@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/spacing_large"
+    android:background="@color/background"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="2dp"
+        android:orientation="vertical">
+        <TextView
+            style="@style/emailPassText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/dm_sans"
+            android:padding="@dimen/spacing_small"
+            android:text="First Name" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Your First Name"
+            android:paddingLeft="@dimen/spacing_mlarge"
+            style=""
+            android:background="@drawable/rectangle_8"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_marginStart="2dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            style="@style/emailPassText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/dm_sans"
+            android:padding="@dimen/spacing_small"
+            android:text="Last Name" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Your Last Name"
+            android:paddingLeft="@dimen/spacing_mlarge"
+            style=""
+            android:background="@drawable/rectangle_8"/>
+    </LinearLayout>
+
+</LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nick Name"
+        android:layout_marginTop="@dimen/spacing_middle"
+        android:padding="@dimen/spacing_xsmall"
+        style="@style/emailPassText"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Your Nick Name"
+        android:paddingLeft="@dimen/spacing_mlarge"
+        style=""
+        android:background="@drawable/rectangle_8"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:layout_marginTop="@dimen/spacing_middle"
+        android:padding="@dimen/spacing_xsmall"
+        style="@style/emailPassText"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Your Email Address"
+        android:paddingLeft="@dimen/spacing_mlarge"
+        style=""
+        android:background="@drawable/rectangle_8"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="NID Number"
+        android:layout_marginTop="@dimen/spacing_middle"
+        android:padding="@dimen/spacing_xsmall"
+        style="@style/emailPassText"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Your NID Serial Number"
+        android:paddingLeft="@dimen/spacing_mlarge"
+        style=""
+        android:background="@drawable/rectangle_8"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Contact Number"
+        android:layout_marginTop="@dimen/spacing_middle"
+        android:padding="@dimen/spacing_xsmall"
+        style="@style/emailPassText"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Your Contact Number"
+        android:paddingLeft="@dimen/spacing_mlarge"
+        style=""
+
+        android:background="@drawable/rectangle_8"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Department"
+        android:layout_marginTop="@dimen/spacing_middle"
+        android:padding="@dimen/spacing_xsmall"
+        style="@style/emailPassText"/>
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:boxStrokeWidth="0dp"
+        android:padding="0dp"
+        android:hint="Department">
+        <AutoCompleteTextView
+            android:id="@+id/department_spinner"
+            android:layout_width="match_parent"
+            android:background="@drawable/rectangle_8"
+            android:layout_height="wrap_content"/>
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="District"
+        android:layout_marginTop="@dimen/spacing_middle"
+        android:padding="@dimen/spacing_xsmall"
+        style="@style/emailPassText"/>
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:boxStrokeWidth="0dp"
+        android:padding="0dp"
+        android:hint="District">
+        <AutoCompleteTextView
+            android:id="@+id/district_spinner"
+            android:layout_width="match_parent"
+            android:background="@drawable/rectangle_8"
+            android:layout_height="wrap_content"/>
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hall"
+        android:layout_marginTop="@dimen/spacing_middle"
+        android:padding="@dimen/spacing_xsmall"
+        style="@style/emailPassText"/>
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:boxStrokeWidth="0dp"
+        android:padding="0dp"
+        android:hint="Hall">
+        <AutoCompleteTextView
+            android:id="@+id/hall_dropdown"
+            android:layout_width="match_parent"
+            android:background="@drawable/rectangle_8"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Gender"
+        android:layout_marginTop="@dimen/spacing_middle"
+        android:padding="@dimen/spacing_xsmall"
+        style="@style/emailPassText"/>
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:checkedButton="@+id/male"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:id="@+id/male"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/rectangle_8"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/spacing_small"
+            android:text="Male"/>
+        <RadioButton
+            android:id="@+id/female"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginStart="@dimen/spacing_small"
+            android:background="@drawable/rectangle_8"
+            android:layout_height="match_parent"
+            android:text="Female"/>
+
+    </RadioGroup>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Blood Group"
+        android:layout_marginTop="@dimen/spacing_middle"
+        android:padding="@dimen/spacing_xsmall"
+        style="@style/emailPassText"/>
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:boxStrokeWidth="0dp"
+        android:padding="0dp"
+        android:hint="A+">
+        <AutoCompleteTextView
+            android:id="@+id/blood_dropdown"
+            android:layout_width="match_parent"
+            android:background="@drawable/rectangle_8"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Date of Birth"
+        android:layout_marginTop="@dimen/spacing_middle"
+        android:padding="@dimen/spacing_xsmall"
+        style="@style/emailPassText"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="01/01/1990"
+        android:paddingLeft="@dimen/spacing_mlarge"
+        style=""
+        android:drawableEnd="@drawable/ic_baseline_calendar_month_24"
+        android:drawablePadding="@dimen/spacing_xsmall"
+        android:drawableTint="@color/grey_10"
+        android:background="@drawable/rectangle_8"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=" Present Address"
+        android:layout_marginTop="@dimen/spacing_middle"
+        android:padding="@dimen/spacing_xsmall"
+        style="@style/emailPassText"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:hint="Present Address"
+        android:maxLines="3"
+        android:paddingLeft="@dimen/spacing_mlarge"
+        style=""
+        android:background="@drawable/rectangle_8"/>
+</LinearLayout>
