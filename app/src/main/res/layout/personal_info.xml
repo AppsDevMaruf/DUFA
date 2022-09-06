@@ -2,9 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:padding="@dimen/spacing_large"
     android:background="@color/background"
     android:layout_height="wrap_content"
+    tools:ignore="HardcodedText"
     android:orientation="vertical">
 <LinearLayout
     android:layout_width="match_parent"
@@ -22,14 +24,15 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/dm_sans"
             android:padding="@dimen/spacing_small"
-            android:text="First Name" />
+            android:text="Full Name" />
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Your First Name"
-            android:paddingLeft="@dimen/spacing_mlarge"
+            android:hint="Your Full Name"
+            android:paddingStart="@dimen/spacing_mlarge"
             style=""
-            android:background="@drawable/rectangle_8"/>
+            android:background="@drawable/rectangle_8"
+            tools:ignore="RtlSymmetry" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="0dp"
@@ -43,32 +46,18 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/dm_sans"
             android:padding="@dimen/spacing_small"
-            android:text="Last Name" />
+            android:text="Nick Name" />
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Your Last Name"
-            android:paddingLeft="@dimen/spacing_mlarge"
+            android:hint="Your Nick Name"
+            android:paddingStart="@dimen/spacing_mlarge"
             style=""
             android:background="@drawable/rectangle_8"/>
     </LinearLayout>
 
 </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Nick Name"
-        android:layout_marginTop="@dimen/spacing_middle"
-        android:padding="@dimen/spacing_xsmall"
-        style="@style/emailPassText"/>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Your Nick Name"
-        android:paddingLeft="@dimen/spacing_mlarge"
-        style=""
-        android:background="@drawable/rectangle_8"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -80,9 +69,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Your Email Address"
-        android:paddingLeft="@dimen/spacing_mlarge"
+        android:inputType="textEmailAddress"
+        android:paddingStart="@dimen/spacing_mlarge"
         style=""
-        android:background="@drawable/rectangle_8"/>
+        android:background="@drawable/rectangle_8"
+        tools:ignore="RtlSymmetry" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -94,9 +85,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Your NID Serial Number"
-        android:paddingLeft="@dimen/spacing_mlarge"
+        android:paddingStart="@dimen/spacing_mlarge"
         style=""
-        android:background="@drawable/rectangle_8"/>
+        android:autofillHints="number"
+        android:inputType="number"
+        android:background="@drawable/rectangle_8"
+        tools:ignore="RtlSymmetry" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -108,10 +102,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Your Contact Number"
-        android:paddingLeft="@dimen/spacing_mlarge"
+        android:paddingStart="@dimen/spacing_mlarge"
         style=""
-
-        android:background="@drawable/rectangle_8"/>
+        android:background="@drawable/rectangle_8"
+        tools:ignore="RtlSymmetry"
+        android:autofillHints="phone"
+        android:inputType="phone" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -238,7 +234,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="01/01/1990"
-        android:paddingLeft="@dimen/spacing_mlarge"
+        android:paddingStart="@dimen/spacing_mlarge"
         style=""
         android:drawableEnd="@drawable/ic_baseline_calendar_month_24"
         android:drawablePadding="@dimen/spacing_xsmall"
@@ -256,7 +252,7 @@
         android:layout_height="100dp"
         android:hint="Present Address"
         android:maxLines="3"
-        android:paddingLeft="@dimen/spacing_mlarge"
+        android:paddingStart="@dimen/spacing_mlarge"
         style=""
         android:background="@drawable/rectangle_8"/>
 </LinearLayout>

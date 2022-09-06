@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         ///
         val drawerLayout: DrawerLayout = findViewById(R.id.drawerLayout)
         val navView: NavigationView = findViewById(R.id.navigationView)
-        navView.setItemIconTintList(null);
+        navView.itemIconTintList = null;
         val navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.

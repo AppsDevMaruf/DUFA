@@ -30,4 +30,29 @@
         android:name="com.marufalam.dufa.MeberListFragment"
         android:label="fragment_meber_list"
         tools:layout="@layout/fragment_meber_list" />
+    <fragment
+        android:id="@+id/memberListFragment"
+        android:name="com.marufalam.dufa.MemberListFragment"
+        android:label="fragment_member_list"
+        tools:layout="@layout/fragment_member_list" />
+    <fragment
+        android:id="@+id/paymentFragment"
+        android:name="com.marufalam.dufa.PaymentFragment"
+        android:label="fragment_payment"
+        tools:layout="@layout/fragment_payment" />
+    <fragment
+        android:id="@+id/eventFragment"
+        android:name="com.marufalam.dufa.EventFragment"
+        android:label="fragment_event"
+        tools:layout="@layout/fragment_event" />
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.marufalam.dufa.NotificationFragment"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification" />
+    <fragment
+        android:id="@+id/QRFragment"
+        android:name="com.marufalam.dufa.QRFragment"
+        android:label="fragment_q_r"
+        tools:layout="@layout/fragment_q_r" />
 </navigation>

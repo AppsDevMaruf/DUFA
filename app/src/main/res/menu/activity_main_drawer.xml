@@ -5,37 +5,34 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
+
         <item
-            android:id="@+id/homeFragment"
-            android:icon="@drawable/nearby"
-            android:title="Near Friends" />
-        <item
-            android:id="@+id/logInFragment"
+            android:id="@+id/memberListFragment"
             app:itemIconTint="@android:color/transparent"
             android:icon="@drawable/location"
             android:title="Search Friends" />
         <item
-            android:id="@+id/Payments"
+            android:id="@+id/paymentFragment"
             app:itemIconTint="@null"
             android:icon="@drawable/payment"
             android:title="Payments" />
+        <item
+            android:id="@+id/notificationFragment"
+            android:icon="@drawable/bell"
+            android:title="Notification" />
+        <item
+            android:id="@+id/eventFragment"
+            android:icon="@drawable/event"
+            android:title="Event" />
+        <item
+            android:id="@+id/QRFragment"
+            android:icon="@drawable/qr"
+            android:title="QR Code" />
 
     </group>
-    <item android:title="More"
-       >
-        <menu>
-            <item
-                android:id="@+id/s"
-                android:icon="@drawable/bell"
-                android:title="Notification" />
-            <item
-                android:id="@+id/fd"
-                android:icon="@drawable/event"
-                android:title="Event" />
-            <item
-                android:id="@+id/df"
-                android:icon="@drawable/qr"
-                android:title="QR Code" />
-        </menu>
-    </item>
+
+
+
+
+
 </menu>
