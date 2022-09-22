@@ -7,16 +7,26 @@
         <entry key="..\:/Users/USER/DUFA/app/src/main/res/drawable/btn_rounded_primary.xml" value="0.1655" />
         <entry key="..\:/Users/USER/DUFA/app/src/main/res/drawable/ic_baseline_contact_page_24.xml" value="0.1425" />
         <entry key="..\:/Users/USER/DUFA/app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.1115" />
+        <entry key="..\:/Users/USER/DUFA/app/src/main/res/drawable/ic_checkmark.xml" value="0.2275" />
         <entry key="..\:/Users/USER/DUFA/app/src/main/res/drawable/rectangle_8.xml" value="0.1655" />
         <entry key="..\:/Users/USER/DUFA/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/USER/DUFA/app/src/main/res/layout/activity_payment.xml" value="0.190625" />
         <entry key="..\:/Users/USER/DUFA/app/src/main/res/layout/dashboard_card.xml" value="0.2" />
+        <entry key="..\:/Users/USER/DUFA/app/src/main/res/layout/dropdown_item.xml" value="0.18984375" />
+        <entry key="..\:/Users/USER/DUFA/app/src/main/res/layout/fragment_event.xml" value="0.190625" />
         <entry key="..\:/Users/USER/DUFA/app/src/main/res/layout/fragment_home.xml" value="0.18841698841698842" />
         <entry key="..\:/Users/USER/DUFA/app/src/main/res/layout/fragment_log_in.xml" value="0.190625" />
         <entry key="..\:/Users/USER/DUFA/app/src/main/res/layout/fragment_meber_list.xml" value="0.190625" />
+        <entry key="..\:/Users/USER/DUFA/app/src/main/res/layout/fragment_member_details_info.xml" value="0.190625" />
+        <entry key="..\:/Users/USER/DUFA/app/src/main/res/layout/fragment_member_list.xml" value="0.190625" />
+        <entry key="..\:/Users/USER/DUFA/app/src/main/res/layout/fragment_payment.xml" value="0.190625" />
         <entry key="..\:/Users/USER/DUFA/app/src/main/res/layout/fragment_sign_up.xml" value="0.190625" />
+        <entry key="..\:/Users/USER/DUFA/app/src/main/res/layout/fragment_splash_screen.xml" value="0.190625" />
         <entry key="..\:/Users/USER/DUFA/app/src/main/res/layout/member_list_row.xml" value="0.190625" />
         <entry key="..\:/Users/USER/DUFA/app/src/main/res/layout/nav_header_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/USER/DUFA/app/src/main/res/layout/password_strength.xml" value="0.190625" />
         <entry key="..\:/Users/USER/DUFA/app/src/main/res/layout/personal_info.xml" value="0.190625" />
+        <entry key="..\:/Users/USER/DUFA/app/src/main/res/layout/signup_info.xml" value="0.190625" />
         <entry key="..\:/Users/USER/DUFA/app/src/main/res/menu/activity_main_drawer.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/USER/DUFA/app/src/main/res/menu/menu.xml" value="0.25416666666666665" />
       </map>

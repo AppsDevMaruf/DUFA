@@ -330,5 +330,12 @@
     <color name="grey_900">#212121</color>
     <color name="grey_1000">#1a1a1a</color>
 
+    <color name="lightGray">#E3E3E3</color>
+    <color name="darkGray">#959595</color>
+    <color name="weak">#FF4646</color>
+    <color name="medium">#ff8f00</color>
+    <color name="strong">#FCCA3F</color>
+    <color name="bulletproof">#00c853</color>
+
 
 </resources>

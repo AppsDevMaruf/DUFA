@@ -84,15 +84,13 @@
                     android:layout_height="match_parent">
 
                     <TextView
+                        style="@style/dashboardItemText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/memberImg"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp"
-                        android:textColor="@color/blue"
-                        android:text="Member List"
-                        android:textSize="22sp"
-                        app:fontFamily="@font/baloo" />
+                        android:text="Member List" />
 
                     <ImageView
                         android:id="@+id/memberImg"
@@ -126,10 +124,8 @@
                         android:layout_below="@id/serviceImg"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp"
-                        android:textColor="@color/blue"
                         android:text="Member Service"
-                        android:textSize="22sp"
-                        app:fontFamily="@font/baloo" />
+                        style="@style/dashboardItemText" />
 
                     <ImageView
                         android:id="@+id/serviceImg"
@@ -182,9 +178,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp"
                         android:text="Payment"
-                        android:textColor="@color/blue"
-                        android:textSize="22sp"
-                        app:fontFamily="@font/baloo" />
+                        style="@style/dashboardItemText" />
 
                     <ImageView
                         android:id="@+id/PaymentsImg"
@@ -220,10 +214,8 @@
                         android:layout_below="@id/eventImg"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp"
-                        android:textColor="@color/blue"
                         android:text="Events"
-                        android:textSize="22sp"
-                        app:fontFamily="@font/baloo" />
+                        style="@style/dashboardItemText" />
 
                     <ImageView
                         android:id="@+id/eventImg"
@@ -271,9 +263,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp"
                         android:text="Notice"
-                        android:textColor="@color/blue"
-                        android:textSize="22sp"
-                        app:fontFamily="@font/baloo" />
+                        style="@style/dashboardItemText" />
 
                     <ImageView
                         android:id="@+id/noticeImg"
@@ -308,9 +298,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp"
                         android:text="News"
-                        android:textColor="@color/blue"
-                        android:textSize="22sp"
-                        app:fontFamily="@font/baloo" />
+                        style="@style/dashboardItemText" />
 
                     <ImageView
                         android:id="@+id/newsImg"

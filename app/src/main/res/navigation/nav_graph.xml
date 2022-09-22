@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/signUpFragment">
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.marufalam.dufa.HomeFragment"
+        android:name="com.marufalam.dufa.DashboardFragment"
         android:label="Home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_dashboard" />
     <fragment
         android:id="@+id/logInFragment"
         android:name="com.marufalam.dufa.LogInFragment"
@@ -17,42 +17,46 @@
         tools:layout="@layout/fragment_log_in" />
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.marufalam.dufa.SignUpFragment"
+        android:name="com.marufalam.dufa.fragments.signup.SignUpFragment"
         android:label="SignUp"
         tools:layout="@layout/fragment_sign_up" />
     <fragment
         android:id="@+id/splashScreenFragment"
         android:name="com.marufalam.dufa.SplashScreenFragment"
         android:label="fragment_splash_screen"
-        tools:layout="@layout/fragment_splash_screen" />
-    <fragment
-        android:id="@+id/meberListFragment"
-        android:name="com.marufalam.dufa.MeberListFragment"
-        android:label="fragment_meber_list"
-        tools:layout="@layout/fragment_meber_list" />
+        tools:layout="@layout/fragment_splash_screen" >
+        <action
+            android:id="@+id/action_splashScreenFragment_to_logInFragment"
+            app:destination="@id/logInFragment" />
+    </fragment>
     <fragment
         android:id="@+id/memberListFragment"
         android:name="com.marufalam.dufa.MemberListFragment"
-        android:label="fragment_member_list"
+        android:label="MemberList"
         tools:layout="@layout/fragment_member_list" />
     <fragment
         android:id="@+id/paymentFragment"
         android:name="com.marufalam.dufa.PaymentFragment"
-        android:label="fragment_payment"
+        android:label=" Payment"
         tools:layout="@layout/fragment_payment" />
     <fragment
         android:id="@+id/eventFragment"
         android:name="com.marufalam.dufa.EventFragment"
-        android:label="fragment_event"
+        android:label="Event"
         tools:layout="@layout/fragment_event" />
     <fragment
         android:id="@+id/notificationFragment"
         android:name="com.marufalam.dufa.NotificationFragment"
-        android:label="fragment_notification"
+        android:label="Notification"
         tools:layout="@layout/fragment_notification" />
     <fragment
         android:id="@+id/QRFragment"
         android:name="com.marufalam.dufa.QRFragment"
-        android:label="fragment_q_r"
+        android:label="QR"
         tools:layout="@layout/fragment_q_r" />
+    <fragment
+        android:id="@+id/memberDetailsInfoFragment"
+        android:name="com.marufalam.dufa.MemberDetailsInfoFragment"
+        android:label="fragment_member_details_info"
+        tools:layout="@layout/fragment_member_details_info" />
 </navigation>

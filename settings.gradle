@@ -1,8 +1,13 @@
-pluginManagement {
+/*pluginManagement {
     repositories {
         gradlePluginPortal()
         google()
         mavenCentral()
+        jcenter()
+        maven { url 'https://jitpack.io' }
+        flatDir {
+            dirs 'libs'
+        }
     }
 }
 dependencyResolutionManagement {
@@ -10,7 +15,13 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        jcenter()
+        maven { url 'https://jitpack.io' }
+        flatDir {
+            dirs 'libs'
+        }
     }
-}
+}*/
 rootProject.name = "DUFA"
 include ':app'
+

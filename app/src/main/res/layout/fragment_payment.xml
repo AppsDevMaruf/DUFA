@@ -1,14 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PaymentFragment">
+    android:gravity="center"
+    android:padding="@dimen/spacing_large"
+    android:background="@color/background"
+    tools:context=".MainActivity"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:paddingStart="5dp"
+        android:text="PaymentType"
+        android:layout_marginTop="@dimen/spacing_middle"
+        android:padding="@dimen/spacing_xsmall"
+        style="@style/emailPassText"/>
+   <FrameLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:background="@drawable/rectangle_8">
+       <androidx.appcompat.widget.AppCompatSpinner
+           android:id="@+id/payment_spinner"
+           app:backgroundTint="@color/black"
+           android:layout_width="match_parent"
+           android:layout_height="?actionBarSize"/>
+   </FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/priceShow"
+            android:textStyle="bold"
+            android:textColor="@color/red_700"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="500 "
+            android:layout_height="wrap_content"
+            android:paddingVertical="5dp"
+            android:textSize="25sp"/>
+        <TextView
+            android:textStyle="bold"
+            android:textColor="@color/red_700"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text=" BDT"
+            android:layout_height="wrap_content"
+            android:paddingVertical="5dp"
+            android:textSize="25sp"/>
+    </LinearLayout>
 
-</FrameLayout>
+    <Button
+        android:id="@+id/payNowButtonId"
+        android:text="Pay Now"
+        android:textAllCaps="false"
+        android:layout_width="150dp"
+        android:layout_height="60dp">
+
+    </Button>
+
+</LinearLayout>
