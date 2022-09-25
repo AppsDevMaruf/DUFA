@@ -1,409 +1,424 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="DUFA"
-        android:layout_marginTop="20dp"
-        android:textColor="@color/blue"
-        android:textSize="30sp"
-        app:fontFamily="@font/baloo"
-        app:layout_constraintEnd_toStartOf="@+id/imageView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:textSize="13sp"
-        android:textStyle="bold"
-        android:textColor="@android:color/holo_red_dark"
-        android:text="Togetherness for betterment"
-        app:layout_constraintEnd_toStartOf="@+id/imageView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+    <data>
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="0dp"
-        android:layout_height="140dp"
-        android:layout_marginEnd="14dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/dufa_logo" />
-</androidx.constraintlayout.widget.ConstraintLayout>
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    </data>
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFFFFF">
+        android:orientation="vertical">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="175dp"
-            android:orientation="horizontal"
-            android:padding="10dp"
-            android:weightSum="2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView">
-            <androidx.cardview.widget.CardView
-                android:id="@+id/memberListCard"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textView"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                app:cardElevation="10dp"
-                app:cardCornerRadius="10dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardMaxElevation="12dp"
-                app:cardPreventCornerOverlap="true"
-                app:cardUseCompatPadding="false"
-                android:layout_weight="1">
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="DUFA"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/blue"
+                android:textSize="30sp"
+                app:fontFamily="@font/baloo"
+                app:layout_constraintEnd_toStartOf="@+id/imageView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:background="@color/cardbg"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        style="@style/dashboardItemText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/memberImg"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="10dp"
-                        android:text="Member List" />
-
-                    <ImageView
-                        android:id="@+id/memberImg"
-                        android:layout_width="75dp"
-                        android:layout_height="75dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="15dp"
-                        app:srcCompat="@drawable/ic_member" />
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
-            <androidx.cardview.widget.CardView
+            <TextView
+                android:id="@+id/textView2"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                app:cardElevation="10dp"
-                app:cardCornerRadius="10dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardMaxElevation="12dp"
-                app:cardPreventCornerOverlap="true"
-                app:cardUseCompatPadding="false"
-                android:layout_weight="1">
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/holo_red_dark"
+                android:text="Togetherness for betterment"
+                app:layout_constraintEnd_toStartOf="@+id/imageView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:background="@color/cardbg"
-                    android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="0dp"
+                android:layout_height="140dp"
+                android:layout_marginEnd="14dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/dufa_logo" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/serviceImg"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="10dp"
-                        android:text="Member Service"
-                        style="@style/dashboardItemText" />
-
-                    <ImageView
-                        android:id="@+id/serviceImg"
-                        android:layout_width="75dp"
-                        android:layout_height="75dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="15dp"
-                        app:srcCompat="@drawable/ic_support" />
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
-
-
-
-        </LinearLayout>
-        <LinearLayout
-
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="175dp"
-            android:orientation="horizontal"
-            android:padding="10dp"
-            android:weightSum="2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView">
+            android:layout_height="match_parent">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/paymentCard"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                app:cardElevation="10dp"
-                app:cardCornerRadius="10dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardMaxElevation="12dp"
-                app:cardPreventCornerOverlap="true"
-                app:cardUseCompatPadding="false"
-                android:layout_weight="1">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF">
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:background="@color/cardbg"
-                    android:layout_height="match_parent">
+                    android:layout_height="175dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:weightSum="2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView">
 
-                    <TextView
-                        android:id="@+id/PaymentsText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/PaymentsImg"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="10dp"
-                        android:text="Payment"
-                        style="@style/dashboardItemText" />
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/memberListCard"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        app:cardElevation="10dp"
+                        app:cardCornerRadius="10dp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardMaxElevation="12dp"
+                        app:cardPreventCornerOverlap="true"
+                        app:cardUseCompatPadding="false"
+                        android:layout_weight="1">
 
-                    <ImageView
-                        android:id="@+id/PaymentsImg"
-                        android:layout_width="75dp"
-                        android:layout_height="75dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="15dp"
-                        app:srcCompat="@drawable/pay_online" />
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
-            <androidx.cardview.widget.CardView
-                android:id="@+id/eventCard"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                app:cardElevation="10dp"
-                app:cardCornerRadius="10dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardMaxElevation="12dp"
-                app:cardPreventCornerOverlap="true"
-                app:cardUseCompatPadding="false"
-                android:layout_weight="1">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:background="@color/cardbg"
+                            android:layout_height="match_parent">
 
-                <RelativeLayout
+                            <TextView
+                                style="@style/dashboardItemText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/memberImg"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="10dp"
+                                android:text="Member List" />
+
+                            <ImageView
+                                android:id="@+id/memberImg"
+                                android:layout_width="75dp"
+                                android:layout_height="75dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="15dp"
+                                app:srcCompat="@drawable/ic_member" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        app:cardElevation="10dp"
+                        app:cardCornerRadius="10dp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardMaxElevation="12dp"
+                        app:cardPreventCornerOverlap="true"
+                        app:cardUseCompatPadding="false"
+                        android:layout_weight="1">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:background="@color/cardbg"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/serviceImg"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="10dp"
+                                android:text="Member Service"
+                                style="@style/dashboardItemText" />
+
+                            <ImageView
+                                android:id="@+id/serviceImg"
+                                android:layout_width="75dp"
+                                android:layout_height="75dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="15dp"
+                                app:srcCompat="@drawable/ic_support" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+
                     android:layout_width="match_parent"
-                    android:background="@color/cardbg"
-                    android:layout_height="match_parent">
+                    android:layout_height="175dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:weightSum="2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView">
 
-                    <TextView
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/paymentCard"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        app:cardElevation="10dp"
+                        app:cardCornerRadius="10dp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardMaxElevation="12dp"
+                        app:cardPreventCornerOverlap="true"
+                        app:cardUseCompatPadding="false"
+                        android:layout_weight="1">
 
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/eventImg"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="10dp"
-                        android:text="Events"
-                        style="@style/dashboardItemText" />
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:background="@color/cardbg"
+                            android:layout_height="match_parent">
 
-                    <ImageView
-                        android:id="@+id/eventImg"
-                        android:layout_width="75dp"
-                        android:layout_height="75dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="15dp"
-                        app:srcCompat="@drawable/event" />
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="175dp"
-            android:orientation="horizontal"
-            android:padding="10dp"
-            android:weightSum="2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView">
-            <androidx.cardview.widget.CardView
-                android:id="@+id/noticeCard"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                app:cardElevation="10dp"
-                app:cardCornerRadius="10dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardMaxElevation="12dp"
-                app:cardPreventCornerOverlap="true"
-                app:cardUseCompatPadding="false"
-                android:layout_weight="1">
+                            <TextView
+                                android:id="@+id/PaymentsText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/PaymentsImg"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="10dp"
+                                android:text="Payment"
+                                style="@style/dashboardItemText" />
 
-                <RelativeLayout
+                            <ImageView
+                                android:id="@+id/PaymentsImg"
+                                android:layout_width="75dp"
+                                android:layout_height="75dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="15dp"
+                                app:srcCompat="@drawable/pay_online" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/eventCard"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        app:cardElevation="10dp"
+                        app:cardCornerRadius="10dp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardMaxElevation="12dp"
+                        app:cardPreventCornerOverlap="true"
+                        app:cardUseCompatPadding="false"
+                        android:layout_weight="1">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:background="@color/cardbg"
+                            android:layout_height="match_parent">
+
+                            <TextView
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/eventImg"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="10dp"
+                                android:text="Events"
+                                style="@style/dashboardItemText" />
+
+                            <ImageView
+                                android:id="@+id/eventImg"
+                                android:layout_width="75dp"
+                                android:layout_height="75dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="15dp"
+                                app:srcCompat="@drawable/event" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:background="@color/cardbg"
-                    android:layout_height="match_parent">
+                    android:layout_height="175dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:weightSum="2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView">
 
-                    <TextView
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/noticeCard"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        app:cardElevation="10dp"
+                        app:cardCornerRadius="10dp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardMaxElevation="12dp"
+                        app:cardPreventCornerOverlap="true"
+                        app:cardUseCompatPadding="false"
+                        android:layout_weight="1">
 
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/noticeImg"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="10dp"
-                        android:text="Notice"
-                        style="@style/dashboardItemText" />
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:background="@color/cardbg"
+                            android:layout_height="match_parent">
 
-                    <ImageView
-                        android:id="@+id/noticeImg"
-                        android:layout_width="75dp"
-                        android:layout_height="75dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="15dp"
-                        app:srcCompat="@drawable/ic_notice" />
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
-            <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                app:cardElevation="10dp"
-                app:cardCornerRadius="10dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardMaxElevation="12dp"
-                app:cardPreventCornerOverlap="true"
-                app:cardUseCompatPadding="false"
-                android:layout_weight="1">
+                            <TextView
 
-                <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/noticeImg"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="10dp"
+                                android:text="Notice"
+                                style="@style/dashboardItemText" />
+
+                            <ImageView
+                                android:id="@+id/noticeImg"
+                                android:layout_width="75dp"
+                                android:layout_height="75dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="15dp"
+                                app:srcCompat="@drawable/ic_notice" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        app:cardElevation="10dp"
+                        app:cardCornerRadius="10dp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardMaxElevation="12dp"
+                        app:cardPreventCornerOverlap="true"
+                        app:cardUseCompatPadding="false"
+                        android:layout_weight="1">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:background="@color/cardbg"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/newsImg"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="10dp"
+                                android:text="News"
+                                style="@style/dashboardItemText" />
+
+                            <ImageView
+                                android:id="@+id/newsImg"
+                                android:layout_width="75dp"
+                                android:layout_height="75dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="15dp"
+                                app:srcCompat="@drawable/ic_news" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+
+                </LinearLayout>
+                <!--<LinearLayout
+                    android:id="@+id/linearLayout"
                     android:layout_width="match_parent"
-                    android:background="@color/cardbg"
-                    android:layout_height="match_parent">
+                    android:layout_height="175dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:weightSum="2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        app:cardElevation="10dp"
+                        app:cardCornerRadius="10dp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardMaxElevation="12dp"
+                        app:cardPreventCornerOverlap="true"
+                        app:cardUseCompatPadding="false"
+                        android:layout_weight="1">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/newsImg"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="10dp"
-                        android:text="News"
-                        style="@style/dashboardItemText" />
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:background="@color/cardbg"
+                            android:layout_height="match_parent">
 
-                    <ImageView
-                        android:id="@+id/newsImg"
-                        android:layout_width="75dp"
-                        android:layout_height="75dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="15dp"
-                        app:srcCompat="@drawable/ic_news" />
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
+                            <TextView
 
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/bus1"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="10dp"
+                                android:textColor="@color/blue"
+                                android:text="Near Friends"
+                                android:textSize="22sp"
+                                app:fontFamily="@font/baloo" />
 
-        </LinearLayout>
-        <!--<LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="175dp"
-            android:orientation="horizontal"
-            android:padding="10dp"
-            android:weightSum="2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView">
-            <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                app:cardElevation="10dp"
-                app:cardCornerRadius="10dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardMaxElevation="12dp"
-                app:cardPreventCornerOverlap="true"
-                app:cardUseCompatPadding="false"
-                android:layout_weight="1">
+                            <ImageView
+                                android:id="@+id/bus1"
+                                android:layout_width="75dp"
+                                android:layout_height="75dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="15dp"
+                                app:srcCompat="@drawable/location" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        app:cardElevation="10dp"
+                        app:cardCornerRadius="10dp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardMaxElevation="12dp"
+                        app:cardPreventCornerOverlap="true"
+                        app:cardUseCompatPadding="false"
+                        android:layout_weight="1">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:background="@color/cardbg"
-                    android:layout_height="match_parent">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:background="@color/cardbg"
+                            android:layout_height="match_parent">
 
-                    <TextView
+                            <TextView
+                                android:id="@+id/textView6"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/bus1"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="10dp"
+                                android:textColor="@color/blue"
+                                android:text="Near Friends"
+                                android:textSize="22sp"
+                                app:fontFamily="@font/baloo" />
 
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/bus1"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="10dp"
-                        android:textColor="@color/blue"
-                        android:text="Near Friends"
-                        android:textSize="22sp"
-                        app:fontFamily="@font/baloo" />
-
-                    <ImageView
-                        android:id="@+id/bus1"
-                        android:layout_width="75dp"
-                        android:layout_height="75dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="15dp"
-                        app:srcCompat="@drawable/location" />
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
-            <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                app:cardElevation="10dp"
-                app:cardCornerRadius="10dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardMaxElevation="12dp"
-                app:cardPreventCornerOverlap="true"
-                app:cardUseCompatPadding="false"
-                android:layout_weight="1">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:background="@color/cardbg"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/textView6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/bus1"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="10dp"
-                        android:textColor="@color/blue"
-                        android:text="Near Friends"
-                        android:textSize="22sp"
-                        app:fontFamily="@font/baloo" />
-
-                    <ImageView
-                        android:id="@+id/bus1"
-                        android:layout_width="75dp"
-                        android:layout_height="75dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="15dp"
-                        app:srcCompat="@drawable/location" />
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
+                            <ImageView
+                                android:id="@+id/bus1"
+                                android:layout_width="75dp"
+                                android:layout_height="75dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="15dp"
+                                app:srcCompat="@drawable/location" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
 
 
-        </LinearLayout>-->
+                </LinearLayout>-->
 
 
+            </LinearLayout>
+        </ScrollView>
     </LinearLayout>
-</ScrollView>
-</LinearLayout>
+</layout>

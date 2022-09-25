@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
 
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -29,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.homeFragment, R.id.logInFragment, R.id.signUpFragment), drawerLayout)
+            R.id.DashboardFragment, R.id.logInFragment, R.id.signUpFragment), drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
