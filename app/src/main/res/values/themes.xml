@@ -4,6 +4,8 @@
     <style name="Theme.DUFA" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorControlNormal">@color/white</item>
+        <item name="android:actionMenuTextColor">@color/white</item>
+        <item name="android:editTextColor">@color/white</item>
         <item name="colorPrimary">@color/blue</item>
         <item name="colorPrimaryVariant">@color/bluedeep</item>
         <item name="colorOnPrimary">@color/white</item>
