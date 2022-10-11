@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/DashboardFragment">
+    app:startDestination="@id/logInFragment">
 
     <fragment
         android:id="@+id/DashboardFragment"
@@ -18,7 +18,11 @@
         android:id="@+id/logInFragment"
         android:name="com.marufalam.dufa.LogInFragment"
         android:label="Login"
-        tools:layout="@layout/fragment_log_in" />
+        tools:layout="@layout/fragment_log_in" >
+    <action
+        android:id="@+id/action_Login_to_Dashboard"
+        app:destination="@id/DashboardFragment" />
+    </fragment>
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.marufalam.dufa.fragments.signup.SignUpFragment"

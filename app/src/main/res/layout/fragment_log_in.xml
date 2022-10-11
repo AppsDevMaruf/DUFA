@@ -63,6 +63,7 @@
                     android:textColor="@color/grey_40" />
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/loginEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="-4dp"
@@ -89,6 +90,7 @@
                     android:textColor="@color/grey_40" />
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/loginPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="-4dp"
@@ -107,6 +109,7 @@
                     android:layout_height="@dimen/spacing_mlarge" />
 
                 <Button
+                    android:id="@+id/log_in"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:layout_marginLeft="-4dp"
@@ -133,7 +136,7 @@
                         android:textColor="@color/blue_grey_300" />
 
                     <TextView
-                        android:id="@+id/sign_up"
+                        android:id="@+id/singup"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:clickable="true"
