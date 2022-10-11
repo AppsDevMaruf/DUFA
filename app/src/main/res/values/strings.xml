@@ -2,4 +2,17 @@
     <string name="app_name">DUFA</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="lowercase_letters">One lowercase character</string>
+    <string name="uppercase_letters">One uppercase character</string>
+    <string name="digits">Digits</string>
+    <string name="minimum_characters">8 characters minimum</string>
+    <string name="special_characters">Special Characters</string>
+    <string name="search_hint">Search</string>
+
+    <string-array name="paymentsType">
+        <item>Registration Fee</item>
+        <item>One Time Fee</item>
+        <item>Yearly Payment</item>
+    </string-array>
+
 </resources>
