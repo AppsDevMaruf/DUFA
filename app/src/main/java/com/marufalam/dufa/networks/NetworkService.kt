@@ -33,7 +33,7 @@ interface DufaServiceApi {
     suspend fun getMemberListData(@Url endUrl: String): MemberList
 
     @POST("login")
-   suspend fun login(@Body userRequest: LoginRequest): Response<LoginResponse>
+    suspend fun login(@Body userRequest: LoginRequest): Response<LoginResponse>
 
 }
 

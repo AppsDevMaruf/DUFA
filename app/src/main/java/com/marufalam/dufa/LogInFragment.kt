@@ -51,17 +51,13 @@ class LogInFragment : Fragment() {
             val loginRequest = LoginRequest(email, password)
 
 
-            var response =dashboardViewModel.login(loginRequest)
+            var response = dashboardViewModel.login(loginRequest)
 
-            if (response!= null){
+            if (response != null) {
                 findNavController().navigate(R.id.action_Login_to_Dashboard)
 
 
             }
-
-
-
-
 
 
 //            if (response.isSuccessful) {
@@ -77,11 +73,7 @@ class LogInFragment : Fragment() {
 //                        NetworkService.dufaServiceApi.login(loginRequest).errorBody().toString()
 //                    } "
 //                )
-            }
-
-
-
-
+        }
 
 
 //            dashboardViewModel.login(loginRequest)
@@ -93,19 +85,20 @@ class LogInFragment : Fragment() {
 //            }
 
 
-        }
-
-
+    }
+    override fun onResume() {
+        super.onResume()
+        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
     }
 
+    override fun onStop() {
+        super.onStop()
+        (activity as AppCompatActivity?)!!.supportActionBar!!.show()
+    }
+
+
+}
+
 //
-//    override fun onResume() {
-//        super.onResume()
-//        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
-//    }
-//
-//    override fun onStop() {
-//        super.onStop()
-//        (activity as AppCompatActivity?)!!.supportActionBar!!.show()
-//    }
-//}
+
+
