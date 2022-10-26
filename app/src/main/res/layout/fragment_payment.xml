@@ -32,17 +32,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <TextView
             android:id="@+id/priceShow"
-            android:textStyle="bold"
-            android:textColor="@color/red_700"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="end"
-            android:text="500 "
-            android:layout_height="wrap_content"
             android:paddingVertical="5dp"
-            android:textSize="25sp"/>
+            android:text="500 "
+            android:textColor="@color/red_700"
+            android:textSize="25sp"
+            android:textStyle="bold" />
         <TextView
             android:textStyle="bold"
             android:textColor="@color/red_700"
