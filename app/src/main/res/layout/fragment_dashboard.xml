@@ -20,7 +20,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="DUFA"
+                android:text="@string/dufa"
                 android:layout_marginTop="20dp"
                 android:textColor="@color/blue"
                 android:textSize="30sp"
@@ -326,96 +326,7 @@
 
 
                 </LinearLayout>
-                <!--<LinearLayout
-                    android:id="@+id/linearLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="175dp"
-                    android:orientation="horizontal"
-                    android:padding="10dp"
-                    android:weightSum="2"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView">
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        app:cardElevation="10dp"
-                        app:cardCornerRadius="10dp"
-                        app:cardBackgroundColor="@color/white"
-                        app:cardMaxElevation="12dp"
-                        app:cardPreventCornerOverlap="true"
-                        app:cardUseCompatPadding="false"
-                        android:layout_weight="1">
 
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:background="@color/cardbg"
-                            android:layout_height="match_parent">
-
-                            <TextView
-
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@id/bus1"
-                                android:layout_centerHorizontal="true"
-                                android:layout_marginTop="10dp"
-                                android:textColor="@color/blue"
-                                android:text="Near Friends"
-                                android:textSize="22sp"
-                                app:fontFamily="@font/baloo" />
-
-                            <ImageView
-                                android:id="@+id/bus1"
-                                android:layout_width="75dp"
-                                android:layout_height="75dp"
-                                android:layout_centerHorizontal="true"
-                                android:layout_marginTop="15dp"
-                                app:srcCompat="@drawable/location" />
-                        </RelativeLayout>
-                    </androidx.cardview.widget.CardView>
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        app:cardElevation="10dp"
-                        app:cardCornerRadius="10dp"
-                        app:cardBackgroundColor="@color/white"
-                        app:cardMaxElevation="12dp"
-                        app:cardPreventCornerOverlap="true"
-                        app:cardUseCompatPadding="false"
-                        android:layout_weight="1">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:background="@color/cardbg"
-                            android:layout_height="match_parent">
-
-                            <TextView
-                                android:id="@+id/textView6"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@id/bus1"
-                                android:layout_centerHorizontal="true"
-                                android:layout_marginTop="10dp"
-                                android:textColor="@color/blue"
-                                android:text="Near Friends"
-                                android:textSize="22sp"
-                                app:fontFamily="@font/baloo" />
-
-                            <ImageView
-                                android:id="@+id/bus1"
-                                android:layout_width="75dp"
-                                android:layout_height="75dp"
-                                android:layout_centerHorizontal="true"
-                                android:layout_marginTop="15dp"
-                                app:srcCompat="@drawable/location" />
-                        </RelativeLayout>
-                    </androidx.cardview.widget.CardView>
-
-
-                </LinearLayout>-->
 
 
             </LinearLayout>

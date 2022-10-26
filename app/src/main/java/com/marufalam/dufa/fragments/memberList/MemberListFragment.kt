@@ -15,17 +15,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.marufalam.dufa.R
 import com.marufalam.dufa.adapter.MemberListAdapter
 import com.marufalam.dufa.databinding.FragmentMemberListBinding
+import com.marufalam.dufa.fragments.BaseFragment
 import com.marufalam.dufa.viewmodel.DashboardViewModel
 
 
-class MemberListFragment : Fragment() {
-    private lateinit var binding: FragmentMemberListBinding
+class MemberListFragment : BaseFragment<FragmentMemberListBinding>() {
+
     val dashboardViewModel: DashboardViewModel by activityViewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
 
     @SuppressLint("ResourceAsColor")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -48,14 +45,14 @@ class MemberListFragment : Fragment() {
     }
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        Toast.makeText(requireActivity(), "WealCome", Toast.LENGTH_LONG).show()
-        // Inflate the layout for this fragment
-        binding = FragmentMemberListBinding.inflate(inflater, container, false)
-        Toast.makeText(requireActivity(), "WealCome", Toast.LENGTH_LONG)
+
+
+    override fun getFragmentView(): Int {
+        return R.layout.fragment_member_list
+
+    }
+
+    override fun configUi() {
         val adapter = MemberListAdapter()
         val llm = LinearLayoutManager(requireActivity())
         llm.orientation = LinearLayoutManager.VERTICAL
@@ -68,7 +65,14 @@ class MemberListFragment : Fragment() {
             Toast.makeText(requireActivity(), "${it.users}", Toast.LENGTH_LONG)
             Log.e("TAG", "onCreateViewDashboard: $it")
         }
-        return binding.root
+    }
+
+    override fun setupNavigation() {
+
+    }
+
+    override fun binObserver() {
+
     }
 
 }
