@@ -11,6 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/my_toolbar" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -85,7 +88,7 @@
                     <androidx.cardview.widget.CardView
                         android:id="@+id/memberListCard"
                         android:layout_width="166dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_margin="10dp"
                         android:layout_weight="1"
                         android:padding="@dimen/_8sdp"
@@ -97,7 +100,7 @@
                         app:cardUseCompatPadding="false">
 
                         <LinearLayout
-                            android:layout_width="166dp"
+                            android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="vertical">
 
@@ -136,7 +139,7 @@
                                 android:padding="5dp"
                                 android:text="Members"
                                 android:textColor="@color/text_gray"
-                                android:textSize="13sp" />
+                                android:textSize="14sp" />
 
                         </LinearLayout>
 
@@ -144,7 +147,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/memberListCard"
+                        android:id="@+id/paymentCard"
                         android:layout_width="166dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
@@ -159,22 +162,23 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:orientation="vertical">
 
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="@dimen/_60sdp"
-                                android:layout_marginTop="20dp"
-                                android:paddingBottom="30dp"
-                                android:scaleType="centerCrop"
+                                android:padding="10dp"
+                                android:layout_marginTop="15dp"
+                                android:layout_marginLeft="-60dp"
+                                android:scaleType="centerInside"
                                 android:src="@drawable/payoneer_master_card" />
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="16dp"
-                                android:layout_marginTop="8dp"
+
                                 android:letterSpacing="-0.02"
                                 android:lineSpacingExtra="1sp"
                                 android:text="1650"
@@ -191,9 +195,9 @@
                                 android:letterSpacing="0.02"
                                 android:lineSpacingExtra="1sp"
                                 android:padding="5dp"
-                                android:text="Members"
+                                android:text="Payments"
                                 android:textColor="@color/text_gray"
-                                android:textSize="13sp" />
+                                android:textSize="14sp" />
 
                         </LinearLayout>
 
@@ -240,11 +244,10 @@
                 </LinearLayout>
 
                 <LinearLayout
-
                     android:layout_width="match_parent"
-                    android:layout_height="175dp"
+                    android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="10dp"
+                    android:padding="8dp"
                     android:weightSum="2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -252,11 +255,11 @@
                     app:layout_constraintTop_toBottomOf="@+id/imageView">
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/paymentCard"
-                        android:layout_width="0dp"
+                        android:layout_width="166dp"
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
                         android:layout_weight="1"
+                        android:padding="@dimen/_8sdp"
                         app:cardBackgroundColor="@color/white"
                         app:cardCornerRadius="10dp"
                         app:cardElevation="5dp"
@@ -264,37 +267,59 @@
                         app:cardPreventCornerOverlap="true"
                         app:cardUseCompatPadding="false">
 
-                        <RelativeLayout
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@color/cardbg">
-
-                            <TextView
-                                android:id="@+id/PaymentsText"
-                                style="@style/dashboardItemText"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@id/PaymentsImg"
-                                android:layout_centerHorizontal="true"
-                                android:layout_marginTop="10dp"
-                                android:text="Payment" />
+                            android:orientation="vertical">
 
                             <ImageView
-                                android:id="@+id/PaymentsImg"
-                                android:layout_width="75dp"
-                                android:layout_height="75dp"
-                                android:layout_centerHorizontal="true"
-                                android:layout_marginTop="15dp"
-                                app:srcCompat="@drawable/pay_online" />
-                        </RelativeLayout>
+                                android:layout_width="match_parent"
+                                android:layout_height="60dp"
+                                android:layout_marginLeft="-10dp"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginRight="10dp"
+                                android:padding="-20dp"
+                                android:paddingTop="40dp"
+                                android:paddingBottom="30dp"
+                                android:scaleType="center"
+                                android:src="@drawable/member_icon" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginTop="8dp"
+                                android:letterSpacing="-0.02"
+                                android:lineSpacingExtra="1sp"
+                                android:text="1650"
+                                android:textColor="@color/text_black"
+                                android:textSize="28sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginBottom="12dp"
+                                android:fontFamily="@font/dm_sans_medium"
+                                android:letterSpacing="0.02"
+                                android:lineSpacingExtra="1sp"
+                                android:padding="5dp"
+                                android:text="Members"
+                                android:textColor="@color/text_gray"
+                                android:textSize="14sp" />
+
+                        </LinearLayout>
+
+
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/eventCard"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:layout_width="166dp"
+                        android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:layout_weight="1"
+                        android:padding="@dimen/_8sdp"
                         app:cardBackgroundColor="@color/white"
                         app:cardCornerRadius="10dp"
                         app:cardElevation="5dp"
@@ -302,37 +327,95 @@
                         app:cardPreventCornerOverlap="true"
                         app:cardUseCompatPadding="false">
 
-                        <RelativeLayout
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@color/cardbg">
+                            android:orientation="vertical">
 
-                            <TextView
-
-                                style="@style/dashboardItemText"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@id/eventImg"
-                                android:layout_centerHorizontal="true"
-                                android:layout_marginTop="10dp"
-                                android:text="Events" />
 
                             <ImageView
-                                android:id="@+id/eventImg"
-                                android:layout_width="75dp"
-                                android:layout_height="75dp"
-                                android:layout_centerHorizontal="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/_60sdp"
+                                android:padding="10dp"
                                 android:layout_marginTop="15dp"
-                                app:srcCompat="@drawable/event" />
-                        </RelativeLayout>
+                                android:layout_marginLeft="-60dp"
+                                android:scaleType="centerInside"
+                                android:src="@drawable/payoneer_master_card" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="16dp"
+
+                                android:letterSpacing="-0.02"
+                                android:lineSpacingExtra="1sp"
+                                android:text="1650"
+                                android:textColor="@color/text_black"
+                                android:textSize="28sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginBottom="12dp"
+                                android:fontFamily="@font/dm_sans_medium"
+                                android:letterSpacing="0.02"
+                                android:lineSpacingExtra="1sp"
+                                android:padding="5dp"
+                                android:text="Payments"
+                                android:textColor="@color/text_gray"
+                                android:textSize="14sp" />
+
+                        </LinearLayout>
+
+
                     </androidx.cardview.widget.CardView>
+
+                    <!--     <androidx.cardview.widget.CardView
+                             android:layout_width="166dp"
+                             android:layout_height="match_parent"
+                             android:layout_margin="10dp"
+                             android:layout_weight="1"
+                             app:cardBackgroundColor="@color/white"
+                             app:cardCornerRadius="10dp"
+                             app:cardElevation="5dp"
+                             app:cardMaxElevation="12dp"
+                             app:cardPreventCornerOverlap="true"
+                             app:cardUseCompatPadding="false">
+
+                             <RelativeLayout
+                                 android:layout_width="match_parent"
+                                 android:layout_height="match_parent"
+                                 android:background="@color/cardbg">
+
+                                 <TextView
+                                     style="@style/dashboardItemText"
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:layout_below="@id/serviceImg"
+                                     android:layout_centerHorizontal="true"
+                                     android:layout_marginTop="10dp"
+                                     android:text="Member Service" />
+
+                                 <ImageView
+                                     android:id="@+id/serviceImg"
+                                     android:layout_width="75dp"
+                                     android:layout_height="75dp"
+                                     android:layout_centerHorizontal="true"
+                                     android:layout_marginTop="15dp"
+                                     app:srcCompat="@drawable/ic_support" />
+                             </RelativeLayout>
+                         </androidx.cardview.widget.CardView>-->
+
+
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="175dp"
+                    android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="10dp"
+                    android:padding="8dp"
                     android:weightSum="2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -340,11 +423,12 @@
                     app:layout_constraintTop_toBottomOf="@+id/imageView">
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/noticeCard"
-                        android:layout_width="0dp"
+
+                        android:layout_width="166dp"
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
                         android:layout_weight="1"
+                        android:padding="@dimen/_8sdp"
                         app:cardBackgroundColor="@color/white"
                         app:cardCornerRadius="10dp"
                         app:cardElevation="5dp"
@@ -352,36 +436,60 @@
                         app:cardPreventCornerOverlap="true"
                         app:cardUseCompatPadding="false">
 
-                        <RelativeLayout
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@color/cardbg">
-
-                            <TextView
-
-                                style="@style/dashboardItemText"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@id/noticeImg"
-                                android:layout_centerHorizontal="true"
-                                android:layout_marginTop="10dp"
-                                android:text="Notice" />
+                            android:orientation="vertical">
 
                             <ImageView
-                                android:id="@+id/noticeImg"
-                                android:layout_width="75dp"
-                                android:layout_height="75dp"
-                                android:layout_centerHorizontal="true"
-                                android:layout_marginTop="15dp"
-                                app:srcCompat="@drawable/ic_notice" />
-                        </RelativeLayout>
+                                android:layout_width="match_parent"
+                                android:layout_height="60dp"
+                                android:layout_marginLeft="-10dp"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginRight="10dp"
+                                android:padding="-20dp"
+                                android:paddingTop="40dp"
+                                android:paddingBottom="30dp"
+                                android:scaleType="center"
+                                android:src="@drawable/member_icon" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginTop="8dp"
+                                android:letterSpacing="-0.02"
+                                android:lineSpacingExtra="1sp"
+                                android:text="1650"
+                                android:textColor="@color/text_black"
+                                android:textSize="28sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginBottom="12dp"
+                                android:fontFamily="@font/dm_sans_medium"
+                                android:letterSpacing="0.02"
+                                android:lineSpacingExtra="1sp"
+                                android:padding="5dp"
+                                android:text="Members"
+                                android:textColor="@color/text_gray"
+                                android:textSize="14sp" />
+
+                        </LinearLayout>
+
+
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
+
+                        android:layout_width="166dp"
+                        android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:layout_weight="1"
+                        android:padding="@dimen/_8sdp"
                         app:cardBackgroundColor="@color/white"
                         app:cardCornerRadius="10dp"
                         app:cardElevation="5dp"
@@ -389,29 +497,85 @@
                         app:cardPreventCornerOverlap="true"
                         app:cardUseCompatPadding="false">
 
-                        <RelativeLayout
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@color/cardbg">
-
-                            <TextView
-                                style="@style/dashboardItemText"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@id/newsImg"
-                                android:layout_centerHorizontal="true"
-                                android:layout_marginTop="10dp"
-                                android:text="News" />
+                            android:orientation="vertical">
 
                             <ImageView
-                                android:id="@+id/newsImg"
-                                android:layout_width="75dp"
-                                android:layout_height="75dp"
-                                android:layout_centerHorizontal="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/_60sdp"
+                                android:padding="10dp"
                                 android:layout_marginTop="15dp"
-                                app:srcCompat="@drawable/ic_news" />
-                        </RelativeLayout>
+                                android:layout_marginLeft="-60dp"
+                                android:scaleType="centerInside"
+                                android:src="@drawable/payoneer_master_card" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="16dp"
+
+                                android:letterSpacing="-0.02"
+                                android:lineSpacingExtra="1sp"
+                                android:text="1650"
+                                android:textColor="@color/text_black"
+                                android:textSize="28sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginBottom="12dp"
+                                android:fontFamily="@font/dm_sans_medium"
+                                android:letterSpacing="0.02"
+                                android:lineSpacingExtra="1sp"
+                                android:padding="5dp"
+                                android:text="Payments"
+                                android:textColor="@color/text_gray"
+                                android:textSize="14sp" />
+
+                        </LinearLayout>
+
+
                     </androidx.cardview.widget.CardView>
+
+                    <!--     <androidx.cardview.widget.CardView
+                             android:layout_width="166dp"
+                             android:layout_height="match_parent"
+                             android:layout_margin="10dp"
+                             android:layout_weight="1"
+                             app:cardBackgroundColor="@color/white"
+                             app:cardCornerRadius="10dp"
+                             app:cardElevation="5dp"
+                             app:cardMaxElevation="12dp"
+                             app:cardPreventCornerOverlap="true"
+                             app:cardUseCompatPadding="false">
+
+                             <RelativeLayout
+                                 android:layout_width="match_parent"
+                                 android:layout_height="match_parent"
+                                 android:background="@color/cardbg">
+
+                                 <TextView
+                                     style="@style/dashboardItemText"
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:layout_below="@id/serviceImg"
+                                     android:layout_centerHorizontal="true"
+                                     android:layout_marginTop="10dp"
+                                     android:text="Member Service" />
+
+                                 <ImageView
+                                     android:id="@+id/serviceImg"
+                                     android:layout_width="75dp"
+                                     android:layout_height="75dp"
+                                     android:layout_centerHorizontal="true"
+                                     android:layout_marginTop="15dp"
+                                     app:srcCompat="@drawable/ic_support" />
+                             </RelativeLayout>
+                         </androidx.cardview.widget.CardView>-->
 
 
                 </LinearLayout>
