@@ -9,7 +9,10 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <com.google.android.material.appbar.AppBarLayout
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/my_toolbar" />
+       <!-- <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBar_lay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -23,14 +26,14 @@
                 app:navigationIcon="@drawable/ic_baseline_menu_24"
                 android:background="#11067b" />
 
-        </com.google.android.material.appbar.AppBarLayout>
+        </com.google.android.material.appbar.AppBarLayout>-->
 
         <fragment
             android:id="@+id/nav_host_fragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/appBar_lay"
+            android:layout_below="@id/toolbar"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="-2dp"
             android:layout_marginEnd="0dp"
