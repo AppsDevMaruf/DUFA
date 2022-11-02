@@ -1,4 +1,4 @@
-package com.marufalam.noteappswithapi.di
+package com.marufalam.dufa.di
 
 import com.marufalam.dufa.api.UserApi
 import com.marufalam.noteappswithapi.utils.Constants.BASE_URL

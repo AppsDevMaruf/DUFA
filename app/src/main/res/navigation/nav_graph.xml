@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_DashboardFragment_to_memberListFragment"
             app:destination="@id/memberListFragment" />
+        <action
+            android:id="@+id/action_DashboardFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment" />
     </fragment>
     <fragment
         android:id="@+id/logInFragment"
