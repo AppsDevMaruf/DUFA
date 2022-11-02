@@ -1,9 +1,9 @@
-package com.marufalam.weatherapps.networks
+package com.marufalam.dufa.networks
 
 import android.annotation.SuppressLint
-import com.marufalam.dufa.models.LoginRequest
-import com.marufalam.dufa.models.LoginResponse
 import com.marufalam.dufa.models.MemberList
+import com.marufalam.dufa.models.login.RequestLogin
+import com.marufalam.dufa.models.login.ResponseLogin
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -33,7 +33,7 @@ interface DufaServiceApi {
     suspend fun getMemberListData(@Url endUrl: String): MemberList
 
     @POST("login")
-    suspend fun login(@Body userRequest: LoginRequest): Response<LoginResponse>
+    suspend fun login(@Body userRequest: RequestLogin): Response<ResponseLogin>
 
 }
 

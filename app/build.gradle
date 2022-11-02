@@ -76,7 +76,7 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.14.2'
 
 
-    def hilt_version = "2.38.1"
+    def hilt_version = "2.44"
     //noinspection GradleDependency
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
@@ -91,5 +91,6 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
 
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
 
 }

@@ -3,14 +3,16 @@ package com.marufalam.dufa.api
 
 import com.marufalam.dufa.models.login.RequestLogin
 import com.marufalam.dufa.models.login.ResponseLogin
+import com.marufalam.dufa.models.register.RequestRegister
+import com.marufalam.dufa.models.register.ResponseRegister
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface UserApi {
-   /* @POST("/users/signup")
-    suspend fun signup(@Body userRequest: UserRequest): Response<UserResponse>*/
+    @POST("/api/register")
+    suspend fun register(@Body requestRegister: RequestRegister): Response<ResponseRegister>
 
-    @POST("/users/signin")
-    suspend fun signin(@Body requestLogin: RequestLogin): Response<ResponseLogin>
+    @POST("/api/login")
+    suspend fun login(@Body requestLogin: RequestLogin): Response<ResponseLogin>
 }

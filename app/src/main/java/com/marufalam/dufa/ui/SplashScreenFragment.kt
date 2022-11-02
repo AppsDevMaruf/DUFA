@@ -1,5 +1,5 @@
 
-package com.marufalam.dufa
+package com.marufalam.dufa.ui
 
 import android.content.pm.PackageInfo
 import android.os.Bundle
@@ -11,6 +11,7 @@ import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import com.marufalam.dufa.R
 import com.marufalam.dufa.databinding.FragmentSplashScreenBinding
 import java.lang.Exception
 

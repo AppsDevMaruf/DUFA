@@ -1,7 +1,7 @@
 package com.marufalam.dufa.di
 
 import com.marufalam.dufa.api.UserApi
-import com.marufalam.noteappswithapi.utils.Constants.BASE_URL
+import com.marufalam.dufa.utils.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

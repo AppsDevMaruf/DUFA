@@ -23,19 +23,40 @@
             android:layout_centerInParent="true"
             android:orientation="vertical"
             android:padding="@dimen/spacing_mlarge">
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:visibility="gone"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/progress_bar"
+                android:indeterminate="true"
+                style="@style/SpinKitView.ThreeBounce"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:SpinKit_Color="@color/white"
+                tools:ignore="MissingClass" />
 
             <TextView
-                android:text="Sign Up"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_25ssp"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:gravity="center"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/spacing_large"
                 android:layout_marginBottom="@dimen/spacing_mlarge"
-                />
+                android:gravity="center"
+                android:text="Sign Up"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_25ssp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/signupErrorText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:text="!error"
+                android:visibility="invisible"
+                android:textColor="@color/red_900"
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -52,8 +73,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:background="@color/background"
+                        android:orientation="vertical"
                         android:padding="@dimen/_8sdp">
 
                         <TextView
@@ -63,112 +84,121 @@
                             android:fontFamily="@font/dm_sans"
                             android:padding="@dimen/spacing_small"
                             android:text="Name" />
+
                         <EditText
                             android:id="@+id/nameEt"
+                            style=""
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:background="@drawable/rectangle_8"
                             android:hint="Your Full Name"
                             android:paddingStart="@dimen/spacing_mlarge"
-                            style=""
-                            android:background="@drawable/rectangle_8"
                             tools:ignore="RtlSymmetry" />
 
                         <TextView
+                            style="@style/emailPassText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Email"
                             android:layout_marginTop="@dimen/spacing_middle"
                             android:padding="@dimen/spacing_xsmall"
-                            style="@style/emailPassText"/>
+                            android:text="Email" />
+
                         <EditText
                             android:id="@+id/emailEt"
+                            style=""
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:background="@drawable/rectangle_8"
                             android:hint="Your Email Address"
                             android:inputType="textEmailAddress"
                             android:paddingStart="@dimen/spacing_mlarge"
-                            style=""
-                            android:background="@drawable/rectangle_8"
                             tools:ignore="RtlSymmetry" />
 
                         <TextView
+                            style="@style/emailPassText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Contact Number"
                             android:layout_marginTop="@dimen/spacing_middle"
                             android:padding="@dimen/spacing_xsmall"
-                            style="@style/emailPassText"/>
+                            android:text="Contact Number" />
+
                         <EditText
                             android:id="@+id/contactEt"
+                            style=""
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Your Contact Number"
-                            android:paddingStart="@dimen/spacing_mlarge"
-                            style=""
-                            android:background="@drawable/rectangle_8"
-                            tools:ignore="RtlSymmetry"
                             android:autofillHints="phone"
-                            android:inputType="phone" />
+                            android:background="@drawable/rectangle_8"
+                            android:hint="Your Contact Number"
+                            android:inputType="phone"
+                            android:paddingStart="@dimen/spacing_mlarge"
+                            tools:ignore="RtlSymmetry" />
 
                         <TextView
+                            style="@style/emailPassText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Address"
                             android:layout_marginTop="@dimen/spacing_middle"
                             android:padding="@dimen/spacing_xsmall"
-                            style="@style/emailPassText"/>
+                            android:text="Address" />
+
                         <EditText
                             android:id="@+id/addressEt"
+                            style=""
                             android:layout_width="match_parent"
                             android:layout_height="100dp"
+                            android:layout_marginBottom="@dimen/spacing_middle"
+                            android:background="@drawable/rectangle_8"
                             android:hint="Address"
                             android:maxLines="3"
-                            android:paddingStart="@dimen/spacing_mlarge"
-                            style=""
-                            android:layout_marginBottom="@dimen/spacing_middle"
-                            android:background="@drawable/rectangle_8"/>
+                            android:paddingStart="@dimen/spacing_mlarge" />
+
                         <TextView
+                            style="@style/emailPassText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Password"
                             android:padding="@dimen/_1sdp"
-                            style="@style/emailPassText"/>
+                            android:text="Password" />
+
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:orientation="horizontal"
-                            android:weightSum="4"
+                            android:layout_height="wrap_content"
                             android:background="@drawable/rectangle_8"
-                            android:layout_height="wrap_content">
+                            android:orientation="horizontal"
+                            android:weightSum="4">
+
                             <com.google.android.material.textfield.TextInputLayout
 
-                                app:hintEnabled="false"
-                                android:layout_weight="3"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                app:boxStrokeWidthFocused="0dp"
+                                android:layout_weight="3"
+                                android:padding="0dp"
                                 app:boxStrokeWidth="0dp"
-                                android:padding="0dp">
+                                app:boxStrokeWidthFocused="0dp"
+                                app:hintEnabled="false">
 
                                 <com.google.android.material.textfield.TextInputEditText
                                     android:id="@+id/password_input"
                                     android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:padding="@dimen/_9sdp"
-                                    android:textSize="@dimen/_13sdp"
-                                    android:hint="*******"
                                     android:background="@drawable/rectangle_8"
-                                    android:layout_height="wrap_content" />
+                                    android:hint="*******"
+                                    android:padding="@dimen/_9sdp"
+                                    android:textSize="@dimen/_13sdp" />
 
                             </com.google.android.material.textfield.TextInputLayout>
+
                             <TextView
                                 android:id="@+id/strength_level_txt"
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
-                                tools:text="Weak"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:gravity="center"
                                 android:textSize="@dimen/_8ssp"
-                                android:layout_height="wrap_content"/>
+                                tools:text="Weak" />
                         </LinearLayout>
+
                         <View
                             android:id="@+id/strength_level_indicator"
                             android:layout_width="match_parent"
@@ -179,19 +209,19 @@
                             app:layout_constraintTop_toBottomOf="@+id/password_input" />
 
 
-
                         <LinearLayout
-                            android:layout_marginTop="@dimen/_6sdp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:paddingLeft="@dimen/_10sdp"
-                            android:orientation="horizontal">
+                            android:layout_marginTop="@dimen/_6sdp"
+                            android:orientation="horizontal"
+                            android:paddingLeft="@dimen/_10sdp">
+
                             <ImageView
                                 android:id="@+id/lowerCase_img"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                app:tint="@color/darkGray"
-                                app:srcCompat="@drawable/ic_checkmark" />
+                                app:srcCompat="@drawable/ic_checkmark"
+                                app:tint="@color/darkGray" />
 
                             <TextView
                                 android:id="@+id/lowerCase_txt"
@@ -199,21 +229,22 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/_3sdp"
                                 android:text="@string/lowercase_letters"
-                                android:textColor="@color/darkGray"/>
+                                android:textColor="@color/darkGray" />
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_marginTop="@dimen/_6sdp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:paddingLeft="@dimen/_10sdp"
-                            android:orientation="horizontal">
+                            android:layout_marginTop="@dimen/_6sdp"
+                            android:orientation="horizontal"
+                            android:paddingLeft="@dimen/_10sdp">
+
                             <ImageView
                                 android:id="@+id/upperCase_img"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                app:tint="@color/darkGray"
-                                app:srcCompat="@drawable/ic_checkmark" />
+                                app:srcCompat="@drawable/ic_checkmark"
+                                app:tint="@color/darkGray" />
 
                             <TextView
                                 android:id="@+id/upperCase_txt"
@@ -221,21 +252,22 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/_3sdp"
                                 android:text="@string/uppercase_letters"
-                                android:textColor="@color/darkGray"/>
+                                android:textColor="@color/darkGray" />
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_marginTop="@dimen/_6sdp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:paddingLeft="@dimen/_10sdp"
-                            android:orientation="horizontal">
+                            android:layout_marginTop="@dimen/_6sdp"
+                            android:orientation="horizontal"
+                            android:paddingLeft="@dimen/_10sdp">
+
                             <ImageView
                                 android:id="@+id/digit_img"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                app:tint="@color/darkGray"
-                                app:srcCompat="@drawable/ic_checkmark" />
+                                app:srcCompat="@drawable/ic_checkmark"
+                                app:tint="@color/darkGray" />
 
                             <TextView
                                 android:id="@+id/digit_txt"
@@ -243,21 +275,22 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/_3sdp"
                                 android:text="@string/digits"
-                                android:textColor="@color/darkGray"/>
+                                android:textColor="@color/darkGray" />
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_marginTop="@dimen/_6sdp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:paddingLeft="@dimen/_10sdp"
-                            android:orientation="horizontal">
+                            android:layout_marginTop="@dimen/_6sdp"
+                            android:orientation="horizontal"
+                            android:paddingLeft="@dimen/_10sdp">
+
                             <ImageView
                                 android:id="@+id/specialChar_Img"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                app:tint="@color/darkGray"
-                                app:srcCompat="@drawable/ic_checkmark" />
+                                app:srcCompat="@drawable/ic_checkmark"
+                                app:tint="@color/darkGray" />
 
                             <TextView
                                 android:id="@+id/specialChar_txt"
@@ -265,11 +298,12 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/_3sdp"
                                 android:text="@string/special_characters"
-                                android:textColor="@color/darkGray"/>
+                                android:textColor="@color/darkGray" />
                         </LinearLayout>
 
 
                         />
+
                         <TextView
                             style="@style/emailPassText"
                             android:layout_width="match_parent"
@@ -277,23 +311,24 @@
                             android:fontFamily="@font/dm_sans"
                             android:padding="@dimen/spacing_small"
                             android:text="Confirm Password" />
+
                         <EditText
                             android:id="@+id/confPassword"
+                            style=""
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:background="@drawable/rectangle_8"
                             android:hint="********"
                             android:paddingStart="@dimen/spacing_mlarge"
-                            style=""
-                            android:background="@drawable/rectangle_8"
                             tools:ignore="RtlSymmetry" />
 
 
                         <Button
-                            android:layout_marginTop="@dimen/_5sdp"
                             android:id="@+id/sign_upBtn"
                             android:layout_width="match_parent"
                             android:layout_height="55dp"
                             android:layout_marginLeft="-4dp"
+                            android:layout_marginTop="@dimen/_5sdp"
                             android:layout_marginRight="-4dp"
                             android:background="@drawable/btn_rounded_primary"
                             android:text="S I G N  U P"
@@ -317,13 +352,15 @@
                                 android:textColor="@color/blue_grey_300" />
 
                             <TextView
+                                android:id="@+id/login_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:clickable="true"
                                 android:text="Log In"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
                                 android:textColor="@color/blue"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                tools:ignore="TouchTargetSizeCheck" />
 
                         </LinearLayout>
 
