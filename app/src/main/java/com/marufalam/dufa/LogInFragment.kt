@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
 class LogInFragment : Fragment() {
 
 
-    val dashboardViewModel: DashboardViewModel by activityViewModels<DashboardViewModel>()
+    private val dashboardViewModel: DashboardViewModel by activityViewModels<DashboardViewModel>()
 
 
     lateinit var binding: FragmentLogInBinding
@@ -53,38 +53,33 @@ class LogInFragment : Fragment() {
 
             var response = dashboardViewModel.login(loginRequest)
 
-            if (response != null) {
-                findNavController().navigate(R.id.action_Login_to_Dashboard)
+            //findNavController().navigate(R.id.action_Login_to_Dashboard)
 
 
+           /* if (response.isSuccessful) {
+                Log.i("TAG", "Okay")
+
+
+            } else {
+
+                Log.i(
+                    "TAG",
+                    " ${
+                        NetworkService.dufaServiceApi.login(loginRequest).errorBody().toString()
+                    } "
+                )
+            }*/
+
+
+            dashboardViewModel.login(loginRequest)
+
+            findNavController().navigate(R.id.action_Login_to_Dashboard)
+
+            dashboardViewModel.userLoginLiveData.observe(viewLifecycleOwner) {
+                Log.i("TAG", "lo ${it.data}")
             }
 
-
-//            if (response.isSuccessful) {
-//                Log.i("TAG", "Okay")
-//
-//
-//
-//            } else {
-//
-//                Log.i(
-//                    "TAG",
-//                    " ${
-//                        NetworkService.dufaServiceApi.login(loginRequest).errorBody().toString()
-//                    } "
-//                )
         }
-
-
-//            dashboardViewModel.login(loginRequest)
-//
-//            findNavController().navigate(R.id.action_Login_to_Dashboard)
-//
-//            dashboardViewModel.userLoginLiveData.observe(viewLifecycleOwner) {
-//                Log.i("TAG", "lo ${it.data}")
-//            }
-
-
     }
     override fun onResume() {
         super.onResume()
