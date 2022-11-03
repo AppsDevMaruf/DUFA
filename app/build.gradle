@@ -60,7 +60,7 @@ dependencies {
 
     //required for ssl commerce
     implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.1.0'
-    implementation(name: 'sslCommerzSdk', ext: 'aar')
+    implementation(files("libs/sslCommerzSdk.aar"))
     implementation 'com.google.code.gson:gson:2.9.0'
     //screen size unit
     implementation 'com.intuit.sdp:sdp-android:1.1.0'
