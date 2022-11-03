@@ -28,7 +28,7 @@
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/progress_bar"
                 android:indeterminate="true"
-                style="@style/SpinKitView.ThreeBounce"
+                style="@style/SpinKitView.Circle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -88,6 +88,7 @@
                         <EditText
                             android:id="@+id/nameEt"
                             style=""
+                            android:textColor="@color/black"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/rectangle_8"
@@ -106,6 +107,7 @@
                         <EditText
                             android:id="@+id/emailEt"
                             style=""
+                            android:textColor="@color/black"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/rectangle_8"
@@ -125,6 +127,7 @@
                         <EditText
                             android:id="@+id/contactEt"
                             style=""
+                            android:textColor="@color/black"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:autofillHints="phone"
@@ -145,6 +148,7 @@
                         <EditText
                             android:id="@+id/addressEt"
                             style=""
+                            android:textColor="@color/black"
                             android:layout_width="match_parent"
                             android:layout_height="100dp"
                             android:layout_marginBottom="@dimen/spacing_middle"
@@ -184,6 +188,7 @@
                                     android:layout_gravity="center"
                                     android:background="@drawable/rectangle_8"
                                     android:hint="*******"
+                                    android:textColor="@color/black"
                                     android:padding="@dimen/_9sdp"
                                     android:textSize="@dimen/_13sdp" />
 
@@ -315,6 +320,7 @@
                         <EditText
                             android:id="@+id/confPassword"
                             style=""
+                            android:textColor="@color/black"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/rectangle_8"

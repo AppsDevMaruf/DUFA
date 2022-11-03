@@ -8,6 +8,7 @@ import com.marufalam.dufa.models.login.RequestLogin
 import com.marufalam.dufa.models.register.RequestRegister
 import com.marufalam.dufa.models.register.ResponseRegister
 import com.marufalam.dufa.utils.NetworkResult
+import org.json.JSONObject
 import javax.inject.Inject
 
 class UserRepository @Inject constructor(private val userApi: UserApi){
@@ -23,7 +24,8 @@ class UserRepository @Inject constructor(private val userApi: UserApi){
             _registerResponseLiveDataRepo.postValue(NetworkResult.Success(response.body()!!))
 
         }else if (response.errorBody() != null){
-            _registerResponseLiveDataRepo.postValue(NetworkResult.Error(".ErrorBody....."))
+            val errorObj = JSONObject(response.errorBody()!!.charStream().readText())
+            _registerResponseLiveDataRepo.postValue(NetworkResult.Error(errorObj.getString("message")))
 
 
         }else{

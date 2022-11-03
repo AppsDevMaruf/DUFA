@@ -41,8 +41,8 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
             authViewModel.registerUserVM(
                 RequestRegister(
                     "murad",
-                    "muradb@gmail.com",
-                    "01684577482",
+                    "murtyb@gmail.com",
+                    "01644577482",
                     "Dhaka",
                     "11223344",
                     "11223344"
@@ -67,6 +67,7 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
 
     override fun binObserver() {
         authViewModel.registerResponseLiveDataVM.observe(viewLifecycleOwner, Observer {
+           binding.progressBar.isVisible =false
             when (it) {
                 is NetworkResult.Success -> {
                     //token abi baki he...
