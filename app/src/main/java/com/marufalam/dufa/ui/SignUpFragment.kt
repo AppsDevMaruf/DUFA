@@ -1,6 +1,8 @@
 package com.marufalam.dufa.ui
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +14,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
@@ -22,13 +25,20 @@ import com.marufalam.dufa.fragments.BaseFragment
 import com.marufalam.dufa.fragments.signup.InputValidation
 import com.marufalam.dufa.models.login.RequestLogin
 import com.marufalam.dufa.models.register.RequestRegister
-import com.marufalam.dufa.utils.NetworkResult
+import com.marufalam.dufa.utils.*
 import com.marufalam.dufa.viewmodel.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.time.Clock.tick
 
 @AndroidEntryPoint
 class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
+    var hasName = false
+    var hasEmail = false
+    var hasPhone = false
+    var hasAddress = false
+    var hasPassword = false
+    var hasConfirmPass = false
     private val authViewModel by viewModels<AuthViewModel>()
 
 
@@ -37,8 +47,198 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
     }
 
     override fun configUi() {
+        binding.nameEt.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if (p0.toString().trim().isEmpty()) {
+                    hasName = false
+                    binding.nameEt.error = "Name is required"
+                    enableBtn(false, binding.signUpBtn)
+                } else {
+                    hasName = true
+                    if (hasName && hasEmail && hasPhone && hasAddress && hasPassword && hasConfirmPass) {
+
+
+                        enableBtn(true, binding.signUpBtn)
+
+                    } else {
+
+                        enableBtn(false, binding.signUpBtn)
+                    }
+                }
+
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+
+            }
+
+        })
+        binding.emailEt.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if (p0.toString().trim().isEmpty()) {
+                    hasEmail = false
+                    binding.emailEt.error = "Email is required"
+                    enableBtn(false, binding.signUpBtn)
+                } else {
+                    isValidEmail(p0.toString().trim())
+                    hasEmail = true
+                    if (hasName && hasEmail && hasPhone && hasAddress && hasPassword && hasConfirmPass) {
+
+
+                        enableBtn(true, binding.signUpBtn)
+
+                    } else {
+
+                        enableBtn(false, binding.signUpBtn)
+                    }
+                }
+
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+
+            }
+
+        })
+        binding.contactEt.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if (p0.toString().trim().isEmpty()) {
+                    hasPhone = false
+                    binding.contactEt.error = "Contract Number is required"
+                    enableBtn(false, binding.signUpBtn)
+                } else {
+                    hasPhone = true
+                    if (hasName && hasEmail && hasPhone && hasAddress && hasPassword && hasConfirmPass) {
+
+
+                        enableBtn(true, binding.signUpBtn)
+
+                    } else {
+
+                        enableBtn(false, binding.signUpBtn)
+                    }
+                }
+
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+
+            }
+
+        })
+        binding.addressEt.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if (p0.toString().trim().isEmpty()) {
+                    hasAddress = false
+                    binding.addressEt.error = "Email is required"
+                    enableBtn(false, binding.signUpBtn)
+                } else {
+                    hasAddress = true
+                    if (hasName && hasEmail && hasPhone && hasAddress && hasPassword && hasConfirmPass) {
+
+
+                        enableBtn(true, binding.signUpBtn)
+
+                    } else {
+
+                        enableBtn(false, binding.signUpBtn)
+                    }
+                }
+
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+
+            }
+
+        })
+        binding.passwordInput.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (s.toString().trim().isEmpty()) {
+                    hasPassword = false
+                    binding.addressEt.error = "Email is required"
+                    enableBtn(false, binding.signUpBtn)
+                } else {
+                    validatePassWord(s.toString().trim())
+                    hasPassword = true
+                    if (hasName && hasEmail && hasPhone && hasAddress && hasPassword && hasConfirmPass) {
+
+
+                        enableBtn(true, binding.signUpBtn)
+
+                    } else {
+
+                        enableBtn(false, binding.signUpBtn)
+                    }
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+
+
+        })
+        binding.confPassword.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if (p0.toString().trim().isEmpty()) {
+                    hasConfirmPass = false
+                    binding.confPassword.error = "Confirm Password Required"
+                    enableBtn(false, binding.signUpBtn)
+                } else {
+                    isPasswordMatch(
+                        binding.passwordInput.toString().trim(),
+                        binding.confPassword.toString().trim()
+                    )
+                    hasConfirmPass = true
+                    if (hasName && hasEmail && hasPhone && hasAddress && hasPassword && hasConfirmPass) {
+
+
+                        enableBtn(true, binding.signUpBtn)
+
+                    } else {
+
+                        enableBtn(false, binding.signUpBtn)
+                    }
+                }
+
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+
+            }
+
+        })
+
+
+
         binding.signUpBtn.setOnClickListener {
-            authViewModel.registerUserVM(
+            toast("thanks")
+            /*authViewModel.registerUserVM(
                 RequestRegister(
                     "murad",
                     "murtyb@gmail.com",
@@ -47,14 +247,12 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
                     "11223344",
                     "11223344"
                 )
-            )
+            )*/
 
         }
         binding.loginText.setOnClickListener {
-            //findNavController().navigate(R.id.action_signUpFragment_to_logInFragment)
-            lifecycleScope.launch {
-                authViewModel.loginUserVM(RequestLogin("murad@gmail.com", "11223344"))
-            }
+            findNavController().navigate(R.id.action_signUpFragment_to_logInFragment)
+
 
         }
 
@@ -65,16 +263,91 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
 
     }
 
+    private fun validatePassWord(password: String) {
+
+        val upperCase: Boolean = hasUpperCase(password)
+        val lowerCase: Boolean = hasLowerCase(password)
+        val hasDigit: Boolean = hasDigit(password)
+        val isLength: Boolean = isLength8(password)
+        val hasSpecialChar: Boolean = hasSpecailChar(password)
+
+
+        if (upperCase) {
+            binding.oneUpperCaseText.setCompoundDrawablesWithIntrinsicBounds(
+                R.drawable.tick, 0, 0, 0
+            )
+            binding.oneUpperCaseText.setTextColor(resources.getColor(R.color.blue))
+
+        } else {
+            binding.oneUpperCaseText.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
+            binding.oneUpperCaseText.setTextColor(resources.getColor(R.color.text_gray))
+        }
+
+        if (lowerCase) {
+            binding.oneLowerCaseText.setCompoundDrawablesWithIntrinsicBounds(
+                R.drawable.tick, 0, 0, 0
+            )
+            binding.oneLowerCaseText.setTextColor(resources.getColor(R.color.blue))
+
+        } else {
+            binding.oneLowerCaseText.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
+            binding.oneLowerCaseText.setTextColor(resources.getColor(R.color.text_gray))
+        }
+
+        if (hasDigit) {
+            binding.oneNumberText.setCompoundDrawablesWithIntrinsicBounds(
+                R.drawable.tick, 0, 0, 0
+            )
+            binding.oneNumberText.setTextColor(resources.getColor(R.color.blue))
+
+        } else {
+            binding.oneNumberText.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
+            binding.oneNumberText.setTextColor(resources.getColor(R.color.text_gray))
+        }
+
+        if (isLength) {
+            binding.eightNumberTextLength.setCompoundDrawablesWithIntrinsicBounds(
+                R.drawable.tick, 0, 0, 0
+            )
+            binding.eightNumberTextLength.setTextColor(resources.getColor(R.color.blue))
+
+        } else {
+            binding.eightNumberTextLength.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
+            binding.eightNumberTextLength.setTextColor(resources.getColor(R.color.text_gray))
+        }
+
+
+        if (hasSpecialChar) {
+            binding.specialCharacters.setCompoundDrawablesWithIntrinsicBounds(
+                R.drawable.tick, 0, 0, 0
+            )
+            binding.specialCharacters.setTextColor(resources.getColor(R.color.blue))
+
+        } else {
+            binding.specialCharacters.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
+            binding.specialCharacters.setTextColor(resources.getColor(R.color.text_gray))
+        }
+
+
+
+
+        if (hasDigit && lowerCase && upperCase && isLength && hasSpecialChar) {
+            enableBtn(true, binding.signUpBtn)
+        }
+
+
+    }
+
     override fun binObserver() {
         authViewModel.registerResponseLiveDataVM.observe(viewLifecycleOwner, Observer {
-           binding.progressBar.isVisible =false
+            binding.progressBar.isVisible = false
             when (it) {
                 is NetworkResult.Success -> {
                     //token abi baki he...
                     findNavController().navigate(R.id.action_signUpFragment_to_DashboardFragment)
                 }
                 is NetworkResult.Error -> {
-                    binding.signupErrorText.visibility =View.VISIBLE
+                    binding.signupErrorText.visibility = View.VISIBLE
                     binding.signupErrorText.text = it.message
                 }
                 is NetworkResult.Loading -> {

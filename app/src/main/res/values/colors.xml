@@ -339,5 +339,8 @@
     <color name="strong">#FCCA3F</color>
     <color name="bulletproof">#00c853</color>
 
+    <color name="text_enable_white">#F2F2F2</color>
+    <color name="text_disable_white">#FFFFFF</color>
+
 
 </resources>
