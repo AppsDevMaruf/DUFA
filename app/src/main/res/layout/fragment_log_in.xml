@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -19,8 +20,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_centerInParent="true"
 
+            android:layout_centerInParent="true"
             android:orientation="vertical"
             android:padding="@dimen/spacing_mlarge">
 
@@ -46,6 +47,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@color/background"
                     android:orientation="vertical"
                     android:padding="@dimen/spacing_mlarge">
 
@@ -75,17 +77,16 @@
                         android:layout_marginLeft="-4dp"
                         android:layout_marginRight="-4dp"
                         android:inputType="text"
+                        android:background="@drawable/rectangle_8"
                         android:maxLength="50"
                         android:maxLines="1"
+                        android:hint="email"
+                        android:paddingLeft="15dp"
                         android:singleLine="true"
+                        android:layout_marginBottom="10dp"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                         android:textColor="@color/blue_600"
-                        android:textStyle="bold"
                         android:theme="@style/EditText.Grey" />
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/spacing_mlarge" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -95,24 +96,39 @@
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
                         android:textColor="@color/grey_40" />
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/loginPassword"
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="-4dp"
-                        android:layout_marginRight="-4dp"
-                        android:inputType="textPassword"
-                        android:maxLength="50"
-                        android:maxLines="1"
-                        android:singleLine="true"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                        android:textColor="@color/blue_600"
-                        android:textStyle="bold"
-                        android:theme="@style/EditText.Grey" />
+                        android:layout_weight="3"
+                        android:padding="0dp"
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp"
+                        app:hintEnabled="false"
+                        app:passwordToggleEnabled="true">
 
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/spacing_mlarge" />
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/password_input"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="15dp"
+                            android:background="@drawable/rectangle_8"
+                            android:hint="*******"
+                            android:padding="@dimen/_9sdp"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_13sdp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <TextView
+                        android:id="@+id/loginErrorText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/red_A700"
+                        android:textSize="12sp"
+                        android:gravity="center"
+                        android:padding="3dp"
+                        android:visibility="invisible"
+                        android:text="New user? " />
 
                     <Button
                         android:id="@+id/log_in"
@@ -125,6 +141,7 @@
                         android:textAllCaps="false"
                         android:textColor="@android:color/white"
                         android:textStyle="bold" />
+
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -152,6 +169,16 @@
                             android:textStyle="bold" />
 
                     </LinearLayout>
+                    <com.github.ybq.android.spinkit.SpinKitView
+                        android:visibility="gone"
+                        android:id="@+id/progress_bar"
+                        android:indeterminate="true"
+                        style="@style/SpinKitView.Circle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        app:SpinKit_Color="@color/white"
+                        tools:ignore="MissingClass" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.marufalam.dufa.models.login.RequestLogin
+import com.marufalam.dufa.models.login.ResponseLogin
 import com.marufalam.dufa.models.register.RequestRegister
 import com.marufalam.dufa.models.register.ResponseRegister
 import com.marufalam.dufa.repos.UserRepository
@@ -17,6 +18,10 @@ import javax.inject.Inject
 class AuthViewModel @Inject constructor(private val userRepository: UserRepository) :ViewModel() {
     val registerResponseLiveDataVM :LiveData<NetworkResult<ResponseRegister>>
     get() = userRepository.registerResponseLiveDataRepo
+
+    val loginResponseLiveDataVM :LiveData<NetworkResult<ResponseLogin>>
+        get() = userRepository.loginResponseLiveDataRepo
+
 
 
     fun registerUserVM(requestRegister: RequestRegister){

@@ -10,6 +10,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        tools:ignore="HardcodedText"
         android:background="@color/white">
 
         <View
@@ -25,7 +26,6 @@
             android:padding="@dimen/spacing_mlarge">
             <com.github.ybq.android.spinkit.SpinKitView
                 android:visibility="gone"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/progress_bar"
                 android:indeterminate="true"
                 style="@style/SpinKitView.Circle"
@@ -135,6 +135,8 @@
                             android:hint="Your Contact Number"
                             android:inputType="phone"
                             android:paddingStart="@dimen/spacing_mlarge"
+                            android:maxLength="11"
+                            android:minLines="11"
                             tools:ignore="RtlSymmetry" />
 
                         <TextView
@@ -170,6 +172,7 @@
                                 android:padding="0dp"
                                 app:boxStrokeWidth="0dp"
                                 app:boxStrokeWidthFocused="0dp"
+                                app:passwordToggleEnabled="true"
                                 app:hintEnabled="false">
 
                                 <com.google.android.material.textfield.TextInputEditText
@@ -248,11 +251,6 @@
                             android:textColor="@color/text_gray"
                             android:textSize="12sp" />
 
-
-
-
-
-
                         <TextView
                             style="@style/emailPassText"
                             android:layout_width="match_parent"
@@ -261,16 +259,28 @@
                             android:padding="@dimen/spacing_small"
                             android:text="Confirm Password" />
 
-                        <EditText
-                            android:id="@+id/confPassword"
-                            style=""
-                            android:textColor="@color/black"
+                        <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/rectangle_8"
-                            android:hint="********"
-                            android:paddingStart="@dimen/spacing_mlarge"
-                            tools:ignore="RtlSymmetry" />
+                            android:layout_weight="3"
+                            android:padding="0dp"
+                            app:boxStrokeWidth="0dp"
+                            app:boxStrokeWidthFocused="0dp"
+                            app:passwordToggleEnabled="true"
+                            app:hintEnabled="false">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/confPassword"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:background="@drawable/rectangle_8"
+                                android:hint="*******"
+                                android:textColor="@color/black"
+                                android:padding="@dimen/_9sdp"
+                                android:textSize="@dimen/_13sdp" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
 
 
                         <androidx.appcompat.widget.AppCompatButton

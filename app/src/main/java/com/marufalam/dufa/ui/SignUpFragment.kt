@@ -30,6 +30,7 @@ import com.marufalam.dufa.viewmodel.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.time.Clock.tick
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
@@ -39,6 +40,8 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
     var hasAddress = false
     var hasPassword = false
     var hasConfirmPass = false
+
+
     private val authViewModel by viewModels<AuthViewModel>()
 
 
@@ -146,7 +149,7 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (p0.toString().trim().isEmpty()) {
                     hasAddress = false
-                    binding.addressEt.error = "Email is required"
+                    binding.addressEt.error = "Address is required"
                     enableBtn(false, binding.signUpBtn)
                 } else {
                     hasAddress = true
@@ -176,7 +179,7 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (s.toString().trim().isEmpty()) {
                     hasPassword = false
-                    binding.addressEt.error = "Email is required"
+                    binding.addressEt.error = "Password is required"
                     enableBtn(false, binding.signUpBtn)
                 } else {
                     validatePassWord(s.toString().trim())
@@ -210,9 +213,11 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
                     binding.confPassword.error = "Confirm Password Required"
                     enableBtn(false, binding.signUpBtn)
                 } else {
-                    isPasswordMatch(
-                        binding.passwordInput.toString().trim(),
-                        binding.confPassword.toString().trim()
+                    enableBtn(
+                        isPasswordMatch(
+                            binding.passwordInput.toString().trim(),
+                            binding.confPassword.toString().trim()
+                        ), binding.signUpBtn
                     )
                     hasConfirmPass = true
                     if (hasName && hasEmail && hasPhone && hasAddress && hasPassword && hasConfirmPass) {
@@ -238,16 +243,7 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
 
         binding.signUpBtn.setOnClickListener {
             toast("thanks")
-            /*authViewModel.registerUserVM(
-                RequestRegister(
-                    "murad",
-                    "murtyb@gmail.com",
-                    "01644577482",
-                    "Dhaka",
-                    "11223344",
-                    "11223344"
-                )
-            )*/
+            authViewModel.registerUserVM(getRequestRegister())
 
         }
         binding.loginText.setOnClickListener {
@@ -261,6 +257,15 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
 
     override fun setupNavigation() {
 
+    }
+    private fun getRequestRegister():RequestRegister{
+        val name = binding.nameEt.text.toString().trim()
+        val email = binding.emailEt.text.toString().trim()
+        val phone = binding.contactEt.text.toString().trim()
+        val address = binding.addressEt.text.toString().trim()
+        val password = binding.passwordInput.text.toString().trim()
+        val confPassword = binding.confPassword.text.toString().trim()
+        return RequestRegister(name,email,phone,address,password,confPassword)
     }
 
     private fun validatePassWord(password: String) {
@@ -343,7 +348,7 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
             binding.progressBar.isVisible = false
             when (it) {
                 is NetworkResult.Success -> {
-                    //token abi baki he...
+                    //token
                     findNavController().navigate(R.id.action_signUpFragment_to_DashboardFragment)
                 }
                 is NetworkResult.Error -> {
