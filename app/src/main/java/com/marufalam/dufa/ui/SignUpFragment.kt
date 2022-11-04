@@ -42,8 +42,6 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
     var hasAddress = false
     var hasPassword = false
     var hasConfirmPass = false
-    @Inject
-    lateinit var tokenManager: TokenManager
     private val authViewModel by viewModels<AuthViewModel>()
 
 
@@ -246,12 +244,11 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
 
 
         binding.signUpBtn.setOnClickListener {
-            toast("thanks")
             authViewModel.registerUserVM(getRequestRegister())
 
         }
         binding.loginText.setOnClickListener {
-            findNavController().navigate(R.id.action_signUpFragment_to_logInFragment)
+           findNavController().popBackStack()
 
 
         }
@@ -260,20 +257,18 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
     }
 
     override fun setupNavigation() {
-        if (tokenManager.getToken()!=null){
-            findNavController().navigate(R.id.action_signUpFragment_to_DashboardFragment)
-        }
 
 
     }
-    private fun getRequestRegister():RequestRegister{
+
+    private fun getRequestRegister(): RequestRegister {
         val name = binding.nameEt.text.toString().trim()
         val email = binding.emailEt.text.toString().trim()
         val phone = binding.contactEt.text.toString().trim()
         val address = binding.addressEt.text.toString().trim()
         val password = binding.passwordInput.text.toString().trim()
         val confPassword = binding.confPassword.text.toString().trim()
-        return RequestRegister(name,email,phone,address,password,confPassword)
+        return RequestRegister(name, email, phone, address, password, confPassword)
     }
 
     private fun validatePassWord(password: String) {
@@ -356,11 +351,10 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
             binding.progressBar.isVisible = false
             when (it) {
                 is NetworkResult.Success -> {
-                    //token
-                    tokenManager.saveToken(it.data!!.message)
-                    Log.i("TAG", "binObserver:${it.data!!.message} ")
 
-                    findNavController().navigate(R.id.action_signUpFragment_to_DashboardFragment)
+                    toast("Registration Successful")
+
+                    findNavController().popBackStack()
                 }
                 is NetworkResult.Error -> {
                     binding.signupErrorText.visibility = View.VISIBLE
