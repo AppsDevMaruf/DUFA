@@ -1,4 +1,4 @@
-package com.marufalam.dufa
+package com.marufalam.dufa.ui
 
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.widget.AppCompatSpinner
 import com.example.awesomedialog.*
+import com.marufalam.dufa.R
 import com.sslwireless.sslcommerzlibrary.model.initializer.SSLCAdditionalInitializer
 import com.sslwireless.sslcommerzlibrary.model.initializer.SSLCommerzInitialization
 import com.sslwireless.sslcommerzlibrary.model.response.SSLCTransactionInfoModel

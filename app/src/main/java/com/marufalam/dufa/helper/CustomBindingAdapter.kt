@@ -1,10 +1,11 @@
-package com.marufalam.dufa
+package com.marufalam.dufa.helper
 
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
-import com.marufalam.weatherapps.networks.getFormattedDate
+import com.marufalam.dufa.R
+import com.marufalam.dufa.networks.getFormattedDate
 
 
 @BindingAdapter("app:setDateTime")

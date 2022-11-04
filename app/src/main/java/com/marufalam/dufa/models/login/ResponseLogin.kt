@@ -1,6 +1,6 @@
-package com.marufalam.dufa.models
+package com.marufalam.dufa.models.login
 
-data class LoginResponse(
+data class ResponseLogin(
     val `data`: Data,
     val message: String,
     val token: String

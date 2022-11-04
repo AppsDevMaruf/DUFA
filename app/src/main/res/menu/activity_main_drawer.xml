@@ -28,6 +28,9 @@
             android:id="@+id/QRFragment"
             android:icon="@drawable/qr"
             android:title="QR Code" />
+        <item
+            android:icon="@android:drawable/ic_menu_close_clear_cancel"
+            android:title="Log Out" />
 
     </group>
 

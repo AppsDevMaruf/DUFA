@@ -8,6 +8,7 @@
     <string name="minimum_characters">8 characters minimum</string>
     <string name="special_characters">Special Characters</string>
     <string name="search_hint">Search</string>
+    <string name="dufa">DUFA</string>
 
     <string-array name="paymentsType">
         <item>Registration Fee</item>
