@@ -10,8 +10,13 @@ import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.marufalam.dufa.R
+import com.marufalam.dufa.utils.TokenManager
+import javax.inject.Inject
 
 abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
+
 
     private  var _binding: T? =null
      val binding get() = _binding!!
@@ -22,6 +27,7 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = DataBindingUtil.inflate(inflater, getFragmentView(), container, false)
+
         return binding.root
     }
 

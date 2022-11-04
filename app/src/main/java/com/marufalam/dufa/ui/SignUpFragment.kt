@@ -3,6 +3,7 @@ package com.marufalam.dufa.ui
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -32,6 +33,7 @@ import kotlinx.coroutines.launch
 import java.time.Clock.tick
 import javax.inject.Inject
 
+
 @AndroidEntryPoint
 class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
     var hasName = false
@@ -40,16 +42,18 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
     var hasAddress = false
     var hasPassword = false
     var hasConfirmPass = false
-
-
+    @Inject
+    lateinit var tokenManager: TokenManager
     private val authViewModel by viewModels<AuthViewModel>()
 
 
     override fun getFragmentView(): Int {
         return R.layout.fragment_sign_up
+
     }
 
     override fun configUi() {
+
         binding.nameEt.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
@@ -256,6 +260,10 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
     }
 
     override fun setupNavigation() {
+        if (tokenManager.getToken()!=null){
+            findNavController().navigate(R.id.action_signUpFragment_to_DashboardFragment)
+        }
+
 
     }
     private fun getRequestRegister():RequestRegister{
@@ -349,6 +357,9 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
             when (it) {
                 is NetworkResult.Success -> {
                     //token
+                    tokenManager.saveToken(it.data!!.message)
+                    Log.i("TAG", "binObserver:${it.data!!.message} ")
+
                     findNavController().navigate(R.id.action_signUpFragment_to_DashboardFragment)
                 }
                 is NetworkResult.Error -> {
