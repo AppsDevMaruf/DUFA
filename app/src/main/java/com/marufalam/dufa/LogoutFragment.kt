@@ -26,6 +26,7 @@ class LogoutFragment : Fragment() {
         editor?.putString(Constants.USER_TOKEN,null)
         editor?.clear()
         editor?.apply()
+        //navigation
         findNavController().navigate(R.id.action_logoutFragment_to_logInFragment)
         return inflater.inflate(R.layout.fragment_logout, container, false)
     }

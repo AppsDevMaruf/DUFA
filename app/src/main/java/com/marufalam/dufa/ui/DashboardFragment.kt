@@ -4,8 +4,9 @@ import androidx.navigation.fragment.findNavController
 import com.marufalam.dufa.R
 import com.marufalam.dufa.databinding.FragmentDashboardBinding
 import com.marufalam.dufa.fragments.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
 
     override fun getFragmentView(): Int {
@@ -16,7 +17,7 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
         binding.memberListCard.setOnClickListener{
             findNavController().navigate(R.id.action_DashboardFragment_to_memberListFragment)
         binding.paymentCard.setOnClickListener {
-            findNavController().navigate(R.id.action_DashboardFragment_to_paymentFragment)
+        findNavController().navigate(R.id.action_DashboardFragment_to_paymentFragment)
         }
 
         }
