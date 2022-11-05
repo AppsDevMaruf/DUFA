@@ -74,23 +74,27 @@ class LogInFragment : BaseFragment<FragmentLogInBinding>() {
             }
         }
         binding.singup.setOnClickListener {
-            findNavController().popBackStack()
+            findNavController().navigate(R.id.action_logInFragment_to_signUpFragment)
         }
 
     }
 
     override fun setupNavigation() {
+        if (tokenManager.getToken()!=null){
+            findNavController().navigate(R.id.action_logInFragment_to_DashboardFragment)
+        }
 
     }
 
     override fun binObserver() {
-        authViewModel.loginResponseLiveDataVM.observe(viewLifecycleOwner,Observer {
+        authViewModel.loginResponseLiveDataVM.observe(viewLifecycleOwner) {
             binding.progressBar.isVisible = false
             when (it) {
                 is NetworkResult.Success -> {
                     //token
                     tokenManager.saveToken(it.data!!.token)
-                    findNavController().navigate(R.id.action_Login_to_Dashboard)
+                    Log.e("TAG", "binObserver: ${it.data.token}")
+                    findNavController().navigate(R.id.action_logInFragment_to_DashboardFragment)
                 }
                 is NetworkResult.Error -> {
                     binding.loginErrorText.visibility = View.VISIBLE
@@ -101,7 +105,7 @@ class LogInFragment : BaseFragment<FragmentLogInBinding>() {
 
                 }
             }
-        })
+        }
 
     }
 

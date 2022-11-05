@@ -5,9 +5,11 @@ import com.marufalam.dufa.models.login.RequestLogin
 import com.marufalam.dufa.models.login.ResponseLogin
 import com.marufalam.dufa.models.register.RequestRegister
 import com.marufalam.dufa.models.register.ResponseRegister
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface UserApi {
     @POST("/api/register")
@@ -15,4 +17,7 @@ interface UserApi {
 
     @POST("/api/login")
     suspend fun login(@Body requestLogin: RequestLogin): Response<ResponseLogin>
+
+   /* @POST("api/logout/")
+    fun logOutUser(@Query("token") token: String?): Call<>*/
 }

@@ -86,7 +86,7 @@
                         android:id="@+id/memberListCard"
                         android:layout_width="166dp"
                         android:layout_height="match_parent"
-                        android:layout_margin="10dp"
+                        android:layout_margin="8dp"
                         android:layout_weight="1"
                         android:padding="@dimen/_8sdp"
                         app:cardBackgroundColor="@color/white"
@@ -147,7 +147,7 @@
                         android:id="@+id/paymentCard"
                         android:layout_width="166dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_margin="8dp"
                         android:layout_weight="1"
                         android:padding="@dimen/_8sdp"
                         app:cardBackgroundColor="@color/white"
@@ -219,7 +219,7 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="166dp"
                         android:layout_height="match_parent"
-                        android:layout_margin="10dp"
+                        android:layout_margin="8dp"
                         android:layout_weight="1"
                         android:padding="@dimen/_8sdp"
                         app:cardBackgroundColor="@color/white"
@@ -279,7 +279,7 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="166dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_margin="8dp"
                         android:layout_weight="1"
                         android:padding="@dimen/_8sdp"
                         app:cardBackgroundColor="@color/white"
@@ -337,7 +337,7 @@
                     <!--     <androidx.cardview.widget.CardView
                              android:layout_width="166dp"
                              android:layout_height="match_parent"
-                             android:layout_margin="10dp"
+                             android:layout_margin="8dp"
                              android:layout_weight="1"
                              app:cardBackgroundColor="@color/white"
                              app:cardCornerRadius="10dp"
@@ -388,7 +388,7 @@
 
                         android:layout_width="166dp"
                         android:layout_height="match_parent"
-                        android:layout_margin="10dp"
+                        android:layout_margin="8dp"
                         android:layout_weight="1"
                         android:padding="@dimen/_8sdp"
                         app:cardBackgroundColor="@color/white"
@@ -449,7 +449,7 @@
 
                         android:layout_width="166dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_margin="8dp"
                         android:layout_weight="1"
                         android:padding="@dimen/_8sdp"
                         app:cardBackgroundColor="@color/white"
