@@ -3,12 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-        <variable
-            name="user"
-            type="com.marufalam.dufa.models.dashboard.ResponseMemberList" />
-
-    </data>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -40,7 +34,7 @@
                 app:srcCompat="@drawable/maruf"
                 app:strokeColor="@color/blue"
                 app:strokeWidth="3dp" />
-               <!-- app:setIcon="@{member.imagePath}"-->
+
 
 
 
@@ -58,11 +52,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="2dp"
-                    android:text="@{user.User.name}"
                     android:textColor="@color/blue"
                     android:textSize="18sp"
                     app:fontFamily="@font/dm_sans"
                     tools:text="Maruf Alam" />
+
 
                 <TextView
                     android:id="@+id/number"
@@ -70,7 +64,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="2dp"
-                    android:text="@{user.User.phone}"
                     android:textColor="@color/blue"
                     android:textSize="15sp"
                     app:fontFamily="@font/dm_sans"
@@ -82,7 +75,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:layout_toEndOf="@+id/profile_image"
-                    android:text="@{user.User.bloodgroup}"
                     android:textColor="@color/red_700"
                     android:textSize="20sp"
                     android:textStyle="bold"
