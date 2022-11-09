@@ -1,4 +1,4 @@
-package com.marufalam.dufa.fragments
+package com.marufalam.dufa
 
 import android.app.Activity
 import android.content.Context
@@ -10,10 +10,6 @@ import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.marufalam.dufa.R
-import com.marufalam.dufa.utils.TokenManager
-import javax.inject.Inject
 
 abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
 

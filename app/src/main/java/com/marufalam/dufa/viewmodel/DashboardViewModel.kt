@@ -1,49 +1,37 @@
 package com.marufalam.dufa.viewmodel
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.marufalam.dufa.models.MemberList
+import com.marufalam.dufa.models.dashboard.ResponseMemberList
 import com.marufalam.dufa.models.login.RequestLogin
 import com.marufalam.dufa.models.login.ResponseLogin
 import com.marufalam.dufa.repos.DashboardRepository
+import com.marufalam.dufa.utils.NetworkResult
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class DashboardViewModel : ViewModel() {
-    val repository = DashboardRepository()
-    val memberlistLD: MutableLiveData<MemberList> = MutableLiveData()
-    val userLoginLiveData: MutableLiveData<ResponseLogin> = MutableLiveData()
+@HiltViewModel
+class DashboardViewModel @Inject constructor(private val dashboardRepo: DashboardRepository) : ViewModel() {
 
-    fun fetchData() {
+    // getMemberList start
+    val getMemberListResponse: LiveData<NetworkResult<ResponseMemberList>>
+        get() = dashboardRepo.responsegetMemberList
+
+    fun getMemberList() {
         viewModelScope.launch {
-            try {
-                memberlistLD.value = repository.fetchMemberListData()
-                Log.e("TAG", "fetchData: $memberlistLD")
-            } catch (e: Exception) {
-                Log.e("DashboardViewModel", e.localizedMessage)
-            }
+            dashboardRepo.getMemberListRepo()
         }
-
     }
+    // getMemberList end
 
 
-    fun login(userRequest: RequestLogin) {
-
-        viewModelScope.launch {
-            try {
-
-                userLoginLiveData.value = repository.loginUser(userRequest)
-            } catch (e: Exception) {
 
 
-            }
 
-
-        }
-
-
-    }
 
 
 }

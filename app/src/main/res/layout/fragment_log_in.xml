@@ -128,7 +128,7 @@
                         android:gravity="center"
                         android:padding="3dp"
                         android:visibility="invisible"
-                        android:text="New user? " />
+                        android:text="" />
 
                     <Button
                         android:id="@+id/log_in"

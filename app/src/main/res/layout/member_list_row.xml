@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="member"
-            type="com.marufalam.dufa.models.MemberList.User" />
+            name="user"
+            type="com.marufalam.dufa.models.dashboard.ResponseMemberList" />
 
     </data>
 
@@ -39,9 +39,10 @@
                 app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                 app:srcCompat="@drawable/maruf"
                 app:strokeColor="@color/blue"
-                app:setIcon="@{member.imagePath}"
                 app:strokeWidth="3dp" />
-            // pic, name, mobile number, blood group
+               <!-- app:setIcon="@{member.imagePath}"-->
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -57,7 +58,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="2dp"
-                    android:text="@{member.name}"
+                    android:text="@{user.User.name}"
                     android:textColor="@color/blue"
                     android:textSize="18sp"
                     app:fontFamily="@font/dm_sans"
@@ -69,7 +70,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="2dp"
-                    android:text="@{member.phone}"
+                    android:text="@{user.User.phone}"
                     android:textColor="@color/blue"
                     android:textSize="15sp"
                     app:fontFamily="@font/dm_sans"
@@ -81,7 +82,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:layout_toEndOf="@+id/profile_image"
-                    android:text="@{member.bloodgroup}"
+                    android:text="@{user.User.bloodgroup}"
                     android:textColor="@color/red_700"
                     android:textSize="20sp"
                     android:textStyle="bold"

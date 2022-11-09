@@ -6,42 +6,46 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.marufalam.dufa.databinding.MemberListRowBinding
-import com.marufalam.dufa.models.MemberList
+import com.marufalam.dufa.models.dashboard.ResponseMemberList
 
 class MemberListAdapter :
-    ListAdapter<MemberList.User, MemberListAdapter.MemberListViewHolder>(MemberListDiffUtil()) {
+    ListAdapter<ResponseMemberList, MemberListAdapter.MemberListViewHolder>(MemberListDiffUtil()) {
 
 
     class MemberListViewHolder(val binding: MemberListRowBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: MemberList.User) {
-            binding.member = item
+        fun bind(item: ResponseMemberList) {
+            binding.user = item
         }
-    }
-
-
-    class MemberListDiffUtil : DiffUtil.ItemCallback<MemberList.User>() {
-        override fun areItemsTheSame(oldItem: MemberList.User, newItem: MemberList.User): Boolean {
-          return oldItem== newItem
-        }
-
-        override fun areContentsTheSame(
-            oldItem: MemberList.User,
-            newItem: MemberList.User
-        ): Boolean {
-            return oldItem== newItem
-        }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MemberListViewHolder {
-        val binding = MemberListRowBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding =
+            MemberListRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MemberListViewHolder(binding)
     }
+
 
     override fun onBindViewHolder(holder: MemberListViewHolder, position: Int) {
         val item = getItem(position)
         holder.bind(item)
+    }
+
+    class MemberListDiffUtil : DiffUtil.ItemCallback<ResponseMemberList>() {
+        override fun areItemsTheSame(
+            oldItem: ResponseMemberList,
+            newItem: ResponseMemberList
+        ): Boolean {
+            return oldItem == newItem
+        }
+
+        override fun areContentsTheSame(
+            oldItem: ResponseMemberList,
+            newItem: ResponseMemberList
+        ): Boolean {
+            return oldItem == newItem
+        }
+
     }
 
 

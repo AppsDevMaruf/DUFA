@@ -1,15 +1,10 @@
 package com.marufalam.dufa.ui
 
-import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.example.awesomedialog.*
 import com.marufalam.dufa.R
 import com.marufalam.dufa.databinding.FragmentPaymentBinding
-import com.marufalam.dufa.fragments.BaseFragment
+import com.marufalam.dufa.BaseFragment
 import com.sslwireless.sslcommerzlibrary.model.initializer.SSLCAdditionalInitializer
 import com.sslwireless.sslcommerzlibrary.model.initializer.SSLCommerzInitialization
 import com.sslwireless.sslcommerzlibrary.model.response.SSLCTransactionInfoModel
@@ -20,20 +15,37 @@ import com.sslwireless.sslcommerzlibrary.viewmodel.listener.SSLCTransactionRespo
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PaymentFragment :Fragment(),SSLCTransactionResponseListener{
+class PaymentFragment : BaseFragment<FragmentPaymentBinding>(),SSLCTransactionResponseListener{
 
     private var sslCommerzInitialization: SSLCommerzInitialization? = null
     var additionalInitializer: SSLCAdditionalInitializer? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_payment, container, false)
+
+
+    override fun getFragmentView(): Int {
+        return R.layout.fragment_payment
     }
 
+    override fun configUi() {
+        binding.registerCard.setOnClickListener {
+            sslSetUp(1000)
+        }
+        binding.oneTimeFee.setOnClickListener {
+            sslSetUp(3000)
+        }
+        binding.yearlePaymentsCard.setOnClickListener {
+            sslSetUp(5000)
+        }
 
+    }
+
+    override fun setupNavigation() {
+
+    }
+
+    override fun binObserver() {
+
+    }
 
     private fun sslSetUp(amount: Int) {
 
@@ -106,31 +118,4 @@ class PaymentFragment :Fragment(),SSLCTransactionResponseListener{
 
             }
     }
-
-   /* override fun getFragmentView(): Int {
-        return R.layout.fragment_payment
-    }
-
-    override fun configUi() {
-     *//*   binding.registerCard.setOnClickListener {
-            sslSetUp(1000)
-        }
-        binding.oneTimeFee.setOnClickListener {
-            sslSetUp(3000)
-        }
-        binding.yearlePaymentsCard.setOnClickListener {
-            sslSetUp(5000)
-        }*//*
-
-    }
-
-    override fun setupNavigation() {
-
-    }
-
-    override fun binObserver() {
-
-    }
-*/
-
 }

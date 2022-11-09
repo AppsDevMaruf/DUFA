@@ -47,7 +47,7 @@
         tools:layout="@layout/fragment_splash_screen" />
     <fragment
         android:id="@+id/memberListFragment"
-        android:name="com.marufalam.dufa.fragments.memberList.MemberListFragment"
+        android:name="com.marufalam.dufa.ui.MemberListFragment"
         android:label="MemberList"
         tools:layout="@layout/fragment_member_list" />
     <fragment
