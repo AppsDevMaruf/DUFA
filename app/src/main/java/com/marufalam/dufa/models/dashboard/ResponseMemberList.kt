@@ -1,8 +1,6 @@
-package com.marufalam.dufa.models
+package com.marufalam.dufa.models.dashboard
 import com.google.gson.annotations.SerializedName
-
-
-data class MemberList(
+data class ResponseMemberList(
     @SerializedName("users")
     val users: List<User>
 ) {

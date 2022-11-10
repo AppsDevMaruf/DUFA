@@ -1,37 +1,20 @@
 package com.marufalam.dufa.ui
 
-import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import com.example.passwordstrengthcalculator.PasswordStrengthCalculator
 import com.marufalam.dufa.R
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.passwordstrengthcalculator.StrengthLevel
 import com.marufalam.dufa.databinding.FragmentSignUpBinding
-import com.marufalam.dufa.fragments.BaseFragment
-import com.marufalam.dufa.fragments.signup.InputValidation
-import com.marufalam.dufa.models.login.RequestLogin
+import com.marufalam.dufa.BaseFragment
 import com.marufalam.dufa.models.register.RequestRegister
 import com.marufalam.dufa.utils.*
 import com.marufalam.dufa.viewmodel.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
-import java.time.Clock.tick
-import javax.inject.Inject
 
 
 @AndroidEntryPoint

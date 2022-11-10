@@ -6,28 +6,29 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.marufalam.dufa.databinding.MemberListRowBinding
-import com.marufalam.dufa.models.MemberList
+
+import com.marufalam.dufa.models.dashboard.ResponseMemberList
 
 class MemberListAdapter :
-    ListAdapter<MemberList.User, MemberListAdapter.MemberListViewHolder>(MemberListDiffUtil()) {
+    ListAdapter<ResponseMemberList.User, MemberListAdapter.MemberListViewHolder>(MemberListDiffUtil()) {
 
 
     class MemberListViewHolder(val binding: MemberListRowBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: MemberList.User) {
+        fun bind(item: ResponseMemberList.User) {
             binding.member = item
         }
     }
 
 
-    class MemberListDiffUtil : DiffUtil.ItemCallback<MemberList.User>() {
-        override fun areItemsTheSame(oldItem: MemberList.User, newItem: MemberList.User): Boolean {
-          return oldItem== newItem
+    class MemberListDiffUtil : DiffUtil.ItemCallback<ResponseMemberList.User>() {
+        override fun areItemsTheSame(oldItem: ResponseMemberList.User, newItem:ResponseMemberList.User): Boolean {
+            return oldItem== newItem
         }
 
         override fun areContentsTheSame(
-            oldItem: MemberList.User,
-            newItem: MemberList.User
+            oldItem: ResponseMemberList.User,
+            newItem: ResponseMemberList.User
         ): Boolean {
             return oldItem== newItem
         }

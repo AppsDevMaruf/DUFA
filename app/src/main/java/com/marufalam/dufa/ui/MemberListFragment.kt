@@ -1,27 +1,28 @@
-package com.marufalam.dufa.fragments.memberList
+package com.marufalam.dufa.ui
 
 import android.annotation.SuppressLint
-import android.os.Bundle
 import android.text.Html.fromHtml
 import android.util.Log
 import android.view.*
-import android.widget.LinearLayout
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.marufalam.dufa.R
 import com.marufalam.dufa.adapter.MemberListAdapter
 import com.marufalam.dufa.databinding.FragmentMemberListBinding
-import com.marufalam.dufa.fragments.BaseFragment
+import com.marufalam.dufa.BaseFragment
+import com.marufalam.dufa.utils.Constants.TAG
+import com.marufalam.dufa.utils.NetworkResult
+import com.marufalam.dufa.utils.hide
+import com.marufalam.dufa.utils.show
+import com.marufalam.dufa.utils.showAlert
 import com.marufalam.dufa.viewmodel.DashboardViewModel
 
 
 class MemberListFragment : BaseFragment<FragmentMemberListBinding>() {
-
-    val dashboardViewModel: DashboardViewModel by activityViewModels()
+    private val adapter = MemberListAdapter()
+    private val dashboardViewModel: DashboardViewModel by activityViewModels()
 
 
     @SuppressLint("ResourceAsColor")
@@ -53,18 +54,15 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>() {
     }
 
     override fun configUi() {
-        val adapter = MemberListAdapter()
+
+
         val llm = LinearLayoutManager(requireActivity())
         llm.orientation = LinearLayoutManager.VERTICAL
         binding.memberListRv.layoutManager = llm
         binding.memberListRv.adapter = adapter
-        Toast.makeText(requireActivity(), "WealCome", Toast.LENGTH_LONG)
-        dashboardViewModel.fetchData()
-        dashboardViewModel.memberlistLD.observe(viewLifecycleOwner) {
-            adapter.submitList(it.users)
-            Toast.makeText(requireActivity(), "${it.users}", Toast.LENGTH_LONG)
-            Log.e("TAG", "onCreateViewDashboard: $it")
-        }
+        Toast.makeText(requireActivity(), "Welcome", Toast.LENGTH_LONG).show()
+        dashboardViewModel.getMemberList()
+
     }
 
     override fun setupNavigation() {
@@ -72,7 +70,32 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>() {
     }
 
     override fun binObserver() {
+        dashboardViewModel.getMemberListResponse.observe(viewLifecycleOwner) {
+            binding.progress.hide()
+            when (it) {
+
+
+                is NetworkResult.Error -> {
+                    showAlert(requireActivity(), it.message!!)
+                }
+                is NetworkResult.Loading -> {
+                    binding.mainLayout.hide()
+                    binding.progress.show()
+                }
+                is NetworkResult.Success -> {
+                    binding.mainLayout.show()
+                    adapter.submitList(it.data?.users)
+                    Log.i(TAG, "binObserver:${it.data}")
+
+
+                    }
+
+
+                }
+
+            }
+
+        }
 
     }
 
-}

@@ -1,5 +1,6 @@
 package com.marufalam.dufa.di
 
+import com.marufalam.dufa.api.DashboardApi
 import com.marufalam.dufa.api.UserApi
 import com.marufalam.dufa.utils.Constants.BASE_URL
 import dagger.Module
@@ -27,6 +28,12 @@ class NetworkModule {
     @Provides
     fun providesUserApi(retrofit: Retrofit): UserApi {
         return retrofit.create(UserApi::class.java)
+
+    }
+    @Singleton
+    @Provides
+    fun providesDashboardApi(retrofit: Retrofit): DashboardApi {
+        return retrofit.create(DashboardApi::class.java)
 
     }
 }

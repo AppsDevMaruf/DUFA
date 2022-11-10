@@ -1,6 +1,5 @@
 package com.marufalam.dufa.repos
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.marufalam.dufa.api.UserApi

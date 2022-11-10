@@ -13,9 +13,10 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.marufalam.dufa.R
 import com.marufalam.dufa.databinding.FragmentSplashScreenBinding
+import dagger.hilt.android.AndroidEntryPoint
 import java.lang.Exception
 
-
+@AndroidEntryPoint
 class SplashScreenFragment : Fragment() {
 
     var binding: FragmentSplashScreenBinding? = null

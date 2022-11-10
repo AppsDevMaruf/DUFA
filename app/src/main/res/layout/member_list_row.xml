@@ -6,7 +6,7 @@
     <data>
         <variable
             name="member"
-            type="com.marufalam.dufa.models.MemberList.User" />
+            type="com.marufalam.dufa.models.dashboard.ResponseMemberList.User" />
 
     </data>
 
@@ -41,7 +41,7 @@
                 app:strokeColor="@color/blue"
                 app:setIcon="@{member.imagePath}"
                 app:strokeWidth="3dp" />
-            // pic, name, mobile number, blood group
+
 
             <LinearLayout
                 android:layout_width="match_parent"
