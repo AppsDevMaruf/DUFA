@@ -83,7 +83,8 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>() {
                     binding.progress.show()
                 }
                 is NetworkResult.Success -> {
-                    adapter.submitList(listOf(it.data))
+                    binding.mainLayout.show()
+                    adapter.submitList(it.data?.users)
                     Log.i(TAG, "binObserver:${it.data}")
 
 
