@@ -239,21 +239,19 @@
                         app:cardUseCompatPadding="false">
 
                         <LinearLayout
+                          android:id="@+id/eventFragment"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="vertical">
 
                             <ImageView
                                 android:layout_width="match_parent"
-                                android:layout_height="60dp"
-                                android:layout_marginLeft="-10dp"
-                                android:layout_marginTop="20dp"
+                                android:layout_height="70dp"
+                                android:layout_marginTop="10dp"
                                 android:layout_marginRight="10dp"
-                                android:padding="-20dp"
-                                android:paddingTop="40dp"
-                                android:paddingBottom="30dp"
-                                android:scaleType="center"
-                                android:src="@drawable/member_icon" />
+                                android:layout_marginLeft="-45dp"
+                                android:scaleType="centerInside"
+                                android:src="@drawable/event" />
 
                             <TextView
                                 android:layout_width="match_parent"
@@ -262,7 +260,8 @@
                                 android:layout_marginTop="8dp"
                                 android:letterSpacing="-0.02"
                                 android:lineSpacingExtra="1sp"
-                                android:text="1650"
+                                android:text="∞"
+                                android:paddingStart="2dp"
                                 android:textColor="@color/text_black"
                                 android:textSize="28sp"
                                 android:textStyle="bold" />
@@ -276,7 +275,7 @@
                                 android:letterSpacing="0.02"
                                 android:lineSpacingExtra="1sp"
                                 android:padding="5dp"
-                                android:text="Members"
+                                android:text="Event"
                                 android:textColor="@color/text_gray"
                                 android:textSize="14sp" />
 
