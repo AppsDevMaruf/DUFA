@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_DashboardFragment_to_logoutFragment"
             app:destination="@id/logoutFragment" />
+        <action
+            android:id="@+id/action_DashboardFragment_to_eventFragment"
+            app:destination="@id/eventFragment" />
     </fragment>
     <fragment
         android:id="@+id/logInFragment"

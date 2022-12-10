@@ -5,20 +5,15 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.marufalam.dufa.R
+import com.marufalam.dufa.utils.Constants
 
 @BindingAdapter("app:setIcon")
 fun setIcon(img:ImageView,imgUrl:String?){
-if (imgUrl != null){
+    val url = Constants.IMG_PREFIX+imgUrl
     Glide.with(img.context)
-        .load(imgUrl)
+        .load(url)
         .placeholder(R.drawable.loadpreview)
         .into(img)
-}else{
-    Glide.with(img.context)
-        .load("")
-        .placeholder(R.drawable.loadpreview)
-        .into(img)
-}
 
 
 
