@@ -14,11 +14,8 @@ import com.marufalam.dufa.R
 import com.marufalam.dufa.adapter.MemberListAdapter
 import com.marufalam.dufa.databinding.FragmentMemberListBinding
 import com.marufalam.dufa.BaseFragment
+import com.marufalam.dufa.utils.*
 import com.marufalam.dufa.utils.Constants.TAG
-import com.marufalam.dufa.utils.NetworkResult
-import com.marufalam.dufa.utils.hide
-import com.marufalam.dufa.utils.show
-import com.marufalam.dufa.utils.showAlert
 import com.marufalam.dufa.viewmodel.DashboardViewModel
 import java.util.Locale
 
@@ -27,29 +24,9 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>() {
     private val adapter = MemberListAdapter()
     private val dashboardViewModel: DashboardViewModel by activityViewModels()
     var filterBy = ""
+    var searchParam = ""
     var listBy = ""
 
-
-    @SuppressLint("ResourceAsColor")
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.search_menu, menu)
-        val searchView = menu.findItem(R.id.member_search).actionView as SearchView
-
-        searchView.queryHint =
-            fromHtml("<font color = #ffffff>" + resources.getString(R.string.search_hint) + "</font>");
-        searchView.isSubmitButtonEnabled = true
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                query?.let {
-                }
-                return true
-            }
-
-            override fun onQueryTextChange(p0: String?): Boolean {
-                return true
-            }
-        })
-    }
 
     override fun getFragmentView(): Int {
         return R.layout.fragment_member_list
@@ -58,14 +35,23 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>() {
 
     override fun configUi() {
 
-        val filterbyAdapter: ArrayAdapter<*>
+        val filterByAdapter: ArrayAdapter<*>
 
-        val showList = arrayOf("Filter By ", "Blood Group", "Department", "Profession","District")
+        val showList = arrayOf("Filter By ", "Blood Group", "Department", "Profession", "District")
+        val paramList = arrayOf("Filter By ", "bloodgroup", "department", "occupation", "district")
 
-        filterbyAdapter =
+        val typeList = arrayOf(
+            "Filter By ",
+            Constants.BY_BLOOD,
+            Constants.BY_DEPARTMENT,
+            Constants.BY_PROFESSION,
+            Constants.BY_DISTRICT
+        )
+
+        filterByAdapter =
             ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, showList)
 
-        binding.filterbySpiner.adapter = filterbyAdapter
+        binding.filterbySpiner.adapter = filterByAdapter
 
         binding.filterbySpiner.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
@@ -76,6 +62,7 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>() {
                     p3: Long
                 ) {
                     filterBy = showList[posaition]
+                    searchParam = typeList[posaition]
 
 
                 }
@@ -86,33 +73,51 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>() {
 
             }
 
-        val itemAdapter: ArrayAdapter<*>
-
-        val itemList = arrayOf("Select a Title", "PASSPORT", "NATIONAL ID", "DRIVING LICENSE")
-
-        itemAdapter =
-            ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, itemList)
-
-        binding.itembySpiner.adapter = itemAdapter
-
-        binding.itembySpiner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, posaition: Int, p3: Long) {
-                listBy = itemList[posaition]
-
-
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-
-            }
-
-        }
-
         val llm = LinearLayoutManager(requireActivity())
         llm.orientation = LinearLayoutManager.VERTICAL
         binding.memberListRv.layoutManager = llm
         binding.memberListRv.adapter = adapter
+
         dashboardViewModel.getMemberList()
+
+
+        binding.searchBtn.setOnClickListener {
+
+            val searchText = binding.searchKey.text.toString().trim()
+
+            dashboardViewModel.getMemberListSearchVM(searchText, searchParam)
+
+
+        }
+
+
+//        val itemAdapter: ArrayAdapter<*>
+//
+//        val itemList = arrayOf("Select a Title", "PASSPORT", "NATIONAL ID", "DRIVING LICENSE")
+//
+//        itemAdapter =
+//            ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, itemList)
+//
+//        binding.itembySpiner.adapter = itemAdapter
+//
+//        binding.itembySpiner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+//            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, posaition: Int, p3: Long) {
+//                listBy = itemList[posaition]
+//
+//
+//            }
+//
+//            override fun onNothingSelected(p0: AdapterView<*>?) {
+//
+//            }
+//
+//        }
+
+
+    }
+
+    private fun searchUser(searchText: CharSequence) {
+
 
     }
 

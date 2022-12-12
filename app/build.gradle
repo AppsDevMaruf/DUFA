@@ -94,4 +94,11 @@ dependencies {
 
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
 
+
+
+    def room_version = "2.4.3"
+
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+
 }

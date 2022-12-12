@@ -30,12 +30,12 @@ class PaymentFragment : BaseFragment<FragmentPaymentBinding>(),SSLCTransactionRe
         binding.registerCard.setOnClickListener {
             sslSetUp(1000)
         }
-        binding.oneTimeFee.setOnClickListener {
-            sslSetUp(3000)
-        }
-        binding.yearlePaymentsCard.setOnClickListener {
-            sslSetUp(5000)
-        }
+//        binding.poneTimeFee.setOnClickListener {
+//            sslSetUp(3000)
+//        }
+//        binding.yearlePaymentsCard.setOnClickListener {
+//            sslSetUp(5000)
+//        }
 
     }
 

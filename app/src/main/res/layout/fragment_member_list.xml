@@ -9,47 +9,59 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        tools:context=".ui.MemberListFragment"
-        android:orientation="vertical"
+        android:layout_height="match_parent"
         android:background="@color/blue_600"
-        android:layout_height="match_parent">
+        android:orientation="vertical"
+        tools:context=".ui.MemberListFragment">
 
         <ProgressBar
             android:id="@+id/progress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone" />
+
         <TextView
             android:id="@+id/filterName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="Filter By"/>
+            android:text="Filter By" />
+
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/filterbySpiner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <TextView
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="Search"/>
-        <androidx.appcompat.widget.AppCompatSpinner
-            android:id="@+id/itembySpiner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Search"/>
+            android:orientation="horizontal">
+
+
+            <EditText
+                android:id="@+id/searchKey"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                android:hint="Search"
+                android:padding="10dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/searchBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Search" />
+
+
+        </LinearLayout>
 
 
         <FrameLayout
             android:id="@+id/mainLayout"
-            android:visibility="visible"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:visibility="visible">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/memberListRv"

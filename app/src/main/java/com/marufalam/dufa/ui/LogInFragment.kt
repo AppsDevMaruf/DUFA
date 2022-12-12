@@ -22,6 +22,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class LogInFragment : BaseFragment<FragmentLogInBinding>() {
     private val authViewModel by viewModels<AuthViewModel>()
+
     @Inject
     lateinit var tokenManager: TokenManager
 
@@ -31,23 +32,22 @@ class LogInFragment : BaseFragment<FragmentLogInBinding>() {
 
     override fun configUi() {
         binding.logIn.setOnClickListener {
-            binding.loginErrorText.isVisible =false
+            binding.loginErrorText.isVisible = false
             if (!isValidEmail(binding.loginEmail.text.toString().trim())) {
 
                 Log.i("TAG", "onCreate: Clicked ")
                 binding.loginErrorText.error = "Email Pattern is Not Correct !"
-                binding.loginErrorText.isVisible =true
+                binding.loginErrorText.isVisible = true
 
 
             } else if (binding.passwordInput.text.toString().trim() == "") {
                 binding.loginErrorText.error = "Password Required!"
-                binding.loginErrorText.isVisible =true
+                binding.loginErrorText.isVisible = true
 
             } else if (binding.passwordInput.text.toString().trim().length < 8) {
 
                 binding.loginErrorText.error = "Password Length Minimum 8 char"
-                binding.loginErrorText.isVisible =true
-
+                binding.loginErrorText.isVisible = true
 
 
             } else {
@@ -71,7 +71,7 @@ class LogInFragment : BaseFragment<FragmentLogInBinding>() {
     }
 
     override fun setupNavigation() {
-        if (tokenManager.getToken()!=null){
+        if (tokenManager.getToken() != null) {
             findNavController().navigate(R.id.action_logInFragment_to_DashboardFragment)
         }
 
@@ -84,6 +84,7 @@ class LogInFragment : BaseFragment<FragmentLogInBinding>() {
                 is NetworkResult.Success -> {
                     //token
                     tokenManager.saveToken(it.data!!.token)
+                    tokenManager.saveUserID(it.data.data.id)
                     Log.e("TAG", "binObserver: ${it.data.token}")
                     findNavController().navigate(R.id.action_logInFragment_to_DashboardFragment)
                 }

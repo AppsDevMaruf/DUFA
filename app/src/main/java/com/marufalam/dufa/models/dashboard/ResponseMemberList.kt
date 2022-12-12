@@ -1,5 +1,7 @@
 package com.marufalam.dufa.models.dashboard
+
 import com.google.gson.annotations.SerializedName
+
 data class ResponseMemberList(
     @SerializedName("users")
     val users: List<User>
@@ -40,6 +42,9 @@ data class ResponseMemberList(
         @SerializedName("subscription")
         val subscription: String,
         @SerializedName("updated_at")
-        val updatedAt: String
+        val updatedAt: String,
+
+        @SerializedName("occupation")
+        val occupation: String?
     )
 }
