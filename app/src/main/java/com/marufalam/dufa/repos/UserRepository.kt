@@ -3,10 +3,10 @@ package com.marufalam.dufa.repos
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.marufalam.dufa.api.UserApi
-import com.marufalam.dufa.models.login.RequestLogin
-import com.marufalam.dufa.models.login.ResponseLogin
-import com.marufalam.dufa.models.register.RequestRegister
-import com.marufalam.dufa.models.register.ResponseRegister
+import com.marufalam.dufa.data.models.login.RequestLogin
+import com.marufalam.dufa.data.models.login.ResponseLogin
+import com.marufalam.dufa.data.models.register.RequestRegister
+import com.marufalam.dufa.data.models.register.ResponseRegister
 import com.marufalam.dufa.utils.NetworkResult
 import org.json.JSONObject
 import javax.inject.Inject

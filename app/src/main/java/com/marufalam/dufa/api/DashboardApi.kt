@@ -1,6 +1,6 @@
 package com.marufalam.dufa.api
 
-import com.marufalam.dufa.models.dashboard.ResponseMemberList
+import com.marufalam.dufa.data.models.getProfileInfo.ResponseProfileInfo
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -10,6 +10,8 @@ interface DashboardApi {
     @GET("userinfos")
     suspend fun getUserinfos(): Response<ResponseMemberList>
 
+    @GET("get-profile-info")
+    suspend fun getProfileInfo(): Response<ResponseProfileInfo>
 
     @POST("search")
     suspend fun getUserByDepartment(@Body department: String): Response<ResponseMemberList>

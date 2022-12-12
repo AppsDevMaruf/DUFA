@@ -1,4 +1,4 @@
-package com.marufalam.dufa.models.register
+package com.marufalam.dufa.data.models.register
 
 
 import com.google.gson.annotations.SerializedName

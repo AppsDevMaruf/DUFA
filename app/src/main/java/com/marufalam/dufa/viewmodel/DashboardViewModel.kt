@@ -1,14 +1,9 @@
 package com.marufalam.dufa.viewmodel
 
-import android.icu.text.StringSearch
-import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.marufalam.dufa.models.dashboard.ResponseMemberList
-import com.marufalam.dufa.models.login.RequestLogin
-import com.marufalam.dufa.models.login.ResponseLogin
+import com.marufalam.dufa.data.models.getProfileInfo.ResponseProfileInfo
 import com.marufalam.dufa.repos.DashboardRepository
 import com.marufalam.dufa.utils.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -29,6 +24,17 @@ class DashboardViewModel @Inject constructor(private val dashboardRepo: Dashboar
         }
     }
     // getMemberList end
+
+    // getMyProfile start
+    val getMyProfileInfoVMLD: LiveData<NetworkResult<ResponseProfileInfo>>
+        get() = dashboardRepo.responseMyProfileRepo
+
+    fun getMyProfileInfoVM() {
+        viewModelScope.launch {
+            dashboardRepo.getMyProfileRepo()
+        }
+    }
+    // getMyProfile end
 
 
     // getMemberList start

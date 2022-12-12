@@ -3,7 +3,7 @@ package com.marufalam.dufa.repos
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.marufalam.dufa.api.DashboardApi
-import com.marufalam.dufa.models.dashboard.ResponseMemberList
+import com.marufalam.dufa.data.models.getProfileInfo.ResponseProfileInfo
 import com.marufalam.dufa.utils.Constants
 import com.marufalam.dufa.utils.NetworkResult
 import org.json.JSONObject
@@ -36,6 +36,34 @@ class DashboardRepository @Inject constructor(private val dashboardApi: Dashboar
 
 
     }
+    //My profile start
+    private var _responseMyProfileRepo =
+        MutableLiveData<NetworkResult<ResponseProfileInfo>>()
+    val responseMyProfileRepo: LiveData<NetworkResult<ResponseProfileInfo>>
+        get() = _responseMyProfileRepo
+
+    suspend fun getMyProfileRepo() {
+
+        _responseMyProfileRepo.postValue(NetworkResult.Loading())
+
+        val response = dashboardApi.getProfileInfo()
+
+        if (response.isSuccessful && response.body() != null) {
+
+            _responseMyProfileRepo.postValue(NetworkResult.Success(response.body()!!))
+
+        } else if (response.errorBody() != null) {
+
+            val errorObj = JSONObject(response.errorBody()!!.charStream().readText())
+            _responseMyProfileRepo.postValue(NetworkResult.Error(errorObj.getString("message")))
+
+        } else {
+
+            _responseMyProfileRepo.postValue(NetworkResult.Error("Something Went Wrong!"))
+        }
+    }
+    //My profile end
+
 
 
 //    //get memberList by Search

@@ -1,39 +1,55 @@
 package com.marufalam.dufa.di
 
+import com.marufalam.dufa.api.AuthInterceptor
 import com.marufalam.dufa.api.DashboardApi
 import com.marufalam.dufa.api.UserApi
+import com.marufalam.dufa.utils.Constants
 import com.marufalam.dufa.utils.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
 class NetworkModule {
 
-    @Singleton
     @Provides
-    fun providesRetrofit():Retrofit{
+    @Singleton
+    fun providesRetrofit(): Retrofit.Builder {
         return Retrofit.Builder()
+            .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(BASE_URL)
+
+
+    }
+
+
+    @Singleton
+    @Provides
+    fun provideOkHttpClient(interceptor: AuthInterceptor): OkHttpClient {
+        return OkHttpClient.Builder().addInterceptor(interceptor)
+            .connectTimeout(60, TimeUnit.SECONDS)
+            .writeTimeout(120, TimeUnit.SECONDS)
+            .readTimeout(60, TimeUnit.SECONDS)
             .build()
-
     }
-    @Singleton
+
     @Provides
-    fun providesUserApi(retrofit: Retrofit): UserApi {
-        return retrofit.create(UserApi::class.java)
-
-    }
     @Singleton
-    @Provides
-    fun providesDashboardApi(retrofit: Retrofit): DashboardApi {
-        return retrofit.create(DashboardApi::class.java)
-
+    fun providesUserApi(retrofitBuilder: Retrofit.Builder): UserApi {
+        return retrofitBuilder.build().create(UserApi::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun providesKYCApi(retrofitBuilder: Retrofit.Builder, okHttpClient: OkHttpClient): DashboardApi {
+        return retrofitBuilder.client(okHttpClient).build().create(DashboardApi::class.java)
+    }
+
 }

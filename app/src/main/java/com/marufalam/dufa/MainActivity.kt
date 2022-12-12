@@ -1,17 +1,13 @@
 package com.marufalam.dufa
 
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.view.MenuItem
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -19,13 +15,11 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.navigation.NavigationView
-import com.marufalam.dufa.db.SearchDB
+import com.marufalam.dufa.data.models.dashboard.ResponseMemberList
 import com.marufalam.dufa.db.room.*
-import com.marufalam.dufa.models.dashboard.ResponseMemberList
 import com.marufalam.dufa.utils.*
 import com.marufalam.dufa.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -38,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         dashboardViewModel.getMemberList()
-        binObserver()
+        //binObserver()
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         val userProfilePic = toolbar.findViewById<ShapeableImageView>(R.id.userProfilePic)
@@ -76,7 +70,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    fun binObserver() {
+    /*fun binObserver() {
         dashboardViewModel.getMemberListResponse.observe(this) {
 
             when (it) {
@@ -99,9 +93,9 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-    }
+    }*/
 
-    private fun setDataToRoom(responseMemberList: ResponseMemberList?) {
+   /* private fun setDataToRoom(responseMemberList: ResponseMemberList?) {
 
         val departmentSet = mutableSetOf<String>()
         val districtSet = mutableSetOf<String>()
@@ -111,12 +105,14 @@ class MainActivity : AppCompatActivity() {
         responseMemberList?.users.let { it ->
 
             it?.forEach {
-                var department = it.department
+                if (it!=null){
 
-                departmentSet.add(department)
-                districtSet.add(it.district)
-                bloodGroupSet.add(it.bloodgroup)
-                professionSet.add(it.occupation ?: "no_data")
+                    it.department?.let { it1 -> departmentSet.add(it1) }
+                    it.district?.let { it1 -> districtSet.add(it1) }
+                    it.bloodgroup?.let { it1 -> bloodGroupSet.add(it1) }
+                    professionSet.add(it.occupation ?: "no_data")
+                }
+
 
             }
 
@@ -129,7 +125,7 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-    }
+    }*/
 
 
 }

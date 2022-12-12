@@ -10,9 +10,10 @@ import androidx.navigation.fragment.findNavController
 import com.marufalam.dufa.R
 import com.marufalam.dufa.databinding.FragmentLogInBinding
 import com.marufalam.dufa.BaseFragment
-import com.marufalam.dufa.models.login.RequestLogin
+import com.marufalam.dufa.data.models.login.RequestLogin
 import com.marufalam.dufa.utils.NetworkResult
-import com.marufalam.dufa.utils.TokenManager
+import com.marufalam.dufa.data.local.TokenManager
+import com.marufalam.dufa.utils.Constants
 import com.marufalam.dufa.utils.isValidEmail
 import com.marufalam.dufa.viewmodel.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -71,7 +72,7 @@ class LogInFragment : BaseFragment<FragmentLogInBinding>() {
     }
 
     override fun setupNavigation() {
-        if (tokenManager.getToken() != null) {
+        if (tokenManager.getToken(Constants.TOKEN) != null) {
             findNavController().navigate(R.id.action_logInFragment_to_DashboardFragment)
         }
 
@@ -83,9 +84,9 @@ class LogInFragment : BaseFragment<FragmentLogInBinding>() {
             when (it) {
                 is NetworkResult.Success -> {
                     //token
-                    tokenManager.saveToken(it.data!!.token)
-                    tokenManager.saveUserID(it.data.data.id)
-                    Log.e("TAG", "binObserver: ${it.data.token}")
+
+                    tokenManager.saveToken(Constants.TOKEN, "${it.message}")
+                    Log.e("TAG", "binObserver: ${it.data?.token}")
                     findNavController().navigate(R.id.action_logInFragment_to_DashboardFragment)
                 }
                 is NetworkResult.Error -> {

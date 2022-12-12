@@ -1,4 +1,4 @@
-package com.marufalam.dufa.models.login
+package com.marufalam.dufa.data.models.login
 
 data class Data(
     val created_at: String,
