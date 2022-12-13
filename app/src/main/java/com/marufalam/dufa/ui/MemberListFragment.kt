@@ -1,26 +1,30 @@
 package com.marufalam.dufa.ui
 
-import android.annotation.SuppressLint
-import android.text.Html.fromHtml
-import android.util.Log
 import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
-import androidx.appcompat.widget.SearchView
+import android.widget.Spinner
+import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.marufalam.dufa.BaseFragment
 import com.marufalam.dufa.R
 import com.marufalam.dufa.adapter.MemberListAdapter
 import com.marufalam.dufa.databinding.FragmentMemberListBinding
-import com.marufalam.dufa.BaseFragment
 import com.marufalam.dufa.utils.*
-import com.marufalam.dufa.utils.Constants.TAG
 import com.marufalam.dufa.viewmodel.DashboardViewModel
-import java.util.Locale
+import kotlinx.coroutines.NonDisposableHandle.parent
 
 
 class MemberListFragment : BaseFragment<FragmentMemberListBinding>() {
+    private val selectedItem: String? = null
+    private var selectedCategory :String? = null
+    private val tvStateSpinner: TextView? =null
+    private  var tvDistrictSpinner :TextView? = null
+    private val  filterbySpiner: Spinner? = null
+    private  var itemSpiner :Spinner? = null
+
+
     private val adapter = MemberListAdapter()
     private val dashboardViewModel: DashboardViewModel by activityViewModels()
     var filterBy = ""
@@ -37,7 +41,8 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>() {
 
         val filterByAdapter: ArrayAdapter<*>
 
-        val showList = arrayOf("Filter By ", "Blood Group", "Department", "Profession", "District")
+
+        val showList = resources.getStringArray(R.array.filterBy)
         val paramList = arrayOf("Filter By ", "bloodgroup", "department", "occupation", "district")
 
         val typeList = arrayOf(
@@ -48,21 +53,30 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>() {
             Constants.BY_DISTRICT
         )
 
-        filterByAdapter =
-            ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, showList)
+        filterByAdapter = ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1,showList)
 
         binding.filterbySpiner.adapter = filterByAdapter
 
         binding.filterbySpiner.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
-                    p0: AdapterView<*>?,
-                    p1: View?,
-                    posaition: Int,
-                    p3: Long
+                    p0: AdapterView<*>?, p1: View?, posaition: Int, p3: Long
                 ) {
                     filterBy = showList[posaition]
                     searchParam = typeList[posaition]
+                    var itemAdapter: ArrayAdapter<*>
+                    selectedCategory = filterbySpiner?.selectedItem.toString();
+                    val parentID: Int = p0!!.id
+                    if (parentID == binding.filterbySpiner.id){
+                        when (selectedCategory){
+                             "Select Your State"->{
+                                 itemAdapter = ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1,resources.getStringArray(R.array.bloodgroup))
+
+                             }
+                            "Blood Group"->{
+                                itemAdapter = ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1,resources.getStringArray(R.array.bloodgroup))
+                            }
+
 
 
                 }
