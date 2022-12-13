@@ -4,7 +4,6 @@ import com.marufalam.dufa.api.AuthInterceptor
 import com.marufalam.dufa.api.DashboardApi
 import com.marufalam.dufa.api.UserApi
 import com.marufalam.dufa.utils.Constants
-import com.marufalam.dufa.utils.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

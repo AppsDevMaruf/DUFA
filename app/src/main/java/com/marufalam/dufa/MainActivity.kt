@@ -1,30 +1,41 @@
 package com.marufalam.dufa
 
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.model.GlideUrl
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.navigation.NavigationView
+import com.marufalam.dufa.data.local.TokenManager
 import com.marufalam.dufa.data.models.dashboard.ResponseMemberList
+import com.marufalam.dufa.data.models.getProfileInfo.Data
 import com.marufalam.dufa.db.room.*
 import com.marufalam.dufa.utils.*
 import com.marufalam.dufa.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+    @Inject
+    lateinit var tokenManager: TokenManager
     private lateinit var appBarConfiguration: AppBarConfiguration
-
+    private lateinit var userProfilePic :ShapeableImageView
+    private lateinit var progressBar:ProgressBar
     private val dashboardViewModel: DashboardViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,10 +43,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         dashboardViewModel.getMemberList()
-        //binObserver()
+        binObserver()
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
-        val userProfilePic = toolbar.findViewById<ShapeableImageView>(R.id.userProfilePic)
+       userProfilePic = toolbar.findViewById(R.id.userProfilePic)
+       progressBar = findViewById(R.id.progress)
         userProfilePic.setOnClickListener {
             Toast.makeText(
                 applicationContext,
@@ -68,22 +80,21 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
-
-
-    /*fun binObserver() {
-        dashboardViewModel.getMemberListResponse.observe(this) {
-
+   fun binObserver() {
+        dashboardViewModel.getMyProfileInfoVMLD.observe(this) {
+            progressBar.isVisible = false
             when (it) {
-
 
                 is NetworkResult.Error -> {
 
                 }
                 is NetworkResult.Loading -> {
+                    progressBar.isVisible = true
 
                 }
                 is NetworkResult.Success -> {
-                    setDataToRoom(it.data)
+                    setData(it.data!!.data)
+
 
 
                 }
@@ -92,40 +103,22 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
+    }
 
-    }*/
+    private fun setData(data: List<Data?>?) {
+        val profilePic = Constants.IMG_PREFIX+ data?.get(0)!!.imagePath
+        val url = GlideUrl(
+            profilePic,
+            GlideUtils.glideHeaders(tokenManager.getToken(Constants.TOKEN))
+        )
 
-   /* private fun setDataToRoom(responseMemberList: ResponseMemberList?) {
+        Glide.with(applicationContext)
+            .load(url)
+            .placeholder(R.drawable.loadpreview)
+            .into(userProfilePic)
 
-        val departmentSet = mutableSetOf<String>()
-        val districtSet = mutableSetOf<String>()
-        val bloodGroupSet = mutableSetOf<String>()
-        val professionSet = mutableSetOf<String>()
+    }
 
-        responseMemberList?.users.let { it ->
-
-            it?.forEach {
-                if (it!=null){
-
-                    it.department?.let { it1 -> departmentSet.add(it1) }
-                    it.district?.let { it1 -> districtSet.add(it1) }
-                    it.bloodgroup?.let { it1 -> bloodGroupSet.add(it1) }
-                    professionSet.add(it.occupation ?: "no_data")
-                }
-
-
-            }
-
-            departmentSet.forEach {
-                Log.i("TAG", "setDataToRoom: $it")
-
-            }
-
-
-        }
-
-
-    }*/
 
 
 }
