@@ -3,6 +3,7 @@ package com.marufalam.dufa.repos
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.marufalam.dufa.api.DashboardApi
+import com.marufalam.dufa.data.models.dashboard.ResponseMemberList
 import com.marufalam.dufa.data.models.getProfileInfo.ResponseProfileInfo
 import com.marufalam.dufa.utils.Constants
 import com.marufalam.dufa.utils.NetworkResult

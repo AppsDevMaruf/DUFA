@@ -5,5 +5,4 @@ import com.google.gson.annotations.SerializedName
 
 data class ResponseMemberList(
     @SerializedName("users")
-    val users: List<User?>?
-)
+    val users: List<User>)

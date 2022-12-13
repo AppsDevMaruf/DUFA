@@ -1,35 +1,41 @@
 package com.marufalam.dufa.ui
 
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.view.*
 import android.widget.AdapterView
+import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.marufalam.dufa.BaseFragment
 import com.marufalam.dufa.R
 import com.marufalam.dufa.adapter.MemberListAdapter
+import com.marufalam.dufa.data.models.dashboard.ResponseMemberList
+import com.marufalam.dufa.data.models.dashboard.User
 import com.marufalam.dufa.databinding.FragmentMemberListBinding
 import com.marufalam.dufa.utils.*
 import com.marufalam.dufa.viewmodel.DashboardViewModel
 import kotlinx.coroutines.NonDisposableHandle.parent
+import java.util.*
 
 
 class MemberListFragment : BaseFragment<FragmentMemberListBinding>() {
-    private val selectedItem: String? = null
-    private var selectedCategory :String? = null
-    private val tvStateSpinner: TextView? =null
-    private  var tvDistrictSpinner :TextView? = null
-    private val  filterbySpiner: Spinner? = null
-    private  var itemSpiner :Spinner? = null
+
+    private var selectedCategory: String? = null
+
+    var searchByList = mutableListOf<String>()
 
 
-    private val adapter = MemberListAdapter()
+    lateinit var adapter: MemberListAdapter
     private val dashboardViewModel: DashboardViewModel by activityViewModels()
-    var filterBy = ""
-    var searchParam = ""
-    var listBy = ""
+
+
+    var userDataList = mutableListOf<User>()
 
 
     override fun getFragmentView(): Int {
@@ -39,98 +45,258 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>() {
 
     override fun configUi() {
 
+
         val filterByAdapter: ArrayAdapter<*>
 
 
         val showList = resources.getStringArray(R.array.filterBy)
-        val paramList = arrayOf("Filter By ", "bloodgroup", "department", "occupation", "district")
+        var searchDataList = mutableListOf<String>()
 
-        val typeList = arrayOf(
-            "Filter By ",
-            Constants.BY_BLOOD,
-            Constants.BY_DEPARTMENT,
-            Constants.BY_PROFESSION,
-            Constants.BY_DISTRICT
-        )
 
-        filterByAdapter = ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1,showList)
+        filterByAdapter =
+            ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, showList)
 
         binding.filterbySpiner.adapter = filterByAdapter
 
         binding.filterbySpiner.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
+            object : OnItemSelectedListener {
                 override fun onItemSelected(
-                    p0: AdapterView<*>?, p1: View?, posaition: Int, p3: Long
+                    p0: AdapterView<*>?, p1: View?, position: Int, p3: Long
                 ) {
-                    filterBy = showList[posaition]
-                    searchParam = typeList[posaition]
-                    var itemAdapter: ArrayAdapter<*>
-                    selectedCategory = filterbySpiner?.selectedItem.toString();
-                    val parentID: Int = p0!!.id
-                    if (parentID == binding.filterbySpiner.id){
-                        when (selectedCategory){
-                             "Select Your State"->{
-                                 itemAdapter = ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1,resources.getStringArray(R.array.bloodgroup))
+                    val itemAdapter: ArrayAdapter<*>
+                    searchByList = resources.getStringArray(R.array.filterBy).toMutableList()
+                    selectedCategory = searchByList[position]
+                    binding.searchLayout.visibility = View.GONE
+                    binding.itemSpiner.visibility = View.VISIBLE
+                    when (selectedCategory) {
 
-                             }
-                            "Blood Group"->{
-                                itemAdapter = ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1,resources.getStringArray(R.array.bloodgroup))
-                            }
+                        "Department" -> {
+                            itemAdapter = ArrayAdapter(
+                                requireActivity(),
+                                android.R.layout.simple_list_item_1,
+                                resources.getStringArray(R.array.department)
 
+                            )
+
+
+                            searchDataList =
+                                resources.getStringArray(R.array.department).toMutableList()
+
+                            binding.itemSpiner.adapter = itemAdapter
+
+                        }
+                        "Blood Group" -> {
+                            itemAdapter = ArrayAdapter(
+                                requireActivity(),
+                                android.R.layout.simple_list_item_1,
+                                resources.getStringArray(R.array.bloodgroup)
+                            )
+                            searchDataList =
+                                resources.getStringArray(R.array.bloodgroup).toMutableList()
+
+                            binding.itemSpiner.adapter = itemAdapter
+                        }
+                        "Occupation" -> {
+                            itemAdapter = ArrayAdapter(
+                                requireActivity(),
+                                android.R.layout.simple_list_item_1,
+                                resources.getStringArray(R.array.profession)
+                            )
+
+                            searchDataList =
+                                resources.getStringArray(R.array.profession).toMutableList()
+                            binding.itemSpiner.adapter = itemAdapter
+                        }
+                        "District" -> {
+                            itemAdapter = ArrayAdapter(
+                                requireActivity(),
+                                android.R.layout.simple_list_item_1,
+                                resources.getStringArray(R.array.district)
+                            )
+
+                            searchDataList =
+                                resources.getStringArray(R.array.district).toMutableList()
+                            binding.itemSpiner.adapter = itemAdapter
+                        }
+                        "Name Or Email" -> {
+
+                            binding.searchLayout.visibility = View.VISIBLE
+
+                        }
+
+
+                    }
 
 
                 }
 
-                override fun onNothingSelected(p0: AdapterView<*>?) {
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+
 
                 }
+            }
+
+        binding.itemSpiner.visibility = View.GONE
+        binding.itemSpiner.onItemSelectedListener = object : OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+
+
+                var searchKeyWord = searchDataList[position]
+
+
+                Toast.makeText(requireActivity(), "$searchKeyWord", Toast.LENGTH_LONG)
+                    .show()
+                filterUser(searchKeyWord)
+
 
             }
 
-        val llm = LinearLayoutManager(requireActivity())
-        llm.orientation = LinearLayoutManager.VERTICAL
-        binding.memberListRv.layoutManager = llm
-        binding.memberListRv.adapter = adapter
+            override fun onNothingSelected(parent: AdapterView<*>?) {
 
-        dashboardViewModel.getMemberList()
-
-
-        binding.searchBtn.setOnClickListener {
-
-            val searchText = binding.searchKey.text.toString().trim()
-
-            dashboardViewModel.getMemberListSearchVM(searchText, searchParam)
-
+            }
 
         }
 
 
-//        val itemAdapter: ArrayAdapter<*>
+        dashboardViewModel.getMemberList()
+
+        binding.searchKey.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(
+                s: CharSequence?,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
+
+            }
+
+            override fun onTextChanged(
+                s: CharSequence?,
+                start: Int,
+                before: Int,
+                count: Int
+            ) {
+                var searchByName: String = s.toString()
+                filterUser(searchByName)
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+        })
+
+
+//        binding.searchBtn.setOnClickListener {
 //
-//        val itemList = arrayOf("Select a Title", "PASSPORT", "NATIONAL ID", "DRIVING LICENSE")
+//            val searchText = binding.searchKey.text.toString().trim()
 //
-//        itemAdapter =
-//            ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, itemList)
+//            dashboardViewModel.getMemberListSearchVM(searchText, searchParam)
 //
-//        binding.itembySpiner.adapter = itemAdapter
-//
-//        binding.itembySpiner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-//            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, posaition: Int, p3: Long) {
-//                listBy = itemList[posaition]
-//
-//
-//            }
-//
-//            override fun onNothingSelected(p0: AdapterView<*>?) {
-//
-//            }
 //
 //        }
 
 
     }
 
-    private fun searchUser(searchText: CharSequence) {
+    private fun filterUser(text: String) {
+
+        val filteredlist = ArrayList<User>()
+        for (item in userDataList) {
+            // Log.i("TAG", "filterUser: ${item.bloodgroup} ")
+
+
+            if (item.bloodgroup == text) {
+                filteredlist.add(item)
+            }
+
+        }
+
+
+        when (selectedCategory) {
+
+            "Department" -> {
+
+                for (item in userDataList) {
+                    if (item.department == text) {
+                        filteredlist.add(item)
+                    }
+                }
+
+
+            }
+            "Blood Group" -> {
+
+
+            }
+            "Occupation" -> {
+                for (item in userDataList) {
+                    if (item.occupation == text) {
+                        filteredlist.add(item)
+                    }
+                }
+
+            }
+            "District" -> {
+                for (item in userDataList) {
+                    if (item.district == text) {
+                        filteredlist.add(item)
+                    }
+                }
+
+            }
+            "Name Or Email" -> {
+
+                binding.searchLayout.visibility = View.VISIBLE
+
+                for (item in userDataList) {
+                    if (item.name?.lowercase(Locale.ROOT)
+                        !!.contains(text.lowercase(Locale.getDefault())) ||
+                        item.email?.lowercase(Locale.ROOT)
+                        !!.contains(text.lowercase(Locale.getDefault()))
+                    ) {
+                        filteredlist.add(item)
+                    }
+                }
+
+
+            }
+
+
+        }
+
+
+        if (filteredlist.isEmpty()) {
+            // if no item is added in filtered list we are
+            // displaying a toast message as no data found.
+//            Toast.makeText(this, "No Data Found..", Toast.LENGTH_SHORT).show()
+        } else {
+            // at last we are passing that filtered
+            // list to our adapter class.
+            adapter.filterList(filteredlist)
+        }
+    }
+
+
+    private fun setRecycelcerView(userData: MutableList<User>) {
+        if (userData.isEmpty()) {
+            binding.noData.visibility = View.VISIBLE
+            binding.memberListRv.visibility = View.GONE
+        } else {
+
+            binding.noData.visibility = View.GONE
+            binding.memberListRv.visibility = View.VISIBLE
+            adapter = MemberListAdapter(requireActivity(), userData)
+            val llm = LinearLayoutManager(requireActivity())
+            llm.orientation = LinearLayoutManager.VERTICAL
+            binding.memberListRv.layoutManager = llm
+            binding.memberListRv.adapter = adapter
+        }
 
 
     }
@@ -150,13 +316,15 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>() {
                     showAlert(requireActivity(), it.message!!)
                 }
                 is NetworkResult.Loading -> {
-                    binding.mainLayout.hide()
+
                     binding.progress.show()
                 }
                 is NetworkResult.Success -> {
-                    binding.mainLayout.show()
-                    adapter.submitList(it.data?.users)
 
+
+                    userDataList = it.data!!.users.toMutableList()
+
+                    setRecycelcerView(userDataList)
 
                 }
 
@@ -168,4 +336,6 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>() {
     }
 
 }
+
+
 

@@ -10,7 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/blue_600"
+
         android:orientation="vertical"
         tools:context=".ui.MemberListFragment">
 
@@ -30,13 +30,24 @@
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/filterbySpiner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_8sdp"
+            android:background="@drawable/stroke_boarder"
+            android:padding="8dp"
+            android:text="@string/app_name" />
+
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/itemSpiner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_8sdp"
+            android:background="@drawable/stroke_boarder"
+            android:padding="8dp"
+            android:text="@string/app_name"
+            android:visibility="gone" />
 
         <LinearLayout
+            android:id="@+id/searchLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -46,11 +57,15 @@
                 android:id="@+id/searchKey"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_margin="8dp"
                 android:layout_weight="6"
+                android:textColor="@color/black"
+                android:background="@drawable/stroke_boarder"
                 android:hint="Search"
                 android:padding="10dp" />
 
             <androidx.appcompat.widget.AppCompatButton
+                android:visibility="gone"
                 android:id="@+id/searchBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -61,19 +76,21 @@
         </LinearLayout>
 
 
-        <FrameLayout
-            android:id="@+id/mainLayout"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/memberListRv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="visible">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/memberListRv"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:listitem="@layout/member_list_row" />
+            tools:listitem="@layout/member_list_row" />
 
-        </FrameLayout>
+        <ImageView
+            android:id="@+id/noData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_50sdp"
+            android:src="@drawable/no_data"
+            android:visibility="gone" />
+
 
     </LinearLayout>
 </layout>

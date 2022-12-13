@@ -13,7 +13,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="@dimen/_150sdp"
         android:layout_margin="10dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="8dp"
@@ -23,7 +23,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/profile_image"
@@ -37,7 +37,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:setIcon="@{member.imagePath}"
+
                 app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                 app:srcCompat="@drawable/maruf"
                 app:strokeColor="@color/blue"
@@ -53,24 +53,24 @@
                 android:paddingBottom="15dp">
 
                 <TextView
-                   android:id="@+id/name"
+                    android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="2dp"
-                    android:text="@{member.name}"
+
                     android:textColor="@color/blue"
                     android:textSize="18sp"
                     app:fontFamily="@font/dm_sans"
                     tools:text="Maruf Alam" />
 
                 <TextView
-                    android:id="@+id/number"
+                    android:id="@+id/phoneNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="2dp"
-                    android:text="@{member.phone}"
+
                     android:textColor="@color/blue"
                     android:textSize="15sp"
                     app:fontFamily="@font/dm_sans"
@@ -82,7 +82,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:layout_toEndOf="@+id/profile_image"
-                    android:text="@{member.bloodgroup}"
+
                     android:textColor="@color/red_700"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -95,9 +95,22 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:layout_toEndOf="@+id/profile_image"
-                    android:text="@{member.department}"
+
                     android:textColor="@color/blue"
                     android:textSize="10sp"
+                    android:textStyle="bold"
+                    app:fontFamily="@font/dm_sans"
+                    tools:text="A+" />
+
+
+                <TextView
+                    android:id="@+id/district"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_toEndOf="@+id/profile_image"
+                    android:textColor="@color/red_700"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     app:fontFamily="@font/dm_sans"
                     tools:text="A+" />

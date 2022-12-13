@@ -1,5 +1,6 @@
 package com.marufalam.dufa.api
 
+import com.marufalam.dufa.data.models.dashboard.ResponseMemberList
 import com.marufalam.dufa.data.models.getProfileInfo.ResponseProfileInfo
 import retrofit2.Response
 import retrofit2.http.Body

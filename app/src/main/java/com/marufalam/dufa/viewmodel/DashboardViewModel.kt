@@ -3,6 +3,7 @@ package com.marufalam.dufa.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.marufalam.dufa.data.models.dashboard.ResponseMemberList
 import com.marufalam.dufa.data.models.getProfileInfo.ResponseProfileInfo
 import com.marufalam.dufa.repos.DashboardRepository
 import com.marufalam.dufa.utils.NetworkResult

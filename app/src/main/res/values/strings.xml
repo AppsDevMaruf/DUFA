@@ -26,6 +26,7 @@
     </string-array>
 
     <string-array name="bloodgroup">
+        <item>Select Blood Group</item>
         <item>A+</item>
         <item>A-</item>
         <item>B+</item>
@@ -173,7 +174,7 @@
         <item>Bangladesh College of Leather Engineering and Technology</item>
         <item>Institute of Leather Engineering and Technology</item>
         <item>Other</item>
-        <item>Other</item>
+
     </string-array>
 
 </resources>

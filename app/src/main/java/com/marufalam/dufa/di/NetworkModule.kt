@@ -26,7 +26,6 @@ class NetworkModule {
             .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
 
-
     }
 
 
