@@ -53,12 +53,12 @@ class PaymentFragment : BaseFragment<FragmentPaymentBinding>(),SSLCTransactionRe
 
         //ssl_commarz
         sslCommerzInitialization = SSLCommerzInitialization(
-            "mobil5fe45035efe16",
-            "mobil5fe45035efe16@ssl",
+            "dufa9596live",
+            "dufa9596live51112",
             amount.toDouble(), SSLCCurrencyType.BDT,
             "MYID$currentTimestamp",
             "yourProductType",
-            SSLCSdkType.TESTBOX
+            SSLCSdkType.LIVE
         )
 
         additionalInitializer = SSLCAdditionalInitializer()
