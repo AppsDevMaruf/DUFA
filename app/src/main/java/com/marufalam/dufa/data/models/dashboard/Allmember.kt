@@ -3,7 +3,7 @@ package com.marufalam.dufa.data.models.dashboard
 
 import com.google.gson.annotations.SerializedName
 
-data class User(
+data class Allmember(
     @SerializedName("address")
     val address: String?,
     @SerializedName("birthdate")

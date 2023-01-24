@@ -3,9 +3,8 @@ package com.marufalam.dufa.repos
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.marufalam.dufa.api.DashboardApi
-import com.marufalam.dufa.data.models.dashboard.ResponseMemberList
+import com.marufalam.dufa.data.models.dashboard.ResponseAllMember
 import com.marufalam.dufa.data.models.getProfileInfo.ResponseProfileInfo
-import com.marufalam.dufa.utils.Constants
 import com.marufalam.dufa.utils.NetworkResult
 import org.json.JSONObject
 import retrofit2.Response
@@ -13,27 +12,27 @@ import javax.inject.Inject
 
 class DashboardRepository @Inject constructor(private val dashboardApi: DashboardApi) {
 
-    //get memberList start
-    private var _responsegetMemberList = MutableLiveData<NetworkResult<ResponseMemberList>>()
+    //get all member start
+    private var _responseAllMember = MutableLiveData<NetworkResult<ResponseAllMember>>()
 
-    val responsegetMemberList: LiveData<NetworkResult<ResponseMemberList>>
-        get() = _responsegetMemberList
+    val responseAllMember: LiveData<NetworkResult<ResponseAllMember>>
+        get() = _responseAllMember
 
-    suspend fun getMemberListRepo() {
+    suspend fun getAllMemberRepo() {
 
-        _responsegetMemberList.postValue(NetworkResult.Loading())
+        _responseAllMember.postValue(NetworkResult.Loading())
 
-        val response: Response<ResponseMemberList> =
-            dashboardApi.getUserinfos()
+        val response: Response<ResponseAllMember> =
+            dashboardApi.getAllMember()
         if (response.isSuccessful && response.body() != null) {
-            _responsegetMemberList.postValue(NetworkResult.Success(response.body()!!))
+            _responseAllMember.postValue(NetworkResult.Success(response.body()!!))
         } else if (response.errorBody() != null) {
             val errorObj = JSONObject(response.errorBody()!!.charStream().readText())
-            _responsegetMemberList.postValue(NetworkResult.Error(errorObj.getString("message")))
+            _responseAllMember.postValue(NetworkResult.Error(errorObj.getString("message")))
         } else {
-            _responsegetMemberList.postValue(NetworkResult.Error("Something Went Wrong!"))
+            _responseAllMember.postValue(NetworkResult.Error("Something Went Wrong!"))
         }
-        //get memberList end
+        //get all memberList end
 
 
     }
@@ -73,6 +72,7 @@ class DashboardRepository @Inject constructor(private val dashboardApi: Dashboar
 //    val responseSearchMemberList: LiveData<NetworkResult<ResponseMemberList>>
 //        get() = _responseSearchMemberList
 
+/*
     suspend fun getSearchMemberListRepo(search: String, type: String) {
 
         _responsegetMemberList.postValue(NetworkResult.Loading())
@@ -116,6 +116,7 @@ class DashboardRepository @Inject constructor(private val dashboardApi: Dashboar
         }
 
     }
+*/
 
 
 }

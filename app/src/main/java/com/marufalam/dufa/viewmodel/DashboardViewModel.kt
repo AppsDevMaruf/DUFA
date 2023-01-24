@@ -3,7 +3,6 @@ package com.marufalam.dufa.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.marufalam.dufa.data.models.dashboard.ResponseMemberList
 import com.marufalam.dufa.data.models.getProfileInfo.ResponseProfileInfo
 import com.marufalam.dufa.repos.DashboardRepository
 import com.marufalam.dufa.utils.NetworkResult
@@ -15,20 +14,17 @@ import javax.inject.Inject
 class DashboardViewModel @Inject constructor(private val dashboardRepo: DashboardRepository) :
     ViewModel() {
 
-    // getMemberList start
-    val getMemberListResponse: LiveData<NetworkResult<ResponseMemberList>>
-        get() = dashboardRepo.responsegetMemberList
-
-    fun getMemberList() {
+    // get all Member start
+    val getAllMemberVMLD = dashboardRepo.responseAllMember
+    fun getAllMemberVM() {
         viewModelScope.launch {
-            dashboardRepo.getMemberListRepo()
+            dashboardRepo.getAllMemberRepo()
         }
     }
-    // getMemberList end
+    // get all Member end
 
     // getMyProfile start
-    val getMyProfileInfoVMLD: LiveData<NetworkResult<ResponseProfileInfo>>
-        get() = dashboardRepo.responseMyProfileRepo
+    val getMyProfileInfoVMLD = dashboardRepo.responseMyProfileRepo
 
     fun getMyProfileInfoVM() {
         viewModelScope.launch {
@@ -37,6 +33,7 @@ class DashboardViewModel @Inject constructor(private val dashboardRepo: Dashboar
     }
     // getMyProfile end
 
+/*
 
     // getMemberList start
 
@@ -47,6 +44,7 @@ class DashboardViewModel @Inject constructor(private val dashboardRepo: Dashboar
         }
     }
     // getMemberList end
+*/
 
 
 }

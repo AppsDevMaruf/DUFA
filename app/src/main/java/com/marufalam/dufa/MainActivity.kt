@@ -1,9 +1,7 @@
 package com.marufalam.dufa
 
 
-import android.app.Activity
 import android.os.Bundle
-import android.util.Log
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -21,9 +19,8 @@ import com.bumptech.glide.load.model.GlideUrl
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.navigation.NavigationView
 import com.marufalam.dufa.data.local.TokenManager
-import com.marufalam.dufa.data.models.dashboard.ResponseMemberList
 import com.marufalam.dufa.data.models.getProfileInfo.Data
-import com.marufalam.dufa.db.room.*
+
 import com.marufalam.dufa.utils.*
 import com.marufalam.dufa.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        dashboardViewModel.getMemberList()
+        dashboardViewModel.getMyProfileInfoVM()
         binObserver()
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -94,8 +91,6 @@ class MainActivity : AppCompatActivity() {
                 }
                 is NetworkResult.Success -> {
                     setData(it.data!!.data)
-
-
 
                 }
 
