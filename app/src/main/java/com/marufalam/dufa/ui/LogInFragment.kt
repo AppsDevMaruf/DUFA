@@ -85,8 +85,8 @@ class LogInFragment : BaseFragment<FragmentLogInBinding>() {
                 is NetworkResult.Success -> {
                     //token
 
-                    tokenManager.saveToken(Constants.TOKEN, "${it.message}")
-                    Log.e("TAG", "binObserver: ${it.data?.token}")
+                    tokenManager.saveToken(Constants.TOKEN, "${it.data!!.data!!.token}")
+                    Log.e("TAG", "binObserver: ${it.data?.data!!.token}")
                     findNavController().navigate(R.id.action_logInFragment_to_DashboardFragment)
                 }
                 is NetworkResult.Error -> {
