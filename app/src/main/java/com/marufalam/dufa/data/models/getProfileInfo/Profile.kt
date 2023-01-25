@@ -3,19 +3,19 @@ package com.marufalam.dufa.data.models.getProfileInfo
 
 import com.google.gson.annotations.SerializedName
 
-data class Data(
+data class Profile(
     @SerializedName("address")
-    val address: Any?,
+    val address: String?,
     @SerializedName("birthdate")
     val birthdate: String?,
     @SerializedName("bloodgroup")
-    val bloodgroup: Any?,
+    val bloodgroup: String?,
     @SerializedName("created_at")
     val createdAt: String?,
     @SerializedName("department")
     val department: String?,
     @SerializedName("district")
-    val district: Any?,
+    val district: String?,
     @SerializedName("email")
     val email: String?,
     @SerializedName("email_verified_at")
@@ -35,9 +35,11 @@ data class Data(
     @SerializedName("nid")
     val nid: String?,
     @SerializedName("occupation")
-    val occupation: Any?,
+    val occupation: String?,
     @SerializedName("phone")
     val phone: String?,
+    @SerializedName("role")
+    val role: String?,
     @SerializedName("status")
     val status: String?,
     @SerializedName("subscription")

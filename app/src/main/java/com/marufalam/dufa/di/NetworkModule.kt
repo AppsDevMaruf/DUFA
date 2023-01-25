@@ -1,5 +1,6 @@
 package com.marufalam.dufa.di
 
+import com.google.gson.GsonBuilder
 import com.marufalam.dufa.api.AuthInterceptor
 import com.marufalam.dufa.api.DashboardApi
 import com.marufalam.dufa.api.UserApi
@@ -14,6 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
+
 @InstallIn(SingletonComponent::class)
 @Module
 class NetworkModule {
@@ -21,6 +23,7 @@ class NetworkModule {
     @Provides
     @Singleton
     fun providesRetrofit(): Retrofit.Builder {
+
         return Retrofit.Builder()
             .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -46,8 +49,9 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun providesKYCApi(retrofitBuilder: Retrofit.Builder, okHttpClient: OkHttpClient): DashboardApi {
+    fun providesDashboardApi(retrofitBuilder: Retrofit.Builder, okHttpClient: OkHttpClient): DashboardApi {
         return retrofitBuilder.client(okHttpClient).build().create(DashboardApi::class.java)
     }
+
 
 }

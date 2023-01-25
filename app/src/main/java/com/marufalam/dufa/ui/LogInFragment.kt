@@ -72,7 +72,8 @@ class LogInFragment : BaseFragment<FragmentLogInBinding>() {
     }
 
     override fun setupNavigation() {
-        if (tokenManager.getToken(Constants.TOKEN) != null) {
+        if (tokenManager.getToken(Constants.TOKEN) != Constants.NO_DATA) {
+            Log.e("notNullToken", "binObserver: ${tokenManager.getToken(Constants.TOKEN)}")
             findNavController().navigate(R.id.action_logInFragment_to_DashboardFragment)
         }
 
@@ -84,9 +85,8 @@ class LogInFragment : BaseFragment<FragmentLogInBinding>() {
             when (it) {
                 is NetworkResult.Success -> {
                     //token
-
                     tokenManager.saveToken(Constants.TOKEN, "${it.data!!.data!!.token}")
-                    Log.e("TAG", "binObserver: ${it.data?.data!!.token}")
+                    Log.e("SuccessToken", "binObserver: ${it.data.data!!.token}")
                     findNavController().navigate(R.id.action_logInFragment_to_DashboardFragment)
                 }
                 is NetworkResult.Error -> {

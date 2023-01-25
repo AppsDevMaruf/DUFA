@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.marufalam.dufa.data.models.dashboard.Allmember
 import com.marufalam.dufa.databinding.MemberListRowBinding
@@ -53,6 +54,28 @@ class MemberListAdapter(var context: Context, var data: MutableList<Allmember>) 
 
     override fun getItemCount(): Int {
         return data.size
+    }
+
+    companion object {
+        private val Comparator =
+            object : DiffUtil.ItemCallback<Allmember>() {
+                override fun areItemsTheSame(
+                    oldItem: Allmember,
+                    newItem: Allmember
+                ): Boolean {
+                    return oldItem.id == newItem.id
+                }
+
+                override fun areContentsTheSame(
+                    oldItem: Allmember,
+                    newItem: Allmember
+                ): Boolean {
+                    return oldItem == newItem
+                }
+
+
+            }
+
     }
 
 

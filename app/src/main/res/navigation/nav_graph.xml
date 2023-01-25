@@ -60,22 +60,22 @@
         tools:layout="@layout/fragment_payment" />
     <fragment
         android:id="@+id/eventFragment"
-        android:name="com.marufalam.dufa.EventFragment"
+        android:name="com.marufalam.dufa.ui.EventFragment"
         android:label="Event"
         tools:layout="@layout/fragment_event" />
     <fragment
         android:id="@+id/notificationFragment"
-        android:name="com.marufalam.dufa.NotificationFragment"
+        android:name="com.marufalam.dufa.ui.NotificationFragment"
         android:label="Notification"
         tools:layout="@layout/fragment_notification" />
     <fragment
         android:id="@+id/QRFragment"
-        android:name="com.marufalam.dufa.QRFragment"
+        android:name="com.marufalam.dufa.ui.QRFragment"
         android:label="QR"
         tools:layout="@layout/fragment_q_r" />
     <fragment
         android:id="@+id/memberDetailsInfoFragment"
-        android:name="com.marufalam.dufa.MemberDetailsInfoFragment"
+        android:name="com.marufalam.dufa.ui.MemberDetailsInfoFragment"
         android:label="fragment_member_details_info"
         tools:layout="@layout/fragment_member_details_info" />
     <fragment

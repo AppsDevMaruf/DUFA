@@ -5,9 +5,7 @@ pluginManagement {
         mavenCentral()
         jcenter()
         maven { url 'https://jitpack.io' }
-        flatDir {
-            dirs 'libs'
-        }
+
     }
 }
 dependencyResolutionManagement {
@@ -16,14 +14,10 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         jcenter()
-
         maven { url 'https://jitpack.io' }
-        flatDir {
-            dirs 'libs'
-        }
     }
 }
 rootProject.name = "DUFA"
 include ':app'
-include ':sslCommerzSdk'
+
 

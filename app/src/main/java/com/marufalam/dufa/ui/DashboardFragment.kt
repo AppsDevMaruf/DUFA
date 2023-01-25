@@ -1,5 +1,7 @@
 package com.marufalam.dufa.ui
 
+import android.util.Log
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.marufalam.dufa.R
@@ -40,7 +42,27 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
     }
 
     override fun binObserver() {
+        dashboardViewModel.getMyProfileInfoVMLD.observe(this) {
+            //progressBar.isVisible = false
+            when (it) {
 
+                is NetworkResult.Error -> {
+                    Log.i("Error", "NetworkResult.Error: ${it.data!!.profile.toString()}")
+                    //Log.i("TAG1", "binObserver: ${it.data!!.message.toString()}")
+                }
+                is NetworkResult.Loading -> {
+                   // progressBar.isVisible = true
+
+                }
+                is NetworkResult.Success -> {
+                    Log.i("SuccessTAG", "DashboardSuccess: ${it.data!!.profile.toString()}")
+
+                }
+
+
+            }
+
+        }
     }
 
 

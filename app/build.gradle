@@ -12,7 +12,6 @@ android {
 
     defaultConfig {
         applicationId "com.marufalam.dufa"
-
         minSdkVersion 19
         targetSdkVersion 33
         versionCode 1
@@ -60,13 +59,12 @@ dependencies {
     //dialog
     implementation 'com.github.chnouman:AwesomeDialog:1.0.5'
 
-    /*//required for ssl commerce
-    implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.1.0'
-    implementation(files("libs/sslCommerzSdk.aar"))*/
+
 
 
     //gson
     implementation 'com.google.code.gson:gson:2.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.3.1'
 
     //screen size unit
     implementation 'com.intuit.sdp:sdp-android:1.1.0'

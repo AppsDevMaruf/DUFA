@@ -10,6 +10,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        tools:context=".ui.LogInFragment"
         android:background="@color/grey_50">
 
         <View

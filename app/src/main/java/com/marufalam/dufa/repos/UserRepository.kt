@@ -1,5 +1,6 @@
 package com.marufalam.dufa.repos
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.marufalam.dufa.api.UserApi
@@ -11,49 +12,55 @@ import com.marufalam.dufa.utils.NetworkResult
 import org.json.JSONObject
 import javax.inject.Inject
 
-class UserRepository @Inject constructor(private val userApi: UserApi){
+class UserRepository @Inject constructor(private val userApi: UserApi) {
 
     private val _registerResponseLiveDataRepo = MutableLiveData<NetworkResult<ResponseRegister>>()
-    val registerResponseLiveDataRepo : LiveData<NetworkResult<ResponseRegister>>
+    val registerResponseLiveDataRepo: LiveData<NetworkResult<ResponseRegister>>
         get() = _registerResponseLiveDataRepo
 
-    private val _loginResponseLiveDataRepo=MutableLiveData<NetworkResult<ResponseLogin>>()
-    val loginResponseLiveDataRepo :LiveData<NetworkResult<ResponseLogin>>
-    get() = _loginResponseLiveDataRepo
+    private val _loginResponseLiveDataRepo = MutableLiveData<NetworkResult<ResponseLogin>>()
+    val loginResponseLiveDataRepo: LiveData<NetworkResult<ResponseLogin>>
+        get() = _loginResponseLiveDataRepo
 
-    suspend fun registerUserRepo(requestRegister: RequestRegister){
+    suspend fun registerUserRepo(requestRegister: RequestRegister) {
         _registerResponseLiveDataRepo.postValue(NetworkResult.Loading())
         val response = userApi.register(requestRegister)
-        if (response.isSuccessful && response.body() != null){
+        if (response.isSuccessful && response.body() != null) {
             _registerResponseLiveDataRepo.postValue(NetworkResult.Success(response.body()!!))
 
-        }else if (response.errorBody() != null){
+        } else if (response.errorBody() != null) {
             val errorObj = JSONObject(response.errorBody()!!.charStream().readText())
             _registerResponseLiveDataRepo.postValue(NetworkResult.Error(errorObj.getString("message")))
 
 
-        }else{
+        } else {
             _registerResponseLiveDataRepo.postValue(NetworkResult.Error(".Something Wrong....."))
 
         }
 
 
     }
-    suspend fun loginUserRepo(requestLogin: RequestLogin){
+
+    suspend fun loginUserRepo(requestLogin: RequestLogin) {
         _loginResponseLiveDataRepo.postValue(NetworkResult.Loading())
-        val response = userApi.login(requestLogin)
-        if (response.isSuccessful && response.body() != null){
-            _loginResponseLiveDataRepo.postValue(NetworkResult.Success(response.body()!!))
+        try {
+            val response = userApi.login(requestLogin)
+            if (response.isSuccessful && response.body() != null) {
+                _loginResponseLiveDataRepo.postValue(NetworkResult.Success(response.body()!!))
 
-        }else if (response.errorBody() != null){
-            val errorObj = JSONObject(response.errorBody()!!.charStream().readText())
-            _loginResponseLiveDataRepo.postValue(NetworkResult.Error(errorObj.getString("message")))
+            } else if (response.errorBody() != null) {
+                val errorObj = JSONObject(response.errorBody()!!.charStream().readText())
+                _loginResponseLiveDataRepo.postValue(NetworkResult.Error(errorObj.getString("message")))
 
 
-        }else{
-            _loginResponseLiveDataRepo.postValue(NetworkResult.Error(".Something Wrong....."))
+            } else {
+                _loginResponseLiveDataRepo.postValue(NetworkResult.Error(".Something Wrong....."))
 
+            }
+        } catch (e: Exception) {
+            Log.i("loginUserRepo", "loginUserRepo: ${e.localizedMessage}")
         }
+
     }
 
 }

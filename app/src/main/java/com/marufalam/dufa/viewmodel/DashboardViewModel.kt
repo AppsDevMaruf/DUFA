@@ -1,11 +1,8 @@
 package com.marufalam.dufa.viewmodel
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.marufalam.dufa.data.models.getProfileInfo.ResponseProfileInfo
 import com.marufalam.dufa.repos.DashboardRepository
-import com.marufalam.dufa.utils.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -29,6 +26,16 @@ class DashboardViewModel @Inject constructor(private val dashboardRepo: Dashboar
     fun getMyProfileInfoVM() {
         viewModelScope.launch {
             dashboardRepo.getMyProfileRepo()
+        }
+    }
+    // getMyProfile end
+
+    // getMyProfile start
+    val getDepartmentsVMLD = dashboardRepo.responseDepartmentsRepo
+
+    fun getDepartmentsVM() {
+        viewModelScope.launch {
+            dashboardRepo.getDepartmentsRepo()
         }
     }
     // getMyProfile end

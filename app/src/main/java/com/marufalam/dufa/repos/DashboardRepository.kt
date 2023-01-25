@@ -1,10 +1,13 @@
 package com.marufalam.dufa.repos
 
+import android.util.JsonToken
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.marufalam.dufa.api.DashboardApi
 import com.marufalam.dufa.data.models.dashboard.ResponseAllMember
 import com.marufalam.dufa.data.models.getProfileInfo.ResponseProfileInfo
+import com.marufalam.dufa.data.models.get_departments.ResponseDepartments
 import com.marufalam.dufa.utils.NetworkResult
 import org.json.JSONObject
 import retrofit2.Response
@@ -21,21 +24,28 @@ class DashboardRepository @Inject constructor(private val dashboardApi: Dashboar
     suspend fun getAllMemberRepo() {
 
         _responseAllMember.postValue(NetworkResult.Loading())
-
-        val response: Response<ResponseAllMember> =
-            dashboardApi.getAllMember()
-        if (response.isSuccessful && response.body() != null) {
-            _responseAllMember.postValue(NetworkResult.Success(response.body()!!))
-        } else if (response.errorBody() != null) {
-            val errorObj = JSONObject(response.errorBody()!!.charStream().readText())
-            _responseAllMember.postValue(NetworkResult.Error(errorObj.getString("message")))
-        } else {
-            _responseAllMember.postValue(NetworkResult.Error("Something Went Wrong!"))
+        try {
+            val response: Response<ResponseAllMember> =
+                dashboardApi.getAllMember()
+            if (response.isSuccessful && response.body() != null) {
+                _responseAllMember.postValue(NetworkResult.Success(response.body()!!))
+            } else if (response.errorBody() != null) {
+                val errorObj = JSONObject(response.errorBody()!!.charStream().readText())
+                _responseAllMember.postValue(NetworkResult.Error(errorObj.getString("message")))
+            } else {
+                _responseAllMember.postValue(NetworkResult.Error("Something Went Wrong!"))
+            }
+        }catch (e:Exception){
+            Log.i("catch", "getAllMemberRepo: ${e.localizedMessage}")
         }
+
+
+
         //get all memberList end
 
 
     }
+
     //My profile start
     private var _responseMyProfileRepo =
         MutableLiveData<NetworkResult<ResponseProfileInfo>>()
@@ -45,24 +55,66 @@ class DashboardRepository @Inject constructor(private val dashboardApi: Dashboar
     suspend fun getMyProfileRepo() {
 
         _responseMyProfileRepo.postValue(NetworkResult.Loading())
+        try {
+            val response = dashboardApi.getProfileInfo()
 
-        val response = dashboardApi.getProfileInfo()
+            if (response.isSuccessful && response.body() != null) {
 
-        if (response.isSuccessful && response.body() != null) {
+                _responseMyProfileRepo.postValue(NetworkResult.Success(response.body()!!))
 
-            _responseMyProfileRepo.postValue(NetworkResult.Success(response.body()!!))
+            } else if (response.errorBody() != null) {
 
-        } else if (response.errorBody() != null) {
+                val errorObj = JSONObject(response.errorBody()!!.charStream().readText())
+                _responseMyProfileRepo.postValue(NetworkResult.Error(errorObj.getString("message")))
 
-            val errorObj = JSONObject(response.errorBody()!!.charStream().readText())
-            _responseMyProfileRepo.postValue(NetworkResult.Error(errorObj.getString("message")))
+            } else {
 
-        } else {
+                _responseMyProfileRepo.postValue(NetworkResult.Error("Something Went Wrong!"))
+            }
+        }catch (e:Exception){
 
-            _responseMyProfileRepo.postValue(NetworkResult.Error("Something Went Wrong!"))
+            Log.i("catch", "DashboardApiRepo: ${e.localizedMessage}")
+
         }
+
+
     }
     //My profile end
+
+    //get Departments start
+    private var _responseDepartmentsRepo =
+        MutableLiveData<NetworkResult<ResponseDepartments>>()
+    val responseDepartmentsRepo: LiveData<NetworkResult<ResponseDepartments>>
+        get() = _responseDepartmentsRepo
+
+    suspend fun getDepartmentsRepo() {
+
+        _responseDepartmentsRepo.postValue(NetworkResult.Loading())
+        try {
+            val response = dashboardApi.getDepartments()
+
+            if (response.isSuccessful && response.body() != null) {
+
+                _responseDepartmentsRepo.postValue(NetworkResult.Success(response.body()!!))
+
+            } else if (response.errorBody() != null) {
+
+                val errorObj = JSONObject(response.errorBody()!!.charStream().readText())
+                _responseDepartmentsRepo.postValue(NetworkResult.Error(errorObj.getString("message")))
+
+            } else {
+
+                _responseDepartmentsRepo.postValue(NetworkResult.Error("Something Went Wrong!"))
+            }
+        }catch (e:Exception){
+
+            Log.i("catch", "getDepartmentsRepo: ${e.localizedMessage}")
+
+        }
+
+
+    }
+    //get Departments start end
 
 
 
