@@ -34,7 +34,7 @@
             style="@style/dashboardItemText"
             android:textSize="@dimen/_8sdp"
             android:text="Version 1.0.0"
-            android:src="@drawable/ic_login_sslc"
+
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/logo" />

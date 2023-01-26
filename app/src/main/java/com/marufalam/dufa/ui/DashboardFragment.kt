@@ -1,19 +1,15 @@
 package com.marufalam.dufa.ui
 
 import android.util.Log
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.model.GlideUrl
 import com.marufalam.dufa.R
 import com.marufalam.dufa.databinding.FragmentDashboardBinding
 import com.marufalam.dufa.BaseFragment
-import com.marufalam.dufa.data.local.TokenManager
-import com.marufalam.dufa.data.models.getProfileInfo.Data
 import com.marufalam.dufa.utils.*
 import com.marufalam.dufa.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
@@ -46,7 +42,27 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
     }
 
     override fun binObserver() {
+        dashboardViewModel.getMyProfileInfoVMLD.observe(this) {
+            //progressBar.isVisible = false
+            when (it) {
 
+                is NetworkResult.Error -> {
+                    Log.i("Error", "NetworkResult.Error: ${it.data!!.profile.toString()}")
+                    //Log.i("TAG1", "binObserver: ${it.data!!.message.toString()}")
+                }
+                is NetworkResult.Loading -> {
+                   // progressBar.isVisible = true
+
+                }
+                is NetworkResult.Success -> {
+                    Log.i("SuccessTAG", "DashboardSuccess: ${it.data!!.profile.toString()}")
+
+                }
+
+
+            }
+
+        }
     }
 
 

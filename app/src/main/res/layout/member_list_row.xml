@@ -7,7 +7,7 @@
 
         <variable
             name="member"
-            type="com.marufalam.dufa.data.models.dashboard.ResponseMemberList" />
+            type="com.marufalam.dufa.data.models.dashboard.ResponseAllMember" />
 
     </data>
 

@@ -2,25 +2,20 @@ package com.marufalam.dufa.ui
 
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.*
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.marufalam.dufa.BaseFragment
 import com.marufalam.dufa.R
 import com.marufalam.dufa.adapter.MemberListAdapter
-import com.marufalam.dufa.data.models.dashboard.ResponseMemberList
-import com.marufalam.dufa.data.models.dashboard.User
+import com.marufalam.dufa.data.models.dashboard.Allmember
 import com.marufalam.dufa.databinding.FragmentMemberListBinding
 import com.marufalam.dufa.utils.*
 import com.marufalam.dufa.viewmodel.DashboardViewModel
-import kotlinx.coroutines.NonDisposableHandle.parent
 import java.util.*
 
 
@@ -35,7 +30,7 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>() {
     private val dashboardViewModel: DashboardViewModel by activityViewModels()
 
 
-    var userDataList = mutableListOf<User>()
+    var userDataList = mutableListOf<Allmember>()
 
 
     override fun getFragmentView(): Int {
@@ -146,7 +141,7 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>() {
             ) {
 
 
-                var searchKeyWord = searchDataList[position]
+                val searchKeyWord = searchDataList[position]
 
 
                 Toast.makeText(requireActivity(), "$searchKeyWord", Toast.LENGTH_LONG)
@@ -163,7 +158,7 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>() {
         }
 
 
-        dashboardViewModel.getMemberList()
+        dashboardViewModel.getAllMemberVM()
 
         binding.searchKey.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
@@ -206,7 +201,7 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>() {
 
     private fun filterUser(text: String) {
 
-        val filteredlist = ArrayList<User>()
+        val filteredlist = ArrayList<Allmember>()
         for (item in userDataList) {
             // Log.i("TAG", "filterUser: ${item.bloodgroup} ")
 
@@ -283,7 +278,7 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>() {
     }
 
 
-    private fun setRecycelcerView(userData: MutableList<User>) {
+    private fun setRecycelcerView(userData: MutableList<Allmember>) {
         if (userData.isEmpty()) {
             binding.noData.visibility = View.VISIBLE
             binding.memberListRv.visibility = View.GONE
@@ -307,7 +302,7 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>() {
     }
 
     override fun binObserver() {
-        dashboardViewModel.getMemberListResponse.observe(viewLifecycleOwner) {
+        dashboardViewModel.getAllMemberVMLD.observe(viewLifecycleOwner) {
             binding.progress.hide()
             when (it) {
 
@@ -322,8 +317,8 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>() {
                 is NetworkResult.Success -> {
 
 
-                    userDataList = it.data!!.users.toMutableList()
-
+                    userDataList = it.data!!.allmembers.toMutableList()
+                    println("................1.2........................ ${userDataList}")
                     setRecycelcerView(userDataList)
 
                 }

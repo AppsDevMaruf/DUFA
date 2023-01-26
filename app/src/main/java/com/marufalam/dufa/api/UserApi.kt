@@ -8,14 +8,16 @@ import com.marufalam.dufa.data.models.register.ResponseRegister
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.Headers
 import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface UserApi {
-    @POST("register")
+    @POST("auth/register")
     suspend fun register(@Body requestRegister: RequestRegister): Response<ResponseRegister>
 
-    @POST("login")
+    @POST("auth/login")
+
     suspend fun login(@Body requestLogin: RequestLogin): Response<ResponseLogin>
 
    /* @POST("api/logout/")

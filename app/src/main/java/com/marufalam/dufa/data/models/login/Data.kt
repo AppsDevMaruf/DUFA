@@ -1,10 +1,11 @@
 package com.marufalam.dufa.data.models.login
 
+
+import com.google.gson.annotations.SerializedName
+
 data class Data(
-    val created_at: String,
-    val email: String,
-    val email_verified_at: String,
-    val id: Int,
-    val name: String,
-    val updated_at: String
+    @SerializedName("name")
+    val name: String?,
+    @SerializedName("token")
+    val token: String?
 )
