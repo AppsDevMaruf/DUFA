@@ -102,6 +102,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
     /*private fun setData(data: List<Data?>?) {
         val profilePic = Constants.IMG_PREFIX+ data?.get(0)!!.imagePath
         val url = GlideUrl(
