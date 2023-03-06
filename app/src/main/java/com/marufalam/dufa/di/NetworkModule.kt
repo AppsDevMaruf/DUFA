@@ -1,9 +1,8 @@
 package com.marufalam.dufa.di
 
-import com.google.gson.GsonBuilder
 import com.marufalam.dufa.api.AuthInterceptor
-import com.marufalam.dufa.api.DashboardApi
-import com.marufalam.dufa.api.UserApi
+import com.marufalam.dufa.api.SecuredApi
+import com.marufalam.dufa.api.PublicApi
 import com.marufalam.dufa.utils.Constants
 import dagger.Module
 import dagger.Provides
@@ -43,14 +42,14 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun providesUserApi(retrofitBuilder: Retrofit.Builder): UserApi {
-        return retrofitBuilder.build().create(UserApi::class.java)
+    fun providesUserApi(retrofitBuilder: Retrofit.Builder): PublicApi {
+        return retrofitBuilder.build().create(PublicApi::class.java)
     }
 
     @Provides
     @Singleton
-    fun providesDashboardApi(retrofitBuilder: Retrofit.Builder, okHttpClient: OkHttpClient): DashboardApi {
-        return retrofitBuilder.client(okHttpClient).build().create(DashboardApi::class.java)
+    fun providesDashboardApi(retrofitBuilder: Retrofit.Builder, okHttpClient: OkHttpClient): SecuredApi {
+        return retrofitBuilder.client(okHttpClient).build().create(SecuredApi::class.java)
     }
 
 

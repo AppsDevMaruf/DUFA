@@ -10,7 +10,7 @@ object Constants {
     const val NO_DATA = "no_data"
     const val TOKEN = "token"
     const val PREFS_TOKEN_FILE = "prefs_token_file"
-    const val IMG_PREFIX = "https://dufa9596.org/images/users/"
+    const val IMG_PREFIX = "https://dufa9596.org"
     val BG_COLORS = arrayOf("#fef9ed", "#f2f8ff", "#edffee", "#fce9ff")
 
 

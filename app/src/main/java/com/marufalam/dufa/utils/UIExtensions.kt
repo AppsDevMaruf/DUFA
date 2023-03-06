@@ -60,6 +60,27 @@ fun Fragment.enableBtn(given: Boolean, btn: Button) {
 
 
 }
+fun Any.nameAbbreviationGenerator(name: String): String? {
+    val lens = name.length - 1
+    val lastChar = name[lens]
+    var temp = ""
+    val arr = mutableListOf<String>()
+    for (item in name) {
+
+        if (item != ' ') {
+            temp += item
+        }
+        if ((item == ' ' && item + 1 == ' ')) continue
+        if ((item == ' ' && temp != "") || lastChar == item) {
+            arr.add(temp)
+            temp = ""
+        }
+    }
+    val len = arr.size - 1
+    val firstnameAB = arr[0][0]
+    val lastnameAB = arr[len][0]
+    return "$firstnameAB$lastnameAB"
+}
 
 
 

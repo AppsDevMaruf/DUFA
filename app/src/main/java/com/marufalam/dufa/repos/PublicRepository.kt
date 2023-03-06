@@ -3,7 +3,7 @@ package com.marufalam.dufa.repos
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.marufalam.dufa.api.UserApi
+import com.marufalam.dufa.api.PublicApi
 import com.marufalam.dufa.data.models.login.RequestLogin
 import com.marufalam.dufa.data.models.login.ResponseLogin
 import com.marufalam.dufa.data.models.register.RequestRegister
@@ -12,7 +12,7 @@ import com.marufalam.dufa.utils.NetworkResult
 import org.json.JSONObject
 import javax.inject.Inject
 
-class UserRepository @Inject constructor(private val userApi: UserApi) {
+class PublicRepository @Inject constructor(private val userApi: PublicApi) {
 
     private val _registerResponseLiveDataRepo = MutableLiveData<NetworkResult<ResponseRegister>>()
     val registerResponseLiveDataRepo: LiveData<NetworkResult<ResponseRegister>>

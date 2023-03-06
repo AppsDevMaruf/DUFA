@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.marufalam.dufa.BaseFragment
 import com.marufalam.dufa.R
 import com.marufalam.dufa.adapter.MemberListAdapter
+import com.marufalam.dufa.adapter.SearchMemberListAdapter
 import com.marufalam.dufa.data.models.dashboard.Allmember
 import com.marufalam.dufa.databinding.FragmentMemberListBinding
 import com.marufalam.dufa.utils.*
@@ -32,6 +33,9 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>() {
 
     var userDataList = mutableListOf<Allmember>()
 
+    private var totalPage = 1
+    private lateinit var searchAdapter: SearchMemberListAdapter
+
 
     override fun getFragmentView(): Int {
         return R.layout.fragment_member_list
@@ -39,6 +43,14 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>() {
     }
 
     override fun configUi() {
+        searchAdapter= SearchMemberListAdapter()
+        binding.memberListRv.adapter = searchAdapter
+
+        dashboardViewModel.getMemberSearchVMLD(totalPage, "")
+            .observe(viewLifecycleOwner) {
+                searchAdapter.submitData(lifecycle, it)
+
+            }
 
 
         val filterByAdapter: ArrayAdapter<*>
@@ -131,170 +143,9 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>() {
                 }
             }
 
-        binding.itemSpiner.visibility = View.GONE
-        binding.itemSpiner.onItemSelectedListener = object : OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-
-
-                val searchKeyWord = searchDataList[position]
-
-
-                Toast.makeText(requireActivity(), "$searchKeyWord", Toast.LENGTH_LONG)
-                    .show()
-                filterUser(searchKeyWord)
-
-
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-
-            }
-
-        }
-
-
-        dashboardViewModel.getAllMemberVM()
-
-        binding.searchKey.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(
-                s: CharSequence?,
-                start: Int,
-                count: Int,
-                after: Int
-            ) {
-
-            }
-
-            override fun onTextChanged(
-                s: CharSequence?,
-                start: Int,
-                before: Int,
-                count: Int
-            ) {
-                var searchByName: String = s.toString()
-                filterUser(searchByName)
-
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-
-            }
-        })
-
-
-//        binding.searchBtn.setOnClickListener {
-//
-//            val searchText = binding.searchKey.text.toString().trim()
-//
-//            dashboardViewModel.getMemberListSearchVM(searchText, searchParam)
-//
-//
-//        }
-
 
     }
 
-    private fun filterUser(text: String) {
-
-        val filteredlist = ArrayList<Allmember>()
-        for (item in userDataList) {
-            // Log.i("TAG", "filterUser: ${item.bloodgroup} ")
-
-
-            if (item.bloodgroup == text) {
-                filteredlist.add(item)
-            }
-
-        }
-
-
-        when (selectedCategory) {
-
-            "Department" -> {
-
-                for (item in userDataList) {
-                    if (item.department == text) {
-                        filteredlist.add(item)
-                    }
-                }
-
-
-            }
-            "Blood Group" -> {
-
-
-            }
-            "Occupation" -> {
-                for (item in userDataList) {
-                    if (item.occupation == text) {
-                        filteredlist.add(item)
-                    }
-                }
-
-            }
-            "District" -> {
-                for (item in userDataList) {
-                    if (item.district == text) {
-                        filteredlist.add(item)
-                    }
-                }
-
-            }
-            "Name Or Email" -> {
-
-                binding.searchLayout.visibility = View.VISIBLE
-
-                for (item in userDataList) {
-                    if (item.name?.lowercase(Locale.ROOT)
-                        !!.contains(text.lowercase(Locale.getDefault())) ||
-                        item.email?.lowercase(Locale.ROOT)
-                        !!.contains(text.lowercase(Locale.getDefault()))
-                    ) {
-                        filteredlist.add(item)
-                    }
-                }
-
-
-            }
-
-
-        }
-
-
-        if (filteredlist.isEmpty()) {
-            // if no item is added in filtered list we are
-            // displaying a toast message as no data found.
-//            Toast.makeText(this, "No Data Found..", Toast.LENGTH_SHORT).show()
-        } else {
-            // at last we are passing that filtered
-            // list to our adapter class.
-            adapter.filterList(filteredlist)
-        }
-    }
-
-
-    private fun setRecycelcerView(userData: MutableList<Allmember>) {
-        if (userData.isEmpty()) {
-            binding.noData.visibility = View.VISIBLE
-            binding.memberListRv.visibility = View.GONE
-        } else {
-
-            binding.noData.visibility = View.GONE
-            binding.memberListRv.visibility = View.VISIBLE
-            adapter = MemberListAdapter(requireActivity(), userData)
-            val llm = LinearLayoutManager(requireActivity())
-            llm.orientation = LinearLayoutManager.VERTICAL
-            binding.memberListRv.layoutManager = llm
-            binding.memberListRv.adapter = adapter
-        }
-
-
-    }
 
     override fun setupNavigation() {
 
@@ -302,31 +153,7 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>() {
     }
 
     override fun binObserver() {
-        dashboardViewModel.getAllMemberVMLD.observe(viewLifecycleOwner) {
-            binding.progress.hide()
-            when (it) {
 
-
-                is NetworkResult.Error -> {
-                    showAlert(requireActivity(), it.message!!)
-                }
-                is NetworkResult.Loading -> {
-
-                    binding.progress.show()
-                }
-                is NetworkResult.Success -> {
-
-
-                    userDataList = it.data!!.allmembers.toMutableList()
-                    println("................1.2........................ ${userDataList}")
-                    setRecycelcerView(userDataList)
-
-                }
-
-
-            }
-
-        }
 
     }
 

@@ -1,19 +1,22 @@
 package com.marufalam.dufa.repos
 
-import android.util.JsonToken
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.marufalam.dufa.api.DashboardApi
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import com.marufalam.dufa.api.SecuredApi
 import com.marufalam.dufa.data.models.dashboard.ResponseAllMember
 import com.marufalam.dufa.data.models.getProfileInfo.ResponseProfileInfo
 import com.marufalam.dufa.data.models.get_departments.ResponseDepartments
+import com.marufalam.dufa.paging.MemberSearchPagingSource
 import com.marufalam.dufa.utils.NetworkResult
 import org.json.JSONObject
 import retrofit2.Response
 import javax.inject.Inject
+import androidx.paging.liveData
 
-class DashboardRepository @Inject constructor(private val dashboardApi: DashboardApi) {
+class SecuredRepository @Inject constructor(private val securedApi: SecuredApi) {
 
     //get all member start
     private var _responseAllMember = MutableLiveData<NetworkResult<ResponseAllMember>>()
@@ -26,7 +29,7 @@ class DashboardRepository @Inject constructor(private val dashboardApi: Dashboar
         _responseAllMember.postValue(NetworkResult.Loading())
         try {
             val response: Response<ResponseAllMember> =
-                dashboardApi.getAllMember()
+                securedApi.getAllMember()
             if (response.isSuccessful && response.body() != null) {
                 _responseAllMember.postValue(NetworkResult.Success(response.body()!!))
             } else if (response.errorBody() != null) {
@@ -35,10 +38,9 @@ class DashboardRepository @Inject constructor(private val dashboardApi: Dashboar
             } else {
                 _responseAllMember.postValue(NetworkResult.Error("Something Went Wrong!"))
             }
-        }catch (e:Exception){
+        } catch (e: Exception) {
             Log.i("catch", "getAllMemberRepo: ${e.localizedMessage}")
         }
-
 
 
         //get all memberList end
@@ -56,7 +58,7 @@ class DashboardRepository @Inject constructor(private val dashboardApi: Dashboar
 
         _responseMyProfileRepo.postValue(NetworkResult.Loading())
         try {
-            val response = dashboardApi.getProfileInfo()
+            val response = securedApi.getProfileInfo()
 
             if (response.isSuccessful && response.body() != null) {
 
@@ -71,7 +73,7 @@ class DashboardRepository @Inject constructor(private val dashboardApi: Dashboar
 
                 _responseMyProfileRepo.postValue(NetworkResult.Error("Something Went Wrong!"))
             }
-        }catch (e:Exception){
+        } catch (e: Exception) {
 
             Log.i("catch", "DashboardApiRepo: ${e.localizedMessage}")
 
@@ -91,7 +93,7 @@ class DashboardRepository @Inject constructor(private val dashboardApi: Dashboar
 
         _responseDepartmentsRepo.postValue(NetworkResult.Loading())
         try {
-            val response = dashboardApi.getDepartments()
+            val response = securedApi.getDepartments()
 
             if (response.isSuccessful && response.body() != null) {
 
@@ -106,7 +108,7 @@ class DashboardRepository @Inject constructor(private val dashboardApi: Dashboar
 
                 _responseDepartmentsRepo.postValue(NetworkResult.Error("Something Went Wrong!"))
             }
-        }catch (e:Exception){
+        } catch (e: Exception) {
 
             Log.i("catch", "getDepartmentsRepo: ${e.localizedMessage}")
 
@@ -116,59 +118,24 @@ class DashboardRepository @Inject constructor(private val dashboardApi: Dashboar
     }
     //get Departments start end
 
+    fun getMemberSearchRepo(
+        totalPage: Int,
+        searchParamString: String,
 
+        ) = Pager(
+        config = PagingConfig(pageSize = 15, maxSize = 75),
+        pagingSourceFactory = {
+            MemberSearchPagingSource(
+                securedApi,
+                totalPage,
+                searchParamString
 
-//    //get memberList by Search
-//    private var _responseSearchMemberList = MutableLiveData<NetworkResult<ResponseMemberList>>()
-//
-//    val responseSearchMemberList: LiveData<NetworkResult<ResponseMemberList>>
-//        get() = _responseSearchMemberList
-
-/*
-    suspend fun getSearchMemberListRepo(search: String, type: String) {
-
-        _responsegetMemberList.postValue(NetworkResult.Loading())
-
-        val response: Response<ResponseMemberList>
-
-        when (type) {
-            Constants.BY_DISTRICT -> {
-                response = dashboardApi.getUserByDistrict(search)
-                getResponse(response)
-            }
-            Constants.BY_DEPARTMENT -> {
-                response = dashboardApi.getUserByDepartment(search)
-                getResponse(response)
-            }
-            Constants.BY_BLOOD -> {
-                response = dashboardApi.getUserByBloodGroup(search)
-                getResponse(response)
-            }
-            Constants.BY_PROFESSION -> {
-                response = dashboardApi.getUserByProfession(search)
-                getResponse(response)
-            }
+            )
         }
+    ).liveData
 
+    suspend fun logout() = securedApi.logout()
 
-        //get memberList end
-
-
-    }
-
-
-    private fun getResponse(response: Response<ResponseMemberList>) {
-        if (response.isSuccessful && response.body() != null) {
-            _responsegetMemberList.postValue(NetworkResult.Success(response.body()!!))
-        } else if (response.errorBody() != null) {
-            val errorObj = JSONObject(response.errorBody()!!.charStream().readText())
-            _responsegetMemberList.postValue(NetworkResult.Error(errorObj.getString("message")))
-        } else {
-            _responsegetMemberList.postValue(NetworkResult.Error("Something Went Wrong!"))
-        }
-
-    }
-*/
 
 
 }

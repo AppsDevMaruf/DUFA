@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -59,18 +60,18 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:layout_weight="6"
-                android:textColor="@color/black"
                 android:background="@drawable/stroke_boarder"
                 android:hint="Search"
-                android:padding="10dp" />
+                android:padding="10dp"
+                android:textColor="@color/black" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:visibility="gone"
                 android:id="@+id/searchBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Search" />
+                android:text="Search"
+                android:visibility="gone" />
 
 
         </LinearLayout>
@@ -80,8 +81,8 @@
             android:id="@+id/memberListRv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
-            tools:listitem="@layout/member_list_row" />
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/member_list_row"/>
 
         <ImageView
             android:id="@+id/noData"

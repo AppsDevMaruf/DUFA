@@ -52,6 +52,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
     implementation 'android.arch.navigation:navigation-fragment-ktx:1.0.0'
     implementation 'android.arch.navigation:navigation-ui-ktx:1.0.0'
+    implementation 'androidx.paging:paging-common-ktx:3.1.1'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
@@ -97,7 +98,8 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
 
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
-
+    def paging_version = "3.1.1"
+    implementation "androidx.paging:paging-runtime-ktx:$paging_version"
 
 
     def room_version = "2.4.3"

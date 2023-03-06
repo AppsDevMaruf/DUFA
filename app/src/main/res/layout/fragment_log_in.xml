@@ -8,6 +8,7 @@
     </data>
 
     <RelativeLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.LogInFragment"
@@ -77,14 +78,14 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="-4dp"
                         android:layout_marginRight="-4dp"
-                        android:inputType="text"
+                        android:layout_marginBottom="10dp"
                         android:background="@drawable/rectangle_8"
+                        android:hint="email"
+                        android:inputType="text"
                         android:maxLength="50"
                         android:maxLines="1"
-                        android:hint="email"
                         android:paddingLeft="15dp"
                         android:singleLine="true"
-                        android:layout_marginBottom="10dp"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                         android:textColor="@color/blue_600"
                         android:theme="@style/EditText.Grey" />
@@ -120,16 +121,17 @@
                             android:textSize="@dimen/_13sdp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
+
                     <TextView
                         android:id="@+id/loginErrorText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/red_A700"
-                        android:textSize="12sp"
                         android:gravity="center"
                         android:padding="3dp"
-                        android:visibility="invisible"
-                        android:text="" />
+                        android:text=""
+                        android:textColor="@color/red_A700"
+                        android:textSize="12sp"
+                        android:visibility="invisible" />
 
                     <Button
                         android:id="@+id/log_in"
@@ -170,14 +172,15 @@
                             android:textStyle="bold" />
 
                     </LinearLayout>
+
                     <com.github.ybq.android.spinkit.SpinKitView
-                        android:visibility="gone"
                         android:id="@+id/progress_bar"
-                        android:indeterminate="true"
                         style="@style/SpinKitView.Circle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:indeterminate="true"
+                        android:visibility="gone"
                         app:SpinKit_Color="@color/white"
                         tools:ignore="MissingClass" />
 
