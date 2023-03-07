@@ -1,7 +1,7 @@
 package com.marufalam.dufa.`interface`
 
-import com.marufalam.dufa.data.models.dashboard.ResponseAllMember
+import com.marufalam.dufa.data.models.search.Data
 
 interface MemberSelectListener {
-    fun selectedMember( responseDetail: ResponseAllMember)
+    fun selectedMember(responseDetail: Data?)
 }

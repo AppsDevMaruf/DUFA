@@ -11,7 +11,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
+        android:background="#DFDFDF"
+        android:padding="16dp"
         android:orientation="vertical"
         tools:context=".ui.MemberListFragment">
 
@@ -25,56 +26,112 @@
             android:id="@+id/filterName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:padding="4dp"
             android:text="Filter By" />
 
-        <androidx.appcompat.widget.AppCompatSpinner
-            android:id="@+id/filterbySpiner"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/filterTypeSpinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_8sdp"
-            android:background="@drawable/stroke_boarder"
-            android:padding="8dp"
-            android:text="@string/app_name" />
-
-        <androidx.appcompat.widget.AppCompatSpinner
-            android:id="@+id/itemSpiner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_8sdp"
-            android:background="@drawable/stroke_boarder"
-            android:padding="8dp"
-            android:text="@string/app_name"
-            android:visibility="gone" />
-
-        <LinearLayout
-            android:id="@+id/searchLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="?actionBarSize"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/white_back_react"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/showTitle">
 
 
-            <EditText
-                android:id="@+id/searchKey"
-                android:layout_width="0dp"
+            <ImageView
+                android:id="@+id/personIcon"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_weight="6"
-                android:background="@drawable/stroke_boarder"
-                android:hint="Search"
-                android:padding="10dp"
-                android:textColor="@color/black" />
+                android:layout_marginStart="10dp"
+                android:paddingVertical="4dp"
+                android:src="@drawable/ic_filter"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/blue" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/searchBtn"
+            <TextView
+                android:id="@+id/titleText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Search"
-                android:visibility="gone" />
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/dm_sans_medium"
+                android:includeFontPadding="false"
+                android:tag="false"
+                android:text="Select Filter Type "
+                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                android:textColor="@color/text_grey"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/personIcon"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
-        </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                app:tint="@color/blue"
+                android:src="@drawable/round_keyboard_arrow_down_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/itemSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/white_back_react"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/showTitle">
+
+
+            <ImageView
+                android:id="@+id/itemIcon"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:paddingVertical="4dp"
+                android:src="@drawable/ic_filter"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/blue" />
+
+            <TextView
+                android:id="@+id/itemTitleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/dm_sans_medium"
+                android:includeFontPadding="false"
+                android:tag="false"
+                android:text="Select Filter Type "
+                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                android:textColor="@color/text_grey"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/itemIcon"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                app:tint="@color/blue"
+                android:src="@drawable/round_keyboard_arrow_down_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -82,7 +139,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/member_list_row"/>
+            tools:listitem="@layout/member_list_row" />
 
         <ImageView
             android:id="@+id/noData"

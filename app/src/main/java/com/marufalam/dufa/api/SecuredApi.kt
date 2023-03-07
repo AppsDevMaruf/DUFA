@@ -4,6 +4,7 @@ import com.marufalam.dufa.data.models.dashboard.ResponseAllMember
 import com.marufalam.dufa.data.models.getProfileInfo.ResponseProfileInfo
 import com.marufalam.dufa.data.models.get_departments.ResponseDepartments
 import com.marufalam.dufa.data.models.logout.ResponseLogout
+import com.marufalam.dufa.data.models.search.RequestSearch
 import com.marufalam.dufa.data.models.search.ResponseSearch
 import retrofit2.Response
 import retrofit2.http.Body
@@ -25,7 +26,7 @@ interface SecuredApi {
     @POST("search")
     //@Header("AUTHORIZATION") value: String
     suspend fun getSearchResult(
-        @Body page: Int
+        @Body page: RequestSearch
     ): ResponseSearch
 
     @POST("logout")

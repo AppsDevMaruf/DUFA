@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_DashboardFragment_to_eventFragment"
             app:destination="@id/eventFragment" />
+        <action
+            android:id="@+id/action_DashboardFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/logInFragment"
@@ -52,7 +55,11 @@
         android:id="@+id/memberListFragment"
         android:name="com.marufalam.dufa.ui.MemberListFragment"
         android:label="MemberList"
-        tools:layout="@layout/fragment_member_list" />
+        tools:layout="@layout/fragment_member_list" >
+        <action
+            android:id="@+id/action_memberListFragment_to_userDetailsFragment"
+            app:destination="@id/userDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/paymentFragment"
         android:name="com.marufalam.dufa.ui.PaymentFragment"
@@ -87,4 +94,14 @@
             android:id="@+id/action_logoutFragment_to_logInFragment"
             app:destination="@id/logInFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.marufalam.dufa.ui.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/userDetailsFragment"
+        android:name="com.marufalam.dufa.UserDetailsFragment"
+        android:label="fragment_user_details"
+        tools:layout="@layout/fragment_user_details" />
 </navigation>

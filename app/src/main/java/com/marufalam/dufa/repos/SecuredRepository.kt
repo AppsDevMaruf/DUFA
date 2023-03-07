@@ -15,6 +15,7 @@ import org.json.JSONObject
 import retrofit2.Response
 import javax.inject.Inject
 import androidx.paging.liveData
+import com.marufalam.dufa.data.models.search.RequestSearch
 
 class SecuredRepository @Inject constructor(private val securedApi: SecuredApi) {
 
@@ -119,23 +120,19 @@ class SecuredRepository @Inject constructor(private val securedApi: SecuredApi) 
     //get Departments start end
 
     fun getMemberSearchRepo(
-        totalPage: Int,
-        searchParamString: String,
 
-        ) = Pager(
-        config = PagingConfig(pageSize = 15, maxSize = 75),
+        requestSearch: RequestSearch
+    ) = Pager(
+        config = PagingConfig(pageSize = 15, maxSize = 150),
         pagingSourceFactory = {
             MemberSearchPagingSource(
                 securedApi,
-                totalPage,
-                searchParamString
-
+                requestSearch
             )
         }
     ).liveData
 
     suspend fun logout() = securedApi.logout()
-
 
 
 }

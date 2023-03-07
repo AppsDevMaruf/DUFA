@@ -13,54 +13,17 @@
         tools:context=".ui.DashboardFragment"
         android:orientation="vertical">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:gravity="start"
-                android:textAlignment="center"
-                android:padding="2dp"
-                android:text="@string/dufa"
-                android:textColor="@color/blue"
-                android:textSize="30sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/textView2"
-                app:layout_constraintTop_toTopOf="@+id/imageView"
-                tools:ignore="RtlCompat" />
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:textAlignment="center"
-                android:text="Togetherness for betterment"
-                android:padding="2dp"
-                android:textColor="@android:color/holo_red_dark"
-                android:textSize="13sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.466"
-                app:layout_constraintStart_toEndOf="@+id/imageView"
-                app:layout_constraintTop_toBottomOf="@+id/textView"
-                app:layout_constraintVertical_bias="0.0" />
 
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="190dp"
                 android:layout_height="140dp"
-                android:contentDescription="TODO"
+                android:layout_gravity="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/dufa_logo" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <ScrollView
             android:layout_width="match_parent"
@@ -202,7 +165,7 @@
                                 android:letterSpacing="0.02"
                                 android:lineSpacingExtra="1sp"
                                 android:padding="5dp"
-                                android:text="Payments"
+                                android:text="Payments History"
                                 android:textColor="@color/text_gray"
                                 android:textSize="14sp" />
 
@@ -250,9 +213,9 @@
                                 android:layout_height="70dp"
                                 android:layout_marginTop="10dp"
                                 android:layout_marginRight="10dp"
-                                android:layout_marginLeft="-45dp"
+                                android:layout_marginLeft="-65dp"
                                 android:scaleType="centerInside"
-                                android:src="@drawable/event" />
+                                android:src="@drawable/income" />
 
                             <TextView
                                 android:layout_width="match_parent"
@@ -276,7 +239,7 @@
                                 android:letterSpacing="0.02"
                                 android:lineSpacingExtra="1sp"
                                 android:padding="5dp"
-                                android:text="Event"
+                                android:text="Total Dues"
                                 android:textColor="@color/text_gray"
                                 android:textSize="14sp" />
 
@@ -307,20 +270,18 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="@dimen/_60sdp"
-                                android:padding="10dp"
                                 android:layout_marginTop="15dp"
                                 android:layout_marginLeft="-60dp"
                                 android:scaleType="centerInside"
-                                android:src="@drawable/payoneer_master_card" />
+                                android:src="@drawable/voucher" />
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="16dp"
-
                                 android:letterSpacing="-0.02"
                                 android:lineSpacingExtra="1sp"
-                                android:text="1650"
+                                android:text="∞"
                                 android:textColor="@color/text_black"
                                 android:textSize="28sp"
                                 android:textStyle="bold" />
@@ -334,7 +295,7 @@
                                 android:letterSpacing="0.02"
                                 android:lineSpacingExtra="1sp"
                                 android:padding="5dp"
-                                android:text="Payments"
+                                android:text="Vouchers"
                                 android:textColor="@color/text_gray"
                                 android:textSize="14sp" />
 
@@ -415,14 +376,11 @@
                             <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="60dp"
-                                android:layout_marginLeft="-10dp"
-                                android:layout_marginTop="20dp"
+                                android:layout_marginTop="10dp"
                                 android:layout_marginRight="10dp"
-                                android:padding="-20dp"
-                                android:paddingTop="40dp"
-                                android:paddingBottom="30dp"
-                                android:scaleType="center"
-                                android:src="@drawable/member_icon" />
+                                android:layout_marginStart="-80dp"
+                                android:src="@drawable/qr"
+                                android:scaleType="centerInside" />
 
                             <TextView
                                 android:layout_width="match_parent"
@@ -431,7 +389,7 @@
                                 android:layout_marginTop="8dp"
                                 android:letterSpacing="-0.02"
                                 android:lineSpacingExtra="1sp"
-                                android:text="1650"
+                                android:text="∞"
                                 android:textColor="@color/text_black"
                                 android:textSize="28sp"
                                 android:textStyle="bold" />
@@ -445,7 +403,7 @@
                                 android:letterSpacing="0.02"
                                 android:lineSpacingExtra="1sp"
                                 android:padding="5dp"
-                                android:text="Members"
+                                android:text="QR"
                                 android:textColor="@color/text_gray"
                                 android:textSize="14sp" />
 
@@ -474,22 +432,21 @@
                             android:orientation="vertical">
 
                             <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="@dimen/_60sdp"
-                                android:padding="10dp"
-                                android:layout_marginTop="15dp"
-                                android:layout_marginLeft="-60dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="70dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_marginLeft="-45dp"
                                 android:scaleType="centerInside"
-                                android:src="@drawable/payoneer_master_card" />
+                                android:src="@drawable/event" />
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="16dp"
-
                                 android:letterSpacing="-0.02"
                                 android:lineSpacingExtra="1sp"
-                                android:text="1650"
+                                android:text="∞"
                                 android:textColor="@color/text_black"
                                 android:textSize="28sp"
                                 android:textStyle="bold" />
@@ -503,7 +460,7 @@
                                 android:letterSpacing="0.02"
                                 android:lineSpacingExtra="1sp"
                                 android:padding="5dp"
-                                android:text="Payments"
+                                android:text="Event"
                                 android:textColor="@color/text_gray"
                                 android:textSize="14sp" />
 

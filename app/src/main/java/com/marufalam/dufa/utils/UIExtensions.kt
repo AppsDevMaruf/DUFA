@@ -1,7 +1,9 @@
 package com.marufalam.dufa.utils
 
+import android.app.Activity
 import android.content.Context
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
@@ -80,6 +82,20 @@ fun Any.nameAbbreviationGenerator(name: String): String? {
     val firstnameAB = arr[0][0]
     val lastnameAB = arr[len][0]
     return "$firstnameAB$lastnameAB"
+}
+fun Fragment.hideSoftKeyboard() {
+    val inputMethodManager =
+        requireActivity().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+    val currentFocus = requireActivity().currentFocus
+    val windowToken = requireActivity().window?.decorView?.rootView?.windowToken
+    inputMethodManager.hideSoftInputFromWindow(windowToken, 0)
+    inputMethodManager.hideSoftInputFromWindow(
+        windowToken,
+        InputMethodManager.HIDE_NOT_ALWAYS
+    )
+    if (currentFocus != null) {
+        inputMethodManager.hideSoftInputFromWindow(currentFocus.windowToken, 0)
+    }
 }
 
 

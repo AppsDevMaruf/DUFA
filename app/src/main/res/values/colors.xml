@@ -341,6 +341,9 @@
 
     <color name="text_enable_white">#F2F2F2</color>
     <color name="text_disable_white">#FFFFFF</color>
+    <color name="text_grey">#4F4F4F</color>
+    <color name="cta_grey">#D9D9D9</color>
+    <color name="back_grey">#F6F6F6</color>
 
 
 </resources>

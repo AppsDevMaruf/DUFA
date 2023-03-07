@@ -1,13 +1,15 @@
 package com.marufalam.dufa.data.models.search
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-
+import kotlinx.android.parcel.Parcelize
+@Parcelize
 data class Data(
     @SerializedName("address")
     val address: String,
     @SerializedName("birthdate")
-    val birthdate: Any,
+    val birthdate: String,
     @SerializedName("bloodgroup")
     val bloodgroup: String,
     @SerializedName("created_at")
@@ -25,7 +27,7 @@ data class Data(
     @SerializedName("id")
     val id: Int,
     @SerializedName("image_path")
-    val imagePath: Any,
+    val imagePath: String,
     @SerializedName("name")
     val name: String,
     @SerializedName("nickname")
@@ -33,7 +35,7 @@ data class Data(
     @SerializedName("nid")
     val nid: String,
     @SerializedName("occupation")
-    val occupation: Any,
+    val occupation: String,
     @SerializedName("phone")
     val phone: String,
     @SerializedName("status")
@@ -42,4 +44,4 @@ data class Data(
     val subscription: String,
     @SerializedName("updated_at")
     val updatedAt: String
-)
+):Parcelable

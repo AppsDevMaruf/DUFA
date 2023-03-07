@@ -8,6 +8,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.marufalam.dufa.data.models.logout.ResponseLogout
 import com.marufalam.dufa.data.models.search.Data
+import com.marufalam.dufa.data.models.search.RequestSearch
 import com.marufalam.dufa.repos.SecuredRepository
 import com.marufalam.dufa.utils.NetworkResult
 import com.marufalam.dufa.utils.NoInternetException
@@ -21,10 +22,11 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
     ViewModel() {
 
     fun getMemberSearchVMLD(
-        totalPage: Int,
-        searchParam: String,
+
+        requestSearch: RequestSearch
+
     ): LiveData<PagingData<Data>> {
-        return securedRepository.getMemberSearchRepo(totalPage, searchParam)
+        return securedRepository.getMemberSearchRepo(requestSearch)
             .cachedIn(viewModelScope)
     }
 
