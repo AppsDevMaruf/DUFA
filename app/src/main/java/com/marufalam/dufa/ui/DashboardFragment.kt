@@ -21,6 +21,7 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
     }
 
     override fun configUi() {
+        //dashboardViewModel.dashboardInfoVM()
         dashboardViewModel.getMyProfileInfoVM()
 
     }
@@ -42,7 +43,7 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
     }
 
     override fun binObserver() {
-        dashboardViewModel.getMyProfileInfoVMLD.observe(this) {
+        dashboardViewModel.getMyProfileInfoVMLD.observe(viewLifecycleOwner) {
             //progressBar.isVisible = false
             when (it) {
 
@@ -56,6 +57,28 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
                 }
                 is NetworkResult.Success -> {
                     Log.i("SuccessTAG", "DashboardSuccess: ${it.data!!.profile.toString()}")
+
+                }
+
+
+            }
+
+        }
+        dashboardViewModel.dashboardInfoVMLD.observe(viewLifecycleOwner) {
+            //progressBar.isVisible = false
+            when (it) {
+
+                is NetworkResult.Error -> {
+
+                    //Log.i("TAG1", "binObserver: ${it.data!!.message.toString()}")
+                }
+                is NetworkResult.Loading -> {
+                    // progressBar.isVisible = true
+
+                }
+                is NetworkResult.Success -> {
+                 /*  toast(it.data.toString())
+                    Log.i("TAG", "binObserver: ${it.data.toString()}")*/
 
                 }
 

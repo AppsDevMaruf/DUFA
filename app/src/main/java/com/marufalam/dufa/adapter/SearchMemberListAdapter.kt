@@ -12,7 +12,7 @@ import com.marufalam.dufa.`interface`.MemberSelectListener
 import com.marufalam.dufa.utils.*
 
 
-class SearchMemberListAdapter() :
+class SearchMemberListAdapter(val memberSelectListener: MemberSelectListener) :
     PagingDataAdapter<Data, SearchMemberListAdapter.MemberListViewHolder>(comparator) {
 
 
@@ -45,10 +45,10 @@ class SearchMemberListAdapter() :
                 holder.binding.bloodGroup.text =it.bloodgroup
                 holder.binding.department.text =it.department
 
-              /*  holder.itemView.setOnClickListener {_->
+                holder.itemView.setOnClickListener {_->
                     memberSelectListener.selectedMember(it)
 
-                }*/
+                }
 
 
 

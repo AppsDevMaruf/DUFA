@@ -133,6 +133,7 @@ class SecuredRepository @Inject constructor(private val securedApi: SecuredApi) 
     ).liveData
 
     suspend fun logout() = securedApi.logout()
+    suspend fun getDashboardInfo() = securedApi.getDashboardInfo()
 
 
 }

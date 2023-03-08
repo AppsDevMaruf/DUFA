@@ -18,23 +18,17 @@ class UserDetailsFragment : BaseFragment<FragmentUserDetailsBinding>() {
     }
 
     override fun configUi() {
-       /* if (arguments!=null){
+        if (arguments!=null){
             val userInfo: Data = requireArguments().getParcelable("memberInfo")!!
             binding.name.text = userInfo.name
             binding.address.text = userInfo.address
             binding.bloodGroup.text = userInfo.bloodgroup
             binding.gender.text = userInfo.gender
-        }*/
+        }
 
     }
 
-    override fun setupNavigation() {
 
-    }
-
-    override fun binObserver() {
-
-    }
 
 
 }

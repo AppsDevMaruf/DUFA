@@ -1,6 +1,7 @@
 package com.marufalam.dufa.api
 
 import com.marufalam.dufa.data.models.dashboard.ResponseAllMember
+import com.marufalam.dufa.data.models.dashboard.dasboard_info.ResponseMembersDashboardInfo
 import com.marufalam.dufa.data.models.getProfileInfo.ResponseProfileInfo
 import com.marufalam.dufa.data.models.get_departments.ResponseDepartments
 import com.marufalam.dufa.data.models.logout.ResponseLogout
@@ -31,6 +32,9 @@ interface SecuredApi {
 
     @POST("logout")
     suspend fun logout(): Response<ResponseLogout>
+
+    @POST("members_dashboard")
+    suspend fun getDashboardInfo(): Response<ResponseMembersDashboardInfo>
 
     /* @POST("search")
      suspend fun getUserByDepartment(@Body department: String): Response<ResponseMemberList>

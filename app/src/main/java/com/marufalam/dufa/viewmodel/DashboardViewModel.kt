@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.marufalam.dufa.data.models.dashboard.dasboard_info.ResponseMembersDashboardInfo
 import com.marufalam.dufa.data.models.logout.ResponseLogout
 import com.marufalam.dufa.data.models.search.Data
 import com.marufalam.dufa.data.models.search.RequestSearch
@@ -104,5 +105,48 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
     //   logout  end
 
 
+
+    //  dashboard info start
+
+    private var _responseDashboardInfo=
+        MutableLiveData<NetworkResult<ResponseMembersDashboardInfo>>()
+    val dashboardInfoVMLD: LiveData<NetworkResult<ResponseMembersDashboardInfo>>
+        get() = _responseDashboardInfo
+
+    fun dashboardInfoVM() {
+
+        _responseDashboardInfo.postValue(NetworkResult.Loading())
+
+
+        viewModelScope.launch {
+
+            try {
+                val response = securedRepository.getDashboardInfo()
+
+                if (response.isSuccessful && response.body() != null) {
+
+
+                    _responseDashboardInfo.postValue(NetworkResult.Success(response.body()!!))
+
+                } else if (response.errorBody() != null) {
+
+                    val errorObj = JSONObject(response.errorBody()!!.charStream().readText())
+                    _responseDashboardInfo.postValue(NetworkResult.Error(errorObj.getString("message")))
+
+                }
+            } catch (noInternetException: NoInternetException) {
+                _responseDashboardInfo.postValue(noInternetException.localizedMessage?.let {
+                    NetworkResult.Error(
+                        it
+                    )
+                })
+            }
+
+        }
+
+    }
+
+
+    //   dashboard info  end
 
 }

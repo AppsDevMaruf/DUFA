@@ -21,7 +21,7 @@ import com.marufalam.dufa.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MemberListFragment : BaseFragment<FragmentMemberListBinding>() {
+open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(),MemberSelectListener {
     var bundle = Bundle()
     private val dashboardViewModel: DashboardViewModel by activityViewModels()
 
@@ -36,7 +36,7 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>() {
     }
 
     override fun configUi() {
-        searchAdapter = SearchMemberListAdapter()
+        searchAdapter = SearchMemberListAdapter(this)
         binding.memberListRv.adapter = searchAdapter
         //searchItemAdapter = SearchItemAdapter(this)
 
@@ -210,13 +210,13 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>() {
 
     }
 
-  /*  override fun selectedMember(memberDetails: Data?) {
+    override fun selectedMember(memberDetails: Data?) {
         bundle.putParcelable("memberInfo", memberDetails)  // Key, value
         findNavController().navigate(
             R.id.action_memberListFragment_to_userDetailsFragment,
             bundle
         )
-    }*/
+    }
 
 
 }
