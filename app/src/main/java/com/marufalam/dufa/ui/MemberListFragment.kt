@@ -1,8 +1,11 @@
 package com.marufalam.dufa.ui
 
 import android.os.Bundle
-import android.view.*
-import android.widget.*
+import android.util.Log
+import android.view.WindowManager
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -12,16 +15,21 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.marufalam.dufa.BaseFragment
 import com.marufalam.dufa.R
 import com.marufalam.dufa.adapter.SearchMemberListAdapter
+import com.marufalam.dufa.data.models.SearchBy
 import com.marufalam.dufa.data.models.search.Data
 import com.marufalam.dufa.data.models.search.RequestSearch
 import com.marufalam.dufa.databinding.FragmentMemberListBinding
-import com.marufalam.dufa.`interface`.MemberSelectListener
-import com.marufalam.dufa.utils.*
+import com.marufalam.dufa.interfaces.MemberSelectListener
+import com.marufalam.dufa.interfaces.SearchByListener
+import com.marufalam.dufa.utils.NetworkResult
+import com.marufalam.dufa.utils.hideSoftKeyboard
 import com.marufalam.dufa.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.math.log
 
 @AndroidEntryPoint
-open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(),MemberSelectListener {
+open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), MemberSelectListener,
+    SearchByListener {
     var bundle = Bundle()
     private val dashboardViewModel: DashboardViewModel by activityViewModels()
 
@@ -30,6 +38,13 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(),Member
     lateinit var requestSearch: RequestSearch
     lateinit var searchItemAdapter: SearchItemAdapter
 
+    var type: String = ""
+
+    var itemsBy: MutableList<SearchBy> = mutableListOf()
+
+    lateinit var bottomSheetDialogSearchItem: BottomSheetDialog
+
+
     override fun getFragmentView(): Int {
         return R.layout.fragment_member_list
 
@@ -37,6 +52,7 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(),Member
 
     override fun configUi() {
         searchAdapter = SearchMemberListAdapter(this)
+        searchItemAdapter = SearchItemAdapter(this)
         binding.memberListRv.adapter = searchAdapter
         //searchItemAdapter = SearchItemAdapter(this)
 
@@ -60,6 +76,8 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(),Member
             binding.titleText.text = it.tag.toString()
             binding.titleText.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
 
+            type = it.tag.toString()
+
             bottomSheetDialog.dismiss()
 
 
@@ -68,14 +86,10 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(),Member
         bottomSheetDialog.findViewById<LinearLayout>(R.id.bloodGroupBtn)!!.setOnClickListener {
             binding.titleText.text = it.tag.toString()
             binding.titleText.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
+            type = it.tag.toString()
 
-            val requestSearch = RequestSearch(null, "A+", null, null, null, 0)
+            dashboardViewModel.getBloodGroupVM()
 
-            dashboardViewModel.getMemberSearchVMLD(requestSearch)
-                .observe(viewLifecycleOwner) {
-                    searchAdapter.submitData(lifecycle, it)
-
-                }
 
 
             bottomSheetDialog.dismiss()
@@ -87,7 +101,7 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(),Member
             binding.titleText.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
 
 
-
+            type = it.tag.toString()
 
             bottomSheetDialog.dismiss()
 
@@ -97,7 +111,7 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(),Member
             binding.titleText.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
 
 
-
+            type = it.tag.toString()
 
             bottomSheetDialog.dismiss()
 
@@ -106,9 +120,8 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(),Member
             binding.titleText.text = it.tag.toString()
             binding.titleText.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
 
-
+            type = it.tag.toString()
             dashboardViewModel.getDepartmentsVM()
-
 
             bottomSheetDialog.dismiss()
 
@@ -116,7 +129,7 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(),Member
         bottomSheetDialog.findViewById<LinearLayout>(R.id.dobBtn)!!.setOnClickListener {
             binding.titleText.text = it.tag.toString()
             binding.titleText.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
-
+            type = it.tag.toString()
             showBottomSheetState()
 
             bottomSheetDialog.dismiss()
@@ -124,6 +137,25 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(),Member
         }
         bottomSheetDialog.show()
     }
+
+
+    private fun showBottomSheetFilterItemType() {
+
+
+        bottomSheetDialogSearchItem = BottomSheetDialog(requireContext())
+        bottomSheetDialogSearchItem.setContentView(R.layout.item_filter_type)
+        bottomSheetDialogSearchItem.behavior.maxHeight =
+            2000 // set max height when expanded in PIXEL
+        bottomSheetDialogSearchItem.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
+
+
+        var itemRcv: RecyclerView =
+            bottomSheetDialogSearchItem.findViewById<RecyclerView>(R.id.itemKeywordRCV)!!
+        itemRcv.adapter = searchItemAdapter
+
+        bottomSheetDialogSearchItem.show()
+    }
+
 
     override fun setupNavigation() {
 
@@ -137,13 +169,52 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(),Member
             when (it) {
                 is NetworkResult.Error -> {}
                 is NetworkResult.Loading -> {}
+
                 is NetworkResult.Success -> {
-//                    it.data
-//
-//                    var search = SearchBy("")
-//
-//
-//                    searchItemAdapter.submitList()
+                    itemsBy.clear()
+
+                    it.data?.departments?.forEach {
+                        val searchBy: SearchBy = SearchBy("", it?.name.toString())
+
+                        itemsBy.add(searchBy)
+
+
+                    }
+
+                    Log.i("TAG", "departments: $itemsBy ")
+
+                    searchItemAdapter.submitList(itemsBy)
+
+
+                    showBottomSheetFilterItemType()
+
+
+                }
+            }
+
+        }
+
+        dashboardViewModel.getBloodGroupVMLD.observe(viewLifecycleOwner) {
+
+            when (it) {
+                is NetworkResult.Error -> {}
+                is NetworkResult.Loading -> {}
+                is NetworkResult.Success -> {
+                    itemsBy.clear()
+
+                    it.data?.bloodgroups?.forEach {
+                        val searchBy: SearchBy = SearchBy("", it?.name.toString())
+
+                        itemsBy.add(searchBy)
+
+
+                    }
+
+                    searchItemAdapter.submitList(itemsBy)
+                    Log.i("TAG", "departments: $itemsBy ")
+                    showBottomSheetFilterItemType()
+
+
                 }
             }
 
@@ -192,10 +263,6 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(),Member
     private fun buildSearchItemRecyclerView(recyclerView: RecyclerView) {
 
 
-        // initializing our adapter class.
-
-
-        // adding layout manager to our recycler view.
         val manager = LinearLayoutManager(requireContext())
         recyclerView.setHasFixedSize(true)
 
@@ -210,12 +277,73 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(),Member
 
     }
 
-    override fun selectedMember(memberDetails: Data?) {
-        bundle.putParcelable("memberInfo", memberDetails)  // Key, value
+    override fun selectedMember(responseDetail: Data?) {
+        bundle.putParcelable("memberInfo", responseDetail)  // Key, value
         findNavController().navigate(
             R.id.action_memberListFragment_to_userDetailsFragment,
             bundle
         )
+    }
+
+    override fun searchBYSelectedItem(searchBy: SearchBy) {
+
+        Log.i("TAG", "searchBYSelectedItem: $searchBy ")
+
+        bottomSheetDialogSearchItem.dismiss()
+
+
+        val requestSearch = when (type) {
+            "NameorEmail" -> {
+                RequestSearch(null, "A+", null, null, null, 0)
+
+
+            }
+
+            "BloodGroup" -> {
+                RequestSearch(null, searchBy.name, null, null, null, 0)
+
+
+            }
+
+            "District" -> {
+                RequestSearch(null, null, null, searchBy.name, null, 0)
+
+
+            }
+
+            "occupation" -> {
+                RequestSearch(null, null, null, null, searchBy.name, 0)
+
+
+            }
+
+            "Department" -> {
+                RequestSearch(null, null, searchBy.name, null, null, 0)
+
+
+            }
+
+            "DateofBirth" -> {
+                RequestSearch(searchBy.name, null, null, null, null, 0)
+
+
+            }
+
+
+            else -> {
+                RequestSearch(null, null, null, null, null, 0)
+            }
+        }
+
+
+
+        dashboardViewModel.getMemberSearchVMLD(requestSearch)
+            .observe(viewLifecycleOwner) {
+                searchAdapter.submitData(lifecycle, it)
+
+            }
+
+
     }
 
 

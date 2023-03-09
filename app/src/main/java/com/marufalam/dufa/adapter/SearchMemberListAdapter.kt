@@ -8,11 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.marufalam.dufa.data.models.search.Data
 import com.marufalam.dufa.databinding.MemberListRowBinding
-import com.marufalam.dufa.`interface`.MemberSelectListener
+import com.marufalam.dufa.interfaces.MemberSelectListener
 import com.marufalam.dufa.utils.*
 
 
-class SearchMemberListAdapter(val memberSelectListener: MemberSelectListener) :
+class SearchMemberListAdapter(private val memberSelectListener: MemberSelectListener) :
     PagingDataAdapter<Data, SearchMemberListAdapter.MemberListViewHolder>(comparator) {
 
 
@@ -52,10 +52,14 @@ class SearchMemberListAdapter(val memberSelectListener: MemberSelectListener) :
 
 
 
-                if (it.imagePath!=null) {
+                if (it.imagePath==null) {
                     holder.binding.userProfilePic.hide()
                     holder.binding.profilePicAB.show()
-                    holder.binding.profilePicAB.text = nameAbbreviationGenerator(it.name)
+                    holder.binding.profilePicAB.text = it.name?.let { it1 ->
+                        nameAbbreviationGenerator(
+                            it1
+                        )
+                    }
                 } else {
                     holder.binding.userProfilePic.show()
                     holder.binding.profilePicAB.hide()

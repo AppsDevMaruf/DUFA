@@ -7,41 +7,41 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Data(
     @SerializedName("address")
-    val address: String,
+    val address: String?,
     @SerializedName("birthdate")
-    val birthdate: String,
+    val birthdate: String?,
     @SerializedName("bloodgroup")
-    val bloodgroup: String,
+    val bloodgroup: String?,
     @SerializedName("created_at")
-    val createdAt: String,
+    val createdAt: String?,
     @SerializedName("department")
-    val department: String,
+    val department: String?,
     @SerializedName("district")
-    val district: String,
+    val district: String?,
     @SerializedName("email")
-    val email: String,
+    val email: String?,
     @SerializedName("gender")
-    val gender: String,
+    val gender: String?,
     @SerializedName("hall")
-    val hall: String,
+    val hall: String?,
     @SerializedName("id")
-    val id: Int,
+    val id: Int?,
     @SerializedName("image_path")
-    val imagePath: String,
+    val imagePath: String?,
     @SerializedName("name")
-    val name: String,
+    val name: String?,
     @SerializedName("nickname")
-    val nickname: String,
+    val nickname: String?,
     @SerializedName("nid")
-    val nid: String,
+    val nid: String?,
     @SerializedName("occupation")
-    val occupation: String,
+    val occupation: String?,
     @SerializedName("phone")
-    val phone: String,
+    val phone: String?,
     @SerializedName("status")
-    val status: String,
+    val status: String?,
     @SerializedName("subscription")
-    val subscription: String,
+    val subscription: String?,
     @SerializedName("updated_at")
-    val updatedAt: String
+    val updatedAt: String?
 ):Parcelable

@@ -7,5 +7,5 @@ data class ResponseSearch(
     @SerializedName("searchData")
     val searchData: SearchData,
     @SerializedName("user")
-    val user: User
+    val user: User?
 )

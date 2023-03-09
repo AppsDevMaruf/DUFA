@@ -6,9 +6,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.marufalam.dufa.data.models.SearchBy
-import com.marufalam.dufa.databinding.FragmentLogoutBinding
 import com.marufalam.dufa.databinding.ItemSearchBinding
-import com.marufalam.dufa.`interface`.SearchByListener
+import com.marufalam.dufa.interfaces.SearchByListener
 
 class SearchItemAdapter(var seaSearchByListener: SearchByListener) :
     ListAdapter<SearchBy, SearchItemAdapter.SearchItemViewHolder>(comparator) {

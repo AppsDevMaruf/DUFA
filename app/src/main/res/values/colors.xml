@@ -13,6 +13,8 @@
     <color name="bluedeep">#0a0449</color>
     <color name="cardbg">#fdfdfd</color>
     <color name="background">#F5F5F5</color>
+    <color name="text_red">#EB5757</color>
+    <color name="green100">#00AA0E</color>
 
     <color name="colorPrimary">#1976D2</color>
     <color name="colorPrimaryDark">#1565C0</color>

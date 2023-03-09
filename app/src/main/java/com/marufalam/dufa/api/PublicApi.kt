@@ -14,7 +14,6 @@ interface PublicApi {
     suspend fun register(@Body requestRegister: RequestRegister): Response<ResponseRegister>
 
     @POST("auth/login")
-
     suspend fun login(@Body requestLogin: RequestLogin): Response<ResponseLogin>
 
    /* @POST("api/logout/")

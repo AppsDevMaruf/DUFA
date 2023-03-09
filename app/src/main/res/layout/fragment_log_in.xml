@@ -11,8 +11,8 @@
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.LogInFragment"
-        android:background="@color/grey_50">
+        android:background="@color/grey_50"
+        tools:context=".ui.LogInFragment">
 
         <View
             android:layout_width="match_parent"
@@ -27,16 +27,24 @@
             android:orientation="vertical"
             android:padding="@dimen/spacing_mlarge">
 
-            <de.hdodenhof.circleimageview.CircleImageView
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/userProfilePic"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/spacing_large"
                 android:layout_marginBottom="@dimen/spacing_mlarge"
+                android:padding="1dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/dufa_logo"
-                app:civ_border_color="@color/red_700"
-                app:civ_border_width="2dp" />
+                app:contentPaddingEnd="10dp"
+                app:contentPaddingTop="1dp"
+                app:contentPaddingBottom="1dp"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Image.PILL"
+                app:strokeColor="@color/red_700"
+                app:strokeWidth="2dp"
+                tools:ignore="MissingConstraints" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -152,7 +160,8 @@
                         android:layout_marginTop="@dimen/spacing_large"
                         android:layout_marginBottom="@dimen/spacing_medium"
                         android:gravity="center"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:visibility="gone">
 
                         <TextView
                             android:layout_width="wrap_content"

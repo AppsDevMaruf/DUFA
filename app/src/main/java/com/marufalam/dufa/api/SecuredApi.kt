@@ -7,10 +7,10 @@ import com.marufalam.dufa.data.models.get_departments.ResponseDepartments
 import com.marufalam.dufa.data.models.logout.ResponseLogout
 import com.marufalam.dufa.data.models.search.RequestSearch
 import com.marufalam.dufa.data.models.search.ResponseSearch
+import com.marufalam.dufa.data.models.search.blood.ResponseBloodGroup
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
-import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface SecuredApi {
@@ -19,6 +19,9 @@ interface SecuredApi {
 
     @GET("get_departments")
     suspend fun getDepartments(): Response<ResponseDepartments>
+
+    @GET("get_bloodgroups")
+    suspend fun getBloodGroups(): Response<ResponseBloodGroup>
 
     @GET("get-userinfo-profile")
     //@Header("AUTHORIZATION") value: String

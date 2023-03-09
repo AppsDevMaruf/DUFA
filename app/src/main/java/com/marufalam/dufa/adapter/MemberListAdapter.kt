@@ -45,9 +45,6 @@ class MemberListAdapter(var context: Context, var data: MutableList<Allmember>) 
             it.bloodGroup.text = user.bloodgroup
             it.phoneNumber.text = user.phone
             it.department.text = user.department
-            it.district.text = user.district
-
-
         }
     }
 

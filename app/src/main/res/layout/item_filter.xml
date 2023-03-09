@@ -26,7 +26,7 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="8dp"
         android:layout_marginTop="50dp"
-        android:tag="Name or Email"
+        android:tag="NameorEmail"
         android:background="@drawable/stroke_boarder"
         android:orientation="horizontal">
 
@@ -62,7 +62,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="8dp"
-        android:tag="Blood Group"
+        android:tag="BloodGroup"
         android:background="@drawable/stroke_boarder"
         android:orientation="horizontal">
 
@@ -193,7 +193,6 @@
             android:layout_margin="0dp"
             android:includeFontPadding="false"
             android:paddingStart="10dp"
-            android:tag="CHECKING"
             android:text="Department"
             android:textColor="@color/text_black"
             android:textSize="20sp"
@@ -207,7 +206,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="8dp"
-        android:tag="Date of Birth"
+        android:tag="DateofBirth"
         android:background="@drawable/stroke_boarder"
         android:orientation="horizontal">
 

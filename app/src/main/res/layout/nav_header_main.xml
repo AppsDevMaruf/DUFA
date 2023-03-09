@@ -1,36 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="176dp"
-    android:background="@drawable/nav_head_bg"
-    android:gravity="bottom"
-    android:orientation="vertical"
-    android:paddingLeft="16dp"
-    android:paddingTop="16dp"
-    android:paddingRight="16dp"
-    android:paddingBottom="16dp"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profile_image"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/marufp"
-        app:civ_border_color="#FFFF"
-        app:civ_border_width="2dp" />
+    <data>
 
-    <TextView
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="8dp"
-        android:text="Maruf Alam"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:layout_height="176dp"
+        android:background="@drawable/nav_head_bg"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:paddingTop="16dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="16dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="marufalam120@gmail.com" />
-</LinearLayout>
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/userProfilePicHeader"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:padding="1dp"
+            android:src="@drawable/maruf"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Image.PILL"
+            app:strokeColor="@color/white"
+            app:strokeWidth="1dp"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/profilePicABHeader"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/cta_circle"
+            android:fontFamily="@font/dm_sans_medium"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:padding="1dp"
+            android:text="AB"
+            android:textAllCaps="false"
+            android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@id/userProfilePicHeader"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="@id/userProfilePicHeader"
+            app:layout_constraintStart_toStartOf="@id/userProfilePicHeader"
+            app:layout_constraintTop_toTopOf="@id/userProfilePicHeader"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Image.PILL"
+            app:strokeColor="@color/white"
+            app:strokeWidth="2dp"
+            tools:ignore="MissingConstraints" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/uploadProfilePic"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="2dp"
+            android:background="@drawable/btn_enable_small"
+            android:src="@drawable/baseline_camera_alt_24"
+            android:tint="@color/white"
+            app:contentPadding="6dp"
+            app:layout_constraintBottom_toBottomOf="@id/userProfilePicHeader"
+            app:layout_constraintEnd_toEndOf="@id/userProfilePicHeader" />
+
+        <TextView
+            android:id="@+id/userName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/dm_sans"
+            android:paddingTop="4dp"
+            android:text="Maruf Alam"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            app:layout_constraintStart_toStartOf="@+id/userProfilePicHeader"
+            app:layout_constraintTop_toBottomOf="@+id/userProfilePicHeader" />
+
+        <TextView
+            android:id="@+id/userEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/dm_sans"
+            android:text="marufalam120@gmail.com"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/userName"
+            app:layout_constraintTop_toBottomOf="@+id/userName" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,8 +1,11 @@
 package com.marufalam.dufa.data.models.getProfileInfo
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Profile(
     @SerializedName("address")
     val address: String?,
@@ -46,4 +49,4 @@ data class Profile(
     val subscription: String?,
     @SerializedName("updated_at")
     val updatedAt: String?
-)
+): Parcelable

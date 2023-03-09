@@ -50,7 +50,8 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
     }
     // getMyProfile end
 
-    // getMyProfile start
+
+    // getDepartmentsVM start
     val getDepartmentsVMLD = securedRepository.responseDepartmentsRepo
 
     fun getDepartmentsVM() {
@@ -58,12 +59,22 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
             securedRepository.getDepartmentsRepo()
         }
     }
-    // getMyProfile end
+    // getDepartmentsVM end
+
+    // getBloodGroupVM start
+    val getBloodGroupVMLD = securedRepository.responseBloodGroupRepo
+
+    fun getBloodGroupVM() {
+        viewModelScope.launch {
+            securedRepository.getBloodGroupsRepo()
+        }
+    }
+    // getBloodGroupVM end
 
 
     //  logout start
 
-    private var _responseLogout=
+    private var _responseLogout =
         MutableLiveData<NetworkResult<ResponseLogout>>()
     val logoutVMLD: LiveData<NetworkResult<ResponseLogout>>
         get() = _responseLogout
@@ -105,10 +116,9 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
     //   logout  end
 
 
-
     //  dashboard info start
 
-    private var _responseDashboardInfo=
+    private var _responseDashboardInfo =
         MutableLiveData<NetworkResult<ResponseMembersDashboardInfo>>()
     val dashboardInfoVMLD: LiveData<NetworkResult<ResponseMembersDashboardInfo>>
         get() = _responseDashboardInfo

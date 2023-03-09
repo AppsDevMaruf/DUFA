@@ -1,4 +1,4 @@
-package com.marufalam.dufa.`interface`
+package com.marufalam.dufa.interfaces
 
 import com.marufalam.dufa.data.models.SearchBy
 

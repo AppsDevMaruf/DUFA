@@ -93,10 +93,22 @@
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="2dp"
                     android:maxLines="1"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
                     android:textColor="@color/blue"
                     android:textSize="18sp"
                     app:fontFamily="@font/dm_sans"
                     tools:text="Maruf Alam" />
+                <TextView
+                    android:id="@+id/department"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:maxLines="1"
+                    android:textColor="@color/blue"
+                    android:textStyle="bold"
+                    app:fontFamily="@font/dm_sans"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+                    tools:text="A+"/>
 
                 <TextView
                     android:id="@+id/phoneNumber"
@@ -105,8 +117,8 @@
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="2dp"
                     android:maxLines="1"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
                     android:textColor="@color/blue"
-                    android:textSize="15sp"
                     app:fontFamily="@font/dm_sans"
                     tools:text="+8801687422428" />
 
@@ -115,37 +127,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
-                    android:layout_toEndOf="@+id/userProfilePic"
                     android:maxLines="1"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
                     android:textColor="@color/red_700"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:fontFamily="@font/dm_sans"
-                    tools:text="A+" />
-
-                <TextView
-                    android:id="@+id/department"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:maxLines="1"
-                    android:textColor="@color/blue"
-                    android:textSize="10sp"
                     android:textStyle="bold"
                     app:fontFamily="@font/dm_sans"
                     tools:text="A+" />
 
 
-                <TextView
-                    android:id="@+id/district"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:textColor="@color/red_700"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:fontFamily="@font/dm_sans"
-                    tools:text="A+" />
 
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

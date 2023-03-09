@@ -1,13 +1,16 @@
 package com.marufalam.dufa
 
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.get
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
@@ -20,10 +23,13 @@ import com.bumptech.glide.load.model.GlideUrl
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.navigation.NavigationView
 import com.marufalam.dufa.data.local.TokenManager
+import com.marufalam.dufa.data.models.getProfileInfo.Profile
+import com.marufalam.dufa.databinding.ActivityMainBinding
 
 import com.marufalam.dufa.utils.*
 import com.marufalam.dufa.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import de.hdodenhof.circleimageview.CircleImageView
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -31,27 +37,36 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var tokenManager: TokenManager
     private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var userProfilePic :ShapeableImageView
-    private lateinit var progressBar:ProgressBar
+    private lateinit var userProfilePic: ShapeableImageView
+
+    private lateinit var progressBar: ProgressBar
     private val dashboardViewModel: DashboardViewModel by viewModels()
+    private var bundle = Bundle()
+    lateinit var binding: ActivityMainBinding
+    private lateinit var userProfilePicHeader: ShapeableImageView
+    private lateinit var userProfilePicABHeader: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+
+        setContentView(binding.root)
+
+        var nav = binding.navigationView.getHeaderView(0)
+
+        userProfilePicHeader = nav.findViewById(R.id.userProfilePicHeader)
+        userProfilePicABHeader = nav.findViewById(R.id.profilePicABHeader)
+
+
+
+
+
+
 
         dashboardViewModel.getMyProfileInfoVM()
         binObserver()
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
-       userProfilePic = toolbar.findViewById(R.id.userProfilePic)
-       progressBar = findViewById(R.id.progress)
-        userProfilePic.setOnClickListener {
-            Toast.makeText(
-                applicationContext,
-                "Your Image not Uploading Yet... ",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
+
         ///
         val drawerLayout: DrawerLayout = findViewById(R.id.drawerLayout)
         val navView: NavigationView = findViewById(R.id.navigationView)
@@ -61,6 +76,22 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
+
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        userProfilePic = toolbar.findViewById(R.id.userProfilePic)
+
+        progressBar = findViewById(R.id.progress)
+        userProfilePic.setOnClickListener {
+            navController.navigateUp() // to clear previous navigation history
+            navController.navigate(R.id.profileFragment,bundle)
+            Toast.makeText(
+                applicationContext,
+                "Your Image not Uploading Yet... ",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.DashboardFragment, R.id.logInFragment, R.id.signUpFragment
@@ -91,8 +122,8 @@ class MainActivity : AppCompatActivity() {
 
                 }
                 is NetworkResult.Success -> {
-                    //Log.i("TAG", "binObserver: ${it.data!!.profile.toString()}")
-                   // setData(it.data!!.profile)
+
+                    setData(it.data?.profile)
 
                 }
 
@@ -102,21 +133,40 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun setData(profile: List<Profile?>?) {
+        if (profile != null) {
+            bundle.putParcelable("memberInfo", profile[0])  // Key, value
+            binding.navigationView.getHeaderView(0).findViewById<TextView>(R.id.userName).text =
+                profile[0]?.name
+            binding.navigationView.getHeaderView(0).findViewById<TextView>(R.id.userEmail).text =
+                profile[0]?.email
+        }
+        if (profile?.get(0)?.imagePath == null) {
 
-    /*private fun setData(data: List<Data?>?) {
-        val profilePic = Constants.IMG_PREFIX+ data?.get(0)!!.imagePath
-        val url = GlideUrl(
-            profilePic,
-            GlideUtils.glideHeaders(tokenManager.getToken(Constants.TOKEN))
-        )
+            userProfilePicHeader.hide()
+            userProfilePicABHeader.show()
+            userProfilePicABHeader.text = nameAbbreviationGenerator(profile!![0]?.name.toString())
+        } else {
+            userProfilePicHeader.show()
+            userProfilePicABHeader.hide()
 
-        Glide.with(applicationContext)
-            .load(url)
-            .placeholder(R.drawable.loadpreview)
-            .into(userProfilePic)
+            val profilePic = Constants.IMG_PREFIX + profile[0]?.imagePath
+            val url = GlideUrl(
+                profilePic,
+                GlideUtils.glideHeaders(tokenManager.getToken(Constants.TOKEN))
+            )
+            Glide.with(applicationContext)
+                .load(url)
+                .placeholder(R.drawable.loadpreview)
+                .into(userProfilePic)
+            Glide.with(applicationContext)
+                .load(url)
+                .placeholder(R.drawable.loadpreview)
+                .into(userProfilePicHeader)
+        }
+
 
     }
-*/
 
 
 }

@@ -5,17 +5,19 @@ import com.bumptech.glide.Glide
 import com.marufalam.dufa.BaseFragment
 import com.marufalam.dufa.R
 import com.marufalam.dufa.data.models.search.Data
-import com.marufalam.dufa.databinding.FragmentProfileBinding
+import com.marufalam.dufa.databinding.FragmentUserDetailsBinding
 import com.marufalam.dufa.utils.Constants
 import com.marufalam.dufa.utils.hide
 import com.marufalam.dufa.utils.nameAbbreviationGenerator
 import com.marufalam.dufa.utils.show
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
+class UserDetailsFragment : BaseFragment<FragmentUserDetailsBinding>() {
 
-class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
     override fun getFragmentView(): Int {
-        return  R.layout.fragment_profile
+        return R.layout.fragment_user_details
     }
 
     override fun configUi() {
@@ -28,7 +30,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
             binding.nid.text = userInfo.nid
             binding.gender.text = userInfo.gender
             binding.birthdate.text = userInfo.birthdate
-            /*binding.department.text = userInfo.department
+            binding.department.text = userInfo.department
             binding.hall.text = userInfo.hall
             binding.bloodGroup.text = userInfo.bloodgroup
             binding.occupation.text = userInfo.occupation
@@ -66,25 +68,18 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
                 val profileImg = Constants.IMG_PREFIX + userInfo.imagePath
 
-                *//* val url = GlideUrl(
+                /* val url = GlideUrl(
                      profileImg,
                      GlideUtils.glideHeaders(tokenStoreManager.getToken(Constants.TOKEN))
-                 )*//*
+                 )*/
 
                 Glide.with(requireActivity())
                     .load(profileImg)
                     .into(binding.userProfilePic)
-            }*/
+            }
         }
 
     }
 
-    override fun setupNavigation() {
-
-    }
-
-    override fun binObserver() {
-
-    }
 
 }

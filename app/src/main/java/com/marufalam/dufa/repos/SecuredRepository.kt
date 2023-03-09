@@ -16,6 +16,7 @@ import retrofit2.Response
 import javax.inject.Inject
 import androidx.paging.liveData
 import com.marufalam.dufa.data.models.search.RequestSearch
+import com.marufalam.dufa.data.models.search.blood.ResponseBloodGroup
 
 class SecuredRepository @Inject constructor(private val securedApi: SecuredApi) {
 
@@ -118,6 +119,42 @@ class SecuredRepository @Inject constructor(private val securedApi: SecuredApi) 
 
     }
     //get Departments start end
+
+    // getBloodGroups start
+    private var _responseBloodRepo =
+        MutableLiveData<NetworkResult<ResponseBloodGroup>>()
+    val responseBloodGroupRepo: LiveData<NetworkResult<ResponseBloodGroup>>
+        get() = _responseBloodRepo
+
+    suspend fun getBloodGroupsRepo() {
+
+        _responseBloodRepo.postValue(NetworkResult.Loading())
+        try {
+            val response = securedApi.getBloodGroups()
+
+            if (response.isSuccessful && response.body() != null) {
+
+                _responseBloodRepo.postValue(NetworkResult.Success(response.body()!!))
+
+            } else if (response.errorBody() != null) {
+
+                val errorObj = JSONObject(response.errorBody()!!.charStream().readText())
+                _responseBloodRepo.postValue(NetworkResult.Error(errorObj.getString("message")))
+
+            } else {
+
+                _responseBloodRepo.postValue(NetworkResult.Error("Something Went Wrong!"))
+            }
+        } catch (e: Exception) {
+
+            Log.i("catch", "getDepartmentsRepo: ${e.localizedMessage}")
+
+        }
+
+
+    }
+    //getBloodGroups start end
+
 
     fun getMemberSearchRepo(
 
