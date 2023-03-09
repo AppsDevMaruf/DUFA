@@ -1,16 +1,13 @@
 package com.marufalam.dufa
 
 
-import android.app.Activity
 import android.os.Bundle
-import android.util.Log
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.view.get
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
@@ -25,11 +22,9 @@ import com.google.android.material.navigation.NavigationView
 import com.marufalam.dufa.data.local.TokenManager
 import com.marufalam.dufa.data.models.getProfileInfo.Profile
 import com.marufalam.dufa.databinding.ActivityMainBinding
-
 import com.marufalam.dufa.utils.*
 import com.marufalam.dufa.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import de.hdodenhof.circleimageview.CircleImageView
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -56,12 +51,8 @@ class MainActivity : AppCompatActivity() {
         var nav = binding.navigationView.getHeaderView(0)
 
         userProfilePicHeader = nav.findViewById(R.id.userProfilePicHeader)
+
         userProfilePicABHeader = nav.findViewById(R.id.profilePicABHeader)
-
-
-
-
-
 
 
         dashboardViewModel.getMyProfileInfoVM()
@@ -83,7 +74,6 @@ class MainActivity : AppCompatActivity() {
 
         progressBar = findViewById(R.id.progress)
         userProfilePic.setOnClickListener {
-            navController.navigateUp() // to clear previous navigation history
             navController.navigate(R.id.profileFragment,bundle)
             Toast.makeText(
                 applicationContext,
@@ -135,7 +125,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setData(profile: List<Profile?>?) {
         if (profile != null) {
-            bundle.putParcelable("memberInfo", profile[0])  // Key, value
+            bundle.putParcelable("userinfo", profile[0])  // Key, value
             binding.navigationView.getHeaderView(0).findViewById<TextView>(R.id.userName).text =
                 profile[0]?.name
             binding.navigationView.getHeaderView(0).findViewById<TextView>(R.id.userEmail).text =

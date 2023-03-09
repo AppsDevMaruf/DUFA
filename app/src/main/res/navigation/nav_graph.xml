@@ -98,10 +98,19 @@
         android:id="@+id/profileFragment"
         android:name="com.marufalam.dufa.ui.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_userUpdateFragment"
+            app:destination="@id/userUpdateFragment" />
+    </fragment>
     <fragment
         android:id="@+id/userDetailsFragment"
         android:name="com.marufalam.dufa.ui.UserDetailsFragment"
         android:label="fragment_user_details"
         tools:layout="@layout/fragment_user_details" />
+    <fragment
+        android:id="@+id/userUpdateFragment"
+        android:name="com.marufalam.dufa.UserUpdateFragment"
+        android:label="fragment_user_update"
+        tools:layout="@layout/fragment_user_update" />
 </navigation>

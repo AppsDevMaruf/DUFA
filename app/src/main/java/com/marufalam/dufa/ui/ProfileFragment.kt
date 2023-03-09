@@ -1,26 +1,27 @@
 package com.marufalam.dufa.ui
 
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.model.GlideUrl
 import com.marufalam.dufa.BaseFragment
 import com.marufalam.dufa.R
+import com.marufalam.dufa.data.models.getProfileInfo.Profile
 import com.marufalam.dufa.data.models.search.Data
 import com.marufalam.dufa.databinding.FragmentProfileBinding
-import com.marufalam.dufa.utils.Constants
-import com.marufalam.dufa.utils.hide
-import com.marufalam.dufa.utils.nameAbbreviationGenerator
-import com.marufalam.dufa.utils.show
+import com.marufalam.dufa.utils.*
 
 
 class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
-
+    private lateinit var userInfo: Profile
     override fun getFragmentView(): Int {
         return  R.layout.fragment_profile
     }
 
     override fun configUi() {
         if (arguments != null) {
-            val userInfo: Data = requireArguments().getParcelable("memberInfo")!!
+            userInfo = requireArguments().getParcelable("userinfo")!!
+
             binding.name.text = userInfo.name
             binding.phoneNumber.text = userInfo.phone
             binding.email.text = userInfo.email
@@ -28,9 +29,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
             binding.nid.text = userInfo.nid
             binding.gender.text = userInfo.gender
             binding.birthdate.text = userInfo.birthdate
-            /*binding.department.text = userInfo.department
+            binding.department.text = userInfo.department
             binding.hall.text = userInfo.hall
             binding.bloodGroup.text = userInfo.bloodgroup
+            binding.bloodGroup.setTextColor(ContextCompat.getColor(requireActivity(), R.color.text_red))
             binding.occupation.text = userInfo.occupation
             binding.district.text = userInfo.district
 
@@ -66,20 +68,23 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
                 val profileImg = Constants.IMG_PREFIX + userInfo.imagePath
 
-                *//* val url = GlideUrl(
+              /*   val url = GlideUrl(
                      profileImg,
                      GlideUtils.glideHeaders(tokenStoreManager.getToken(Constants.TOKEN))
-                 )*//*
+                 )*/
 
                 Glide.with(requireActivity())
                     .load(profileImg)
                     .into(binding.userProfilePic)
-            }*/
+            }
         }
 
     }
 
     override fun setupNavigation() {
+        binding.updateBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_profileFragment_to_userUpdateFragment,)
+        }
 
     }
 

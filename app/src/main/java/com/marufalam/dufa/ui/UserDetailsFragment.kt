@@ -33,6 +33,7 @@ class UserDetailsFragment : BaseFragment<FragmentUserDetailsBinding>() {
             binding.department.text = userInfo.department
             binding.hall.text = userInfo.hall
             binding.bloodGroup.text = userInfo.bloodgroup
+            binding.bloodGroup.setTextColor(ContextCompat.getColor(requireActivity(), R.color.text_red))
             binding.occupation.text = userInfo.occupation
             binding.district.text = userInfo.district
 

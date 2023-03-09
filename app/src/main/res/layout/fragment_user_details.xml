@@ -24,7 +24,6 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="50dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
@@ -340,13 +339,13 @@
                         android:layout_marginHorizontal="16dp"
                         android:background="#F4F4F4" />
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:orientation="horizontal"
                         android:padding="16dp">
 
                         <TextView
-                            android:id="@+id/addressTag"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="10dp"
@@ -355,47 +354,24 @@
                             android:padding="2dp"
                             android:text="Address"
                             android:textColor="@color/black"
-                            android:textSize="16sp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/address"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="end"
-                            android:layout_marginStart="32dp"
-                            android:layout_marginEnd="16dp"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/dm_sans_medium"
-                            android:gravity="end"
-                            android:maxLines="3"
-                            android:padding="2dp"
-                            android:text="null"
-                            android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
-                            android:textColor="#8F9BB3"
-                            app:layout_constraintEnd_toStartOf="@+id/addressEditBtn"
-                            app:layout_constraintStart_toEndOf="@id/addressTag"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <ImageView
-                            android:id="@+id/addressEditBtn"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="end"
                             android:layout_marginHorizontal="10dp"
                             android:layout_weight="1"
                             android:fontFamily="@font/dm_sans_medium"
+                            android:lines="1"
+                            android:padding="2dp"
+                            android:text="saiful.khandaker@gmail.com"
                             android:textAlignment="textEnd"
-                            app:layout_constraintBottom_toBottomOf="@id/address"
+                            android:textColor="#8F9BB3"
+                            app:layout_constraintEnd_toStartOf="@+id/addressEditBtn" />
 
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="@id/address" />
-
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
+                    </LinearLayout>
 
                     <View
                         android:layout_width="match_parent"
@@ -658,7 +634,10 @@
                         android:background="#F4F4F4" />
 
 
+
                 </LinearLayout>
+
+
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
