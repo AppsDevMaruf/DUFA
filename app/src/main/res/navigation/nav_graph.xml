@@ -110,7 +110,7 @@
         tools:layout="@layout/fragment_user_details" />
     <fragment
         android:id="@+id/userUpdateFragment"
-        android:name="com.marufalam.dufa.UserUpdateFragment"
+        android:name="com.marufalam.dufa.ui.UserUpdateFragment"
         android:label="fragment_user_update"
         tools:layout="@layout/fragment_user_update" />
 </navigation>

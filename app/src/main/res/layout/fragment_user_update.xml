@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/back_grey"
-        tools:context=".UserUpdateFragment">
+        tools:context=".ui.UserUpdateFragment">
 
         <ScrollView
             android:layout_width="match_parent"

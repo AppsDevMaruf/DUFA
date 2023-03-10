@@ -61,6 +61,18 @@ dependencies {
     //dialog
     implementation 'com.github.chnouman:AwesomeDialog:1.0.5'
 
+    //Camera Library
+    def camerax_version = "1.2.1"
+    implementation "androidx.camera:camera-core:${camerax_version}"
+//    implementation "androidx.camera:camera-camera2:${camerax_version}"
+    implementation "androidx.camera:camera-lifecycle:${camerax_version}"
+//    implementation "androidx.camera:camera-video:${camerax_version}"
+    implementation "androidx.camera:camera-view:${camerax_version}"
+    implementation "androidx.camera:camera-extensions:${camerax_version}"
+
+    implementation 'com.vanniktech:android-image-cropper:4.5.0'
+
+    implementation 'id.zelory:compressor:3.0.1'
 
 
 
@@ -75,7 +87,7 @@ dependencies {
     def retrofit_version = "2.9.0"
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
-    implementation 'com.squareup.okhttp3:okhttp:4.9.3'
+    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
     //location
     implementation 'com.google.android.gms:play-services-location:21.0.1'
     //glide

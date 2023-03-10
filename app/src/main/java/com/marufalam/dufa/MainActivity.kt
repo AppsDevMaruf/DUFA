@@ -1,13 +1,20 @@
 package com.marufalam.dufa
 
 
+import android.annotation.SuppressLint
+import android.app.Dialog
+import android.net.Uri
 import android.os.Bundle
+import android.view.Window
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
@@ -17,6 +24,10 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.model.GlideUrl
+import com.canhub.cropper.CropImage
+import com.canhub.cropper.CropImageContract
+import com.canhub.cropper.CropImageContractOptions
+import com.canhub.cropper.CropImageOptions
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.navigation.NavigationView
 import com.marufalam.dufa.data.local.TokenManager
@@ -39,8 +50,21 @@ class MainActivity : AppCompatActivity() {
     private var bundle = Bundle()
     lateinit var binding: ActivityMainBinding
     private lateinit var userProfilePicHeader: ShapeableImageView
+    private lateinit var uploadProfilePic: ShapeableImageView
     private lateinit var userProfilePicABHeader: TextView
+    companion object {
+        private val PERMISSIONS = arrayOf(
+            android.Manifest.permission.READ_EXTERNAL_STORAGE,
+            android.Manifest.permission.CAMERA
+        )
+    }
 
+    private lateinit var permissionsRequest: ActivityResultLauncher<Array<String>>
+    private val customCropImage = registerForActivityResult(CropImageContract()) {
+        if (it !is CropImage.CancelledResult) {
+            handleCropImageResult(it.uriContent.toString())
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -48,11 +72,17 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
-        var nav = binding.navigationView.getHeaderView(0)
+        val nav = binding.navigationView.getHeaderView(0)
 
         userProfilePicHeader = nav.findViewById(R.id.userProfilePicHeader)
 
         userProfilePicABHeader = nav.findViewById(R.id.profilePicABHeader)
+
+        uploadProfilePic = nav.findViewById(R.id.uploadProfilePic)
+
+        uploadProfilePic.setOnClickListener {
+
+        }
 
 
         dashboardViewModel.getMyProfileInfoVM()
@@ -75,11 +105,8 @@ class MainActivity : AppCompatActivity() {
         progressBar = findViewById(R.id.progress)
         userProfilePic.setOnClickListener {
             navController.navigate(R.id.profileFragment,bundle)
-            Toast.makeText(
-                applicationContext,
-                "Your Image not Uploading Yet... ",
-                Toast.LENGTH_SHORT
-            ).show()
+
+            Toast.makeText(applicationContext, "Your Image not Uploading Yet... ", Toast.LENGTH_SHORT).show()
         }
 
         appBarConfiguration = AppBarConfiguration(
@@ -91,6 +118,74 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
 
+    }
+    private fun getPermissionsRequest() =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
+            if (isAllPermissionsGranted(PERMISSIONS)) {
+                showImagePickerDialog()
+            } else {
+
+            }
+        }
+    @SuppressLint("SetTextI18n")
+    private fun handleCropImageResult(uri: String) {
+
+      /*  setKycData(KycData.BUSINESS_LOGO, uri)
+        binding.businessLogo.setImageURI(Uri.parse(uri))
+        binding.businessLogo.show()
+
+        binding.fileName.text = "image-${System.currentTimeMillis()}.$extension"
+        binding.fileName.show()
+
+
+        hasLogo = true
+        enableBtn(
+            (hasLogo && isCountrySelected && hasBusinessRegNum && hasBusinessName),
+            binding.nextBtn
+        )*/
+
+    }
+
+    private fun showImagePickerDialog() {
+
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.setCancelable(true)
+        dialog.setContentView(R.layout.dialog_custom_layout)
+
+        dialog.findViewById<TextView>(R.id.cancel_button).setOnClickListener {
+            dialog.dismiss()
+        }
+
+        val galleryBtn = dialog.findViewById(R.id.galleryBtn) as TextView
+        val cameraBtn = dialog.findViewById(R.id.cameraBtn) as TextView
+
+
+        galleryBtn.setOnClickListener {
+            startCameraWithoutUri(includeCamera = false, includeGallery = true)
+            dialog.dismiss()
+        }
+
+        cameraBtn.setOnClickListener {
+            startCameraWithoutUri(includeCamera = true, includeGallery = false)
+            dialog.dismiss()
+        }
+
+        dialog.show()
+
+    }
+
+    private fun startCameraWithoutUri(includeCamera: Boolean, includeGallery: Boolean) {
+        customCropImage.launch(
+            CropImageContractOptions(
+                uri = null,
+                cropImageOptions = CropImageOptions(
+                    imageSourceIncludeCamera = includeCamera,
+                    imageSourceIncludeGallery = includeGallery,
+                ),
+            ),
+        )
     }
 
 

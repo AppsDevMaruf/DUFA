@@ -2,11 +2,15 @@ package com.marufalam.dufa.utils
 
 import android.app.Activity
 import android.content.Context
+import android.content.pm.PackageManager
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.marufalam.dufa.R
@@ -97,7 +101,14 @@ fun Fragment.hideSoftKeyboard() {
         inputMethodManager.hideSoftInputFromWindow(currentFocus.windowToken, 0)
     }
 }
+fun Any.requestPermissions(
+    request: ActivityResultLauncher<Array<String>>,
+    permissions: Array<String>
+) = request.launch(permissions)
 
+fun Activity.isAllPermissionsGranted(permissions: Array<String>) = permissions.all {
+    ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_GRANTED
+}
 
 
 

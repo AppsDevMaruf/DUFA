@@ -8,10 +8,10 @@ import com.marufalam.dufa.data.models.logout.ResponseLogout
 import com.marufalam.dufa.data.models.search.RequestSearch
 import com.marufalam.dufa.data.models.search.ResponseSearch
 import com.marufalam.dufa.data.models.search.blood.ResponseBloodGroup
+import com.marufalam.dufa.data.models.upload_profile_pic.ResponseUploadProfilePic
+import okhttp3.MultipartBody
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface SecuredApi {
     @GET("get-all-members")
@@ -38,6 +38,14 @@ interface SecuredApi {
 
     @POST("members_dashboard")
     suspend fun getDashboardInfo(): Response<ResponseMembersDashboardInfo>
+
+    @Multipart
+    @PUT("member-profile-update/{userID}")
+    suspend fun uploadProfilePic(
+        @Path("userID") userID: Int,
+        @Part image: MultipartBody.Part,
+    ): Response<ResponseUploadProfilePic>
+
 
     /* @POST("search")
      suspend fun getUserByDepartment(@Body department: String): Response<ResponseMemberList>
