@@ -17,6 +17,7 @@ import javax.inject.Inject
 import androidx.paging.liveData
 import com.marufalam.dufa.data.models.search.RequestSearch
 import com.marufalam.dufa.data.models.search.blood.ResponseBloodGroup
+import okhttp3.MultipartBody
 
 class SecuredRepository @Inject constructor(private val securedApi: SecuredApi) {
 
@@ -50,13 +51,13 @@ class SecuredRepository @Inject constructor(private val securedApi: SecuredApi) 
 
     }
 
-    //My profile start
+    /*//My profile start
     private var _responseMyProfileRepo =
         MutableLiveData<NetworkResult<ResponseProfileInfo>>()
     val responseMyProfileRepo: LiveData<NetworkResult<ResponseProfileInfo>>
         get() = _responseMyProfileRepo
 
-    suspend fun getMyProfileRepo() {
+    fun getMyProfileRepo() {
 
         _responseMyProfileRepo.postValue(NetworkResult.Loading())
         try {
@@ -83,7 +84,7 @@ class SecuredRepository @Inject constructor(private val securedApi: SecuredApi) 
 
 
     }
-    //My profile end
+    //My profile end*/
 
     //get Departments start
     private var _responseDepartmentsRepo =
@@ -171,6 +172,9 @@ class SecuredRepository @Inject constructor(private val securedApi: SecuredApi) 
 
     suspend fun logout() = securedApi.logout()
     suspend fun getDashboardInfo() = securedApi.getDashboardInfo()
+    suspend fun getProfile() = securedApi.getProfileInfo()
+    suspend fun uploadProfilePic(userId: Int, part: MultipartBody.Part) =
+        securedApi.uploadProfilePic(userId, part)
 
 
 }

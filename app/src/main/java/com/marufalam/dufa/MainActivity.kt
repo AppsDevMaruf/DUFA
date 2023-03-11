@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        permissionsRequest = getPermissionsRequest()
         binding = ActivityMainBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
@@ -81,11 +81,12 @@ class MainActivity : AppCompatActivity() {
         uploadProfilePic = nav.findViewById(R.id.uploadProfilePic)
 
         uploadProfilePic.setOnClickListener {
-
+            requestPermissions(permissionsRequest, PERMISSIONS)
+            hideSoftKeyboard()
         }
 
 
-        dashboardViewModel.getMyProfileInfoVM()
+        dashboardViewModel.profileInfoVM()
         binObserver()
 
         ///
@@ -129,9 +130,9 @@ class MainActivity : AppCompatActivity() {
         }
     @SuppressLint("SetTextI18n")
     private fun handleCropImageResult(uri: String) {
-
+        binding.navigationView.getHeaderView(0).findViewById<ShapeableImageView>(R.id.userProfilePicHeader).setImageURI(Uri.parse(uri))
       /*  setKycData(KycData.BUSINESS_LOGO, uri)
-        binding.businessLogo.setImageURI(Uri.parse(uri))
+
         binding.businessLogo.show()
 
         binding.fileName.text = "image-${System.currentTimeMillis()}.$extension"
@@ -195,7 +196,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun binObserver() {
-        dashboardViewModel.getMyProfileInfoVMLD.observe(this) {
+        dashboardViewModel.profileInfoVMLD.observe(this) {
             progressBar.isVisible = false
             when (it) {
 

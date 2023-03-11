@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.marufalam.dufa.data.models.dashboard.dasboard_info.ResponseMembersDashboardInfo
+import com.marufalam.dufa.data.models.getProfileInfo.ResponseProfileInfo
 import com.marufalam.dufa.data.models.logout.ResponseLogout
 import com.marufalam.dufa.data.models.search.Data
 import com.marufalam.dufa.data.models.search.RequestSearch
@@ -40,7 +41,7 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
     }
     // get all Member end
 
-    // getMyProfile start
+   /* // getMyProfile start
     val getMyProfileInfoVMLD = securedRepository.responseMyProfileRepo
 
     fun getMyProfileInfoVM() {
@@ -48,7 +49,7 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
             securedRepository.getMyProfileRepo()
         }
     }
-    // getMyProfile end
+    // getMyProfile end*/
 
 
     // getDepartmentsVM start
@@ -79,7 +80,7 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
     val logoutVMLD: LiveData<NetworkResult<ResponseLogout>>
         get() = _responseLogout
 
-    fun logoutVM() {
+   suspend fun logoutVM() {
 
         _responseLogout.postValue(NetworkResult.Loading())
 
@@ -115,6 +116,47 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
 
     //   logout  end
 
+    //  profile info start
+
+    private var _responseProfileInfo =
+        MutableLiveData<NetworkResult<ResponseProfileInfo>>()
+    val profileInfoVMLD: LiveData<NetworkResult<ResponseProfileInfo>>
+        get() = _responseProfileInfo
+
+    fun profileInfoVM() {
+
+        _responseProfileInfo.postValue(NetworkResult.Loading())
+
+        viewModelScope.launch {
+
+            try {
+                val response = securedRepository.getProfile()
+
+                if (response.isSuccessful && response.body() != null) {
+
+
+                    _responseProfileInfo.postValue(NetworkResult.Success(response.body()!!))
+
+                } else if (response.errorBody() != null) {
+
+                    val errorObj = JSONObject(response.errorBody()!!.charStream().readText())
+                    _responseProfileInfo.postValue(NetworkResult.Error(errorObj.getString("message")))
+
+                }
+            } catch (noInternetException: NoInternetException) {
+                _responseProfileInfo.postValue(noInternetException.localizedMessage?.let {
+                    NetworkResult.Error(
+                        it
+                    )
+                })
+            }
+
+        }
+
+    }
+
+
+    //   profile info  end
 
     //  dashboard info start
 
@@ -158,5 +200,48 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
 
 
     //   dashboard info  end
+
+    //  upload profile pic start
+
+    private var _responseUploadProfilePic =
+        MutableLiveData<NetworkResult<ResponseMembersDashboardInfo>>()
+    val uploadProfilePicVMLD: LiveData<NetworkResult<ResponseMembersDashboardInfo>>
+        get() = _responseUploadProfilePic
+
+   suspend fun uploadProfilePicVM() {
+
+        _responseUploadProfilePic.postValue(NetworkResult.Loading())
+
+
+        viewModelScope.launch {
+
+            try {
+                val response = securedRepository.getDashboardInfo()
+
+                if (response.isSuccessful && response.body() != null) {
+
+
+                    _responseUploadProfilePic.postValue(NetworkResult.Success(response.body()!!))
+
+                } else if (response.errorBody() != null) {
+
+                    val errorObj = JSONObject(response.errorBody()!!.charStream().readText())
+                    _responseUploadProfilePic.postValue(NetworkResult.Error(errorObj.getString("message")))
+
+                }
+            } catch (noInternetException: NoInternetException) {
+                _responseUploadProfilePic.postValue(noInternetException.localizedMessage?.let {
+                    NetworkResult.Error(
+                        it
+                    )
+                })
+            }
+
+        }
+
+    }
+
+
+    //   upload profile pic  end
 
 }

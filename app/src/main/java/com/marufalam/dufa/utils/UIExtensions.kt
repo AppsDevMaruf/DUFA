@@ -109,6 +109,20 @@ fun Any.requestPermissions(
 fun Activity.isAllPermissionsGranted(permissions: Array<String>) = permissions.all {
     ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_GRANTED
 }
+fun Activity.hideSoftKeyboard() {
+    val inputMethodManager =
+        this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+    val currentFocus = this.currentFocus
+    val windowToken = this.window?.decorView?.rootView?.windowToken
+    inputMethodManager.hideSoftInputFromWindow(windowToken, 0)
+    inputMethodManager.hideSoftInputFromWindow(
+        windowToken,
+        InputMethodManager.HIDE_NOT_ALWAYS
+    )
+    if (currentFocus != null) {
+        inputMethodManager.hideSoftInputFromWindow(currentFocus.windowToken, 0)
+    }
+}
 
 
 

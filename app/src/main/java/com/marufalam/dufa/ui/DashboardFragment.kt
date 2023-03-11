@@ -22,7 +22,7 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
 
     override fun configUi() {
         //dashboardViewModel.dashboardInfoVM()
-        dashboardViewModel.getMyProfileInfoVM()
+        dashboardViewModel.profileInfoVM()
 
     }
 
@@ -43,7 +43,7 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
     }
 
     override fun binObserver() {
-        dashboardViewModel.getMyProfileInfoVMLD.observe(viewLifecycleOwner) {
+        dashboardViewModel.profileInfoVMLD.observe(viewLifecycleOwner) {
             //progressBar.isVisible = false
             when (it) {
 
@@ -65,7 +65,7 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
 
         }
         dashboardViewModel.dashboardInfoVMLD.observe(viewLifecycleOwner) {
-            //progressBar.isVisible = false
+            binding.progressBar.hide()
             when (it) {
 
                 is NetworkResult.Error -> {
@@ -73,12 +73,15 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
                     //Log.i("TAG1", "binObserver: ${it.data!!.message.toString()}")
                 }
                 is NetworkResult.Loading -> {
-                    // progressBar.isVisible = true
+                    binding.progressBar.show()
 
                 }
                 is NetworkResult.Success -> {
-                 /*  toast(it.data.toString())
-                    Log.i("TAG", "binObserver: ${it.data.toString()}")*/
+                    binding.totalMember.text = it.data?.total_member.toString()
+                    binding.totalDues.text = it.data?.total_dues.toString()
+                    binding.totalVouchers.text = it.data?.total_voucher.toString()
+
+
 
                 }
 
