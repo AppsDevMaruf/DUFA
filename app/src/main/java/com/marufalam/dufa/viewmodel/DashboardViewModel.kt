@@ -8,6 +8,8 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.marufalam.dufa.data.models.dashboard.dasboard_info.ResponseMembersDashboardInfo
 import com.marufalam.dufa.data.models.getProfileInfo.ResponseProfileInfo
+import com.marufalam.dufa.data.models.get_districts.ResponseDistrict
+import com.marufalam.dufa.data.models.get_occupations.ResponseOccupations
 import com.marufalam.dufa.data.models.logout.ResponseLogout
 import com.marufalam.dufa.data.models.search.Data
 import com.marufalam.dufa.data.models.search.RequestSearch
@@ -157,6 +159,92 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
 
 
     //   profile info  end
+
+    //  District info start
+
+    private var _responseDistrict =
+        MutableLiveData<NetworkResult<ResponseDistrict>>()
+    val districtVMLD: LiveData<NetworkResult<ResponseDistrict>>
+        get() = _responseDistrict
+
+    fun districtVM() {
+
+        _responseDistrict.postValue(NetworkResult.Loading())
+
+        viewModelScope.launch {
+
+            try {
+                val response = securedRepository.getDistricts()
+
+                if (response.isSuccessful && response.body() != null) {
+
+
+                    _responseDistrict.postValue(NetworkResult.Success(response.body()!!))
+
+                } else if (response.errorBody() != null) {
+
+                    val errorObj = JSONObject(response.errorBody()!!.charStream().readText())
+                    _responseDistrict.postValue(NetworkResult.Error(errorObj.getString("message")))
+
+                }
+            } catch (noInternetException: NoInternetException) {
+                _responseDistrict.postValue(noInternetException.localizedMessage?.let {
+                    NetworkResult.Error(
+                        it
+                    )
+                })
+            }
+
+        }
+
+    }
+
+
+    //   District info  end
+
+
+    //  District info start
+
+    private var _responseOccupations =
+        MutableLiveData<NetworkResult<ResponseOccupations>>()
+    val occupationsVMLD: LiveData<NetworkResult<ResponseOccupations>>
+        get() = _responseOccupations
+
+    fun occupationsVM() {
+
+        _responseOccupations.postValue(NetworkResult.Loading())
+
+        viewModelScope.launch {
+
+            try {
+                val response = securedRepository.getOccupations()
+
+                if (response.isSuccessful && response.body() != null) {
+
+
+                    _responseOccupations.postValue(NetworkResult.Success(response.body()!!))
+
+                } else if (response.errorBody() != null) {
+
+                    val errorObj = JSONObject(response.errorBody()!!.charStream().readText())
+                    _responseOccupations.postValue(NetworkResult.Error(errorObj.getString("message")))
+
+                }
+            } catch (noInternetException: NoInternetException) {
+                _responseOccupations.postValue(noInternetException.localizedMessage?.let {
+                    NetworkResult.Error(
+                        it
+                    )
+                })
+            }
+
+        }
+
+    }
+
+
+    //   District info  end
+
 
     //  dashboard info start
 

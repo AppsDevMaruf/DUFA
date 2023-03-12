@@ -4,6 +4,8 @@ import com.marufalam.dufa.data.models.dashboard.ResponseAllMember
 import com.marufalam.dufa.data.models.dashboard.dasboard_info.ResponseMembersDashboardInfo
 import com.marufalam.dufa.data.models.getProfileInfo.ResponseProfileInfo
 import com.marufalam.dufa.data.models.get_departments.ResponseDepartments
+import com.marufalam.dufa.data.models.get_districts.ResponseDistrict
+import com.marufalam.dufa.data.models.get_occupations.ResponseOccupations
 import com.marufalam.dufa.data.models.logout.ResponseLogout
 import com.marufalam.dufa.data.models.search.RequestSearch
 import com.marufalam.dufa.data.models.search.ResponseSearch
@@ -22,7 +24,10 @@ interface SecuredApi {
 
     @GET("get_bloodgroups")
     suspend fun getBloodGroups(): Response<ResponseBloodGroup>
-
+    @GET("get_districts")
+    suspend fun getDistricts(): Response<ResponseDistrict>
+    @GET("get_occupations")
+    suspend fun getOccupations(): Response<ResponseOccupations>
     @GET("get-userinfo-profile")
     //@Header("AUTHORIZATION") value: String
     suspend fun getProfileInfo(): Response<ResponseProfileInfo>
