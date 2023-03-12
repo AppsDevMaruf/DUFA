@@ -80,59 +80,14 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/itemSpinner"
-            android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/white_back_react"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/showTitle">
-
-
-            <ImageView
-                android:id="@+id/itemIcon"
-                android:layout_width="30dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:paddingVertical="4dp"
-                android:src="@drawable/ic_filter"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/blue" />
-
-            <TextView
-                android:id="@+id/itemTitleText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:fontFamily="@font/dm_sans_medium"
-                android:includeFontPadding="false"
-                android:tag="false"
-                android:text="Select Filter Type "
-                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-                android:textColor="@color/text_grey"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/itemIcon"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-            <ImageView
-                android:id="@+id/imageView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                app:tint="@color/blue"
-                android:src="@drawable/round_keyboard_arrow_down_24"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
+      <EditText
+          android:id="@+id/searchET"
+          android:visibility="gone"
+          android:layout_width="match_parent"
+          android:layout_height="?actionBarSize"
+          android:layout_marginTop="10dp"
+          android:background="@drawable/border_back_grey_stock"
+          android:hint="Name or Email"/>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/memberListRv"
             android:layout_width="match_parent"

@@ -22,7 +22,9 @@ import com.marufalam.dufa.databinding.FragmentMemberListBinding
 import com.marufalam.dufa.interfaces.MemberSelectListener
 import com.marufalam.dufa.interfaces.SearchByListener
 import com.marufalam.dufa.utils.NetworkResult
+import com.marufalam.dufa.utils.hide
 import com.marufalam.dufa.utils.hideSoftKeyboard
+import com.marufalam.dufa.utils.show
 import com.marufalam.dufa.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.log
@@ -66,6 +68,7 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
     }
 
     private fun showBottomSheetFilterType() {
+        binding.searchET.hide()
         val bottomSheetDialog = BottomSheetDialog(requireContext())
         bottomSheetDialog.setContentView(R.layout.item_filter)
         bottomSheetDialog.behavior.maxHeight = 2000 // set max height when expanded in PIXEL
@@ -75,8 +78,9 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
         bottomSheetDialog.findViewById<LinearLayout>(R.id.nameOrEmailBtn)!!.setOnClickListener {
             binding.titleText.text = it.tag.toString()
             binding.titleText.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
-
+            binding.searchET.show()
             type = it.tag.toString()
+
 
             bottomSheetDialog.dismiss()
 
