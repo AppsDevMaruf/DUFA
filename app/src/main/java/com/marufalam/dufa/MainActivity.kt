@@ -1,6 +1,4 @@
 package com.marufalam.dufa
-
-
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.net.Uri

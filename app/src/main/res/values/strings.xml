@@ -10,6 +10,7 @@
     <string name="search_hint">Search</string>
     <string name="dufa">DUFA</string>
     <string name="log_out">Log Out</string>
+    <string name="name_or_email">Name Or Email</string>
 
     <string-array name="paymentsType">
         <item>Registration Fee</item>

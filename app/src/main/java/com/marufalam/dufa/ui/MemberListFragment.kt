@@ -28,7 +28,12 @@ import com.marufalam.dufa.utils.hide
 import com.marufalam.dufa.utils.hideSoftKeyboard
 import com.marufalam.dufa.utils.show
 import com.marufalam.dufa.viewmodel.DashboardViewModel
+import com.miguelcatalan.materialsearchview.MaterialSearchView
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.util.*
 
 
@@ -57,6 +62,7 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
 
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
     override fun configUi() {
         searchAdapter = SearchMemberListAdapter(this)
         searchItemAdapter = SearchItemAdapter(this)
@@ -69,7 +75,7 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
             hideSoftKeyboard()
         }
 
- /*       binding.searchET.addTextChangedListener(object : TextWatcher {
+        binding.searchET.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
             }
@@ -81,8 +87,18 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
                         timer = Timer()
                         timer.schedule(object : TimerTask() {
                             override fun run() {
-                              requestSearch= RequestSearch(null,null,null,null,null,s.toString(),0)
+                                requestSearch =
+                                    RequestSearch(null, null, null, null, null, s.toString(), 0)
+
                                 dashboardViewModel.getMemberSearchVMLD(requestSearch)
+                                GlobalScope.launch(Dispatchers.Main) {
+                                    dashboardViewModel.getMemberSearchVMLD(
+                                        requestSearch
+                                    ).observe(viewLifecycleOwner) {
+                                        searchAdapter.submitData(lifecycle, it)
+
+                                    }
+                                }
 
                             }
                         }, DELAY)
@@ -94,30 +110,6 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
 
             override fun afterTextChanged(s: Editable?) {
 
-            }
-        })*/
-
-        binding.searchET.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-
-            override fun onQueryTextChange(s: String): Boolean {
-                Log.i("TAG", "onQueryTextChange$s: ")
-                requestSearch = RequestSearch(null ,null,null,null,null,s,0)
-                Log.i("TAG", "onQueryTextSubmit: $s ")
-                dashboardViewModel.getMemberSearchVMLD(requestSearch).observe(viewLifecycleOwner) {
-                    searchAdapter.submitData(lifecycle, it)
-
-                }
-                return true
-            }
-
-            override fun onQueryTextSubmit(s: String): Boolean {
-                requestSearch = RequestSearch(null ,null,null,null,null,s,0)
-                Log.i("TAG", "onQueryTextSubmit: $s ")
-                dashboardViewModel.getMemberSearchVMLD(requestSearch).observe(viewLifecycleOwner) {
-                    searchAdapter.submitData(lifecycle, it)
-                }
-
-                return true
             }
         })
     }
@@ -408,25 +400,25 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
             }*/
 
             "BloodGroup" -> {
-                RequestSearch(null, searchBy.name, null, null, null, null,0)
+                RequestSearch(null, searchBy.name, null, null, null, null, 0)
 
 
             }
 
             "District" -> {
-                RequestSearch(null, null, null, searchBy.name, null,null, 0)
+                RequestSearch(null, null, null, searchBy.name, null, null, 0)
 
 
             }
 
             "occupation" -> {
-                RequestSearch(null, null, null, null, searchBy.name,null, 0)
+                RequestSearch(null, null, null, null, searchBy.name, null, 0)
 
 
             }
 
             "Department" -> {
-                RequestSearch(null, null, searchBy.name, null, null, null,0)
+                RequestSearch(null, null, searchBy.name, null, null, null, 0)
 
 
             }
@@ -439,7 +431,7 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
 
 
             else -> {
-                RequestSearch(null, null, null, null, null, null,0)
+                RequestSearch(null, null, null, null, null, null, 0)
             }
         }
 
