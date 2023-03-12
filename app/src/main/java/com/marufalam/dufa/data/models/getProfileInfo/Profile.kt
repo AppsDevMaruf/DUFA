@@ -41,6 +41,8 @@ data class Profile(
     val occupation: String?,
     @SerializedName("phone")
     val phone: String?,
+    @SerializedName("profile_pic")
+    val profilePic: String?,
     @SerializedName("role")
     val role: String?,
     @SerializedName("status")
@@ -49,4 +51,4 @@ data class Profile(
     val subscription: String?,
     @SerializedName("updated_at")
     val updatedAt: String?
-): Parcelable
+):Parcelable

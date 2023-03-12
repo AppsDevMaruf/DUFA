@@ -23,7 +23,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import org.json.JSONObject
-import retrofit2.http.Multipart
 import javax.inject.Inject
 
 @HiltViewModel
@@ -155,7 +154,7 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
 
     //   profile info  end
 
-    //  searchByNameEmail start
+  /*  //  searchByNameEmail start
 
     private var _responeSearchByNameEmail =
         MutableLiveData<NetworkResult<ResponseSearch>>()
@@ -195,8 +194,8 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
     }
 
 
-    //   profile info  end
-
+    //   searchByNameEmail info  end
+*/
     //  District info start
 
     private var _responseDistrict =

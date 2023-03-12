@@ -11,8 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#DFDFDF"
-        android:padding="16dp"
         android:orientation="vertical"
+        android:padding="16dp"
         tools:context=".ui.MemberListFragment">
 
         <ProgressBar
@@ -68,26 +68,33 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
-
             <ImageView
                 android:id="@+id/imageView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
-                app:tint="@color/blue"
                 android:src="@drawable/round_keyboard_arrow_down_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/blue" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-      <EditText
-          android:id="@+id/searchET"
-          android:visibility="gone"
-          android:layout_width="match_parent"
-          android:layout_height="?actionBarSize"
-          android:layout_marginTop="10dp"
-          android:background="@drawable/border_back_grey_stock"
-          android:hint="Name or Email"/>
+
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchET"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginHorizontal="4dp"
+            android:layout_marginVertical="8dp"
+            android:background="@drawable/border_back_blue"
+            android:hint="search"
+            android:imeOptions="actionSearch"
+            android:visibility="gone"
+            app:layout_constraintEnd_toStartOf="@+id/filterBtn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/memberListRv"
             android:layout_width="match_parent"

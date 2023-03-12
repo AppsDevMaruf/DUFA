@@ -7,7 +7,6 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import com.marufalam.dufa.api.SecuredApi
 import com.marufalam.dufa.data.models.dashboard.ResponseAllMember
-import com.marufalam.dufa.data.models.getProfileInfo.ResponseProfileInfo
 import com.marufalam.dufa.data.models.get_departments.ResponseDepartments
 import com.marufalam.dufa.paging.MemberSearchPagingSource
 import com.marufalam.dufa.utils.NetworkResult
@@ -169,7 +168,7 @@ class SecuredRepository @Inject constructor(private val securedApi: SecuredApi) 
             )
         }
     ).liveData
-    suspend fun searchByNameEmail(nameOrEmail:RequestSearch) = securedApi.searchByNameEmail(nameOrEmail)
+    //suspend fun searchByNameEmail(nameOrEmail:RequestSearch) = securedApi.searchByNameEmail(nameOrEmail)
     suspend fun logout() = securedApi.logout()
     suspend fun getDashboardInfo() = securedApi.getDashboardInfo()
     suspend fun getProfile() = securedApi.getProfileInfo()

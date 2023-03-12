@@ -15,7 +15,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
@@ -37,7 +36,6 @@ import com.marufalam.dufa.databinding.ActivityMainBinding
 import com.marufalam.dufa.utils.*
 import com.marufalam.dufa.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import id.zelory.compressor.Compressor
 import id.zelory.compressor.Compressor.compress
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -56,7 +54,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var userProfilePic: ShapeableImageView
     private var userId = 0
-
     private lateinit var progressBar: ProgressBar
     private val dashboardViewModel: DashboardViewModel by viewModels()
     private var bundle = Bundle()
@@ -64,6 +61,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var userProfilePicHeader: ShapeableImageView
     private lateinit var uploadProfilePic: ShapeableImageView
     private lateinit var userProfilePicABHeader: TextView
+    private lateinit var profilePicAB: TextView
 
     companion object {
         private val PERMISSIONS = arrayOf(
@@ -116,6 +114,7 @@ class MainActivity : AppCompatActivity() {
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         userProfilePic = toolbar.findViewById(R.id.userProfilePic)
+        profilePicAB = toolbar.findViewById(R.id.profilePicAB)
 
         progressBar = findViewById(R.id.progress)
         userProfilePic.setOnClickListener {
@@ -150,12 +149,14 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun handleCropImageResult(uri: Uri) {
+        upload(uri)
         binding.navigationView.getHeaderView(0)
             .findViewById<ShapeableImageView>(R.id.userProfilePicHeader).setImageURI(uri)
-        upload(uri)
+        binding.toolbar.userProfilePic.setImageURI(uri)
 
 
     }
+
     private fun upload(fileUri: Uri) {
 
         val filesDir = applicationContext.filesDir
@@ -175,7 +176,7 @@ class MainActivity : AppCompatActivity() {
 
             val part = MultipartBody.Part.createFormData("profile_pic", file.name, requestBody)
 
-            dashboardViewModel.uploadProfilePicVM(userId,part)
+            dashboardViewModel.uploadProfilePicVM(userId, part)
         }
 
 
@@ -255,7 +256,7 @@ class MainActivity : AppCompatActivity() {
 
         }
         dashboardViewModel.uploadProfilePicVMLD.observe(this) {
-            progressBar.isVisible = false
+            progressBar.hide()
             Log.i("TAG", "binObserver: $it ")
 
             when (it) {
@@ -264,11 +265,11 @@ class MainActivity : AppCompatActivity() {
 
                 }
                 is NetworkResult.Loading -> {
-                    progressBar.isVisible = true
+                    progressBar.show()
 
                 }
                 is NetworkResult.Success -> {
-
+                    dashboardViewModel.profileInfoVM()
                     Toast.makeText(this, "Upload Successfully", Toast.LENGTH_SHORT).show()
 
                 }
@@ -292,10 +293,15 @@ class MainActivity : AppCompatActivity() {
 
             userProfilePicHeader.hide()
             userProfilePicABHeader.show()
+            userProfilePic.hide()
+            profilePicAB.show()
+
             userProfilePicABHeader.text = nameAbbreviationGenerator(profile!![0]?.name.toString())
         } else {
             userProfilePicHeader.show()
             userProfilePicABHeader.hide()
+            userProfilePic.show()
+            profilePicAB.hide()
 
             val profilePic = Constants.IMG_PREFIX + profile[0]?.imagePath
             val url = GlideUrl(
