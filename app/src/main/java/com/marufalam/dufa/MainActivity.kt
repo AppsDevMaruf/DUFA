@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.Window
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -36,6 +37,16 @@ import com.marufalam.dufa.databinding.ActivityMainBinding
 import com.marufalam.dufa.utils.*
 import com.marufalam.dufa.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import id.zelory.compressor.Compressor
+import id.zelory.compressor.Compressor.compress
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import java.io.File
+import java.io.FileOutputStream
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -44,6 +55,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var tokenManager: TokenManager
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var userProfilePic: ShapeableImageView
+    private var userId = 0
 
     private lateinit var progressBar: ProgressBar
     private val dashboardViewModel: DashboardViewModel by viewModels()
@@ -52,6 +64,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var userProfilePicHeader: ShapeableImageView
     private lateinit var uploadProfilePic: ShapeableImageView
     private lateinit var userProfilePicABHeader: TextView
+
     companion object {
         private val PERMISSIONS = arrayOf(
             android.Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -62,14 +75,15 @@ class MainActivity : AppCompatActivity() {
     private lateinit var permissionsRequest: ActivityResultLauncher<Array<String>>
     private val customCropImage = registerForActivityResult(CropImageContract()) {
         if (it !is CropImage.CancelledResult) {
-            handleCropImageResult(it.uriContent.toString())
+            handleCropImageResult(it.uriContent!!)
         }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         permissionsRequest = getPermissionsRequest()
         binding = ActivityMainBinding.inflate(layoutInflater)
-
+        //  supportActionBar?.hide()
         setContentView(binding.root)
 
         val nav = binding.navigationView.getHeaderView(0)
@@ -105,9 +119,13 @@ class MainActivity : AppCompatActivity() {
 
         progressBar = findViewById(R.id.progress)
         userProfilePic.setOnClickListener {
-            navController.navigate(R.id.profileFragment,bundle)
+            navController.navigate(R.id.profileFragment, bundle)
 
-            Toast.makeText(applicationContext, "Your Image not Uploading Yet... ", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                applicationContext,
+                "Your Image not Uploading Yet... ",
+                Toast.LENGTH_SHORT
+            ).show()
         }
 
         appBarConfiguration = AppBarConfiguration(
@@ -120,6 +138,7 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
     private fun getPermissionsRequest() =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
             if (isAllPermissionsGranted(PERMISSIONS)) {
@@ -128,22 +147,40 @@ class MainActivity : AppCompatActivity() {
 
             }
         }
+
     @SuppressLint("SetTextI18n")
-    private fun handleCropImageResult(uri: String) {
-        binding.navigationView.getHeaderView(0).findViewById<ShapeableImageView>(R.id.userProfilePicHeader).setImageURI(Uri.parse(uri))
-      /*  setKycData(KycData.BUSINESS_LOGO, uri)
-
-        binding.businessLogo.show()
-
-        binding.fileName.text = "image-${System.currentTimeMillis()}.$extension"
-        binding.fileName.show()
+    private fun handleCropImageResult(uri: Uri) {
+        binding.navigationView.getHeaderView(0)
+            .findViewById<ShapeableImageView>(R.id.userProfilePicHeader).setImageURI(uri)
+        upload(uri)
 
 
-        hasLogo = true
-        enableBtn(
-            (hasLogo && isCountrySelected && hasBusinessRegNum && hasBusinessName),
-            binding.nextBtn
-        )*/
+    }
+    private fun upload(fileUri: Uri) {
+
+        val filesDir = applicationContext.filesDir
+        val file = File(filesDir, "profile$userId${System.currentTimeMillis()}.png")
+
+        Log.i("uploadFileDir", "upload:$file")
+
+        val inputStream = contentResolver.openInputStream(fileUri)
+        val outputStream = FileOutputStream(file)
+        inputStream!!.copyTo(outputStream)
+
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val nFile = compress(this@MainActivity, file)
+
+            val requestBody = nFile.asRequestBody("image/*".toMediaTypeOrNull())
+
+            val part = MultipartBody.Part.createFormData("profile_pic", file.name, requestBody)
+
+            dashboardViewModel.uploadProfilePicVM(userId,part)
+        }
+
+
+        inputStream.close()
+        outputStream.close()
 
     }
 
@@ -217,10 +254,34 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
+        dashboardViewModel.uploadProfilePicVMLD.observe(this) {
+            progressBar.isVisible = false
+            Log.i("TAG", "binObserver: $it ")
+
+            when (it) {
+
+                is NetworkResult.Error -> {
+
+                }
+                is NetworkResult.Loading -> {
+                    progressBar.isVisible = true
+
+                }
+                is NetworkResult.Success -> {
+
+                    Toast.makeText(this, "Upload Successfully", Toast.LENGTH_SHORT).show()
+
+                }
+
+
+            }
+
+        }
     }
 
     private fun setData(profile: List<Profile?>?) {
         if (profile != null) {
+            userId = profile[0]?.id!!
             bundle.putParcelable("userinfo", profile[0])  // Key, value
             binding.navigationView.getHeaderView(0).findViewById<TextView>(R.id.userName).text =
                 profile[0]?.name
@@ -251,9 +312,7 @@ class MainActivity : AppCompatActivity() {
                 .into(userProfilePicHeader)
         }
 
-
     }
-
 
 }
 

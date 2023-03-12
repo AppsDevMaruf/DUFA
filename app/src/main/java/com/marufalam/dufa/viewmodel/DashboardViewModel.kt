@@ -1,5 +1,6 @@
 package com.marufalam.dufa.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,12 +14,16 @@ import com.marufalam.dufa.data.models.get_occupations.ResponseOccupations
 import com.marufalam.dufa.data.models.logout.ResponseLogout
 import com.marufalam.dufa.data.models.search.Data
 import com.marufalam.dufa.data.models.search.RequestSearch
+import com.marufalam.dufa.data.models.search.ResponseSearch
+import com.marufalam.dufa.data.models.upload_profile_pic.ResponseUploadProfilePic
 import com.marufalam.dufa.repos.SecuredRepository
 import com.marufalam.dufa.utils.NetworkResult
 import com.marufalam.dufa.utils.NoInternetException
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
 import org.json.JSONObject
+import retrofit2.http.Multipart
 import javax.inject.Inject
 
 @HiltViewModel
@@ -41,17 +46,7 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
             securedRepository.getAllMemberRepo()
         }
     }
-    // get all Member end
 
-   /* // getMyProfile start
-    val getMyProfileInfoVMLD = securedRepository.responseMyProfileRepo
-
-    fun getMyProfileInfoVM() {
-        viewModelScope.launch {
-            securedRepository.getMyProfileRepo()
-        }
-    }
-    // getMyProfile end*/
 
 
     // getDepartmentsVM start
@@ -147,6 +142,48 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
                 }
             } catch (noInternetException: NoInternetException) {
                 _responseProfileInfo.postValue(noInternetException.localizedMessage?.let {
+                    NetworkResult.Error(
+                        it
+                    )
+                })
+            }
+
+        }
+
+    }
+
+
+    //   profile info  end
+
+    //  searchByNameEmail start
+
+    private var _responeSearchByNameEmail =
+        MutableLiveData<NetworkResult<ResponseSearch>>()
+    val searchByNameEmailVMLD: LiveData<NetworkResult<ResponseSearch>>
+        get() = _responeSearchByNameEmail
+
+    fun searchByNameEmailVM(nameOrEmail:RequestSearch) {
+
+        _responeSearchByNameEmail.postValue(NetworkResult.Loading())
+
+        viewModelScope.launch {
+
+            try {
+                val response = securedRepository.searchByNameEmail(nameOrEmail)
+
+                if (response.isSuccessful && response.body() != null) {
+
+
+                    _responeSearchByNameEmail.postValue(NetworkResult.Success(response.body()!!))
+
+                } else if (response.errorBody() != null) {
+
+                    val errorObj = JSONObject(response.errorBody()!!.charStream().readText())
+                    _responeSearchByNameEmail.postValue(NetworkResult.Error(errorObj.getString("message")))
+
+                }
+            } catch (noInternetException: NoInternetException) {
+                _responeSearchByNameEmail.postValue(noInternetException.localizedMessage?.let {
                     NetworkResult.Error(
                         it
                     )
@@ -292,11 +329,11 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
     //  upload profile pic start
 
     private var _responseUploadProfilePic =
-        MutableLiveData<NetworkResult<ResponseMembersDashboardInfo>>()
-    val uploadProfilePicVMLD: LiveData<NetworkResult<ResponseMembersDashboardInfo>>
+        MutableLiveData<NetworkResult<ResponseUploadProfilePic>>()
+    val uploadProfilePicVMLD: LiveData<NetworkResult<ResponseUploadProfilePic>>
         get() = _responseUploadProfilePic
 
-   suspend fun uploadProfilePicVM() {
+   suspend fun uploadProfilePicVM(userId:Int,part:MultipartBody.Part) {
 
         _responseUploadProfilePic.postValue(NetworkResult.Loading())
 
@@ -304,7 +341,9 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
         viewModelScope.launch {
 
             try {
-                val response = securedRepository.getDashboardInfo()
+                val response = securedRepository.uploadProfilePic(userId,part)
+
+                Log.i("TAG", "uploadProfilePicVM: $response")
 
                 if (response.isSuccessful && response.body() != null) {
 
@@ -328,7 +367,6 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
         }
 
     }
-
 
     //   upload profile pic  end
 

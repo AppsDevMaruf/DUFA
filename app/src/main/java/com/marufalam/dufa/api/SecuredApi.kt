@@ -21,13 +21,20 @@ interface SecuredApi {
 
     @GET("get_departments")
     suspend fun getDepartments(): Response<ResponseDepartments>
+    @GET("search")
+    suspend fun searchByNameEmail(
+        @Body nameOrEmail: RequestSearch
+    ): Response<ResponseSearch>
 
     @GET("get_bloodgroups")
     suspend fun getBloodGroups(): Response<ResponseBloodGroup>
+
     @GET("get_districts")
     suspend fun getDistricts(): Response<ResponseDistrict>
+
     @GET("get_occupations")
     suspend fun getOccupations(): Response<ResponseOccupations>
+
     @GET("get-userinfo-profile")
     //@Header("AUTHORIZATION") value: String
     suspend fun getProfileInfo(): Response<ResponseProfileInfo>
@@ -45,9 +52,9 @@ interface SecuredApi {
     suspend fun getDashboardInfo(): Response<ResponseMembersDashboardInfo>
 
     @Multipart
-    @PUT("member-profile-update/{userID}")
+    @POST("member-profile-update/{userID}")
     suspend fun uploadProfilePic(
-        @Path("userID") userID: Int,
+        @Path("userID") userId: Int,
         @Part image: MultipartBody.Part,
     ): Response<ResponseUploadProfilePic>
 

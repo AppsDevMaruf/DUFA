@@ -72,10 +72,10 @@ class LogInFragment : BaseFragment<FragmentLogInBinding>() {
     }
 
     override fun setupNavigation() {
-        if (tokenManager.getToken(Constants.TOKEN) != Constants.NO_DATA) {
-            Log.e("notNullToken", "binObserver: ${tokenManager.getToken(Constants.TOKEN)}")
-            findNavController().navigate(R.id.action_logInFragment_to_DashboardFragment)
-        }
+//        if (tokenManager.getToken(Constants.TOKEN) != Constants.NO_DATA) {
+//            Log.e("notNullToken", "binObserver: ${tokenManager.getToken(Constants.TOKEN)}")
+//            findNavController().navigate(R.id.action_logInFragment_to_DashboardFragment)
+//        }
 
     }
 

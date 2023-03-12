@@ -25,6 +25,7 @@
         android:theme="@style/Theme.DUFA"
         tools:targetApi="33">
         <activity
+            android:theme="@style/Theme.Main"
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

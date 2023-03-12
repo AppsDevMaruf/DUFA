@@ -1,11 +1,12 @@
 package com.marufalam.dufa.ui
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -27,7 +28,8 @@ import com.marufalam.dufa.utils.hideSoftKeyboard
 import com.marufalam.dufa.utils.show
 import com.marufalam.dufa.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.math.log
+import java.util.*
+
 
 @AndroidEntryPoint
 open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), MemberSelectListener,
@@ -45,6 +47,8 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
     var itemsBy: MutableList<SearchBy> = mutableListOf()
 
     lateinit var bottomSheetDialogSearchItem: BottomSheetDialog
+    private var timer: Timer = Timer()
+    private val DELAY: Long = 1000 // in ms
 
 
     override fun getFragmentView(): Int {
@@ -64,6 +68,34 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
             hideSoftKeyboard()
         }
 
+        binding.searchET.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+                if (s != null) {
+                    if (s.length >= 3) {
+                        timer = Timer()
+                        timer.schedule(object : TimerTask() {
+                            override fun run() {
+                              val  requestSearch= RequestSearch("","","","","",0)
+                                dashboardViewModel.searchByNameEmailVM(requestSearch)
+
+                            }
+                        }, DELAY)
+                    }
+                }
+
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+        })
+
 
     }
 
@@ -73,8 +105,6 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
         bottomSheetDialog.setContentView(R.layout.item_filter)
         bottomSheetDialog.behavior.maxHeight = 2000 // set max height when expanded in PIXEL
         bottomSheetDialog.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
-
-
         bottomSheetDialog.findViewById<LinearLayout>(R.id.nameOrEmailBtn)!!.setOnClickListener {
             binding.titleText.text = it.tag.toString()
             binding.titleText.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
@@ -86,7 +116,6 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
 
 
         }
-
         bottomSheetDialog.findViewById<LinearLayout>(R.id.bloodGroupBtn)!!.setOnClickListener {
             binding.titleText.text = it.tag.toString()
             binding.titleText.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
@@ -106,7 +135,7 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
 
 
             type = it.tag.toString()
-
+            dashboardViewModel.districtVM()
             bottomSheetDialog.dismiss()
 
         }
@@ -116,6 +145,8 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
 
 
             type = it.tag.toString()
+
+            dashboardViewModel.occupationsVM()
 
             bottomSheetDialog.dismiss()
 
@@ -207,6 +238,56 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
                     itemsBy.clear()
 
                     it.data?.bloodgroups?.forEach {
+                        val searchBy: SearchBy = SearchBy("", it?.name.toString())
+
+                        itemsBy.add(searchBy)
+
+
+                    }
+
+                    searchItemAdapter.submitList(itemsBy)
+                    Log.i("TAG", "departments: $itemsBy ")
+                    showBottomSheetFilterItemType()
+
+
+                }
+            }
+
+        }
+        dashboardViewModel.districtVMLD.observe(viewLifecycleOwner) {
+
+            when (it) {
+                is NetworkResult.Error -> {}
+                is NetworkResult.Loading -> {}
+                is NetworkResult.Success -> {
+                    itemsBy.clear()
+
+                    it.data?.districts?.forEach {
+                        val searchBy: SearchBy = SearchBy("", it?.name.toString())
+
+                        itemsBy.add(searchBy)
+
+
+                    }
+
+                    searchItemAdapter.submitList(itemsBy)
+                    Log.i("TAG", "departments: $itemsBy ")
+                    showBottomSheetFilterItemType()
+
+
+                }
+            }
+
+        }
+        dashboardViewModel.occupationsVMLD.observe(viewLifecycleOwner) {
+
+            when (it) {
+                is NetworkResult.Error -> {}
+                is NetworkResult.Loading -> {}
+                is NetworkResult.Success -> {
+                    itemsBy.clear()
+
+                    it.data?.occupations?.forEach {
                         val searchBy: SearchBy = SearchBy("", it?.name.toString())
 
                         itemsBy.add(searchBy)

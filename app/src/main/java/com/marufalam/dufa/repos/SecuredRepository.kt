@@ -169,11 +169,12 @@ class SecuredRepository @Inject constructor(private val securedApi: SecuredApi) 
             )
         }
     ).liveData
-
+    suspend fun searchByNameEmail(nameOrEmail:RequestSearch) = securedApi.searchByNameEmail(nameOrEmail)
     suspend fun logout() = securedApi.logout()
     suspend fun getDashboardInfo() = securedApi.getDashboardInfo()
     suspend fun getProfile() = securedApi.getProfileInfo()
     suspend fun getDistricts() = securedApi.getDistricts()
+
     suspend fun getOccupations() = securedApi.getOccupations()
     suspend fun uploadProfilePic(userId: Int, part: MultipartBody.Part) =
         securedApi.uploadProfilePic(userId, part)
