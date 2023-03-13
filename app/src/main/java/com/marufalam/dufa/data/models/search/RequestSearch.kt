@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class RequestSearch(
     @SerializedName("birth_date")
-    val birthdate: String?,
+    val birth_date: String?,
     @SerializedName("bloodgroup")
     val bloodgroup: String?,
     @SerializedName("department")

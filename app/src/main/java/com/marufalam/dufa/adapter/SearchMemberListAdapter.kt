@@ -40,7 +40,7 @@ class SearchMemberListAdapter(private val memberSelectListener: MemberSelectList
         getItem(position).let {
 
             if (it != null) {
-                holder.binding.name.text = it.name
+                holder.binding.name.text = it.birthdate
                 holder.binding.phoneNumber.text =it.phone
                 holder.binding.bloodGroup.text =it.bloodgroup
                 holder.binding.department.text =it.department
@@ -66,10 +66,7 @@ class SearchMemberListAdapter(private val memberSelectListener: MemberSelectList
 
                     val profileImg = Constants.IMG_PREFIX + it.imagePath
 
-                   /* val url = GlideUrl(
-                        profileImg,
-                        GlideUtils.glideHeaders(tokenStoreManager.getToken(Constants.TOKEN))
-                    )*/
+
 
                     Glide.with(holder.itemView.context)
                         .load(profileImg)

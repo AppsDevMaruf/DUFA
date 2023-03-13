@@ -25,10 +25,7 @@ import com.marufalam.dufa.data.models.search.RequestSearch
 import com.marufalam.dufa.databinding.FragmentMemberListBinding
 import com.marufalam.dufa.interfaces.MemberSelectListener
 import com.marufalam.dufa.interfaces.SearchByListener
-import com.marufalam.dufa.utils.NetworkResult
-import com.marufalam.dufa.utils.hide
-import com.marufalam.dufa.utils.hideSoftKeyboard
-import com.marufalam.dufa.utils.show
+import com.marufalam.dufa.utils.*
 import com.marufalam.dufa.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -70,55 +67,41 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
         searchAdapter = SearchMemberListAdapter(this)
         searchItemAdapter = SearchItemAdapter(this)
         binding.memberListRv.adapter = searchAdapter
-        //searchItemAdapter = SearchItemAdapter(this)
 
         searchBYSelectedItem(SearchBy(null, null))
-        binding.filterTypeSpinner.setOnClickListener {
-            showBottomSheetFilterType()
-            hideSoftKeyboard()
+
+
+        binding.searchET.onTextChanged {
+
+            if (it != null) {
+                if (it.length >= 3) {
+                    timer = Timer()
+                    timer.schedule(object : TimerTask() {
+                        override fun run() {
+                            requestSearch =
+                                RequestSearch(null, null, null, null, null, it, 0)
+
+                            dashboardViewModel.getMemberSearchVMLD(requestSearch)
+                            GlobalScope.launch(Dispatchers.Main) {
+                                dashboardViewModel.getMemberSearchVMLD(
+                                    requestSearch
+                                ).observe(viewLifecycleOwner) {
+                                    searchAdapter.submitData(lifecycle, it)
+
+                                }
+                            }
+
+                        }
+                    }, DELAY)
+                }
+            }
         }
 
-        binding.searchET.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
-                if (s != null) {
-                    if (s.length >= 3) {
-                        timer = Timer()
-                        timer.schedule(object : TimerTask() {
-                            override fun run() {
-                                requestSearch =
-                                    RequestSearch(null, null, null, null, null, s.toString(), 0)
-
-                                dashboardViewModel.getMemberSearchVMLD(requestSearch)
-                                GlobalScope.launch(Dispatchers.Main) {
-                                    dashboardViewModel.getMemberSearchVMLD(
-                                        requestSearch
-                                    ).observe(viewLifecycleOwner) {
-                                        searchAdapter.submitData(lifecycle, it)
-
-                                    }
-                                }
-
-                            }
-                        }, DELAY)
-                    }
-                }
-
-
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-
-            }
-        })
     }
 
     private fun showBottomSheetFilterType() {
-        binding.searchET.hide()
+        binding.searchET.gone()
+        binding.dobTV.gone()
         val bottomSheetDialog = BottomSheetDialog(requireContext())
         bottomSheetDialog.setContentView(R.layout.item_filter)
         bottomSheetDialog.behavior.maxHeight = 2000 // set max height when expanded in PIXEL
@@ -161,10 +144,7 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
         bottomSheetDialog.findViewById<LinearLayout>(R.id.occupationBtn)!!.setOnClickListener {
             binding.titleText.text = it.tag.toString()
             binding.titleText.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
-
-
             type = it.tag.toString()
-
             dashboardViewModel.occupationsVM()
             hasData = false
             bottomSheetDialog.dismiss()
@@ -173,7 +153,6 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
         bottomSheetDialog.findViewById<LinearLayout>(R.id.departmentBtn)!!.setOnClickListener {
             binding.titleText.text = it.tag.toString()
             binding.titleText.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
-
             type = it.tag.toString()
             dashboardViewModel.getDepartmentsVM()
             hasData = false
@@ -184,7 +163,7 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
             binding.titleText.text = it.tag.toString()
             binding.titleText.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
             type = it.tag.toString()
-            showBottomSheetState()
+            binding.dobTV.show()
             hasData = false
             bottomSheetDialog.dismiss()
 
@@ -211,6 +190,32 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
 
 
     override fun setupNavigation() {
+        binding.filterTypeSpinner.setOnClickListener {
+            showBottomSheetFilterType()
+            hideSoftKeyboard()
+        }
+        binding.dobTV.setOnClickListener {
+            datePickerFun {
+                binding.dobTV.text = it
+
+                requestSearch = RequestSearch(it, null, null, null, null, null, 0)
+                Log.i("TAG", "requestSearch: $requestSearch")
+                    dashboardViewModel.getMemberSearchVMLD(
+                        requestSearch
+                    ).observe(viewLifecycleOwner) {
+                        searchAdapter.submitData(lifecycle, it)
+
+
+            }
+            hideSoftKeyboard()
+
+
+
+
+            }
+
+
+        }
 
 
     }
@@ -247,7 +252,6 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
             }
 
         }
-
         dashboardViewModel.getBloodGroupVMLD.observe(viewLifecycleOwner) {
 
             when (it) {
@@ -329,7 +333,7 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
 
 
     }
-
+/*
     private fun showBottomSheetState() {
         val bottomSheetDialog = BottomSheetDialog(requireContext())
         bottomSheetDialog.setContentView(R.layout.item_bottom_search)
@@ -394,9 +398,7 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
 //        }
 
 
-
-
-    }
+    }*/
 
     override fun selectedMember(responseDetail: Data?) {
         bundle.putParcelable("memberInfo", responseDetail)  // Key, value

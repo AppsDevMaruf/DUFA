@@ -1,11 +1,16 @@
 package com.marufalam.dufa.utils
 
 import android.app.Activity
+import android.app.DatePickerDialog
 import android.content.Context
 import android.content.pm.PackageManager
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.content.res.AppCompatResources
@@ -14,6 +19,9 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.marufalam.dufa.R
+import java.math.RoundingMode
+import java.text.DecimalFormat
+import java.util.*
 
 
 fun Fragment.toast(str: String) {
@@ -35,16 +43,17 @@ fun Fragment.showAlert(context: Context, msg: String) {
 
 
 fun View.hide() {
+    visibility = View.INVISIBLE
+}
+fun View.gone() {
     visibility = View.GONE
 }
+
 
 fun View.show() {
     visibility = View.VISIBLE
 }
 
-fun View.invisible() {
-    visibility = View.INVISIBLE
-}
 
 
 fun Fragment.enableBtn(given: Boolean, btn: Button) {
@@ -122,6 +131,53 @@ fun Activity.hideSoftKeyboard() {
     if (currentFocus != null) {
         inputMethodManager.hideSoftInputFromWindow(currentFocus.windowToken, 0)
     }
+}
+
+fun Fragment.datePickerFun(
+    getDateValue: (str: String) -> Unit
+
+) {
+    val mCurrentDate: Calendar = Calendar.getInstance()
+    val mYear: Int = mCurrentDate.get(Calendar.YEAR)
+    val mMonth: Int = mCurrentDate.get(Calendar.MONTH)
+    val mDay: Int = mCurrentDate.get(Calendar.DAY_OF_MONTH)
+
+    val mDatePicker = DatePickerDialog(
+        requireActivity(), R.style.Theme_DUFA,
+        { datepicker, selectedyear, selectedmonth, selectedday ->
+            val selectedmonth = selectedmonth + 1
+
+            val mFormat = DecimalFormat("00")
+            mFormat.roundingMode = RoundingMode.DOWN
+            val mDate =
+                mFormat.format((selectedyear)) + "-" + mFormat.format(
+                    (selectedmonth)
+                ) + "-" + mFormat.format((selectedday))
+
+            getDateValue.invoke(mDate)
+
+
+        }, mYear, mMonth, mDay
+    )
+
+    mCurrentDate.add(Calendar.YEAR, 0)
+    mCurrentDate.add(Calendar.DAY_OF_MONTH, 0)
+    mDatePicker.datePicker.maxDate = mCurrentDate.timeInMillis
+    mDatePicker.show()
+}
+fun EditText.onTextChanged(onTextChanged: (String) -> Unit) {
+    this.addTextChangedListener(object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            onTextChanged.invoke(s.toString().trim())
+        }
+
+        override fun afterTextChanged(editable: Editable?) {
+
+        }
+    })
 }
 
 
