@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.View
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -55,6 +56,7 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
     lateinit var bottomSheetDialogSearchItem: BottomSheetDialog
     private var timer: Timer = Timer()
     private val DELAY: Long = 1000 // in ms
+    private var hasData = false
 
 
     override fun getFragmentView(): Int {
@@ -127,7 +129,7 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
             binding.searchET.show()
             type = it.tag.toString()
 
-
+            hasData = false
             bottomSheetDialog.dismiss()
 
 
@@ -139,7 +141,7 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
 
             dashboardViewModel.getBloodGroupVM()
 
-
+            hasData = false
 
             bottomSheetDialog.dismiss()
 
@@ -152,6 +154,7 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
 
             type = it.tag.toString()
             dashboardViewModel.districtVM()
+            hasData = false
             bottomSheetDialog.dismiss()
 
         }
@@ -163,7 +166,7 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
             type = it.tag.toString()
 
             dashboardViewModel.occupationsVM()
-
+            hasData = false
             bottomSheetDialog.dismiss()
 
         }
@@ -173,7 +176,7 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
 
             type = it.tag.toString()
             dashboardViewModel.getDepartmentsVM()
-
+            hasData = false
             bottomSheetDialog.dismiss()
 
         }
@@ -182,7 +185,7 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
             binding.titleText.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
             type = it.tag.toString()
             showBottomSheetState()
-
+            hasData = false
             bottomSheetDialog.dismiss()
 
         }
@@ -234,6 +237,7 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
                     Log.i("TAG", "departments: $itemsBy ")
 
                     searchItemAdapter.submitList(itemsBy)
+                    hasData = true
 
 
                     showBottomSheetFilterItemType()
@@ -261,6 +265,7 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
                     }
 
                     searchItemAdapter.submitList(itemsBy)
+                    hasData = true
                     Log.i("TAG", "departments: $itemsBy ")
                     showBottomSheetFilterItemType()
 
@@ -286,6 +291,7 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
                     }
 
                     searchItemAdapter.submitList(itemsBy)
+                    hasData = true
                     Log.i("TAG", "departments: $itemsBy ")
                     showBottomSheetFilterItemType()
 
@@ -303,7 +309,7 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
                     itemsBy.clear()
 
                     it.data?.occupations?.forEach {
-                        val searchBy: SearchBy = SearchBy("", it?.name.toString())
+                        val searchBy: SearchBy = SearchBy("", it.name.toString())
 
                         itemsBy.add(searchBy)
 
@@ -311,6 +317,7 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
                     }
 
                     searchItemAdapter.submitList(itemsBy)
+                    hasData = true
                     Log.i("TAG", "departments: $itemsBy ")
                     showBottomSheetFilterItemType()
 
@@ -373,6 +380,20 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
         // setting adapter to
         // our recycler view.
         recyclerView.adapter = searchItemAdapter
+
+        var size = searchItemAdapter.currentList.size
+
+
+//        if (size > 0) {
+//            binding.memberListRv.visibility = View.VISIBLE
+//            binding.noData.visibility = View.GONE
+//        } else {
+//
+//            binding.memberListRv.visibility = View.GONE
+//            binding.noData.visibility = View.VISIBLE
+//        }
+
+
 
 
     }

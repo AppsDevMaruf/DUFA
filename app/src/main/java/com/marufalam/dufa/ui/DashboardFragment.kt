@@ -21,8 +21,9 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
     }
 
     override fun configUi() {
-        //dashboardViewModel.dashboardInfoVM()
         dashboardViewModel.profileInfoVM()
+        dashboardViewModel.dashboardInfoVM()
+
 
     }
 
@@ -48,7 +49,7 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
             when (it) {
 
                 is NetworkResult.Error -> {
-                    Log.i("Error", "NetworkResult.Error: ${it.data!!.profile.toString()}")
+                    Log.i("Error", "NetworkResult.Error: ${it.data!!}")
                     //Log.i("TAG1", "binObserver: ${it.data!!.message.toString()}")
                 }
                 is NetworkResult.Loading -> {
@@ -56,10 +57,9 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
 
                 }
                 is NetworkResult.Success -> {
-                    Log.i("SuccessTAG", "DashboardSuccess: ${it.data!!.profile.toString()}")
+                    Log.i("SuccessTAG", "DashboardSuccess: ${it.data!!}")
 
                 }
-
 
             }
 
@@ -77,9 +77,9 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
 
                 }
                 is NetworkResult.Success -> {
-                    binding.totalMember.text = it.data?.total_member.toString()
-                    binding.totalDues.text = it.data?.total_dues.toString()
-                    binding.totalVouchers.text = it.data?.total_voucher.toString()
+                    binding.totalMember.text = it.data?.totalMember.toString()
+                    binding.totalDues.text = it.data?.totalDues.toString()
+                    binding.totalVouchers.text = it.data?.totalVoucher.toString()
 
 
 

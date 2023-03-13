@@ -101,6 +101,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/memberListRv"
             android:layout_width="match_parent"
+            android:visibility="visible"
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/member_list_row" />

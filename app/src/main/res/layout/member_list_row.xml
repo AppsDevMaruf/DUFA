@@ -9,8 +9,8 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:layout_marginVertical="10dp"
+        android:layout_height="100dp"
+        android:layout_margin="4dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="8dp"
         app:cardMaxElevation="10dp"
@@ -78,9 +78,6 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:paddingTop="15dp"
-                android:paddingEnd="10dp"
-                android:paddingBottom="15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/view"
@@ -91,24 +88,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="4dp"
                     android:maxLines="1"
                     android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
                     android:textColor="@color/blue"
                     android:textSize="18sp"
                     app:fontFamily="@font/dm_sans"
                     tools:text="Maruf Alam" />
+
                 <TextView
                     android:id="@+id/department"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:maxLines="1"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
                     android:textColor="@color/blue"
                     android:textStyle="bold"
                     app:fontFamily="@font/dm_sans"
-                    android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
-                    tools:text="A+"/>
+                    tools:text="A+" />
 
                 <TextView
                     android:id="@+id/phoneNumber"
@@ -133,7 +131,6 @@
                     android:textStyle="bold"
                     app:fontFamily="@font/dm_sans"
                     tools:text="A+" />
-
 
 
             </LinearLayout>

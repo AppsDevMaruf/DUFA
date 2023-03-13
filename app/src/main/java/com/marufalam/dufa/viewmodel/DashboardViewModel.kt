@@ -7,14 +7,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.marufalam.dufa.data.models.dashboard.dasboard_info.ResponseMembersDashboardInfo
+import com.marufalam.dufa.data.models.dashboard.dasboard_info.ResponseDashboardInfo
 import com.marufalam.dufa.data.models.getProfileInfo.ResponseProfileInfo
 import com.marufalam.dufa.data.models.get_districts.ResponseDistrict
 import com.marufalam.dufa.data.models.get_occupations.ResponseOccupations
 import com.marufalam.dufa.data.models.logout.ResponseLogout
 import com.marufalam.dufa.data.models.search.Data
 import com.marufalam.dufa.data.models.search.RequestSearch
-import com.marufalam.dufa.data.models.search.ResponseSearch
 import com.marufalam.dufa.data.models.upload_profile_pic.ResponseUploadProfilePic
 import com.marufalam.dufa.repos.SecuredRepository
 import com.marufalam.dufa.utils.NetworkResult
@@ -285,8 +284,8 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
     //  dashboard info start
 
     private var _responseDashboardInfo =
-        MutableLiveData<NetworkResult<ResponseMembersDashboardInfo>>()
-    val dashboardInfoVMLD: LiveData<NetworkResult<ResponseMembersDashboardInfo>>
+        MutableLiveData<NetworkResult<ResponseDashboardInfo>>()
+    val dashboardInfoVMLD: LiveData<NetworkResult<ResponseDashboardInfo>>
         get() = _responseDashboardInfo
 
     fun dashboardInfoVM() {
@@ -298,7 +297,7 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
 
             try {
                 val response = securedRepository.getDashboardInfo()
-
+                Log.i("TAG", "dashboardInfoVM: $response")
                 if (response.isSuccessful && response.body() != null) {
 
 

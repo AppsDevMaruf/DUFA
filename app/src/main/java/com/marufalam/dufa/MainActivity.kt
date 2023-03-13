@@ -22,7 +22,6 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.model.GlideUrl
 import com.canhub.cropper.CropImage
 import com.canhub.cropper.CropImageContract
 import com.canhub.cropper.CropImageContractOptions
@@ -30,7 +29,7 @@ import com.canhub.cropper.CropImageOptions
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.navigation.NavigationView
 import com.marufalam.dufa.data.local.TokenManager
-import com.marufalam.dufa.data.models.getProfileInfo.Profile
+import com.marufalam.dufa.data.models.getProfileInfo.ResponseProfileInfo
 import com.marufalam.dufa.databinding.ActivityMainBinding
 import com.marufalam.dufa.utils.*
 import com.marufalam.dufa.viewmodel.DashboardViewModel
@@ -232,7 +231,7 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    fun binObserver() {
+    fun  binObserver() {
         dashboardViewModel.profileInfoVMLD.observe(this) {
             progressBar.isVisible = false
             when (it) {
@@ -247,7 +246,7 @@ class MainActivity : AppCompatActivity() {
                 is NetworkResult.Success -> {
                     Log.i("TAG", "binObserver: $it ")
 
-                    it.data?.let { it1 -> setData(it1.profile) }
+                    it.data?.let { it1 -> setData(it1) }
 
                 }
 
@@ -280,32 +279,31 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setData(profile: List<Profile>) {
-
+    private fun setData(profile: ResponseProfileInfo) {
         Log.i("TAG", "setData: $profile ")
 
 
-        userId = profile[0].id
-        bundle.putParcelable("userinfo", profile[0])  // Key, value
+        userId = profile.id
+        bundle.putParcelable("userinfo", profile)  // Key, value
         binding.navigationView.getHeaderView(0).findViewById<TextView>(R.id.userName).text =
-            profile[0].name
+            profile.name
         binding.navigationView.getHeaderView(0).findViewById<TextView>(R.id.userEmail).text =
-            profile[0].email
-        if (profile[0].imagePath == null) {
+            profile.email
+        if (profile.imagePath == null) {
 
             userProfilePicHeader.hide()
             userProfilePicABHeader.show()
             userProfilePic.hide()
             profilePicAB.show()
 
-            userProfilePicABHeader.text = nameAbbreviationGenerator(profile[0].name.toString())
+            userProfilePicABHeader.text = nameAbbreviationGenerator(profile.name.toString())
         } else {
             userProfilePicHeader.show()
             userProfilePicABHeader.hide()
             userProfilePic.show()
             profilePicAB.hide()
 
-            val profilePic = Constants.IMG_PREFIX + profile[0].imagePath
+            val profilePic = Constants.IMG_PREFIX + profile.imagePath
 //            val url = GlideUrl(
 //                profilePic,
 //                GlideUtils.glideHeaders(tokenManager.getToken(Constants.TOKEN))
@@ -322,8 +320,9 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+    }
 
-}
+
 
 
 

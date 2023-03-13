@@ -1,17 +1,17 @@
 package com.marufalam.dufa.ui
 
+import android.provider.ContactsContract
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.marufalam.dufa.BaseFragment
 import com.marufalam.dufa.R
-import com.marufalam.dufa.data.models.getProfileInfo.Profile
+import com.marufalam.dufa.data.models.getProfileInfo.ResponseProfileInfo
 import com.marufalam.dufa.databinding.FragmentProfileBinding
 import com.marufalam.dufa.utils.*
 
-
 class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
-    private lateinit var userInfo: Profile
+    private lateinit var userInfo: ResponseProfileInfo
     override fun getFragmentView(): Int {
         return  R.layout.fragment_profile
     }

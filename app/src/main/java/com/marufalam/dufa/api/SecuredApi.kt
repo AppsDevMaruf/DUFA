@@ -1,7 +1,7 @@
 package com.marufalam.dufa.api
 
 import com.marufalam.dufa.data.models.dashboard.ResponseAllMember
-import com.marufalam.dufa.data.models.dashboard.dasboard_info.ResponseMembersDashboardInfo
+import com.marufalam.dufa.data.models.dashboard.dasboard_info.ResponseDashboardInfo
 import com.marufalam.dufa.data.models.getProfileInfo.ResponseProfileInfo
 import com.marufalam.dufa.data.models.get_departments.ResponseDepartments
 import com.marufalam.dufa.data.models.get_districts.ResponseDistrict
@@ -21,10 +21,6 @@ interface SecuredApi {
 
     @GET("get_departments")
     suspend fun getDepartments(): Response<ResponseDepartments>
-    @GET("search")
-    suspend fun searchByNameEmail(
-        @Body nameOrEmail: RequestSearch
-    ): Response<ResponseSearch>
 
     @GET("get_bloodgroups")
     suspend fun getBloodGroups(): Response<ResponseBloodGroup>
@@ -48,8 +44,8 @@ interface SecuredApi {
     @POST("logout")
     suspend fun logout(): Response<ResponseLogout>
 
-    @POST("members_dashboard")
-    suspend fun getDashboardInfo(): Response<ResponseMembersDashboardInfo>
+    @GET("members_dashboard")
+    suspend fun getDashboardInfo(): Response<ResponseDashboardInfo>
 
     @Multipart
     @POST("member-profile-update/{userID}")
