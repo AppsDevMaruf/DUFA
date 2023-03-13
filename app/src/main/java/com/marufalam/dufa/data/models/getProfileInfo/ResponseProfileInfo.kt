@@ -5,5 +5,5 @@ import com.google.gson.annotations.SerializedName
 
 data class ResponseProfileInfo(
     @SerializedName("profile")
-    val profile: List<Profile?>?
+    val profile: List<Profile>
 )

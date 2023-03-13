@@ -1,4 +1,5 @@
 package com.marufalam.dufa
+
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.net.Uri
@@ -244,8 +245,9 @@ class MainActivity : AppCompatActivity() {
 
                 }
                 is NetworkResult.Success -> {
+                    Log.i("TAG", "binObserver: $it ")
 
-                    setData(it.data?.profile)
+                    it.data?.let { it1 -> setData(it1.profile) }
 
                 }
 
@@ -278,43 +280,46 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setData(profile: List<Profile?>?) {
-        if (profile != null) {
-            userId = profile[0]?.id!!
-            bundle.putParcelable("userinfo", profile[0])  // Key, value
-            binding.navigationView.getHeaderView(0).findViewById<TextView>(R.id.userName).text =
-                profile[0]?.name
-            binding.navigationView.getHeaderView(0).findViewById<TextView>(R.id.userEmail).text =
-                profile[0]?.email
-        }
-        if (profile?.get(0)?.imagePath == null) {
+    private fun setData(profile: List<Profile>) {
+
+        Log.i("TAG", "setData: $profile ")
+
+
+        userId = profile[0].id
+        bundle.putParcelable("userinfo", profile[0])  // Key, value
+        binding.navigationView.getHeaderView(0).findViewById<TextView>(R.id.userName).text =
+            profile[0].name
+        binding.navigationView.getHeaderView(0).findViewById<TextView>(R.id.userEmail).text =
+            profile[0].email
+        if (profile[0].imagePath == null) {
 
             userProfilePicHeader.hide()
             userProfilePicABHeader.show()
             userProfilePic.hide()
             profilePicAB.show()
 
-            userProfilePicABHeader.text = nameAbbreviationGenerator(profile!![0]?.name.toString())
+            userProfilePicABHeader.text = nameAbbreviationGenerator(profile[0].name.toString())
         } else {
             userProfilePicHeader.show()
             userProfilePicABHeader.hide()
             userProfilePic.show()
             profilePicAB.hide()
 
-            val profilePic = Constants.IMG_PREFIX + profile[0]?.imagePath
-            val url = GlideUrl(
-                profilePic,
-                GlideUtils.glideHeaders(tokenManager.getToken(Constants.TOKEN))
-            )
+            val profilePic = Constants.IMG_PREFIX + profile[0].imagePath
+//            val url = GlideUrl(
+//                profilePic,
+//                GlideUtils.glideHeaders(tokenManager.getToken(Constants.TOKEN))
+//            )
             Glide.with(applicationContext)
-                .load(url)
+                .load(profilePic)
                 .placeholder(R.drawable.loadpreview)
                 .into(userProfilePic)
             Glide.with(applicationContext)
-                .load(url)
+                .load(profilePic)
                 .placeholder(R.drawable.loadpreview)
                 .into(userProfilePicHeader)
         }
+
 
     }
 

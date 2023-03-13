@@ -57,10 +57,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:ellipsize="end"
                 android:fontFamily="@font/dm_sans_medium"
                 android:includeFontPadding="false"
+                android:maxLines="1"
                 android:tag="false"
-                android:text="Select Filter Type "
+                android:text="@string/select_filter_type"
                 android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                 android:textColor="@color/text_grey"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -91,8 +93,8 @@
             android:hint="@string/name_or_email"
             android:imeOptions="actionSearch"
             android:paddingStart="16dp"
-            android:visibility="gone"
             android:textColor="@color/text_black"
+            android:visibility="gone"
             tools:ignore="RtlSymmetry" />
 
 

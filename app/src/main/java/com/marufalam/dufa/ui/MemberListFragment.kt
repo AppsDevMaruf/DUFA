@@ -1,5 +1,6 @@
 package com.marufalam.dufa.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -7,7 +8,7 @@ import android.util.Log
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.LinearLayout
-import androidx.appcompat.widget.SearchView
+
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -28,7 +29,6 @@ import com.marufalam.dufa.utils.hide
 import com.marufalam.dufa.utils.hideSoftKeyboard
 import com.marufalam.dufa.utils.show
 import com.marufalam.dufa.viewmodel.DashboardViewModel
-import com.miguelcatalan.materialsearchview.MaterialSearchView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
@@ -64,12 +64,13 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
 
     @OptIn(DelicateCoroutinesApi::class)
     override fun configUi() {
+        bottomSheetDialogSearchItem = BottomSheetDialog(requireContext())
         searchAdapter = SearchMemberListAdapter(this)
         searchItemAdapter = SearchItemAdapter(this)
         binding.memberListRv.adapter = searchAdapter
         //searchItemAdapter = SearchItemAdapter(this)
 
-
+        searchBYSelectedItem(SearchBy(null, null))
         binding.filterTypeSpinner.setOnClickListener {
             showBottomSheetFilterType()
             hideSoftKeyboard()
@@ -192,14 +193,13 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
     private fun showBottomSheetFilterItemType() {
 
 
-        bottomSheetDialogSearchItem = BottomSheetDialog(requireContext())
         bottomSheetDialogSearchItem.setContentView(R.layout.item_filter_type)
         bottomSheetDialogSearchItem.behavior.maxHeight =
             2000 // set max height when expanded in PIXEL
         bottomSheetDialogSearchItem.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
 
 
-        var itemRcv: RecyclerView =
+        val itemRcv: RecyclerView =
             bottomSheetDialogSearchItem.findViewById<RecyclerView>(R.id.itemKeywordRCV)!!
         itemRcv.adapter = searchItemAdapter
 
@@ -385,19 +385,18 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
         )
     }
 
+    @SuppressLint("SetTextI18n")
     override fun searchBYSelectedItem(searchBy: SearchBy) {
 
         Log.i("TAG", "searchBYSelectedItem: $searchBy ")
 
         bottomSheetDialogSearchItem.dismiss()
 
+        binding.titleText.text = "${binding.titleText.text}  ${searchBy.name ?: ""}"
+
 
         val requestSearch = when (type) {
-            /*"NameorEmail" -> {
-                //RequestSearch(null, null, null, null, null,s, 0)
 
-
-            }*/
 
             "BloodGroup" -> {
                 RequestSearch(null, searchBy.name, null, null, null, null, 0)

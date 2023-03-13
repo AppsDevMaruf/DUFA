@@ -28,11 +28,11 @@ data class Profile(
     @SerializedName("hall")
     val hall: String?,
     @SerializedName("id")
-    val id: Int?,
+    val id: Int,
     @SerializedName("image_path")
     val imagePath: String?,
     @SerializedName("name")
-    val name: String?,
+    val name: String,
     @SerializedName("nickname")
     val nickname: String?,
     @SerializedName("nid")
