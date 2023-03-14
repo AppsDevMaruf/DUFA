@@ -10,6 +10,7 @@ import androidx.paging.cachedIn
 import com.marufalam.dufa.data.models.dashboard.dasboard_info.ResponseDashboardInfo
 import com.marufalam.dufa.data.models.getProfileInfo.ResponseProfileInfo
 import com.marufalam.dufa.data.models.get_districts.ResponseDistrict
+import com.marufalam.dufa.data.models.get_halls.ResponseHalls
 import com.marufalam.dufa.data.models.get_occupations.ResponseOccupations
 import com.marufalam.dufa.data.models.logout.ResponseLogout
 import com.marufalam.dufa.data.models.search.Data
@@ -267,6 +268,49 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
                 }
             } catch (noInternetException: NoInternetException) {
                 _responseOccupations.postValue(noInternetException.localizedMessage?.let {
+                    NetworkResult.Error(
+                        it
+                    )
+                })
+            }
+
+        }
+
+    }
+
+
+    //   District info  end
+
+
+    //  Halls info start
+
+    private var _responseHalls =
+        MutableLiveData<NetworkResult<ResponseHalls>>()
+    val hallsVMLD: LiveData<NetworkResult<ResponseHalls>>
+        get() = _responseHalls
+
+    fun hallsVM() {
+
+        _responseHalls.postValue(NetworkResult.Loading())
+
+        viewModelScope.launch {
+
+            try {
+                val response = securedRepository.getHalls()
+
+                if (response.isSuccessful && response.body() != null) {
+
+
+                    _responseHalls.postValue(NetworkResult.Success(response.body()!!))
+
+                } else if (response.errorBody() != null) {
+
+                    val errorObj = JSONObject(response.errorBody()!!.charStream().readText())
+                    _responseHalls.postValue(NetworkResult.Error(errorObj.getString("message")))
+
+                }
+            } catch (noInternetException: NoInternetException) {
+                _responseHalls.postValue(noInternetException.localizedMessage?.let {
                     NetworkResult.Error(
                         it
                     )

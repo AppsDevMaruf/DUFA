@@ -5,6 +5,7 @@ import com.marufalam.dufa.data.models.dashboard.dasboard_info.ResponseDashboardI
 import com.marufalam.dufa.data.models.getProfileInfo.ResponseProfileInfo
 import com.marufalam.dufa.data.models.get_departments.ResponseDepartments
 import com.marufalam.dufa.data.models.get_districts.ResponseDistrict
+import com.marufalam.dufa.data.models.get_halls.ResponseHalls
 import com.marufalam.dufa.data.models.get_occupations.ResponseOccupations
 import com.marufalam.dufa.data.models.logout.ResponseLogout
 import com.marufalam.dufa.data.models.search.RequestSearch
@@ -30,6 +31,8 @@ interface SecuredApi {
 
     @GET("get_occupations")
     suspend fun getOccupations(): Response<ResponseOccupations>
+    @GET("get_halls")
+    suspend fun getHalls(): Response<ResponseHalls>
 
     @GET("get-userinfo-profile")
     //@Header("AUTHORIZATION") value: String

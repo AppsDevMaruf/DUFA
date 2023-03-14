@@ -175,6 +175,7 @@ class SecuredRepository @Inject constructor(private val securedApi: SecuredApi) 
     suspend fun getDistricts() = securedApi.getDistricts()
 
     suspend fun getOccupations() = securedApi.getOccupations()
+    suspend fun getHalls() = securedApi.getHalls()
     suspend fun uploadProfilePic(userId: Int, part: MultipartBody.Part) =
         securedApi.uploadProfilePic(userId, part)
 
