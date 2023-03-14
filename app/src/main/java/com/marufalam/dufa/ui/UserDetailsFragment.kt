@@ -69,16 +69,16 @@ class UserDetailsFragment : BaseFragment<FragmentUserDetailsBinding>() {
 
                 val profileImg = Constants.IMG_PREFIX + userInfo.imagePath
 
-                /* val url = GlideUrl(
-                     profileImg,
-                     GlideUtils.glideHeaders(tokenStoreManager.getToken(Constants.TOKEN))
-                 )*/
 
                 Glide.with(requireActivity())
                     .load(profileImg)
                     .into(binding.userProfilePic)
             }
         }
+
+    }
+
+    override fun setupNavigation() {
 
     }
 

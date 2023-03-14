@@ -225,8 +225,6 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
                     requestSearch
                 ).observe(viewLifecycleOwner) {
                     searchAdapter.submitData(lifecycle, it)
-
-
                 }
                 hideSoftKeyboard()
 
@@ -385,27 +383,15 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
             "District" -> {
                 RequestSearch(null, null, null, searchBy.name, null, null, 0)
 
-
             }
 
             "occupation" -> {
                 RequestSearch(null, null, null, null, searchBy.name, null, 0)
-
-
             }
 
             "Department" -> {
                 RequestSearch(null, null, searchBy.name, null, null, null, 0)
-
-
             }
-
-            /*"DateofBirth" -> {
-                RequestSearch(searchBy.name, null, null, null, null,null, 0)
-
-
-            }*/
-
 
             else -> {
                 RequestSearch(null, null, null, null, null, null, 0)

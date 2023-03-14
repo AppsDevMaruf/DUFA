@@ -40,7 +40,7 @@ class SearchMemberListAdapter(private val memberSelectListener: MemberSelectList
         getItem(position).let {
 
             if (it != null) {
-                holder.binding.name.text = it.birthdate
+                holder.binding.name.text = it.name
                 holder.binding.phoneNumber.text =it.phone
                 holder.binding.bloodGroup.text =it.bloodgroup
                 holder.binding.department.text =it.department

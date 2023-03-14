@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+
+    <LinearLayout
+        android:id="@+id/buttonSheetLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:orientation="vertical"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp">
+
+            <ImageView
+                android:id="@+id/cancel_buttonSheet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:src="@drawable/handler" />
+
+            <androidx.appcompat.widget.SearchView
+                android:drawableEnd="@drawable/border_back_grey_stock"
+                android:id="@+id/searchText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/back_grey"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:padding="16dp"
+                android:layout_margin="16dp"
+                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                android:visibility="gone"
+                android:id="@+id/noDataTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawableLeft="@drawable/ic_round_warning_24"
+                android:drawablePadding="8dp"
+                android:drawableTint="@color/text_red"
+                android:fontFamily="@font/dm_sans_medium"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="No data available"
+                android:textAlignment="center"
+                android:textColor="@color/text_red" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/countryRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="20dp"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</layout>
