@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Context
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -45,6 +46,7 @@ fun Fragment.showAlert(context: Context, msg: String) {
 fun View.hide() {
     visibility = View.INVISIBLE
 }
+
 fun View.gone() {
     visibility = View.GONE
 }
@@ -53,7 +55,6 @@ fun View.gone() {
 fun View.show() {
     visibility = View.VISIBLE
 }
-
 
 
 fun Fragment.enableBtn(given: Boolean, btn: Button) {
@@ -75,6 +76,7 @@ fun Fragment.enableBtn(given: Boolean, btn: Button) {
 
 
 }
+
 fun Any.nameAbbreviationGenerator(name: String): String? {
     val lens = name.length - 1
     val lastChar = name[lens]
@@ -96,6 +98,7 @@ fun Any.nameAbbreviationGenerator(name: String): String? {
     val lastnameAB = arr[len][0]
     return "$firstnameAB$lastnameAB"
 }
+
 fun Fragment.hideSoftKeyboard() {
     val inputMethodManager =
         requireActivity().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -110,6 +113,7 @@ fun Fragment.hideSoftKeyboard() {
         inputMethodManager.hideSoftInputFromWindow(currentFocus.windowToken, 0)
     }
 }
+
 fun Any.requestPermissions(
     request: ActivityResultLauncher<Array<String>>,
     permissions: Array<String>
@@ -118,6 +122,7 @@ fun Any.requestPermissions(
 fun Activity.isAllPermissionsGranted(permissions: Array<String>) = permissions.all {
     ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_GRANTED
 }
+
 fun Activity.hideSoftKeyboard() {
     val inputMethodManager =
         this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -143,7 +148,7 @@ fun Fragment.datePickerFun(
     val mDay: Int = mCurrentDate.get(Calendar.DAY_OF_MONTH)
 
     val mDatePicker = DatePickerDialog(
-        requireActivity(), R.style.Theme_DUFA,
+        requireActivity(), R.style.DatePickerTheme,
         { datepicker, selectedyear, selectedmonth, selectedday ->
             val selectedmonth = selectedmonth + 1
 
@@ -163,8 +168,13 @@ fun Fragment.datePickerFun(
     mCurrentDate.add(Calendar.YEAR, 0)
     mCurrentDate.add(Calendar.DAY_OF_MONTH, 0)
     mDatePicker.datePicker.maxDate = mCurrentDate.timeInMillis
+//    mDatePicker.getButton(DatePickerDialog.BUTTON_NEGATIVE).highlightColor
+//    mDatePicker.getButton(DatePickerDialog.BUTTON_POSITIVE).highlightColor
+
+
     mDatePicker.show()
 }
+
 fun EditText.onTextChanged(onTextChanged: (String) -> Unit) {
     this.addTextChangedListener(object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {

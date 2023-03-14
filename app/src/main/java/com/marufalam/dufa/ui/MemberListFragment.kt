@@ -1,6 +1,7 @@
 package com.marufalam.dufa.ui
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,6 +10,7 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.activity.OnBackPressedCallback
 
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
@@ -61,8 +63,29 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
 
     }
 
+
+    override fun onResume() {
+        super.onResume()
+        itemsBy.clear()
+        bottomSheetDialogSearchItem.dismiss()
+    }
+
+
     @OptIn(DelicateCoroutinesApi::class)
     override fun configUi() {
+
+
+
+//        val onBackPressedCallback = object : OnBackPressedCallback(true) {
+//            override fun handleOnBackPressed() {
+//                requireActivity().supportFragmentManager.beginTransaction()
+//                    .remove(this@MemberListFragment).commit()
+//               // requireActivity().supportFragmentManager.popBackStack()
+//            }
+//        }
+//        requireActivity().onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
+
+
         bottomSheetDialogSearchItem = BottomSheetDialog(requireContext())
         searchAdapter = SearchMemberListAdapter(this)
         searchItemAdapter = SearchItemAdapter(this)
@@ -73,27 +96,25 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
 
         binding.searchET.onTextChanged {
 
-            if (it != null) {
-                if (it.length >= 3) {
-                    timer = Timer()
-                    timer.schedule(object : TimerTask() {
-                        override fun run() {
-                            requestSearch =
-                                RequestSearch(null, null, null, null, null, it, 0)
+            if (it.length >= 3) {
+                timer = Timer()
+                timer.schedule(object : TimerTask() {
+                    override fun run() {
+                        requestSearch =
+                            RequestSearch(null, null, null, null, null, it, 0)
 
-                            dashboardViewModel.getMemberSearchVMLD(requestSearch)
-                            GlobalScope.launch(Dispatchers.Main) {
-                                dashboardViewModel.getMemberSearchVMLD(
-                                    requestSearch
-                                ).observe(viewLifecycleOwner) {
-                                    searchAdapter.submitData(lifecycle, it)
+                        dashboardViewModel.getMemberSearchVMLD(requestSearch)
+                        GlobalScope.launch(Dispatchers.Main) {
+                            dashboardViewModel.getMemberSearchVMLD(
+                                requestSearch
+                            ).observe(viewLifecycleOwner) {
+                                searchAdapter.submitData(lifecycle, it)
 
-                                }
                             }
-
                         }
-                    }, DELAY)
-                }
+
+                    }
+                }, DELAY)
             }
         }
 
@@ -200,16 +221,14 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
 
                 requestSearch = RequestSearch(it, null, null, null, null, null, 0)
                 Log.i("TAG", "requestSearch: $requestSearch")
-                    dashboardViewModel.getMemberSearchVMLD(
-                        requestSearch
-                    ).observe(viewLifecycleOwner) {
-                        searchAdapter.submitData(lifecycle, it)
+                dashboardViewModel.getMemberSearchVMLD(
+                    requestSearch
+                ).observe(viewLifecycleOwner) {
+                    searchAdapter.submitData(lifecycle, it)
 
 
-            }
-            hideSoftKeyboard()
-
-
+                }
+                hideSoftKeyboard()
 
 
             }
@@ -219,6 +238,7 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
 
 
     }
+
 
     override fun binObserver() {
 
@@ -333,72 +353,7 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
 
 
     }
-/*
-    private fun showBottomSheetState() {
-        val bottomSheetDialog = BottomSheetDialog(requireContext())
-        bottomSheetDialog.setContentView(R.layout.item_bottom_search)
-        bottomSheetDialog.behavior.maxHeight = 1000 // set max height when expanded in PIXEL
-        bottomSheetDialog.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
-        // bottomSheetDialog.window?.setBackgroundDrawableResource(android.R.color.transparent);
-        bottomSheetDialog.findViewById<ImageView>(R.id.cancel_buttonSheet)?.setOnClickListener {
-            bottomSheetDialog.dismiss()
-        }
 
-
-        //  bottomSheetDialog.behavior.peekHeight = 400 // set default height when collapsed in PIXEL
-        // val copy = bottomSheetDialog.findViewById<LinearLayout>(R.id.copyLinearLayout)
-        val recyclerView = bottomSheetDialog.findViewById<RecyclerView>(R.id.searchItemRcv)
-
-
-        buildSearchItemRecyclerView(recyclerView!!)
-        //  val searchView = bottomSheetDialog.findViewById<SearchView>(R.id.searchText)
-
-
-//        searchView!!.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-//            override fun onQueryTextSubmit(query: String): Boolean {
-//                return false
-//            }
-//
-//            override fun onQueryTextChange(newText: String): Boolean {
-//                // inside on query text change method we are
-//                // calling a method to filter our recycler view.
-//                filterState(newText)
-//                return false
-//            }
-//        })
-
-
-        bottomSheetDialog.show()
-    }
-
-    private fun buildSearchItemRecyclerView(recyclerView: RecyclerView) {
-
-
-        val manager = LinearLayoutManager(requireContext())
-        recyclerView.setHasFixedSize(true)
-
-        // setting layout manager
-        // to our recycler view.
-        recyclerView.layoutManager = manager
-
-        // setting adapter to
-        // our recycler view.
-        recyclerView.adapter = searchItemAdapter
-
-        var size = searchItemAdapter.currentList.size
-
-
-//        if (size > 0) {
-//            binding.memberListRv.visibility = View.VISIBLE
-//            binding.noData.visibility = View.GONE
-//        } else {
-//
-//            binding.memberListRv.visibility = View.GONE
-//            binding.noData.visibility = View.VISIBLE
-//        }
-
-
-    }*/
 
     override fun selectedMember(responseDetail: Data?) {
         bundle.putParcelable("memberInfo", responseDetail)  // Key, value
