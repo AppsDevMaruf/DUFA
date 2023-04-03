@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -11,10 +12,8 @@ import com.marufalam.dufa.R
 import com.marufalam.dufa.databinding.FragmentLogInBinding
 import com.marufalam.dufa.BaseFragment
 import com.marufalam.dufa.data.models.login.RequestLogin
-import com.marufalam.dufa.utils.NetworkResult
 import com.marufalam.dufa.data.local.TokenManager
-import com.marufalam.dufa.utils.Constants
-import com.marufalam.dufa.utils.isValidEmail
+import com.marufalam.dufa.utils.*
 import com.marufalam.dufa.viewmodel.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -22,7 +21,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class LogInFragment : BaseFragment<FragmentLogInBinding>() {
-    private val authViewModel by viewModels<AuthViewModel>()
+    private val authViewModel by activityViewModels<AuthViewModel>()
 
     @Inject
     lateinit var tokenManager: TokenManager
@@ -72,33 +71,32 @@ class LogInFragment : BaseFragment<FragmentLogInBinding>() {
     }
 
     override fun setupNavigation() {
-       if (tokenManager.getToken(Constants.TOKEN) != Constants.NO_DATA) {
-           Log.e("notNullToken", "binObserver: ${tokenManager.getToken(Constants.TOKEN)}")
-            findNavController().navigate(R.id.action_logInFragment_to_DashboardFragment)
-        }
+        /*  if (tokenManager.getToken(Constants.TOKEN) != Constants.NO_DATA) {
+              Log.e("notNullToken", "binObserver: ${tokenManager.getToken(Constants.TOKEN)}")
+               findNavController().navigate(R.id.action_logInFragment_to_DashboardFragment)
+           }*/
 
     }
 
     override fun binObserver() {
         authViewModel.loginResponseLiveDataVM.observe(viewLifecycleOwner) {
-            binding.progressBar.isVisible = false
+            binding.progressBar.gone()
             when (it) {
                 is NetworkResult.Success -> {
                     //token
-
                     Log.e("SuccessToken", "binObserver: ${it.data}")
+                    authViewModel.setLoginResponseToken(it.data!!)
 
-                    tokenManager.saveToken(Constants.TOKEN, "${it.data!!.token}")
+                    tokenManager.saveToken(Constants.TOKEN, it.data.token)
 
                     findNavController().navigate(R.id.action_logInFragment_to_DashboardFragment)
                 }
                 is NetworkResult.Error -> {
-                    binding.loginErrorText.visibility = View.VISIBLE
+                    binding.loginErrorText.show()
                     binding.loginErrorText.text = it.message
                 }
                 is NetworkResult.Loading -> {
-                    binding.progressBar.isVisible = true
-
+                    binding.progressBar.show()
                 }
             }
         }
@@ -116,6 +114,5 @@ class LogInFragment : BaseFragment<FragmentLogInBinding>() {
     }
 }
 
-//
 
 

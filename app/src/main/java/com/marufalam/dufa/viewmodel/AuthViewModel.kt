@@ -1,6 +1,7 @@
 package com.marufalam.dufa.viewmodel
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.marufalam.dufa.data.models.login.RequestLogin
@@ -15,6 +16,16 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(private val userRepository: PublicRepository) :ViewModel() {
+
+    private val _loginResponseToken = MutableLiveData<ResponseLogin>()
+    val loginResponseToken: LiveData<ResponseLogin>
+        get() = _loginResponseToken
+
+    fun setLoginResponseToken(responseLogin: ResponseLogin) {
+        _loginResponseToken.postValue(responseLogin)
+
+    }
+
     val registerResponseLiveDataVM :LiveData<NetworkResult<ResponseRegister>>
     get() = userRepository.registerResponseLiveDataRepo
 

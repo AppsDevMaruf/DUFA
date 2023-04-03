@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -32,6 +33,7 @@ import com.marufalam.dufa.data.local.TokenManager
 import com.marufalam.dufa.data.models.getProfileInfo.ResponseProfileInfo
 import com.marufalam.dufa.databinding.ActivityMainBinding
 import com.marufalam.dufa.utils.*
+import com.marufalam.dufa.viewmodel.AuthViewModel
 import com.marufalam.dufa.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import id.zelory.compressor.Compressor.compress
@@ -54,6 +56,7 @@ class MainActivity : AppCompatActivity() {
     private var userId = 0
     private lateinit var progressBar: ProgressBar
     private val dashboardViewModel: DashboardViewModel by viewModels()
+    private val authViewModel by viewModels<AuthViewModel>()
     private var bundle = Bundle()
     lateinit var binding: ActivityMainBinding
     private lateinit var userProfilePicHeader: ShapeableImageView
@@ -95,8 +98,13 @@ class MainActivity : AppCompatActivity() {
             hideSoftKeyboard()
         }
 
+        authViewModel.loginResponseToken.observe(this){
+           if (it.status){
+               dashboardViewModel.profileInfoVM()
+           }
+        }
 
-        dashboardViewModel.profileInfoVM()
+
         binObserver()
 
         ///
@@ -231,7 +239,7 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    fun  binObserver() {
+    fun binObserver() {
         dashboardViewModel.profileInfoVMLD.observe(this) {
             progressBar.isVisible = false
             when (it) {
@@ -310,17 +318,15 @@ class MainActivity : AppCompatActivity() {
 //            )
             Glide.with(applicationContext)
                 .load(profilePic)
-                .placeholder(R.drawable.loadpreview)
                 .into(userProfilePic)
             Glide.with(applicationContext)
                 .load(profilePic)
-                .placeholder(R.drawable.loadpreview)
                 .into(userProfilePicHeader)
         }
 
 
     }
-    }
+}
 
 
 
