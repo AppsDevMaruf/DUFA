@@ -9,15 +9,14 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.marufalam.dufa.R
 import java.math.RoundingMode
@@ -188,6 +187,13 @@ fun EditText.onTextChanged(onTextChanged: (String) -> Unit) {
 
         }
     })
+}
+fun ImageView.loadImagesWithGlide(url: String) {
+    Glide.with(this)
+        .load(url)
+        .centerCrop()
+        .diskCacheStrategy(DiskCacheStrategy.ALL)
+        .into(this)
 }
 
 

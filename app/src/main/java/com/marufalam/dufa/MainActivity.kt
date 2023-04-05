@@ -312,16 +312,9 @@ class MainActivity : AppCompatActivity() {
             profilePicAB.hide()
 
             val profilePic = Constants.IMG_PREFIX + profile.imagePath
-//            val url = GlideUrl(
-//                profilePic,
-//                GlideUtils.glideHeaders(tokenManager.getToken(Constants.TOKEN))
-//            )
-            Glide.with(applicationContext)
-                .load(profilePic)
-                .into(userProfilePic)
-            Glide.with(applicationContext)
-                .load(profilePic)
-                .into(userProfilePicHeader)
+//
+            uploadProfilePic.loadImagesWithGlide(profilePic)
+            userProfilePicHeader.loadImagesWithGlide(profilePic)
         }
 
 

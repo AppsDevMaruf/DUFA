@@ -66,10 +66,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                     binding.profilePicAB.hide()
 
                     val profileImg = Constants.IMG_PREFIX + userInfo.imagePath
-
-                    Glide.with(requireActivity())
-                        .load(profileImg)
-                        .into(binding.userProfilePic)
+                    binding.userProfilePic.loadImagesWithGlide(profileImg)
                 }
             }
 
