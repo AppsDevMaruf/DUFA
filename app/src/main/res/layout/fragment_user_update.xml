@@ -519,16 +519,18 @@
                         <EditText
                             android:id="@+id/address"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="0dp"
+                            android:minHeight="70dp"
                             android:layout_gravity="start"
                             android:layout_weight="1"
                             android:background="@drawable/white_back_react"
                             android:ellipsize="end"
                             android:fontFamily="@font/dm_sans_medium"
                             android:lines="1"
+                            android:maxLines="2"
                             android:padding="2dp"
                             android:paddingStart="10dp"
-                            android:text="Saiful Khandaker"
+                            android:text="@string/saiful_khandaker"
                             android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
                             android:textColor="@color/text_primary" />
 
@@ -563,7 +565,7 @@
                             android:lines="1"
                             android:padding="2dp"
                             android:paddingStart="10dp"
-                            android:text="Saiful Khandaker"
+                            tools:text="Saiful Khandaker"
                             android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
                             android:textColor="@color/text_primary" />
 
@@ -658,18 +660,18 @@
                             android:layout_gravity="start"
                             android:layout_weight="1"
                             android:background="@drawable/white_back_react"
+                            android:drawableEnd="@drawable/baseline_date_range_24"
+                            android:drawablePadding="10dp"
                             android:ellipsize="end"
                             android:fontFamily="@font/dm_sans_medium"
-                            android:lines="1"
                             android:gravity="center_vertical"
-                            android:padding="2dp"
                             android:hint="yyyy-mm-dd"
-                            android:drawablePadding="10dp"
-                            android:paddingEnd="10dp"
-                            android:drawableEnd="@drawable/baseline_date_range_24"
+                            android:lines="1"
+                            android:padding="2dp"
                             android:paddingStart="10dp"
-                            android:textColor="@color/text_primary"
-                            android:textAppearance="@style/TextAppearance.Material3.TitleSmall" />
+                            android:paddingEnd="10dp"
+                            android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+                            android:textColor="@color/text_primary" />
 
                     </LinearLayout>
 

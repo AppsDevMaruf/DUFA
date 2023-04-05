@@ -12,6 +12,12 @@
     <string name="log_out">Log Out</string>
     <string name="name_or_email">Name Or Email</string>
     <string name="select_filter_type">Select Filter Type</string>
+    <string name="mr">Mr</string>
+    <string name="mrs">Mrs</string>
+    <string name="todo">TODO</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="saiful_khandaker">Saiful Khandaker</string>
 
     <string-array name="paymentsType">
         <item>Registration Fee</item>

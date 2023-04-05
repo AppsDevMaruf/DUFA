@@ -1,14 +1,13 @@
 package com.marufalam.dufa.ui.profile_update
 
-import android.util.Log
 import android.view.WindowManager
 import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.marufalam.dufa.BaseFragment
 import com.marufalam.dufa.R
@@ -16,9 +15,7 @@ import com.marufalam.dufa.data.models.get_departments.Department
 import com.marufalam.dufa.data.models.get_districts.District
 import com.marufalam.dufa.data.models.get_halls.Hall
 import com.marufalam.dufa.data.models.get_occupations.Occupation
-import com.marufalam.dufa.data.models.search.Data
 import com.marufalam.dufa.data.models.search.blood.Bloodgroup
-import com.marufalam.dufa.databinding.FragmentUserDetailsBinding
 import com.marufalam.dufa.databinding.FragmentUserUpdateBinding
 import com.marufalam.dufa.interfaces.*
 import com.marufalam.dufa.ui.profile_update.adapter.*
@@ -42,6 +39,7 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(),DepartmentS
     private lateinit var bloodGroupAdapter: BloodGroupAdapter
     private lateinit var occupationAdapter: OccupationAdapter
     private lateinit var hallAdapter: HallAdapter
+    private var title = "Male"
 
     override fun getFragmentView(): Int {
         return R.layout.fragment_user_update
@@ -76,6 +74,47 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(),DepartmentS
             showBottomSheetHall()
             hideSoftKeyboard()
         }
+        binding.genderTypeSpinner.setOnClickListener {
+            showBottomSheetGender()
+            hideSoftKeyboard()
+        }
+        binding.birthdate.setOnClickListener {
+            datePickerFun {
+                binding.birthdate.text = it
+            }
+        }
+    }
+    private fun showBottomSheetGender() {
+        val bottomSheetDialog = BottomSheetDialog(requireContext())
+        bottomSheetDialog.setContentView(R.layout.item_gender_type)
+        bottomSheetDialog.behavior.maxHeight = 1000 // set max height when expanded in PIXEL
+        bottomSheetDialog.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
+
+
+        bottomSheetDialog.findViewById<LinearLayout>(R.id.btnMr)!!.setOnClickListener {
+
+            title = "Male"
+            binding.genderTypeSpinner
+            binding.genderTypeText.text = title
+            binding.genderTypeText.setTextColor(ContextCompat.getColor(requireActivity(),R.color.black))
+            binding.genderIcon.setImageResource(R.drawable.ic_mr)
+
+            bottomSheetDialog.dismiss()
+
+
+        }
+
+        bottomSheetDialog.findViewById<LinearLayout>(R.id.btnMrs)!!.setOnClickListener {
+
+            title = "Female"
+            binding.genderTypeText.text = title
+            binding.genderTypeText.setTextColor(ContextCompat.getColor(requireActivity(),R.color.black))
+            binding.genderIcon.setImageResource(R.drawable.ic_mrs)
+
+            bottomSheetDialog.dismiss()
+        }
+
+        bottomSheetDialog.show()
     }
 
 /*     override fun configUi() {
