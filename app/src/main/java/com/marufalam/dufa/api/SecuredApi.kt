@@ -11,6 +11,7 @@ import com.marufalam.dufa.data.models.logout.ResponseLogout
 import com.marufalam.dufa.data.models.search.RequestSearch
 import com.marufalam.dufa.data.models.search.ResponseSearch
 import com.marufalam.dufa.data.models.search.blood.ResponseBloodGroup
+import com.marufalam.dufa.data.models.transaction_history.TransHistory
 import com.marufalam.dufa.data.models.upload_profile_pic.ResponseUploadProfilePic
 import okhttp3.MultipartBody
 import retrofit2.Response
@@ -31,6 +32,7 @@ interface SecuredApi {
 
     @GET("get_occupations")
     suspend fun getOccupations(): Response<ResponseOccupations>
+
     @GET("get_halls")
     suspend fun getHalls(): Response<ResponseHalls>
 
@@ -56,6 +58,10 @@ interface SecuredApi {
         @Path("userID") userId: Int,
         @Part image: MultipartBody.Part,
     ): Response<ResponseUploadProfilePic>
+
+
+    @GET("payment-history")
+    suspend fun getTransactionHistory(): Response<TransHistory>
 
 
     /* @POST("search")

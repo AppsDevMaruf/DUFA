@@ -8,9 +8,11 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.marufalam.dufa.BaseFragment
 import com.marufalam.dufa.R
+import com.marufalam.dufa.data.models.getProfileInfo.ResponseProfileInfo
 import com.marufalam.dufa.data.models.get_departments.Department
 import com.marufalam.dufa.data.models.get_districts.District
 import com.marufalam.dufa.data.models.get_halls.Hall
@@ -25,7 +27,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
 @AndroidEntryPoint
-class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(),DepartmentSelectListener,DistrictSelectListener,BloodGroupSelectListener,HallSelectListener,OccupationSelectListener {
+class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), DepartmentSelectListener,
+    DistrictSelectListener, BloodGroupSelectListener, HallSelectListener, OccupationSelectListener {
     private val dashboardViewModel by viewModels<DashboardViewModel>()
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private lateinit var departmentList: ArrayList<Department>
@@ -45,13 +48,6 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(),DepartmentS
         return R.layout.fragment_user_update
     }
 
-    override fun configUi() {
-        dashboardViewModel.occupationsVM()
-        dashboardViewModel.districtVM()
-        dashboardViewModel.hallsVM()
-        dashboardViewModel.getBloodGroupVM()
-        dashboardViewModel.getDepartmentsVM()
-    }
 
     override fun setupNavigation() {
         binding.departmentTypeSpinner.setOnClickListener {
@@ -84,6 +80,7 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(),DepartmentS
             }
         }
     }
+
     private fun showBottomSheetGender() {
         val bottomSheetDialog = BottomSheetDialog(requireContext())
         bottomSheetDialog.setContentView(R.layout.item_gender_type)
@@ -96,7 +93,12 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(),DepartmentS
             title = "Male"
             binding.genderTypeSpinner
             binding.genderTypeText.text = title
-            binding.genderTypeText.setTextColor(ContextCompat.getColor(requireActivity(),R.color.black))
+            binding.genderTypeText.setTextColor(
+                ContextCompat.getColor(
+                    requireActivity(),
+                    R.color.black
+                )
+            )
             binding.genderIcon.setImageResource(R.drawable.ic_mr)
 
             bottomSheetDialog.dismiss()
@@ -108,7 +110,12 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(),DepartmentS
 
             title = "Female"
             binding.genderTypeText.text = title
-            binding.genderTypeText.setTextColor(ContextCompat.getColor(requireActivity(),R.color.black))
+            binding.genderTypeText.setTextColor(
+                ContextCompat.getColor(
+                    requireActivity(),
+                    R.color.black
+                )
+            )
             binding.genderIcon.setImageResource(R.drawable.ic_mrs)
 
             bottomSheetDialog.dismiss()
@@ -117,65 +124,79 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(),DepartmentS
         bottomSheetDialog.show()
     }
 
-/*     override fun configUi() {
+    override fun configUi() {
 
-         if (arguments != null) {
-             val userInfo: Data = requireArguments().getParcelable("updateUserinfo")!!
-             binding.name.text = userInfo.name
-             binding.phoneNumber.text = userInfo.phone
-             binding.email.text = userInfo.email
-             binding.address.text = userInfo.address
-             binding.nid.text = userInfo.nid
-             binding.gender.text = userInfo.gender
-             binding.birthdate.text = userInfo.birthdate
-             binding.department.text = userInfo.department
-             binding.hall.text = userInfo.hall
-             binding.bloodGroup.text = userInfo.bloodgroup
-             binding.bloodGroup.setTextColor(ContextCompat.getColor(requireActivity(), R.color.text_red))
-             binding.occupation.text = userInfo.occupation
-             binding.district.text = userInfo.district
 
-             if (userInfo.subscription == "none") {
-                 binding.status.text = "Inactive"
-                 binding.status.setTextColor(
-                     ContextCompat.getColor(
-                         requireActivity(),
-                         R.color.text_red
-                     )
-                 )
-             } else {
-                 binding.status.text = "Active"
-                 binding.status.setTextColor(
-                     ContextCompat.getColor(
-                         requireActivity(),
-                         R.color.green100
-                     )
-                 )
-             }
+        dashboardViewModel.occupationsVM()
+        dashboardViewModel.districtVM()
+        dashboardViewModel.hallsVM()
+        dashboardViewModel.getBloodGroupVM()
+        dashboardViewModel.getDepartmentsVM()
 
-             if (userInfo.imagePath == null) {
-                 binding.userProfilePic.hide()
-                 binding.profilePicAB.show()
-                 binding.profilePicAB.text = userInfo.name?.let { it1 ->
-                     nameAbbreviationGenerator(
-                         it1
-                     )
-                 }
-             } else {
-                 binding.userProfilePic.show()
-                 binding.profilePicAB.hide()
+        if (arguments != null) {
+            val userInfo: ResponseProfileInfo = requireArguments().getParcelable("userinfo")!!
+            binding.name.setText(userInfo.name)
+            binding.phone.setText(userInfo.phone)
 
-                 val profileImg = Constants.IMG_PREFIX + userInfo.imagePath
+            binding.address.setText(userInfo.address)
+            binding.nid.setText(userInfo.nid)
+            binding.genderTypeText.setText(userInfo.gender)
+            binding.birthdate.text = userInfo.birthdate
+            binding.departmentTypeText.setText(userInfo.department)
+            binding.hallTypeText.setText(userInfo.hall)
+            binding.bloodGroupTypeText.setText(userInfo.bloodgroup)
+            binding.bloodGroupTypeText.setTextColor(
+                ContextCompat.getColor(
+                    requireActivity(),
+                    R.color.text_red
+                )
+            )
+            binding.occupationTypeText.setText(userInfo.occupation)
+            binding.districtTypeText.setText(userInfo.district)
+
+//            if (userInfo.subscription == "none") {
+//                binding. status.text = "Inactive"
+//                binding.status.setTextColor(
+//                    ContextCompat.getColor(
+//                        requireActivity(),
+//                        R.color.text_red
+//                    )
+//                )
+//            } else {
+//                binding.status.text = "Active"
+//                binding.status.setTextColor(
+//                    ContextCompat.getColor(
+//                        requireActivity(),
+//                        R.color.green100
+//                    )
+//                )
+//            }
+
+            if (userInfo.imagePath == null) {
+                binding.userProfilePic.hide()
+                binding.profilePicAB.show()
+                binding.profilePicAB.text = userInfo.name?.let { it1 ->
+                    nameAbbreviationGenerator(
+                        it1
+                    )
+                }
+            } else {
+                binding.userProfilePic.show()
+                binding.profilePicAB.hide()
+
+                val profileImg = Constants.IMG_PREFIX + userInfo.imagePath
 
 
 
                 Glide.with(requireActivity())
                     .load(profileImg)
+                    .placeholder(R.drawable.ic_mr)
                     .into(binding.userProfilePic)
             }
         }
 
-    }*/
+    }
+
     override fun binObserver() {
         dashboardViewModel.occupationsVMLD.observe(viewLifecycleOwner) { occupations ->
             binding.progress.hide()
@@ -378,6 +399,7 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(),DepartmentS
 
 
     }
+
     //Districts
     private fun showBottomSheetDistricts() {
         bottomSheetDialog = BottomSheetDialog(requireContext())

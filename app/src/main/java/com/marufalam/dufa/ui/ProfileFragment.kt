@@ -1,5 +1,6 @@
 package com.marufalam.dufa.ui
 
+import android.os.Bundle
 import android.provider.ContactsContract
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
@@ -12,15 +13,17 @@ import com.marufalam.dufa.utils.*
 
 class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     private lateinit var userInfo: ResponseProfileInfo
+
+    lateinit var bundle: Bundle
     override fun getFragmentView(): Int {
-        return  R.layout.fragment_profile
+        return R.layout.fragment_profile
     }
 
     override fun configUi() {
         if (arguments != null) {
             userInfo = requireArguments().getParcelable("userinfo")!!
 
-            if (userInfo!=null){
+            if (userInfo != null) {
                 binding.name.text = userInfo.name
                 binding.phoneNumber.text = userInfo.phone
                 binding.email.text = userInfo.email
@@ -31,7 +34,12 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                 binding.department.text = userInfo.department
                 binding.hall.text = userInfo.hall
                 binding.bloodGroup.text = userInfo.bloodgroup
-                binding.bloodGroup.setTextColor(ContextCompat.getColor(requireActivity(), R.color.text_red))
+                binding.bloodGroup.setTextColor(
+                    ContextCompat.getColor(
+                        requireActivity(),
+                        R.color.text_red
+                    )
+                )
                 binding.occupation.text = userInfo.occupation
                 binding.district.text = userInfo.district
 
@@ -70,6 +78,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                 }
             }
 
+            bundle = Bundle()
+            bundle.putParcelable("userinfo", userInfo)
+
 
         }
 
@@ -77,7 +88,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
     override fun setupNavigation() {
         binding.updateBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_profileFragment_to_userUpdateFragment,)
+
+
+            findNavController().navigate(R.id.action_profileFragment_to_userUpdateFragment, bundle)
         }
 
     }

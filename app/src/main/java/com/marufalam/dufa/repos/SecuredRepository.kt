@@ -16,6 +16,7 @@ import javax.inject.Inject
 import androidx.paging.liveData
 import com.marufalam.dufa.data.models.search.RequestSearch
 import com.marufalam.dufa.data.models.search.blood.ResponseBloodGroup
+import com.marufalam.dufa.data.models.transaction_history.TransHistory
 import okhttp3.MultipartBody
 
 class SecuredRepository @Inject constructor(private val securedApi: SecuredApi) {
@@ -49,6 +50,38 @@ class SecuredRepository @Inject constructor(private val securedApi: SecuredApi) 
 
 
     }
+
+
+    //getTransactionHistory start
+    private var _responseTransHistory = MutableLiveData<NetworkResult<TransHistory>>()
+
+    val responseTransHistory: LiveData<NetworkResult<TransHistory>>
+        get() = _responseTransHistory
+
+    suspend fun getTransactionHistory() {
+
+        _responseTransHistory.postValue(NetworkResult.Loading())
+        try {
+            val response: Response<TransHistory> =
+                securedApi.getTransactionHistory()
+            if (response.isSuccessful && response.body() != null) {
+                _responseTransHistory.postValue(NetworkResult.Success(response.body()!!))
+            } else if (response.errorBody() != null) {
+                val errorObj = JSONObject(response.errorBody()!!.charStream().readText())
+                _responseTransHistory.postValue(NetworkResult.Error(errorObj.getString("message")))
+            } else {
+                _responseTransHistory.postValue(NetworkResult.Error("Something Went Wrong!"))
+            }
+        } catch (e: Exception) {
+            Log.i("catch", "getAllMemberRepo: ${e.localizedMessage}")
+        }
+
+
+        //getTransactionHistory end
+
+
+    }
+
 
     /*//My profile start
     private var _responseMyProfileRepo =
@@ -168,6 +201,7 @@ class SecuredRepository @Inject constructor(private val securedApi: SecuredApi) 
             )
         }
     ).liveData
+
     //suspend fun searchByNameEmail(nameOrEmail:RequestSearch) = securedApi.searchByNameEmail(nameOrEmail)
     suspend fun logout() = securedApi.logout()
     suspend fun getDashboardInfo() = securedApi.getDashboardInfo()

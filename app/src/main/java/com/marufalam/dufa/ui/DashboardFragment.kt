@@ -32,11 +32,11 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
             findNavController().navigate(R.id.action_DashboardFragment_to_memberListFragment)
         }
         binding.paymentCard.setOnClickListener {
-            toast("Thanks bro")
-            findNavController().navigate(R.id.action_DashboardFragment_to_paymentFragment)
+
+            findNavController().navigate(R.id.action_DashboardFragment_to_transactionHistoryFragment)
         }
         binding.eventFragment.setOnClickListener {
-            toast("Thanks bro")
+
             findNavController().navigate(R.id.action_DashboardFragment_to_eventFragment)
         }
 

@@ -98,10 +98,10 @@ class MainActivity : AppCompatActivity() {
             hideSoftKeyboard()
         }
 
-        authViewModel.loginResponseToken.observe(this){
-           if (it.status){
-               dashboardViewModel.profileInfoVM()
-           }
+        authViewModel.loginResponseToken.observe(this) {
+            if (it.status) {
+                dashboardViewModel.profileInfoVM()
+            }
         }
 
 
@@ -126,12 +126,12 @@ class MainActivity : AppCompatActivity() {
         userProfilePic.setOnClickListener {
             navController.navigate(R.id.profileFragment, bundle)
 
-            Toast.makeText(
-                applicationContext,
-                "Your Image not Uploading Yet... ",
-                Toast.LENGTH_SHORT
-            ).show()
         }
+        profilePicAB.setOnClickListener {
+            navController.navigate(R.id.profileFragment, bundle)
+
+        }
+
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
