@@ -12,7 +12,7 @@
             android:icon="@drawable/location"
             android:title="Search Friends" />
         <item
-            android:id="@+id/paymentFragment"
+            android:id="@+id/duesPaymentFragment"
             app:itemIconTint="@null"
             android:icon="@drawable/payment"
             android:title="Payments" />

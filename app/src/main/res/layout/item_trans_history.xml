@@ -20,6 +20,7 @@
             android:layout_marginVertical="2dp"
             android:drawableLeft="@drawable/name_account_24"
             android:drawablePadding="3dp"
+            android:drawableTint="@color/colorPrimaryDark"
             android:ellipsize="end"
             android:fontFamily="@font/dm_sans_bold"
             android:gravity="center_vertical"
@@ -27,7 +28,8 @@
             android:maxLines="1"
             android:padding="4dp"
             android:text="Mehedi Hasan"
-            android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />
+            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+            android:textColor="@color/colorPrimaryDark" />
 
         <TextView
             android:id="@+id/email"
@@ -37,6 +39,7 @@
             android:layout_marginVertical="0dp"
             android:drawableLeft="@drawable/round_alternate_email_24"
             android:drawablePadding="4dp"
+            android:drawableTint="@color/colorPrimaryDark"
             android:ellipsize="end"
             android:fontFamily="@font/dm_sans"
             android:gravity="center_vertical"
@@ -44,7 +47,8 @@
             android:maxLines="1"
             android:padding="2dp"
             android:text="MehediHasan@gmail.com"
-            android:textAppearance="@style/TextAppearance.Material3.TitleSmall" />
+            android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+            android:textColor="@color/colorPrimary" />
 
         <TextView
             android:id="@+id/mobile"
@@ -54,6 +58,7 @@
             android:layout_marginVertical="0dp"
             android:drawableLeft="@drawable/baseline_mobile_friendly_24"
             android:drawablePadding="4dp"
+            android:drawableTint="@color/colorPrimaryDark"
             android:ellipsize="end"
             android:fontFamily="@font/dm_sans"
             android:gravity="center_vertical"
@@ -61,7 +66,8 @@
             android:maxLines="1"
             android:padding="2dp"
             android:text="01713602644"
-            android:textAppearance="@style/TextAppearance.Material3.TitleSmall" />
+            android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+            android:textColor="@color/colorPrimary" />
 
         <TextView
             android:id="@+id/amount"
@@ -71,15 +77,17 @@
             android:layout_marginVertical="0dp"
             android:drawableLeft="@drawable/baseline_attach_money_24"
             android:drawablePadding="4dp"
+            android:drawableTint="@color/colorPrimaryDark"
             android:ellipsize="end"
             android:fontFamily="@font/dm_sans"
             android:gravity="center_vertical"
             android:includeFontPadding="false"
             android:maxLines="1"
             android:padding="2dp"
-
             android:text="100"
-            android:textAppearance="@style/TextAppearance.Material3.TitleSmall" />
+
+            android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+            android:textColor="@color/colorPrimary" />
 
         <TextView
             android:id="@+id/status"
@@ -89,6 +97,7 @@
             android:layout_marginVertical="0dp"
             android:drawableLeft="@drawable/baseline_wifi_protected_setup_24"
             android:drawablePadding="4dp"
+            android:drawableTint="@color/colorPrimaryDark"
             android:ellipsize="end"
             android:fontFamily="@font/dm_sans"
             android:gravity="center_vertical"
@@ -96,7 +105,8 @@
             android:maxLines="1"
             android:padding="2dp"
             android:text="Processing"
-            android:textAppearance="@style/TextAppearance.Material3.TitleSmall" />
+            android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+            android:textColor="@color/colorPrimary" />
 
 
         <TextView
@@ -107,6 +117,7 @@
             android:layout_marginVertical="0dp"
             android:drawableLeft="@drawable/baseline_payments_24"
             android:drawablePadding="4dp"
+            android:drawableTint="@color/colorPrimaryDark"
             android:ellipsize="end"
             android:fontFamily="@font/dm_sans"
             android:gravity="center_vertical"
@@ -114,7 +125,8 @@
             android:maxLines="1"
             android:padding="2dp"
             android:text="BKASH"
-            android:textAppearance="@style/TextAppearance.Material3.TitleSmall" />
+            android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+            android:textColor="@color/colorPrimary" />
 
 
         <TextView
@@ -124,9 +136,10 @@
             android:layout_marginHorizontal="8dp"
             android:layout_marginVertical="0dp"
             android:layout_marginBottom="8dp"
-
             android:drawableLeft="@drawable/fee"
             android:drawablePadding="4dp"
+
+            android:drawableTint="@color/colorPrimaryDark"
             android:ellipsize="end"
             android:fontFamily="@font/dm_sans"
             android:gravity="center_vertical"
@@ -134,7 +147,8 @@
             android:maxLines="1"
             android:padding="2dp"
             android:text="yearly_fee"
-            android:textAppearance="@style/TextAppearance.Material3.TitleSmall" />
+            android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+            android:textColor="@color/colorPrimary" />
 
 
     </LinearLayout>
