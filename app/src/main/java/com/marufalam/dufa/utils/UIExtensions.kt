@@ -4,15 +4,16 @@ import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Context
 import android.content.pm.PackageManager
-import android.graphics.Color
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
@@ -122,6 +123,10 @@ fun Activity.isAllPermissionsGranted(permissions: Array<String>) = permissions.a
     ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_GRANTED
 }
 
+fun Fragment.isAllPermissionsGranted(permissions: Array<String>) = permissions.all {
+    ContextCompat.checkSelfPermission(requireContext(), it) == PackageManager.PERMISSION_GRANTED
+}
+
 fun Activity.hideSoftKeyboard() {
     val inputMethodManager =
         this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -188,6 +193,7 @@ fun EditText.onTextChanged(onTextChanged: (String) -> Unit) {
         }
     })
 }
+
 fun ImageView.loadImagesWithGlide(url: String) {
     Glide.with(this)
         .load(url)

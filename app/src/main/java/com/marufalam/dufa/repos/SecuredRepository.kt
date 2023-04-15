@@ -5,19 +5,20 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
+import androidx.paging.liveData
 import com.marufalam.dufa.api.SecuredApi
 import com.marufalam.dufa.data.models.dashboard.ResponseAllMember
 import com.marufalam.dufa.data.models.get_departments.ResponseDepartments
-import com.marufalam.dufa.paging.MemberSearchPagingSource
-import com.marufalam.dufa.utils.NetworkResult
-import org.json.JSONObject
-import retrofit2.Response
-import javax.inject.Inject
-import androidx.paging.liveData
 import com.marufalam.dufa.data.models.search.RequestSearch
 import com.marufalam.dufa.data.models.search.blood.ResponseBloodGroup
 import com.marufalam.dufa.data.models.transaction_history.TransHistory
+import com.marufalam.dufa.paging.MemberSearchPagingSource
+import com.marufalam.dufa.ui.profile_update.RequestProfileUpdate
+import com.marufalam.dufa.utils.NetworkResult
 import okhttp3.MultipartBody
+import org.json.JSONObject
+import retrofit2.Response
+import javax.inject.Inject
 
 class SecuredRepository @Inject constructor(private val securedApi: SecuredApi) {
 
@@ -212,6 +213,9 @@ class SecuredRepository @Inject constructor(private val securedApi: SecuredApi) 
     suspend fun getHalls() = securedApi.getHalls()
     suspend fun uploadProfilePic(userId: Int, part: MultipartBody.Part) =
         securedApi.uploadProfilePic(userId, part)
+
+    suspend fun updateProfile(userId: Int, requestProfileUpdate: RequestProfileUpdate) =
+        securedApi.updateProfile(userId, requestProfileUpdate)
 
 
 }

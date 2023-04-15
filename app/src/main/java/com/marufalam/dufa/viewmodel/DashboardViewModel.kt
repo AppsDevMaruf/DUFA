@@ -17,6 +17,8 @@ import com.marufalam.dufa.data.models.search.Data
 import com.marufalam.dufa.data.models.search.RequestSearch
 import com.marufalam.dufa.data.models.upload_profile_pic.ResponseUploadProfilePic
 import com.marufalam.dufa.repos.SecuredRepository
+import com.marufalam.dufa.ui.profile_update.RequestProfileUpdate
+import com.marufalam.dufa.ui.profile_update.ResponseUpdateProfile
 import com.marufalam.dufa.utils.NetworkResult
 import com.marufalam.dufa.utils.NoInternetException
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -47,7 +49,6 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
     }
 
 
-
     // getDepartmentsVM start
     val getDepartmentsVMLD = securedRepository.responseDepartmentsRepo
 
@@ -76,7 +77,7 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
     val logoutVMLD: LiveData<NetworkResult<ResponseLogout>>
         get() = _responseLogout
 
-   suspend fun logoutVM() {
+    suspend fun logoutVM() {
 
         _responseLogout.postValue(NetworkResult.Loading())
 
@@ -154,48 +155,48 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
 
     //   profile info  end
 
-  /*  //  searchByNameEmail start
+    /*  //  searchByNameEmail start
 
-    private var _responeSearchByNameEmail =
-        MutableLiveData<NetworkResult<ResponseSearch>>()
-    val searchByNameEmailVMLD: LiveData<NetworkResult<ResponseSearch>>
-        get() = _responeSearchByNameEmail
+      private var _responeSearchByNameEmail =
+          MutableLiveData<NetworkResult<ResponseSearch>>()
+      val searchByNameEmailVMLD: LiveData<NetworkResult<ResponseSearch>>
+          get() = _responeSearchByNameEmail
 
-    fun searchByNameEmailVM(nameOrEmail:RequestSearch) {
+      fun searchByNameEmailVM(nameOrEmail:RequestSearch) {
 
-        _responeSearchByNameEmail.postValue(NetworkResult.Loading())
+          _responeSearchByNameEmail.postValue(NetworkResult.Loading())
 
-        viewModelScope.launch {
+          viewModelScope.launch {
 
-            try {
-                val response = securedRepository.searchByNameEmail(nameOrEmail)
+              try {
+                  val response = securedRepository.searchByNameEmail(nameOrEmail)
 
-                if (response.isSuccessful && response.body() != null) {
-
-
-                    _responeSearchByNameEmail.postValue(NetworkResult.Success(response.body()!!))
-
-                } else if (response.errorBody() != null) {
-
-                    val errorObj = JSONObject(response.errorBody()!!.charStream().readText())
-                    _responeSearchByNameEmail.postValue(NetworkResult.Error(errorObj.getString("message")))
-
-                }
-            } catch (noInternetException: NoInternetException) {
-                _responeSearchByNameEmail.postValue(noInternetException.localizedMessage?.let {
-                    NetworkResult.Error(
-                        it
-                    )
-                })
-            }
-
-        }
-
-    }
+                  if (response.isSuccessful && response.body() != null) {
 
 
-    //   searchByNameEmail info  end
-*/
+                      _responeSearchByNameEmail.postValue(NetworkResult.Success(response.body()!!))
+
+                  } else if (response.errorBody() != null) {
+
+                      val errorObj = JSONObject(response.errorBody()!!.charStream().readText())
+                      _responeSearchByNameEmail.postValue(NetworkResult.Error(errorObj.getString("message")))
+
+                  }
+              } catch (noInternetException: NoInternetException) {
+                  _responeSearchByNameEmail.postValue(noInternetException.localizedMessage?.let {
+                      NetworkResult.Error(
+                          it
+                      )
+                  })
+              }
+
+          }
+
+      }
+
+
+      //   searchByNameEmail info  end
+  */
     //  District info start
 
     private var _responseDistrict =
@@ -375,7 +376,7 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
     val uploadProfilePicVMLD: LiveData<NetworkResult<ResponseUploadProfilePic>>
         get() = _responseUploadProfilePic
 
-   suspend fun uploadProfilePicVM(userId:Int,part:MultipartBody.Part) {
+    suspend fun uploadProfilePicVM(userId: Int, part: MultipartBody.Part) {
 
         _responseUploadProfilePic.postValue(NetworkResult.Loading())
 
@@ -383,7 +384,7 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
         viewModelScope.launch {
 
             try {
-                val response = securedRepository.uploadProfilePic(userId,part)
+                val response = securedRepository.uploadProfilePic(userId, part)
 
                 Log.i("TAG", "uploadProfilePicVM: $response")
 
@@ -400,6 +401,50 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
                 }
             } catch (noInternetException: NoInternetException) {
                 _responseUploadProfilePic.postValue(noInternetException.localizedMessage?.let {
+                    NetworkResult.Error(
+                        it
+                    )
+                })
+            }
+
+        }
+
+    }
+
+    //   upload profile pic  end
+
+    //  upload profile pic start
+
+    private var _responseUpdateProfile =
+        MutableLiveData<NetworkResult<ResponseUploadProfilePic>>()
+    val responseUpdateProfileVMLD: LiveData<NetworkResult<ResponseUploadProfilePic>>
+        get() = _responseUpdateProfile
+
+    suspend fun updateProfileVM(userId: Int, requestProfileUpdate: RequestProfileUpdate) {
+
+        _responseUpdateProfile.postValue(NetworkResult.Loading())
+
+
+        viewModelScope.launch {
+
+            try {
+                val response = securedRepository.updateProfile(userId, requestProfileUpdate)
+
+                Log.i("TAG", "uploadProfilePicVM: $response")
+
+                if (response.isSuccessful && response.body() != null) {
+
+
+                    _responseUpdateProfile.postValue(NetworkResult.Success(response.body()!!))
+
+                } else if (response.errorBody() != null) {
+
+                    val errorObj = JSONObject(response.errorBody()!!.charStream().readText())
+                    _responseUpdateProfile.postValue(NetworkResult.Error(errorObj.getString("message")))
+
+                }
+            } catch (noInternetException: Exception) {
+                _responseUpdateProfile.postValue(noInternetException.localizedMessage?.let {
                     NetworkResult.Error(
                         it
                     )

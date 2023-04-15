@@ -1,13 +1,14 @@
 package com.marufalam.dufa.ui
 
 import android.util.Log
-import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.marufalam.dufa.BaseFragment
 import com.marufalam.dufa.R
 import com.marufalam.dufa.databinding.FragmentDashboardBinding
-import com.marufalam.dufa.BaseFragment
-import com.marufalam.dufa.utils.*
+import com.marufalam.dufa.utils.NetworkResult
+import com.marufalam.dufa.utils.hide
+import com.marufalam.dufa.utils.show
 import com.marufalam.dufa.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -17,7 +18,7 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
     private val dashboardViewModel by viewModels<DashboardViewModel>()
 
     override fun getFragmentView(): Int {
-       return R.layout.fragment_dashboard
+        return R.layout.fragment_dashboard
     }
 
     override fun configUi() {
@@ -28,16 +29,16 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
     }
 
     override fun setupNavigation() {
-        binding.memberListCard.setOnClickListener{
+        binding.memberListCard.setOnClickListener {
             findNavController().navigate(R.id.action_DashboardFragment_to_memberListFragment)
         }
         binding.paymentCard.setOnClickListener {
 
             findNavController().navigate(R.id.action_DashboardFragment_to_transactionHistoryFragment)
         }
-        binding.eventFragment.setOnClickListener {
+        binding.duesPaymentBtn.setOnClickListener {
 
-            findNavController().navigate(R.id.action_DashboardFragment_to_eventFragment)
+            findNavController().navigate(R.id.action_DashboardFragment_to_duesPaymentFragment)
         }
 
 
@@ -53,7 +54,7 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
                     //Log.i("TAG1", "binObserver: ${it.data!!.message.toString()}")
                 }
                 is NetworkResult.Loading -> {
-                   // progressBar.isVisible = true
+                    // progressBar.isVisible = true
 
                 }
                 is NetworkResult.Success -> {
@@ -80,7 +81,6 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
                     binding.totalMember.text = it.data?.totalMember.toString()
                     binding.totalDues.text = it.data?.totalDues.toString()
                     binding.totalVouchers.text = it.data?.totalVoucher.toString()
-
 
 
                 }

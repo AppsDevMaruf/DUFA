@@ -13,6 +13,8 @@ import com.marufalam.dufa.data.models.search.ResponseSearch
 import com.marufalam.dufa.data.models.search.blood.ResponseBloodGroup
 import com.marufalam.dufa.data.models.transaction_history.TransHistory
 import com.marufalam.dufa.data.models.upload_profile_pic.ResponseUploadProfilePic
+import com.marufalam.dufa.ui.profile_update.RequestProfileUpdate
+import com.marufalam.dufa.ui.profile_update.ResponseUpdateProfile
 import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.*
@@ -57,6 +59,13 @@ interface SecuredApi {
     suspend fun uploadProfilePic(
         @Path("userID") userId: Int,
         @Part image: MultipartBody.Part,
+    ): Response<ResponseUploadProfilePic>
+
+
+    @POST("details-profile-update/{userID}")
+    suspend fun updateProfile(
+        @Path("userID") userId: Int,
+        @Body requestProfileUpdate: RequestProfileUpdate
     ): Response<ResponseUploadProfilePic>
 
 

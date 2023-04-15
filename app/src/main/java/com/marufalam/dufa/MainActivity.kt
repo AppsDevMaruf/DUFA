@@ -1,11 +1,13 @@
 package com.marufalam.dufa
 
+
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.Window
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
@@ -16,13 +18,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.bumptech.glide.Glide
 import com.canhub.cropper.CropImage
 import com.canhub.cropper.CropImageContract
 import com.canhub.cropper.CropImageContractOptions
@@ -47,6 +47,7 @@ import java.io.File
 import java.io.FileOutputStream
 import javax.inject.Inject
 
+
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     @Inject
@@ -63,6 +64,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var uploadProfilePic: ShapeableImageView
     private lateinit var userProfilePicABHeader: TextView
     private lateinit var profilePicAB: TextView
+
+    private lateinit var toolbar: Toolbar
+
+    lateinit var titleAb: TextView
+    lateinit var topImage: ImageView
 
     companion object {
         private val PERMISSIONS = arrayOf(
@@ -117,7 +123,7 @@ class MainActivity : AppCompatActivity() {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
 
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         userProfilePic = toolbar.findViewById(R.id.userProfilePic)
         profilePicAB = toolbar.findViewById(R.id.profilePicAB)
@@ -289,6 +295,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun setData(profile: ResponseProfileInfo) {
         Log.i("TAG", "setData: $profile ")
+        titleAb = toolbar.findViewById(R.id.profilePicAB)
+        topImage = toolbar.findViewById(R.id.userProfilePic)
 
 
         userId = profile.id
@@ -305,6 +313,12 @@ class MainActivity : AppCompatActivity() {
             profilePicAB.show()
 
             userProfilePicABHeader.text = nameAbbreviationGenerator(profile.name.toString())
+
+            titleAb.show()
+            topImage.hide()
+            titleAb.text = nameAbbreviationGenerator(profile.name.toString())
+
+
         } else {
             userProfilePicHeader.show()
             userProfilePicABHeader.hide()
@@ -312,6 +326,11 @@ class MainActivity : AppCompatActivity() {
             profilePicAB.hide()
 
             val profilePic = Constants.IMG_PREFIX + profile.imagePath
+            topImage.show()
+            titleAb.hide()
+
+            topImage.loadImagesWithGlide(profilePic)
+
 //
             uploadProfilePic.loadImagesWithGlide(profilePic)
             userProfilePicHeader.loadImagesWithGlide(profilePic)

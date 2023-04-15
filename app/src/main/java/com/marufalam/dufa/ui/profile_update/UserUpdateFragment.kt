@@ -1,14 +1,25 @@
 package com.marufalam.dufa.ui.profile_update
 
+import android.app.Dialog
+import android.net.Uri
+import android.util.Log
+import android.view.Window
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.canhub.cropper.CropImage
+import com.canhub.cropper.CropImageContract
+import com.canhub.cropper.CropImageContractOptions
+import com.canhub.cropper.CropImageOptions
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.marufalam.dufa.BaseFragment
 import com.marufalam.dufa.R
@@ -24,6 +35,15 @@ import com.marufalam.dufa.ui.profile_update.adapter.*
 import com.marufalam.dufa.utils.*
 import com.marufalam.dufa.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import id.zelory.compressor.Compressor
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import java.io.File
+import java.io.FileOutputStream
 import java.util.*
 
 @AndroidEntryPoint
@@ -44,12 +64,28 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
     private lateinit var hallAdapter: HallAdapter
     private var title = "Male"
 
+    companion object {
+        private val PERMISSIONS = arrayOf(
+            android.Manifest.permission.READ_EXTERNAL_STORAGE,
+            android.Manifest.permission.CAMERA
+        )
+    }
+
+    private lateinit var permissionsRequest: ActivityResultLauncher<Array<String>>
+    private val customCropImage = registerForActivityResult(CropImageContract()) {
+        if (it !is CropImage.CancelledResult) {
+            handleCropImageResult(it.uriContent!!)
+        }
+    }
+
     override fun getFragmentView(): Int {
         return R.layout.fragment_user_update
     }
 
 
     override fun setupNavigation() {
+
+
         binding.departmentTypeSpinner.setOnClickListener {
             showBottomSheetDepartments()
             hideSoftKeyboard()
@@ -78,6 +114,55 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
             datePickerFun {
                 binding.birthdate.text = it
             }
+        }
+
+        binding.userProfilePic.setOnClickListener {
+            requestPermissions(permissionsRequest, PERMISSIONS)
+            startCameraWithoutUri(includeCamera = false, includeGallery = true)
+
+        }
+        binding.profilePicAB.setOnClickListener {
+            requestPermissions(permissionsRequest, PERMISSIONS)
+            startCameraWithoutUri(includeCamera = true, includeGallery = false)
+
+        }
+
+
+        binding.updateBtn.setOnClickListener {
+
+            var request = RequestProfileUpdate(
+                binding.name.text.toString(),
+                binding.address.text.toString(),
+                binding.phone.text.toString(),
+                " ",
+                binding.departmentTypeText.text.toString(),
+                binding.districtTypeText.text.toString(),
+                binding.bloodGroupTypeText.text.toString(),
+                binding.occupationTypeText.text.toString(),
+                binding.genderTypeText.text.toString(),
+                binding.hallTypeText.text.toString(),
+                binding.nid.text.toString()
+            )
+
+
+
+
+
+            try {
+                CoroutineScope(Dispatchers.IO).launch {
+
+
+                    dashboardViewModel.updateProfileVM(1384, requestProfileUpdate = request)
+
+                }
+
+
+            } catch (e: Exception) {
+
+                Log.i("TAG", "setupNavigation: ${e.message} ")
+            }
+
+
         }
     }
 
@@ -124,7 +209,98 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
         bottomSheetDialog.show()
     }
 
+    private fun getPermissionsRequest() =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
+            if (isAllPermissionsGranted(PERMISSIONS)) {
+                showImagePickerDialog()
+            } else {
+
+            }
+        }
+
+
+    private fun handleCropImageResult(uri: Uri) {
+        upload(uri)
+        binding.userProfilePic.show()
+        binding.profilePicAB.hide()
+        binding.userProfilePic.setImageURI(uri)
+
+
+    }
+
+    private fun upload(fileUri: Uri) {
+
+        val filesDir = requireActivity().filesDir
+        val file = File(filesDir, "profile${System.currentTimeMillis()}.png")
+
+        Log.i("uploadFileDir", "upload:$file")
+
+        val inputStream = requireActivity().contentResolver.openInputStream(fileUri)
+        val outputStream = FileOutputStream(file)
+        inputStream!!.copyTo(outputStream)
+
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val nFile = Compressor.compress(requireContext(), file)
+
+            val requestBody = nFile.asRequestBody("image/*".toMediaTypeOrNull())
+
+            val part = MultipartBody.Part.createFormData("profile_pic", file.name, requestBody)
+
+            dashboardViewModel.uploadProfilePicVM(1384, part)
+        }
+
+
+        inputStream.close()
+        outputStream.close()
+
+    }
+
+    private fun showImagePickerDialog() {
+
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.setCancelable(true)
+        dialog.setContentView(R.layout.dialog_custom_layout)
+
+        dialog.findViewById<TextView>(R.id.cancel_button).setOnClickListener {
+            dialog.dismiss()
+        }
+
+        val galleryBtn = dialog.findViewById(R.id.galleryBtn) as TextView
+        val cameraBtn = dialog.findViewById(R.id.cameraBtn) as TextView
+
+
+        galleryBtn.setOnClickListener {
+            startCameraWithoutUri(includeCamera = false, includeGallery = true)
+            dialog.dismiss()
+        }
+
+        cameraBtn.setOnClickListener {
+            startCameraWithoutUri(includeCamera = true, includeGallery = false)
+            dialog.dismiss()
+        }
+
+        dialog.show()
+
+    }
+
+    private fun startCameraWithoutUri(includeCamera: Boolean, includeGallery: Boolean) {
+        customCropImage.launch(
+            CropImageContractOptions(
+                uri = null,
+                cropImageOptions = CropImageOptions(
+                    imageSourceIncludeCamera = includeCamera,
+                    imageSourceIncludeGallery = includeGallery,
+                ),
+            ),
+        )
+    }
+
     override fun configUi() {
+        permissionsRequest = getPermissionsRequest()
+
 
 
         dashboardViewModel.occupationsVM()
@@ -144,6 +320,7 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
             binding.birthdate.text = userInfo.birthdate
             binding.departmentTypeText.setText(userInfo.department)
             binding.hallTypeText.setText(userInfo.hall)
+            binding.occupationTypeText.setText(userInfo.occupation)
             binding.bloodGroupTypeText.setText(userInfo.bloodgroup)
             binding.bloodGroupTypeText.setTextColor(
                 ContextCompat.getColor(
@@ -151,7 +328,7 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
                     R.color.text_red
                 )
             )
-            binding.occupationTypeText.setText(userInfo.occupation)
+
             binding.districtTypeText.setText(userInfo.district)
 
 //            if (userInfo.subscription == "none") {
@@ -198,6 +375,33 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
     }
 
     override fun binObserver() {
+
+        dashboardViewModel.responseUpdateProfileVMLD.observe(viewLifecycleOwner) {
+
+            when (it) {
+                is NetworkResult.Error -> {
+
+                    Log.i("TAG", "Error: ${it.data.toString()}")
+
+                }
+                is NetworkResult.Loading -> {
+
+                    Log.i("TAG", "Loading: ${it.data}")
+                }
+                is NetworkResult.Success -> {
+
+                    Log.i("TAG", "message: ${it.message}")
+                    Log.i("TAG", "data: ${it.data?.message}")
+
+                 //   it.data?.let { it1 -> toast(it1.message) }
+
+
+                }
+            }
+
+
+        }
+
         dashboardViewModel.occupationsVMLD.observe(viewLifecycleOwner) { occupations ->
             binding.progress.hide()
 

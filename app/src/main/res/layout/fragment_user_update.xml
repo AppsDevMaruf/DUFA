@@ -34,8 +34,8 @@
                     android:layout_height="100dp"
                     android:layout_marginTop="30dp"
                     android:padding="1dp"
-                    android:src="@drawable/ic_member"
-                    android:visibility="invisible"
+                    android:src="@drawable/maruf"
+                    android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="@+id/view"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +58,7 @@
                     android:text="AB"
                     android:textAllCaps="false"
                     android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
-                    android:visibility="visible"
+                    android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="@+id/view"
                     app:layout_constraintDimensionRatio="1:1"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -171,10 +171,10 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="8dp"
                                 android:layout_marginStart="16dp"
-                                android:fontFamily="@font/dm_sans_medium"
-                                android:tag="false"
-                                android:maxLines="1"
                                 android:ellipsize="end"
+                                android:fontFamily="@font/dm_sans_medium"
+                                android:maxLines="1"
+                                android:tag="false"
                                 android:text="Select Occupation type"
                                 android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                                 android:textColor="#8F9BB3"
@@ -184,16 +184,16 @@
 
                             <ImageView
                                 android:id="@+id/imageView4"
-                                app:tint="@color/text_primary"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:src="@drawable/round_keyboard_arrow_down_24"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintHorizontal_bias="0.905"
-                                app:layout_constraintVertical_bias="0.523"
                                 app:layout_constraintStart_toEndOf="@+id/occupationTypeText"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="0.523"
+                                app:tint="@color/text_primary" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                     </LinearLayout>
@@ -276,10 +276,10 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="8dp"
                                 android:layout_marginStart="16dp"
-                                android:fontFamily="@font/dm_sans_medium"
-                                android:tag="false"
-                                android:maxLines="1"
                                 android:ellipsize="end"
+                                android:fontFamily="@font/dm_sans_medium"
+                                android:maxLines="1"
+                                android:tag="false"
                                 android:text="Select department"
                                 android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                                 android:textColor="@color/text_primary"
@@ -290,14 +290,14 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                app:tint="@color/text_primary"
                                 android:src="@drawable/round_keyboard_arrow_down_24"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintHorizontal_bias="0.905"
-                                app:layout_constraintVertical_bias="0.523"
                                 app:layout_constraintStart_toEndOf="@+id/departmentTypeText"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="0.523"
+                                app:tint="@color/text_primary" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                     </LinearLayout>
@@ -346,8 +346,8 @@
                                 android:fontFamily="@font/dm_sans_medium"
                                 android:tag="false"
                                 android:text="Select hall"
-                                android:textColor="@color/text_primary"
                                 android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                                android:textColor="@color/text_primary"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toEndOf="@+id/hallIcon"
                                 app:layout_constraintTop_toTopOf="parent" />
@@ -359,9 +359,9 @@
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintHorizontal_bias="0.905"
-                                app:layout_constraintVertical_bias="0.523"
                                 app:layout_constraintStart_toEndOf="@+id/hallTypeText"
                                 app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="0.523"
 
                                 app:tint="@color/text_primary" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -409,10 +409,10 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="8dp"
                                 android:layout_marginStart="16dp"
-                                android:fontFamily="@font/dm_sans_medium"
-                                android:tag="false"
-                                android:maxLines="1"
                                 android:ellipsize="end"
+                                android:fontFamily="@font/dm_sans_medium"
+                                android:maxLines="1"
+                                android:tag="false"
                                 android:text="Select blood Group"
                                 android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                                 android:textColor="@color/text_primary"
@@ -423,13 +423,13 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                app:tint="@color/text_primary"
                                 android:src="@drawable/round_keyboard_arrow_down_24"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintHorizontal_bias="0.905"
                                 app:layout_constraintStart_toEndOf="@+id/bloodGroupTypeText"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:tint="@color/text_primary" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                     </LinearLayout>
@@ -475,10 +475,10 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="8dp"
                                 android:layout_marginStart="16dp"
-                                android:fontFamily="@font/dm_sans_medium"
-                                android:tag="false"
-                                android:maxLines="1"
                                 android:ellipsize="end"
+                                android:fontFamily="@font/dm_sans_medium"
+                                android:maxLines="1"
+                                android:tag="false"
                                 android:text="Select District"
                                 android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                                 android:textColor="@color/text_primary"
@@ -493,9 +493,9 @@
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintHorizontal_bias="0.905"
-                                app:layout_constraintVertical_bias="0.523"
                                 app:layout_constraintStart_toEndOf="@+id/districtTypeText"
                                 app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="0.523"
                                 app:tint="@color/text_primary" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -520,7 +520,6 @@
                             android:id="@+id/address"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:minHeight="70dp"
                             android:layout_gravity="start"
                             android:layout_weight="1"
                             android:background="@drawable/white_back_react"
@@ -528,6 +527,7 @@
                             android:fontFamily="@font/dm_sans_medium"
                             android:lines="1"
                             android:maxLines="2"
+                            android:minHeight="70dp"
                             android:padding="2dp"
                             android:paddingStart="10dp"
                             android:text="@string/saiful_khandaker"
@@ -565,9 +565,9 @@
                             android:lines="1"
                             android:padding="2dp"
                             android:paddingStart="10dp"
-                            tools:text="Saiful Khandaker"
                             android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
-                            android:textColor="@color/text_primary" />
+                            android:textColor="@color/text_primary"
+                            tools:text="Saiful Khandaker" />
 
                     </LinearLayout>
                     <!-- gender-->
@@ -612,11 +612,11 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="8dp"
                                 android:layout_marginStart="16dp"
+                                android:ellipsize="end"
                                 android:fontFamily="@font/dm_sans_medium"
+                                android:maxLines="1"
                                 android:tag="false"
                                 android:text="Select Gender"
-                                android:maxLines="1"
-                                android:ellipsize="end"
                                 android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                                 android:textColor="@color/text_primary"
                                 app:layout_constraintBottom_toBottomOf="parent"
@@ -626,13 +626,13 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                app:tint="@color/text_primary"
                                 android:src="@drawable/round_keyboard_arrow_down_24"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintHorizontal_bias="0.905"
                                 app:layout_constraintStart_toEndOf="@+id/genderTypeText"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:tint="@color/text_primary" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                     </LinearLayout>
@@ -674,6 +674,18 @@
                             android:textColor="@color/text_primary" />
 
                     </LinearLayout>
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/updateBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/_50sdp"
+                        android:background="@drawable/btn_enable"
+                        android:fontFamily="@font/dm_sans_bold"
+                        android:text="Update info"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white" />
+
 
                 </LinearLayout>
 
