@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -9,55 +9,130 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        tools:context=".ui.MemberListFragment"
+        android:layout_height="match_parent"
+        android:background="#DFDFDF"
         android:orientation="vertical"
-        android:background="@color/blue_600"
-        android:layout_height="match_parent">
+        android:padding="16dp"
+        tools:context=".ui.MemberListFragment">
 
         <ProgressBar
             android:id="@+id/progress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone" />
+
         <TextView
             android:id="@+id/filterName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="Filter By"/>
-        <androidx.appcompat.widget.AppCompatSpinner
-            android:id="@+id/filterbySpiner"
+            android:padding="4dp"
+            android:text="Filter By" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/filterTypeSpinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="?actionBarSize"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/white_back_react"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/showTitle">
+
+
+            <ImageView
+                android:id="@+id/personIcon"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:paddingVertical="4dp"
+                android:src="@drawable/ic_filter"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/blue" />
+
+            <TextView
+                android:id="@+id/titleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/dm_sans_medium"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:tag="false"
+                android:text="@string/select_filter_type"
+                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                android:textColor="@color/text_grey"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/personIcon"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/round_keyboard_arrow_down_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/blue" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <EditText
+            android:id="@+id/searchET"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/border_back_grey"
+            android:drawableStart="@drawable/ic_search"
+            android:drawablePadding="10dp"
+            android:hint="@string/name_or_email"
+            android:imeOptions="actionSearch"
+            android:paddingStart="16dp"
+            android:textColor="@color/text_black"
+            android:visibility="gone"
+            tools:ignore="RtlSymmetry" />
+
         <TextView
+            android:id="@+id/dobTV"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="Search"/>
-        <androidx.appcompat.widget.AppCompatSpinner
-            android:id="@+id/itembySpiner"
+            android:layout_height="?actionBarSize"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/border_back_grey_stock"
+            android:clickable="true"
+            android:visibility="gone"
+            android:drawablePadding="4dp"
+            android:focusable="true"
+            android:fontFamily="@font/dm_sans"
+            android:gravity="center_vertical"
+            android:hint="yyyy-mm-dd"
+            android:includeFontPadding="false"
+            android:paddingHorizontal="10dp"
+            android:paddingStart="10dp"
+            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+            app:drawableRightCompat="@drawable/baseline_date_range_24" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/memberListRv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <androidx.appcompat.widget.AppCompatButton
+            android:layout_height="match_parent"
+            android:visibility="visible"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/member_list_row" />
+
+        <ImageView
+            android:id="@+id/noData"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Search"/>
+            android:padding="@dimen/_50sdp"
+            android:src="@drawable/no_data"
+            android:visibility="gone" />
 
-
-        <FrameLayout
-            android:id="@+id/mainLayout"
-            android:visibility="visible"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/memberListRv"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:listitem="@layout/member_list_row" />
-
-        </FrameLayout>
 
     </LinearLayout>
 </layout>

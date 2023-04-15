@@ -18,7 +18,7 @@
             android:background="@color/background"
             android:gravity="center"
             android:orientation="vertical"
-            tools:context=".MainActivity">
+            tools:context=".ui.PaymentFragment">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/registerCard"
@@ -40,7 +40,7 @@
 
 
                     <ImageView
-                        android:id="@+id/registerCardImg"
+                        android:id="@+id/imageView1"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:paddingStart="10dp"
@@ -51,7 +51,7 @@
                         app:srcCompat="@drawable/credit_card" />
 
                     <TextView
-                        android:id="@+id/registerText"
+                        android:id="@+id/textView7"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
@@ -63,12 +63,12 @@
                         android:textColor="@color/text_black"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        app:layout_constraintEnd_toStartOf="@+id/regAmount"
-                        app:layout_constraintStart_toEndOf="@+id/registerCardImg"
-                        app:layout_constraintTop_toTopOf="@+id/registerCardImg" />
+                        app:layout_constraintEnd_toStartOf="@+id/textView6"
+                        app:layout_constraintStart_toEndOf="@+id/imageView1"
+                        app:layout_constraintTop_toTopOf="@+id/imageView1" />
 
                     <TextView
-                        android:id="@+id/regPaymentNow"
+                        android:id="@+id/textView5"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/dm_sans_medium"
@@ -78,13 +78,13 @@
                         android:text="Pay Now"
                         android:textColor="@color/text_gray"
                         android:textSize="10sp"
-                        app:layout_constraintEnd_toEndOf="@+id/registerText"
+                        app:layout_constraintEnd_toEndOf="@+id/textView7"
                         app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="@+id/registerText"
-                        app:layout_constraintTop_toBottomOf="@+id/registerText" />
+                        app:layout_constraintStart_toStartOf="@+id/textView7"
+                        app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
                     <TextView
-                        android:id="@+id/regAmount"
+                        android:id="@+id/textView6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="4dp"
@@ -105,175 +105,175 @@
 
             </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/oneTimeFee"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:padding="@dimen/_8sdp"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="5dp"
-                app:cardMaxElevation="12dp"
-                app:cardPreventCornerOverlap="true"
-                app:cardUseCompatPadding="false">
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:id="@+id/oneTimeFee"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="0dp"-->
+<!--                android:layout_margin="10dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:padding="@dimen/_8sdp"-->
+<!--                app:cardBackgroundColor="@color/white"-->
+<!--                app:cardCornerRadius="10dp"-->
+<!--                app:cardElevation="5dp"-->
+<!--                app:cardMaxElevation="12dp"-->
+<!--                app:cardPreventCornerOverlap="true"-->
+<!--                app:cardUseCompatPadding="false">-->
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-
-                    <ImageView
-                        android:id="@+id/oneTimeImgView"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:paddingStart="10dp"
-                        android:scaleType="centerInside"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/credit_card" />
-
-                    <TextView
-                        android:id="@+id/oneTimeText"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_weight="1"
-                        android:letterSpacing="-0.02"
-                        android:lineSpacingExtra="1sp"
-                        android:text="One Time Fee "
-                        android:textColor="@color/text_black"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toStartOf="@+id/oneTimeAmount"
-                        app:layout_constraintStart_toEndOf="@+id/oneTimeImgView"
-                        app:layout_constraintTop_toTopOf="@+id/oneTimeImgView" />
-
-                    <TextView
-                        android:id="@+id/oneTimePaymentLabel"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/dm_sans_medium"
-                        android:letterSpacing="0.02"
-                        android:lineSpacingExtra="1sp"
-                        android:padding="5dp"
-                        android:text="Pay Now"
-                        android:textColor="@color/text_gray"
-                        android:textSize="10sp"
-                        app:layout_constraintEnd_toEndOf="@+id/oneTimeText"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="@+id/oneTimeText"
-                        app:layout_constraintTop_toBottomOf="@+id/oneTimeText" />
-
-                    <TextView
-                        android:id="@+id/oneTimeAmount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="4dp"
-                        android:layout_weight="1"
-                        android:letterSpacing="-0.02"
-                        android:lineSpacingExtra="1sp"
-                        android:paddingRight="10dp"
-                        android:text="৳3000"
-                        android:textColor="@color/text_black"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.21" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content">-->
 
 
-            </androidx.cardview.widget.CardView>
+<!--                    <ImageView-->
+<!--                        android:id="@+id/imageView2"-->
+<!--                        android:layout_width="60dp"-->
+<!--                        android:layout_height="60dp"-->
+<!--                        android:paddingStart="10dp"-->
+<!--                        android:scaleType="centerInside"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"-->
+<!--                        app:srcCompat="@drawable/credit_card" />-->
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/yearlePaymentsCard"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:padding="@dimen/_8sdp"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="5dp"
-                app:cardMaxElevation="12dp"
-                app:cardPreventCornerOverlap="true"
-                app:cardUseCompatPadding="false">
+<!--                    <TextView-->
+<!--                        android:id="@+id/textView7"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginLeft="16dp"-->
+<!--                        android:layout_marginTop="8dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:letterSpacing="-0.02"-->
+<!--                        android:lineSpacingExtra="1sp"-->
+<!--                        android:text="One Time Fee "-->
+<!--                        android:textColor="@color/text_black"-->
+<!--                        android:textSize="16sp"-->
+<!--                        android:textStyle="bold"-->
+<!--                        app:layout_constraintEnd_toStartOf="@+id/textView6"-->
+<!--                        app:layout_constraintStart_toEndOf="@+id/imageView2"-->
+<!--                        app:layout_constraintTop_toTopOf="@+id/imageView2" />-->
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+<!--                    <TextView-->
+<!--                        android:id="@+id/textView5"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:fontFamily="@font/dm_sans_medium"-->
+<!--                        android:letterSpacing="0.02"-->
+<!--                        android:lineSpacingExtra="1sp"-->
+<!--                        android:padding="5dp"-->
+<!--                        android:text="Pay Now"-->
+<!--                        android:textColor="@color/text_gray"-->
+<!--                        android:textSize="10sp"-->
+<!--                        app:layout_constraintEnd_toEndOf="@+id/textView7"-->
+<!--                        app:layout_constraintHorizontal_bias="0.0"-->
+<!--                        app:layout_constraintStart_toStartOf="@+id/textView7"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/textView7" />-->
 
-
-                    <ImageView
-                        android:id="@+id/yearleImgView"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:paddingStart="10dp"
-                        android:scaleType="centerInside"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/credit_card" />
-
-                    <TextView
-                        android:id="@+id/yearleImgViewText"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_weight="1"
-                        android:letterSpacing="-0.02"
-                        android:lineSpacingExtra="1sp"
-                        android:text="Yearly Payment"
-                        android:textColor="@color/text_black"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toStartOf="@+id/yearleAmount"
-                        app:layout_constraintStart_toEndOf="@+id/yearleImgView"
-                        app:layout_constraintTop_toTopOf="@+id/yearleImgView" />
-
-                    <TextView
-                        android:id="@+id/yearlePaymentLabel"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/dm_sans_medium"
-                        android:letterSpacing="0.02"
-                        android:lineSpacingExtra="1sp"
-                        android:padding="5dp"
-                        android:text="Pay Now"
-                        android:textColor="@color/text_gray"
-                        android:textSize="10sp"
-                        app:layout_constraintEnd_toEndOf="@+id/yearleImgViewText"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="@+id/yearleImgViewText"
-                        app:layout_constraintTop_toBottomOf="@+id/yearleImgViewText" />
-
-                    <TextView
-                        android:id="@+id/yearleAmount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="4dp"
-                        android:layout_weight="1"
-                        android:letterSpacing="-0.02"
-                        android:lineSpacingExtra="1sp"
-                        android:paddingRight="10dp"
-                        android:text="৳5000"
-                        android:textColor="@color/text_black"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.21" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+<!--                    <TextView-->
+<!--                        android:id="@+id/textView6"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginEnd="4dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:letterSpacing="-0.02"-->
+<!--                        android:lineSpacingExtra="1sp"-->
+<!--                        android:paddingRight="10dp"-->
+<!--                        android:text="৳3000"-->
+<!--                        android:textColor="@color/text_black"-->
+<!--                        android:textSize="16sp"-->
+<!--                        android:textStyle="bold"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"-->
+<!--                        app:layout_constraintVertical_bias="0.21" />-->
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
 
 
-            </androidx.cardview.widget.CardView>
+<!--            </androidx.cardview.widget.CardView>-->
+
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:id="@+id/yearlePaymentsCard"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="0dp"-->
+<!--                android:layout_margin="10dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:padding="@dimen/_8sdp"-->
+<!--                app:cardBackgroundColor="@color/white"-->
+<!--                app:cardCornerRadius="10dp"-->
+<!--                app:cardElevation="5dp"-->
+<!--                app:cardMaxElevation="12dp"-->
+<!--                app:cardPreventCornerOverlap="true"-->
+<!--                app:cardUseCompatPadding="false">-->
+
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content">-->
+
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/imageView4"-->
+<!--                        android:layout_width="60dp"-->
+<!--                        android:layout_height="60dp"-->
+<!--                        android:paddingStart="10dp"-->
+<!--                        android:scaleType="centerInside"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"-->
+<!--                        app:srcCompat="@drawable/credit_card" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/textView7"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginLeft="16dp"-->
+<!--                        android:layout_marginTop="8dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:letterSpacing="-0.02"-->
+<!--                        android:lineSpacingExtra="1sp"-->
+<!--                        android:text="Yearly Payment"-->
+<!--                        android:textColor="@color/text_black"-->
+<!--                        android:textSize="16sp"-->
+<!--                        android:textStyle="bold"-->
+<!--                        app:layout_constraintEnd_toStartOf="@+id/textView6"-->
+<!--                        app:layout_constraintStart_toEndOf="@+id/imageView4"-->
+<!--                        app:layout_constraintTop_toTopOf="@+id/imageView4" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/textView5"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:fontFamily="@font/dm_sans_medium"-->
+<!--                        android:letterSpacing="0.02"-->
+<!--                        android:lineSpacingExtra="1sp"-->
+<!--                        android:padding="5dp"-->
+<!--                        android:text="Pay Now"-->
+<!--                        android:textColor="@color/text_gray"-->
+<!--                        android:textSize="10sp"-->
+<!--                        app:layout_constraintEnd_toEndOf="@+id/textView7"-->
+<!--                        app:layout_constraintHorizontal_bias="0.0"-->
+<!--                        app:layout_constraintStart_toStartOf="@+id/textView7"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/textView7" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/textView6"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginEnd="4dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:letterSpacing="-0.02"-->
+<!--                        android:lineSpacingExtra="1sp"-->
+<!--                        android:paddingRight="10dp"-->
+<!--                        android:text="৳5000"-->
+<!--                        android:textColor="@color/text_black"-->
+<!--                        android:textSize="16sp"-->
+<!--                        android:textStyle="bold"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"-->
+<!--                        app:layout_constraintVertical_bias="0.21" />-->
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+
+<!--            </androidx.cardview.widget.CardView>-->
 
 
         </LinearLayout>

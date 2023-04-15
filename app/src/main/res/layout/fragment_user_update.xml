@@ -1,0 +1,697 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/back_grey"
+        tools:context=".ui.profile_update.UserUpdateFragment">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="50dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/userProfilePic"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="30dp"
+                    android:padding="1dp"
+                    android:src="@drawable/ic_member"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="@+id/view"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.Image.PILL"
+                    app:strokeColor="@color/blue"
+                    app:strokeWidth="1dp"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/profilePicAB"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/cta_circle"
+                    android:fontFamily="@font/dm_sans_medium"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:padding="1dp"
+                    android:text="AB"
+                    android:textAllCaps="false"
+                    android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="@+id/view"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.Image.PILL"
+                    app:strokeColor="@color/white"
+                    app:strokeWidth="2dp"
+                    tools:ignore="MissingConstraints" />
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/dm_sans_medium"
+                    android:padding="8dp"
+                    app:layout_constraintBottom_toTopOf="@+id/mainLayout"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/mainLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="70dp"
+                    android:background="@color/back_grey"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+                    <!--name-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:lines="1"
+                            android:padding="2dp"
+                            android:text="Full name"
+                            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                            android:textColor="@color/blue" />
+
+                        <EditText
+                            android:id="@+id/name"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_gravity="start"
+                            android:layout_weight="1"
+                            android:background="@drawable/white_back_react"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:lines="1"
+                            android:padding="2dp"
+                            android:paddingStart="10dp"
+                            android:text="Saiful Khandaker"
+                            android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+                            android:textColor="@color/text_primary" />
+
+                    </LinearLayout>
+
+                    <!-- occupation-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:lines="1"
+                            android:padding="2dp"
+                            android:text="Occupation"
+                            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                            android:textColor="@color/blue" />
+
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/occupationTypeSpinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_marginTop="5dp"
+                            android:background="@drawable/white_back_react"
+                            app:layout_constraintStart_toStartOf="@id/accountTypeTitle"
+                            app:layout_constraintTop_toBottomOf="@+id/accountTypeTitle">
+
+
+                            <ImageView
+                                android:id="@+id/occupationIcon"
+                                android:layout_width="30dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:paddingVertical="12dp"
+                                android:src="@drawable/ic_occupation"
+                                android:visibility="visible"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/occupationTypeText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="8dp"
+                                android:layout_marginStart="16dp"
+                                android:fontFamily="@font/dm_sans_medium"
+                                android:tag="false"
+                                android:maxLines="1"
+                                android:ellipsize="end"
+                                android:text="Select Occupation type"
+                                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                                android:textColor="#8F9BB3"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/occupationIcon"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <ImageView
+                                android:id="@+id/imageView4"
+                                app:tint="@color/text_primary"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/round_keyboard_arrow_down_24"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.905"
+                                app:layout_constraintVertical_bias="0.523"
+                                app:layout_constraintStart_toEndOf="@+id/occupationTypeText"
+                                app:layout_constraintTop_toTopOf="parent" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </LinearLayout>
+                    <!-- phone-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:lines="1"
+                            android:padding="2dp"
+                            android:text="Phone"
+                            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                            android:textColor="@color/blue" />
+
+                        <EditText
+                            android:id="@+id/phone"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_gravity="start"
+                            android:layout_weight="1"
+                            android:background="@drawable/white_back_react"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:lines="1"
+                            android:padding="2dp"
+                            android:paddingStart="10dp"
+                            android:text="Saiful Khandaker"
+                            android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+                            android:textColor="@color/text_primary" />
+
+                    </LinearLayout>
+
+                    <!-- department-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:lines="1"
+                            android:padding="2dp"
+                            android:text="Department"
+                            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                            android:textColor="@color/blue" />
+
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/departmentTypeSpinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_marginTop="5dp"
+                            android:background="@drawable/white_back_react"
+                            app:layout_constraintStart_toStartOf="@id/accountTypeTitle"
+                            app:layout_constraintTop_toBottomOf="@+id/accountTypeTitle">
+
+
+                            <ImageView
+                                android:id="@+id/departmentIcon"
+                                android:layout_width="30dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:paddingVertical="12dp"
+                                android:src="@drawable/ic_occupation"
+                                android:visibility="visible"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/departmentTypeText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="8dp"
+                                android:layout_marginStart="16dp"
+                                android:fontFamily="@font/dm_sans_medium"
+                                android:tag="false"
+                                android:maxLines="1"
+                                android:ellipsize="end"
+                                android:text="Select department"
+                                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                                android:textColor="@color/text_primary"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/departmentIcon"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:tint="@color/text_primary"
+                                android:src="@drawable/round_keyboard_arrow_down_24"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.905"
+                                app:layout_constraintVertical_bias="0.523"
+                                app:layout_constraintStart_toEndOf="@+id/departmentTypeText"
+                                app:layout_constraintTop_toTopOf="parent" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </LinearLayout>
+                    <!-- hall-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:lines="1"
+                            android:padding="2dp"
+                            android:text="Hall"
+                            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                            android:textColor="@color/blue" />
+
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/hallTypeSpinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_marginTop="5dp"
+                            android:background="@drawable/white_back_react">
+
+                            <ImageView
+                                android:id="@+id/hallIcon"
+                                android:layout_width="30dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:paddingVertical="12dp"
+                                android:src="@drawable/ic_occupation"
+                                android:visibility="visible"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/hallTypeText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="8dp"
+                                android:layout_marginStart="16dp"
+                                android:fontFamily="@font/dm_sans_medium"
+                                android:tag="false"
+                                android:text="Select hall"
+                                android:textColor="@color/text_primary"
+                                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/hallIcon"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/round_keyboard_arrow_down_24"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.905"
+                                app:layout_constraintVertical_bias="0.523"
+                                app:layout_constraintStart_toEndOf="@+id/hallTypeText"
+                                app:layout_constraintTop_toTopOf="parent"
+
+                                app:tint="@color/text_primary" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </LinearLayout>
+                    <!-- blood group-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:lines="1"
+                            android:padding="2dp"
+                            android:text="Blood Group"
+                            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                            android:textColor="@color/blue" />
+
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/bloodGroupTypeSpinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_marginTop="5dp"
+                            android:background="@drawable/white_back_react">
+
+                            <ImageView
+                                android:id="@+id/bloodGroupIcon"
+                                android:layout_width="30dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:paddingVertical="12dp"
+                                android:src="@drawable/ic_occupation"
+                                android:visibility="visible"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/bloodGroupTypeText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="8dp"
+                                android:layout_marginStart="16dp"
+                                android:fontFamily="@font/dm_sans_medium"
+                                android:tag="false"
+                                android:maxLines="1"
+                                android:ellipsize="end"
+                                android:text="Select blood Group"
+                                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                                android:textColor="@color/text_primary"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/bloodGroupIcon"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:tint="@color/text_primary"
+                                android:src="@drawable/round_keyboard_arrow_down_24"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.905"
+                                app:layout_constraintStart_toEndOf="@+id/bloodGroupTypeText"
+                                app:layout_constraintTop_toTopOf="parent" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </LinearLayout>
+                    <!-- district-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:lines="1"
+                            android:padding="2dp"
+                            android:text="District"
+                            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                            android:textColor="@color/blue" />
+
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/districtTypeSpinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_marginTop="5dp"
+                            android:background="@drawable/white_back_react">
+
+                            <ImageView
+                                android:id="@+id/districtIcon"
+                                android:layout_width="30dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:paddingVertical="12dp"
+                                android:src="@drawable/ic_occupation"
+                                android:visibility="visible"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/districtTypeText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="8dp"
+                                android:layout_marginStart="16dp"
+                                android:fontFamily="@font/dm_sans_medium"
+                                android:tag="false"
+                                android:maxLines="1"
+                                android:ellipsize="end"
+                                android:text="Select District"
+                                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                                android:textColor="@color/text_primary"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/districtIcon"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/round_keyboard_arrow_down_24"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.905"
+                                app:layout_constraintVertical_bias="0.523"
+                                app:layout_constraintStart_toEndOf="@+id/districtTypeText"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:tint="@color/text_primary" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </LinearLayout>
+                    <!--address-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:lines="1"
+                            android:padding="2dp"
+                            android:text="Address"
+                            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                            android:textColor="@color/blue" />
+
+                        <EditText
+                            android:id="@+id/address"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:minHeight="70dp"
+                            android:layout_gravity="start"
+                            android:layout_weight="1"
+                            android:background="@drawable/white_back_react"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:lines="1"
+                            android:maxLines="2"
+                            android:padding="2dp"
+                            android:paddingStart="10dp"
+                            android:text="@string/saiful_khandaker"
+                            android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+                            android:textColor="@color/text_primary" />
+
+                    </LinearLayout>
+
+                    <!--nid-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:lines="1"
+                            android:padding="2dp"
+                            android:text="NID"
+                            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                            android:textColor="@color/blue" />
+
+                        <EditText
+                            android:id="@+id/nid"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_gravity="start"
+                            android:layout_weight="1"
+                            android:background="@drawable/white_back_react"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:inputType="number"
+                            android:lines="1"
+                            android:padding="2dp"
+                            android:paddingStart="10dp"
+                            tools:text="Saiful Khandaker"
+                            android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+                            android:textColor="@color/text_primary" />
+
+                    </LinearLayout>
+                    <!-- gender-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:lines="1"
+                            android:padding="2dp"
+                            android:text="Gender"
+                            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                            android:textColor="@color/blue" />
+
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/genderTypeSpinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_marginTop="5dp"
+                            android:background="@drawable/white_back_react">
+
+                            <ImageView
+                                android:id="@+id/genderIcon"
+                                android:layout_width="30dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:paddingVertical="12dp"
+                                android:src="@drawable/ic_occupation"
+                                android:visibility="visible"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/genderTypeText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="8dp"
+                                android:layout_marginStart="16dp"
+                                android:fontFamily="@font/dm_sans_medium"
+                                android:tag="false"
+                                android:text="Select Gender"
+                                android:maxLines="1"
+                                android:ellipsize="end"
+                                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                                android:textColor="@color/text_primary"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/genderIcon"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:tint="@color/text_primary"
+                                android:src="@drawable/round_keyboard_arrow_down_24"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.905"
+                                app:layout_constraintStart_toEndOf="@+id/genderTypeText"
+                                app:layout_constraintTop_toTopOf="parent" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </LinearLayout>
+
+                    <!-- birthday-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:lines="1"
+                            android:padding="2dp"
+                            android:text="Birthday"
+                            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                            android:textColor="@color/blue" />
+
+                        <TextView
+                            android:id="@+id/birthdate"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_gravity="start"
+                            android:layout_weight="1"
+                            android:background="@drawable/white_back_react"
+                            android:drawableEnd="@drawable/baseline_date_range_24"
+                            android:drawablePadding="10dp"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:gravity="center_vertical"
+                            android:hint="yyyy-mm-dd"
+                            android:lines="1"
+                            android:padding="2dp"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+                            android:textColor="@color/text_primary" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="8dp"
+        android:background="@drawable/stroke_boarder"
+        android:orientation="horizontal"
+        android:tag="Date of Birth">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:contentDescription="@string/app_name"
+            android:padding="8dp"
+            android:src="@drawable/ic_filter"
+            app:tint="@color/blue" />
+
+        <TextView
+            android:id="@+id/searchByItemTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="0dp"
+            android:includeFontPadding="false"
+            android:paddingStart="10dp"
+            android:tag="CHECKING"
+            android:text="Date of Birth"
+            android:textColor="@color/text_black"
+            android:textSize="20sp"
+            tools:ignore="RtlSymmetry" />
+
+
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,651 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/back_grey"
+        tools:context=".ui.UserDetailsFragment">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/userProfilePic"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="30dp"
+                    android:padding="1dp"
+                    android:src="@drawable/ic_member"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="@+id/view"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.Image.PILL"
+                    app:strokeColor="@color/blue"
+                    app:strokeWidth="1dp"
+                    tools:ignore="MissingConstraints" />
+                <TextView
+                    android:id="@+id/profilePicAB"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/cta_circle"
+                    android:fontFamily="@font/dm_sans_medium"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:padding="1dp"
+                    android:text="AB"
+                    android:textAllCaps="false"
+                    android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="@+id/view"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.Image.PILL"
+                    app:strokeColor="@color/white"
+                    app:strokeWidth="2dp"
+                    tools:ignore="MissingConstraints" />
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/dm_sans_medium"
+                    android:padding="8dp"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintBottom_toTopOf="@+id/mainLayout"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/mainLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="70dp"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10dp"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:lines="1"
+                            android:padding="2dp"
+                            android:text="Full name"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/name"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:lines="1"
+                            android:padding="2dp"
+                            android:text=" Saiful Khandaker"
+                            android:textAlignment="textEnd"
+                            android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+                            android:textColor="#8F9BB3" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginHorizontal="16dp"
+                        android:background="#F4F4F4" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10dp"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:lines="1"
+                            android:padding="2dp"
+                            android:text="Occupation"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/occupation"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:lines="1"
+                            android:padding="2dp"
+                            android:text="saiful.khandaker@gmail.com"
+                            android:textAlignment="textEnd"
+                            android:textColor="#8F9BB3"
+                            app:layout_constraintEnd_toStartOf="@+id/addressEditBtn" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginHorizontal="16dp"
+                        android:background="#F4F4F4" />
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginHorizontal="16dp"
+                        android:background="#F4F4F4" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10dp"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:lines="1"
+                            android:padding="2dp"
+                            android:text="Phone"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/phoneNumber"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_weight="1"
+                            android:drawablePadding="8dp"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:gravity="end|center"
+                            android:includeFontPadding="false"
+                            android:lines="1"
+                            android:text=" +1 817 686 3544"
+                            android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+                            android:textColor="#8F9BB3" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginHorizontal="16dp"
+                        android:background="#F4F4F4" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10dp"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:lines="1"
+                            android:padding="2dp"
+                            android:text="E-mail"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/email"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:lines="1"
+                            android:padding="2dp"
+                            android:text="saiful.khandaker@gmail.com"
+                            android:textAlignment="textEnd"
+                            android:textColor="#8F9BB3"
+                            app:layout_constraintEnd_toStartOf="@+id/addressEditBtn" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginHorizontal="16dp"
+                        android:background="#F4F4F4" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10dp"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:lines="1"
+                            android:padding="2dp"
+                            android:text="Department"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/department"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:lines="1"
+                            android:padding="2dp"
+                            android:text="saiful.khandaker@gmail.com"
+                            android:textAlignment="textEnd"
+                            android:textColor="#8F9BB3"
+                            app:layout_constraintEnd_toStartOf="@+id/addressEditBtn" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginHorizontal="16dp"
+                        android:background="#F4F4F4" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10dp"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:lines="1"
+                            android:padding="2dp"
+                            android:text="Hall"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/hall"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:lines="1"
+                            android:padding="2dp"
+                            android:text="saiful.khandaker@gmail.com"
+                            android:textAlignment="textEnd"
+                            android:textColor="#8F9BB3"
+                            app:layout_constraintEnd_toStartOf="@+id/addressEditBtn" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginHorizontal="16dp"
+                        android:background="#F4F4F4" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10dp"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:lines="1"
+                            android:padding="2dp"
+                            android:text="Address"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/address"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:lines="1"
+                            android:padding="2dp"
+                            android:text="saiful.khandaker@gmail.com"
+                            android:textAlignment="textEnd"
+                            android:textColor="#8F9BB3"
+                            app:layout_constraintEnd_toStartOf="@+id/addressEditBtn" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginHorizontal="16dp"
+                        android:background="#F4F4F4" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10dp"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:lines="1"
+                            android:padding="2dp"
+                            android:text="NID"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/nid"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:lines="1"
+                            android:padding="2dp"
+                            android:text="saiful.khandaker@gmail.com"
+                            android:textAlignment="textEnd"
+                            android:textColor="#8F9BB3"
+                            app:layout_constraintEnd_toStartOf="@+id/addressEditBtn" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginHorizontal="16dp"
+                        android:background="#F4F4F4" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10dp"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:lines="1"
+                            android:padding="2dp"
+                            android:text="Gender"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/gender"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:lines="1"
+                            android:padding="2dp"
+                            android:text="saiful.khandaker@gmail.com"
+                            android:textAlignment="textEnd"
+                            android:textColor="#8F9BB3"
+                            app:layout_constraintEnd_toStartOf="@+id/addressEditBtn" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginHorizontal="16dp"
+                        android:background="#F4F4F4" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10dp"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:lines="1"
+                            android:padding="2dp"
+                            android:text="Birthdate"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/birthdate"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:lines="1"
+                            android:padding="2dp"
+                            android:text="saiful.khandaker@gmail.com"
+                            android:textAlignment="textEnd"
+                            android:textColor="#8F9BB3"
+                            app:layout_constraintEnd_toStartOf="@+id/addressEditBtn" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginHorizontal="16dp"
+                        android:background="#F4F4F4" />
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10dp"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:lines="1"
+                            android:padding="2dp"
+                            android:text="Bloodgroup"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/bloodGroup"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:lines="1"
+                            android:padding="2dp"
+                            android:text="saiful.khandaker@gmail.com"
+                            android:textAlignment="textEnd"
+                            android:textColor="#8F9BB3"
+                            app:layout_constraintEnd_toStartOf="@+id/addressEditBtn" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginHorizontal="16dp"
+                        android:background="#F4F4F4" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10dp"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:lines="1"
+                            android:padding="2dp"
+                            android:text="District"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/district"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:lines="1"
+                            android:padding="2dp"
+                            android:text="saiful.khandaker@gmail.com"
+                            android:textAlignment="textEnd"
+                            android:textColor="#8F9BB3"
+                            app:layout_constraintEnd_toStartOf="@+id/addressEditBtn" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginHorizontal="16dp"
+                        android:background="#F4F4F4" />
+
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10dp"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:lines="1"
+                            android:padding="2dp"
+                            android:text="Status"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/status"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/dm_sans_medium"
+                            android:lines="1"
+                            android:padding="2dp"
+                            android:text="saiful.khandaker@gmail.com"
+                            android:textAlignment="textEnd"
+                            android:textColor="#8F9BB3"
+                            app:layout_constraintEnd_toStartOf="@+id/addressEditBtn" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginHorizontal="16dp"
+                        android:background="#F4F4F4" />
+
+
+
+                </LinearLayout>
+
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -10,11 +10,179 @@
     <string name="search_hint">Search</string>
     <string name="dufa">DUFA</string>
     <string name="log_out">Log Out</string>
+    <string name="name_or_email">Name Or Email</string>
+    <string name="select_filter_type">Select Filter Type</string>
+    <string name="mr">Mr</string>
+    <string name="mrs">Mrs</string>
+    <string name="todo">TODO</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="saiful_khandaker">Saiful Khandaker</string>
 
     <string-array name="paymentsType">
         <item>Registration Fee</item>
         <item>One Time Fee</item>
         <item>Yearly Payment</item>
+    </string-array>
+    <string-array name="filterBy">
+        <item>Please Select Category</item>
+        <item>Name Or Email</item>
+        <item>Blood Group</item>
+        <item>District</item>
+        <item>Occupation</item>
+        <item>Department</item>
+    </string-array>
+
+    <string-array name="bloodgroup">
+        <item>Select Blood Group</item>
+        <item>A+</item>
+        <item>A-</item>
+        <item>B+</item>
+        <item>B-</item>
+        <item>O+</item>
+        <item>O-</item>
+        <item>AB+</item>
+        <item>AB-</item>
+    </string-array>
+    <string-array name="district">
+        <item>Select District</item>
+        <item>Dhaka</item>
+        <item>Barguna</item>
+        <item>Barisal</item>
+        <item>Bhola</item>
+        <item>Jhalokati</item>
+        <item>Patuakhali</item>
+        <item>Pirojpur</item>
+        <item>Bandarban</item>
+        <item>Brahmanbaria</item>
+        <item>Chandpur</item>
+        <item>Chittagong</item>
+        <item>Cumilla</item>
+        <item>Cox\'s Bazar</item>
+        <item>Feni</item>
+        <item>Khagrachhari</item>
+        <item>Lakshmipur</item>
+        <item>Noakhali</item>
+        <item>Rangamati</item>
+        <item>Faridpur</item>
+        <item>Gazipur</item>
+        <item>Gopalganj</item>
+        <item>Kishoreganj</item>
+        <item>Madaripur</item>
+        <item>Manikganj</item>
+        <item>Munshiganj</item>
+        <item>Narayanganj</item>
+        <item>Narsingdi</item>
+        <item>Rajbari</item>
+        <item>Shariatpur</item>
+        <item>Tangail</item>
+        <item>Bagerhat</item>
+        <item>Chuadanga</item>
+        <item>Jessore</item>
+        <item>Jhenaidah</item>
+        <item>Khulna</item>
+        <item>Kushtia</item>
+        <item>Magura</item>
+        <item>Meherpur</item>
+        <item>Narail</item>
+        <item>Satkhira</item>
+        <item>Jamalpur</item>
+        <item>Mymensingh</item>
+        <item>Netrakona</item>
+        <item>Sherpur</item>
+        <item>Bogra</item>
+        <item>Chapainawabganj</item>
+        <item>Joypurhat</item>
+        <item>Naogaon</item>
+        <item>Natore</item>
+        <item>Pabna</item>
+        <item>Rajshahi</item>
+        <item>Sirajganj</item>
+        <item>Dinajpur</item>
+        <item>Gaibandha</item>
+        <item>Kurigram</item>
+        <item>Lalmonirhat</item>
+        <item>Nilphamari</item>
+        <item>Panchagarh</item>
+        <item>Rangpur</item>
+        <item>Thakurgaon</item>
+        <item>Habiganj</item>
+        <item>Moulvibazar</item>
+        <item>Sunamganj</item>
+        <item>Sylhet</item>
+    </string-array>
+
+    <string-array name="profession">
+        <item>Choose Profession</item>
+        <item>Artists</item>
+        <item>Actors</item>
+        <item>Singers</item>
+        <item>Media</item>
+        <item>Chartered Accountant</item>
+        <item>Consultancy</item>
+        <item>Advisory</item>
+        <item>Architecture</item>
+        <item>Engineering</item>
+        <item>Doctor (Govt, Private and All Types of Doctor)</item>
+        <item>Service Holder (Gov Employees)</item>
+        <item>Banker</item>
+        <item>Teacher</item>
+        <item>Self Employed (Business)</item>
+        <item>International Foreign Organizations</item>
+        <item>Lawyers, ITP</item>
+        <item>United Nations Agencies</item>
+        <item>Other</item>
+    </string-array>
+    <string-array name="department">
+        <item>Select Department</item>
+        <item>Bengali</item>
+        <item>English</item>
+        <item>Arabic</item>
+        <item>Urdu and Persian Language</item>
+        <item>Palli and Sanskriti</item>
+        <item>History</item>
+        <item>Philosophy</item>
+        <item>Islamic Studies</item>
+        <item>Islamic &amp; Culture</item>
+        <item>Information Science and Library Management</item>
+        <item>World Religions and Culture</item>
+        <item>Economics</item>
+        <item>Political Science</item>
+        <item>International Relations</item>
+        <item>Sociology</item>
+        <item>Mass Communication &amp; Journalism</item>
+        <item>Public Administration</item>
+        <item>Anthropology</item>
+        <item>Law</item>
+        <item>Management</item>
+        <item>Accounting &amp; Information Systems</item>
+        <item>Marketing</item>
+        <item>Finance</item>
+        <item>Physics</item>
+        <item>Mathematics</item>
+        <item>Chemistry</item>
+        <item>Statistics</item>
+        <item>Applied Physics</item>
+        <item>Soil Science</item>
+        <item>Botany</item>
+        <item>Zoology</item>
+        <item>Biochemistry</item>
+        <item>Psychology</item>
+        <item>Microbiology</item>
+        <item>Pharmacy</item>
+        <item>Geography &amp; Environment</item>
+        <item>Geology</item>
+        <item>Applied Chemistry</item>
+        <item>Computer Science</item>
+        <item>Institute of Fine Art</item>
+        <item>Institute of Education and Research</item>
+        <item>Institute of Statistical Research and Training</item>
+        <item>Institute of Business Administration</item>
+        <item>Institute of Social Welfare and Research</item>
+        <item>Bangladesh College of Leather Engineering and Technology</item>
+        <item>Institute of Leather Engineering and Technology</item>
+        <item>Other</item>
+
     </string-array>
 
 </resources>

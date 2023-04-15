@@ -11,7 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.marufalam.dufa.databinding.FragmentSignUpBinding
 import com.marufalam.dufa.BaseFragment
-import com.marufalam.dufa.models.register.RequestRegister
+import com.marufalam.dufa.data.models.register.RequestRegister
 import com.marufalam.dufa.utils.*
 import com.marufalam.dufa.viewmodel.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint

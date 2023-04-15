@@ -14,14 +14,17 @@
             android:id="@+id/action_DashboardFragment_to_memberListFragment"
             app:destination="@id/memberListFragment" />
         <action
-            android:id="@+id/action_DashboardFragment_to_paymentFragment"
-            app:destination="@id/paymentFragment" />
-        <action
             android:id="@+id/action_DashboardFragment_to_logoutFragment"
             app:destination="@id/logoutFragment" />
         <action
             android:id="@+id/action_DashboardFragment_to_eventFragment"
             app:destination="@id/eventFragment" />
+        <action
+            android:id="@+id/action_DashboardFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_DashboardFragment_to_transactionHistoryFragment"
+            app:destination="@id/transactionHistoryFragment" />
     </fragment>
     <fragment
         android:id="@+id/logInFragment"
@@ -52,7 +55,11 @@
         android:id="@+id/memberListFragment"
         android:name="com.marufalam.dufa.ui.MemberListFragment"
         android:label="MemberList"
-        tools:layout="@layout/fragment_member_list" />
+        tools:layout="@layout/fragment_member_list" >
+        <action
+            android:id="@+id/action_memberListFragment_to_userDetailsFragment"
+            app:destination="@id/userDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/paymentFragment"
         android:name="com.marufalam.dufa.ui.PaymentFragment"
@@ -60,22 +67,22 @@
         tools:layout="@layout/fragment_payment" />
     <fragment
         android:id="@+id/eventFragment"
-        android:name="com.marufalam.dufa.EventFragment"
+        android:name="com.marufalam.dufa.ui.EventFragment"
         android:label="Event"
         tools:layout="@layout/fragment_event" />
     <fragment
         android:id="@+id/notificationFragment"
-        android:name="com.marufalam.dufa.NotificationFragment"
+        android:name="com.marufalam.dufa.ui.NotificationFragment"
         android:label="Notification"
         tools:layout="@layout/fragment_notification" />
     <fragment
         android:id="@+id/QRFragment"
-        android:name="com.marufalam.dufa.QRFragment"
+        android:name="com.marufalam.dufa.ui.QRFragment"
         android:label="QR"
         tools:layout="@layout/fragment_q_r" />
     <fragment
         android:id="@+id/memberDetailsInfoFragment"
-        android:name="com.marufalam.dufa.MemberDetailsInfoFragment"
+        android:name="com.marufalam.dufa.ui.MemberDetailsInfoFragment"
         android:label="fragment_member_details_info"
         tools:layout="@layout/fragment_member_details_info" />
     <fragment
@@ -87,4 +94,28 @@
             android:id="@+id/action_logoutFragment_to_logInFragment"
             app:destination="@id/logInFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.marufalam.dufa.ui.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_userUpdateFragment"
+            app:destination="@id/userUpdateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userDetailsFragment"
+        android:name="com.marufalam.dufa.ui.UserDetailsFragment"
+        android:label="fragment_user_details"
+        tools:layout="@layout/fragment_user_details" />
+    <fragment
+        android:id="@+id/userUpdateFragment"
+        android:name="com.marufalam.dufa.ui.profile_update.UserUpdateFragment"
+        android:label="fragment_user_update"
+        tools:layout="@layout/fragment_user_update" />
+    <fragment
+        android:id="@+id/transactionHistoryFragment"
+        android:name="com.marufalam.dufa.ui.trans_history.TransactionHistoryFragment"
+        android:label="fragment_transaction_history"
+        tools:layout="@layout/fragment_transaction_history" />
 </navigation>

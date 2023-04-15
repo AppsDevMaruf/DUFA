@@ -4,16 +4,16 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.marufalam.dufa.R
 import com.marufalam.dufa.databinding.FragmentLogInBinding
 import com.marufalam.dufa.BaseFragment
-import com.marufalam.dufa.models.login.RequestLogin
-import com.marufalam.dufa.utils.NetworkResult
-import com.marufalam.dufa.utils.TokenManager
-import com.marufalam.dufa.utils.isValidEmail
+import com.marufalam.dufa.data.models.login.RequestLogin
+import com.marufalam.dufa.data.local.TokenManager
+import com.marufalam.dufa.utils.*
 import com.marufalam.dufa.viewmodel.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -21,7 +21,8 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class LogInFragment : BaseFragment<FragmentLogInBinding>() {
-    private val authViewModel by viewModels<AuthViewModel>()
+    private val authViewModel by activityViewModels<AuthViewModel>()
+
     @Inject
     lateinit var tokenManager: TokenManager
 
@@ -31,23 +32,22 @@ class LogInFragment : BaseFragment<FragmentLogInBinding>() {
 
     override fun configUi() {
         binding.logIn.setOnClickListener {
-            binding.loginErrorText.isVisible =false
+            binding.loginErrorText.isVisible = false
             if (!isValidEmail(binding.loginEmail.text.toString().trim())) {
 
                 Log.i("TAG", "onCreate: Clicked ")
                 binding.loginErrorText.error = "Email Pattern is Not Correct !"
-                binding.loginErrorText.isVisible =true
+                binding.loginErrorText.isVisible = true
 
 
             } else if (binding.passwordInput.text.toString().trim() == "") {
                 binding.loginErrorText.error = "Password Required!"
-                binding.loginErrorText.isVisible =true
+                binding.loginErrorText.isVisible = true
 
             } else if (binding.passwordInput.text.toString().trim().length < 8) {
 
                 binding.loginErrorText.error = "Password Length Minimum 8 char"
-                binding.loginErrorText.isVisible =true
-
+                binding.loginErrorText.isVisible = true
 
 
             } else {
@@ -71,29 +71,32 @@ class LogInFragment : BaseFragment<FragmentLogInBinding>() {
     }
 
     override fun setupNavigation() {
-        if (tokenManager.getToken()!=null){
-            findNavController().navigate(R.id.action_logInFragment_to_DashboardFragment)
-        }
+        /*  if (tokenManager.getToken(Constants.TOKEN) != Constants.NO_DATA) {
+              Log.e("notNullToken", "binObserver: ${tokenManager.getToken(Constants.TOKEN)}")
+               findNavController().navigate(R.id.action_logInFragment_to_DashboardFragment)
+           }*/
 
     }
 
     override fun binObserver() {
         authViewModel.loginResponseLiveDataVM.observe(viewLifecycleOwner) {
-            binding.progressBar.isVisible = false
+            binding.progressBar.gone()
             when (it) {
                 is NetworkResult.Success -> {
                     //token
-                    tokenManager.saveToken(it.data!!.token)
-                    Log.e("TAG", "binObserver: ${it.data.token}")
+                    Log.e("SuccessToken", "binObserver: ${it.data}")
+                    authViewModel.setLoginResponseToken(it.data!!)
+
+                    tokenManager.saveToken(Constants.TOKEN, it.data.token)
+
                     findNavController().navigate(R.id.action_logInFragment_to_DashboardFragment)
                 }
                 is NetworkResult.Error -> {
-                    binding.loginErrorText.visibility = View.VISIBLE
+                    binding.loginErrorText.show()
                     binding.loginErrorText.text = it.message
                 }
                 is NetworkResult.Loading -> {
-                    binding.progressBar.isVisible = true
-
+                    binding.progressBar.show()
                 }
             }
         }
@@ -111,6 +114,5 @@ class LogInFragment : BaseFragment<FragmentLogInBinding>() {
     }
 }
 
-//
 
 

@@ -14,8 +14,8 @@ import androidx.fragment.app.Fragment
 abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
 
 
-    private  var _binding: T? =null
-     val binding get() = _binding!!
+    private var _binding: T? = null
+    val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,9 +53,9 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
     }
 
     abstract fun getFragmentView(): Int
-    abstract fun configUi(): Unit
-    abstract fun setupNavigation(): Unit
-    abstract fun binObserver(): Unit
+    open fun configUi() {}
+    open fun setupNavigation() {}
+    open fun binObserver() {}
 
 
 }

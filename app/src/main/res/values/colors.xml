@@ -13,6 +13,8 @@
     <color name="bluedeep">#0a0449</color>
     <color name="cardbg">#fdfdfd</color>
     <color name="background">#F5F5F5</color>
+    <color name="text_red">#EB5757</color>
+    <color name="green100">#00AA0E</color>
 
     <color name="colorPrimary">#1976D2</color>
     <color name="colorPrimaryDark">#1565C0</color>
@@ -341,6 +343,11 @@
 
     <color name="text_enable_white">#F2F2F2</color>
     <color name="text_disable_white">#FFFFFF</color>
+    <color name="text_grey">#4F4F4F</color>
+    <color name="cta_grey">#D9D9D9</color>
+    <color name="back_grey">#F6F6F6</color>
+    <color name="text_primary">#8F9BB3</color>
+
 
 
 </resources>
