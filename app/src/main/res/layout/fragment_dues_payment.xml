@@ -52,7 +52,7 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/continue1000Payment"
                     android:layout_width="@dimen/_150sdp"
-                    android:layout_height="@dimen/_30sdp"
+                    android:layout_height="@dimen/_25sdp"
                     android:background="@drawable/btn_enable"
                     android:includeFontPadding="false"
                     android:text="Continue to Payment"
@@ -103,7 +103,7 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/continue2000Payment"
                     android:layout_width="@dimen/_150sdp"
-                    android:layout_height="@dimen/_30sdp"
+                    android:layout_height="@dimen/_25sdp"
                     android:background="@drawable/btn_enable"
                     android:includeFontPadding="false"
                     android:text="Continue to Payment"
@@ -154,7 +154,7 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/continue10000Payment"
                     android:layout_width="@dimen/_150sdp"
-                    android:layout_height="@dimen/_30sdp"
+                    android:layout_height="@dimen/_25sdp"
                     android:background="@drawable/btn_enable"
                     android:includeFontPadding="false"
                     android:text="Continue to Payment"
@@ -166,6 +166,19 @@
 
 
         </androidx.cardview.widget.CardView>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/paymentHistory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginVertical="@dimen/_50sdp"
+            android:background="@drawable/btn_enable"
+            android:includeFontPadding="false"
+            android:text="Show Payment History"
+            android:textAllCaps="false"
+            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+            android:textColor="@color/white" />
 
 
     </LinearLayout>

@@ -197,6 +197,7 @@ fun EditText.onTextChanged(onTextChanged: (String) -> Unit) {
 fun ImageView.loadImagesWithGlide(url: String) {
     Glide.with(this)
         .load(url)
+        .placeholder(R.drawable.avatar_placeholder)
         .centerCrop()
         .diskCacheStrategy(DiskCacheStrategy.ALL)
         .into(this)

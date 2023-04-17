@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/logInFragment">
+    app:startDestination="@id/DashboardFragment">
 
     <fragment
         android:id="@+id/DashboardFragment"
@@ -14,32 +14,11 @@
             android:id="@+id/action_DashboardFragment_to_memberListFragment"
             app:destination="@id/memberListFragment" />
         <action
-            android:id="@+id/action_DashboardFragment_to_logoutFragment"
-            app:destination="@id/logoutFragment" />
-        <action
             android:id="@+id/action_DashboardFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
         <action
-            android:id="@+id/action_DashboardFragment_to_transactionHistoryFragment"
-            app:destination="@id/transactionHistoryFragment" />
-        <action
             android:id="@+id/action_DashboardFragment_to_duesPaymentFragment"
             app:destination="@id/duesPaymentFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/logInFragment"
-        android:name="com.marufalam.dufa.ui.LogInFragment"
-        android:label="Login"
-        tools:layout="@layout/fragment_log_in" >
-        <action
-            android:id="@+id/action_logInFragment_to_signUpFragment"
-            app:destination="@id/signUpFragment"
-            app:popUpToInclusive="false" />
-        <action
-            android:id="@+id/action_logInFragment_to_DashboardFragment"
-            app:destination="@id/DashboardFragment"
-            app:popUpTo="@id/logInFragment"
-            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -86,15 +65,6 @@
         android:label="fragment_member_details_info"
         tools:layout="@layout/fragment_member_details_info" />
     <fragment
-        android:id="@+id/logoutFragment"
-        android:name="com.marufalam.dufa.LogoutFragment"
-        android:label="fragment_logout"
-        tools:layout="@layout/fragment_logout" >
-        <action
-            android:id="@+id/action_logoutFragment_to_logInFragment"
-            app:destination="@id/logInFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/profileFragment"
         android:name="com.marufalam.dufa.ui.ProfileFragment"
         android:label="fragment_profile"
@@ -122,5 +92,9 @@
         android:id="@+id/duesPaymentFragment"
         android:name="com.marufalam.dufa.ui.dues_payment.DuesPaymentFragment"
         android:label="fragment_dues_payment"
-        tools:layout="@layout/fragment_dues_payment" />
+        tools:layout="@layout/fragment_dues_payment" >
+        <action
+            android:id="@+id/action_duesPaymentFragment_to_transactionHistoryFragment"
+            app:destination="@id/transactionHistoryFragment" />
+    </fragment>
 </navigation>

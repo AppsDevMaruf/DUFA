@@ -55,7 +55,7 @@ class SplashScreenFragment : Fragment() {
 }*/
 
         Handler().postDelayed({ // This method will be executed once the timer is over
-            Navigation.findNavController(container!!).navigate(R.id.logInFragment)
+//         //   Navigation.findNavController(container!!).navigate(R.id.logInFragment)
         }, 3000)
         // Inflate the layout for this fragment
         return binding!!.root
