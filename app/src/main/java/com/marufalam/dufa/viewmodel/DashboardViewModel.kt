@@ -88,7 +88,7 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
     val logoutVMLD: LiveData<NetworkResult<ResponseLogout>>
         get() = _responseLogout
 
-    suspend fun logoutVM() {
+     fun logoutVM() {
 
         _responseLogout.postValue(NetworkResult.Loading())
 

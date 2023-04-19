@@ -1,41 +1,57 @@
 package com.marufalam.dufa.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
-import com.marufalam.dufa.BaseFragment
-import com.marufalam.dufa.R
-import com.marufalam.dufa.data.local.TokenManager
+import androidx.navigation.fragment.findNavController
 import com.marufalam.dufa.databinding.FragmentLogoutBinding
 import com.marufalam.dufa.utils.NetworkResult
 import com.marufalam.dufa.utils.toast
 import com.marufalam.dufa.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
-class LogoutFragment : BaseFragment<FragmentLogoutBinding>() {
+class LogoutFragment : DialogFragment() {
     private val dashboardViewModel by viewModels<DashboardViewModel>()
 
-    override fun getFragmentView(): Int {
-        return R.layout.fragment_logout
+    lateinit var binding: FragmentLogoutBinding
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentLogoutBinding.inflate(inflater, container, false)
+
+        setupNavigation()
+        binObserver()
+
+
+        return binding.root
     }
 
-    override fun configUi() {
 
-        toast("Thanks ")
-        //dashboardViewModel.logoutVM()
+    fun setupNavigation() {
+
+        binding.notLogout.setOnClickListener {
+
+            findNavController().popBackStack()
+        }
+
+        binding.yesLogout.setOnClickListener {
+            dashboardViewModel.logoutVM()
+        }
+
+
     }
 
-    override fun setupNavigation() {
-
-    }
-
-    override fun binObserver() {
+    fun binObserver() {
         dashboardViewModel.logoutVMLD.observe(this) {
             //progressBar.isVisible = false
             when (it) {
@@ -52,6 +68,18 @@ class LogoutFragment : BaseFragment<FragmentLogoutBinding>() {
                     toast(it.data!!.message)
                     Log.i("logout", "DashboardSuccess: ${it.data!!.message}")
 
+                    requireActivity().run {
+                        startActivity(
+                            Intent(
+                                requireContext(),
+                                LogInActivity::class.java
+                            )
+                        )
+
+                        finish()
+                    }
+
+
                 }
 
 
@@ -59,5 +87,15 @@ class LogoutFragment : BaseFragment<FragmentLogoutBinding>() {
 
         }
     }
+
+//    override fun onResume() {
+//        super.onResume()
+//        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
+//    }
+//
+//    override fun onStop() {
+//        super.onStop()
+//        (activity as AppCompatActivity?)!!.supportActionBar!!.show()
+//    }
 
 }

@@ -1,6 +1,7 @@
 package com.marufalam.dufa.ui.profile_update
 
 import android.app.Dialog
+import android.app.ProgressDialog
 import android.net.Uri
 import android.util.Log
 import android.view.Window
@@ -64,6 +65,8 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
     private lateinit var hallAdapter: HallAdapter
     private var title = "Male"
 
+    lateinit var dialog: ProgressDialog
+
     companion object {
         private val PERMISSIONS = arrayOf(
             android.Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -79,6 +82,10 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
     }
 
     override fun getFragmentView(): Int {
+        dialog = ProgressDialog(requireContext())
+        dialog.setTitle("Profile Updating...")
+
+
         return R.layout.fragment_user_update
     }
 
@@ -144,7 +151,8 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
                 binding.nid.text.toString()
             )
 
-
+            dialog.setCancelable(false)
+            dialog.show()
 
 
 
@@ -229,6 +237,8 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
     }
 
     private fun upload(fileUri: Uri) {
+        dialog.setCancelable(false)
+        dialog.show()
 
         val filesDir = requireActivity().filesDir
         val file = File(filesDir, "profile${System.currentTimeMillis()}.png")
@@ -380,20 +390,51 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
 
             when (it) {
                 is NetworkResult.Error -> {
+                    dialog.dismiss()
 
                     Log.i("TAG", "Error: ${it.data.toString()}")
 
                 }
                 is NetworkResult.Loading -> {
+                    dialog.dismiss()
 
                     Log.i("TAG", "Loading: ${it.data}")
                 }
                 is NetworkResult.Success -> {
+                    dialog.dismiss()
 
                     Log.i("TAG", "message: ${it.message}")
                     Log.i("TAG", "data: ${it.data?.message}")
 
-                 //   it.data?.let { it1 -> toast(it1.message) }
+                    //   it.data?.let { it1 -> toast(it1.message) }
+
+
+                }
+            }
+
+
+        }
+        dashboardViewModel.uploadProfilePicVMLD.observe(viewLifecycleOwner) {
+
+            when (it) {
+                is NetworkResult.Error -> {
+                    dialog.dismiss()
+
+                    Log.i("TAG", "Error: ${it.data.toString()}")
+
+                }
+                is NetworkResult.Loading -> {
+                    dialog.dismiss()
+
+                    Log.i("TAG", "Loading: ${it.data}")
+                }
+                is NetworkResult.Success -> {
+                    dialog.dismiss()
+
+                    Log.i("TAG", "message: ${it.message}")
+                    Log.i("TAG", "data: ${it.data?.message}")
+
+                    //   it.data?.let { it1 -> toast(it1.message) }
 
 
                 }

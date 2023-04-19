@@ -1,18 +1,16 @@
 package com.marufalam.dufa.ui
 
+import android.content.Intent
+import android.os.Bundle
 import android.util.Log
-import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
-import com.marufalam.dufa.R
-import com.marufalam.dufa.databinding.FragmentLogInBinding
-import com.marufalam.dufa.BaseFragment
-import com.marufalam.dufa.data.models.login.RequestLogin
+import com.marufalam.dufa.MainActivity
 import com.marufalam.dufa.data.local.TokenManager
+import com.marufalam.dufa.data.models.login.RequestLogin
+import com.marufalam.dufa.databinding.FragmentLogInBinding
 import com.marufalam.dufa.utils.*
 import com.marufalam.dufa.viewmodel.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,17 +18,23 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class LogInFragment : BaseFragment<FragmentLogInBinding>() {
-    private val authViewModel by activityViewModels<AuthViewModel>()
+class LogInActivity : AppCompatActivity() {
+    private val authViewModel :AuthViewModel by viewModels<AuthViewModel>()
+
+    lateinit var binding: FragmentLogInBinding
 
     @Inject
     lateinit var tokenManager: TokenManager
 
-    override fun getFragmentView(): Int {
-        return R.layout.fragment_log_in
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = FragmentLogInBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        configUi()
+        binObserver()
     }
 
-    override fun configUi() {
+    fun configUi() {
         binding.logIn.setOnClickListener {
             binding.loginErrorText.isVisible = false
             if (!isValidEmail(binding.loginEmail.text.toString().trim())) {
@@ -64,22 +68,14 @@ class LogInFragment : BaseFragment<FragmentLogInBinding>() {
 
             }
         }
-        binding.singup.setOnClickListener {
-            findNavController().navigate(R.id.action_logInFragment_to_signUpFragment)
-        }
+
 
     }
 
-    override fun setupNavigation() {
-        /*  if (tokenManager.getToken(Constants.TOKEN) != Constants.NO_DATA) {
-              Log.e("notNullToken", "binObserver: ${tokenManager.getToken(Constants.TOKEN)}")
-               findNavController().navigate(R.id.action_logInFragment_to_DashboardFragment)
-           }*/
 
-    }
 
-    override fun binObserver() {
-        authViewModel.loginResponseLiveDataVM.observe(viewLifecycleOwner) {
+    fun binObserver() {
+        authViewModel.loginResponseLiveDataVM.observe(this) {
             binding.progressBar.gone()
             when (it) {
                 is NetworkResult.Success -> {
@@ -89,7 +85,8 @@ class LogInFragment : BaseFragment<FragmentLogInBinding>() {
 
                     tokenManager.saveToken(Constants.TOKEN, it.data.token)
 
-                    findNavController().navigate(R.id.action_logInFragment_to_DashboardFragment)
+                    startActivity(Intent(this@LogInActivity, MainActivity::class.java))
+                    finish()
                 }
                 is NetworkResult.Error -> {
                     binding.loginErrorText.show()
@@ -103,15 +100,15 @@ class LogInFragment : BaseFragment<FragmentLogInBinding>() {
 
     }
 
-    override fun onResume() {
-        super.onResume()
-        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        (activity as AppCompatActivity?)!!.supportActionBar!!.show()
-    }
+//     fun onResume() {
+//        super.onResume()
+//        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
+//    }
+//
+//     fun onStop() {
+//        super.onStop()
+//        (activity as AppCompatActivity?)!!.supportActionBar!!.show()
+//    }
 }
 
 

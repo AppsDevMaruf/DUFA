@@ -44,6 +44,8 @@
                     app:strokeColor="@color/blue"
                     app:strokeWidth="1dp"
                     tools:ignore="MissingConstraints" />
+
+
                 <TextView
                     android:id="@+id/profilePicAB"
                     android:layout_width="100dp"
@@ -73,9 +75,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:fontFamily="@font/dm_sans_medium"
                     android:padding="8dp"
-                    android:layout_marginBottom="10dp"
                     app:layout_constraintBottom_toTopOf="@+id/mainLayout"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -259,6 +261,7 @@
                         android:layout_height="1dp"
                         android:layout_marginHorizontal="16dp"
                         android:background="#F4F4F4" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -338,6 +341,7 @@
                         android:layout_height="1dp"
                         android:layout_marginHorizontal="16dp"
                         android:background="#F4F4F4" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -377,7 +381,6 @@
                         android:layout_height="1dp"
                         android:layout_marginHorizontal="16dp"
                         android:background="#F4F4F4" />
-
 
 
                     <View
@@ -508,7 +511,6 @@
                         android:background="#F4F4F4" />
 
 
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -590,8 +592,6 @@
                         android:background="#F4F4F4" />
 
 
-
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -633,16 +633,16 @@
                         android:background="#F4F4F4" />
 
                     <Button
-                        android:layout_marginTop="50dp"
-                        android:layout_marginBottom="50dp"
                         android:id="@+id/updateBtn"
-                        android:layout_marginHorizontal="64dp"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
+                        android:layout_marginHorizontal="64dp"
                         android:layout_marginLeft="-4dp"
+                        android:layout_marginTop="50dp"
                         android:layout_marginRight="-4dp"
+                        android:layout_marginBottom="50dp"
                         android:background="@drawable/btn_rounded_primary"
-                        android:text="Update"
+                        android:text="Edit Profile"
                         android:textAllCaps="false"
                         android:textColor="@android:color/white"
                         android:textStyle="bold" />
@@ -663,7 +663,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/account_toolbar" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

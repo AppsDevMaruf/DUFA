@@ -22,6 +22,8 @@ class TransactionHistoryFragment : BaseFragment<FragmentTransactionHistoryBindin
         return R.layout.fragment_transaction_history
     }
 
+
+
     override fun binObserver() {
         viewModel.getTransactionHistoryVM()
         adapter = TransHistoryAdapter()

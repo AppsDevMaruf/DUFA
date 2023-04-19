@@ -6,10 +6,14 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.marufalam.dufa.R
 import com.marufalam.dufa.data.models.search.Data
 import com.marufalam.dufa.databinding.MemberListRowBinding
 import com.marufalam.dufa.interfaces.MemberSelectListener
-import com.marufalam.dufa.utils.*
+import com.marufalam.dufa.utils.Constants
+import com.marufalam.dufa.utils.hide
+import com.marufalam.dufa.utils.nameAbbreviationGenerator
+import com.marufalam.dufa.utils.show
 
 
 class SearchMemberListAdapter(private val memberSelectListener: MemberSelectListener) :
@@ -41,18 +45,18 @@ class SearchMemberListAdapter(private val memberSelectListener: MemberSelectList
 
             if (it != null) {
                 holder.binding.name.text = it.name
-                holder.binding.phoneNumber.text =it.phone
-                holder.binding.bloodGroup.text =it.bloodgroup
-                holder.binding.department.text =it.department
+                holder.binding.phoneNumber.text = it.phone
+                holder.binding.bloodGroup.text = it.bloodgroup
+                holder.binding.department.text = it.department
 
-                holder.itemView.setOnClickListener {_->
+                holder.itemView.setOnClickListener { _ ->
                     memberSelectListener.selectedMember(it)
 
                 }
 
 
 
-                if (it.imagePath==null) {
+                if (it.imagePath == null) {
                     holder.binding.userProfilePic.hide()
                     holder.binding.profilePicAB.show()
                     holder.binding.profilePicAB.text = it.name?.let { it1 ->
@@ -69,7 +73,7 @@ class SearchMemberListAdapter(private val memberSelectListener: MemberSelectList
 
 
                     Glide.with(holder.itemView.context)
-                        .load(profileImg)
+                        .load(profileImg).placeholder(R.drawable.avatar_placeholder)
                         .into(holder.binding.userProfilePic)
                 }
 
