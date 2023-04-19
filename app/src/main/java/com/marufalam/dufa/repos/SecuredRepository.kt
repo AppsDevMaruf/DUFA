@@ -9,6 +9,7 @@ import androidx.paging.liveData
 import com.marufalam.dufa.api.SecuredApi
 import com.marufalam.dufa.data.models.dashboard.ResponseAllMember
 import com.marufalam.dufa.data.models.get_departments.ResponseDepartments
+import com.marufalam.dufa.data.models.payRenew.RequestPayRenew
 import com.marufalam.dufa.data.models.search.RequestSearch
 import com.marufalam.dufa.data.models.search.blood.ResponseBloodGroup
 import com.marufalam.dufa.data.models.transaction_history.TransHistory
@@ -216,6 +217,6 @@ class SecuredRepository @Inject constructor(private val securedApi: SecuredApi) 
 
     suspend fun updateProfile(userId: Int, requestProfileUpdate: RequestProfileUpdate) =
         securedApi.updateProfile(userId, requestProfileUpdate)
-
+    fun payRenew(requestPayRenew: RequestPayRenew) = securedApi.payRenew(requestPayRenew)
 
 }

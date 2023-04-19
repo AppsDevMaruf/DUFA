@@ -1,4 +1,4 @@
-package com.marufalam.dufa.ui.dues_payment
+package com.marufalam.dufa.ui
 
 import android.annotation.SuppressLint
 import android.util.Log
@@ -8,19 +8,20 @@ import com.google.gson.Gson
 import com.marufalam.dufa.BaseFragment
 import com.marufalam.dufa.R
 import com.marufalam.dufa.data.models.payRenew.RequestPayRenew
-import com.marufalam.dufa.databinding.FragmentDuesPaymentBinding
+import com.marufalam.dufa.databinding.FragmentDuesBinding
 import com.marufalam.dufa.utils.NetworkResult
 import com.marufalam.dufa.utils.gone
 import com.marufalam.dufa.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DuesPaymentFragment : BaseFragment<FragmentDuesPaymentBinding>(){
+class DuesFragment : BaseFragment<FragmentDuesBinding>() {
     private val dashboardViewModel by viewModels<DashboardViewModel>()
-    override fun getFragmentView(): Int {
-        return R.layout.fragment_dues_payment
-    }
 
+
+    override fun getFragmentView(): Int {
+     return R.layout.fragment_dues
+    }
 
     override fun configUi() {
 
@@ -63,7 +64,7 @@ class DuesPaymentFragment : BaseFragment<FragmentDuesPaymentBinding>(){
 
                 /* binding.webView.show()
                  binding.progress.hide()*/
-                binding.paymentsLayout.gone()
+                binding.button.gone()
             }
         }
         binding.webView.settings.javaScriptEnabled = true
@@ -84,11 +85,11 @@ class DuesPaymentFragment : BaseFragment<FragmentDuesPaymentBinding>(){
     }
 
     override fun setupNavigation() {
-        binding.continue2000Payment.setOnClickListener {
+        binding.button.setOnClickListener {
             val request = RequestPayRenew(
                 amount = 2000,
                 membership ="yearly",
-                userinfoID = 1382,
+                userinfoID = 1384,
                 renewFee = "renew_fee"
             )
             dashboardViewModel.payRenewVM(request)
@@ -111,17 +112,19 @@ class DuesPaymentFragment : BaseFragment<FragmentDuesPaymentBinding>(){
                 }
                 is NetworkResult.Success -> {
 
+                    binding.textView.text = it.data
                     loadWeb(it.data.toString())
 
 
+
                 }
+
 
             }
 
         }
 
     }
-
 
 
 }

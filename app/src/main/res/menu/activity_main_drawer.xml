@@ -21,7 +21,7 @@
             android:icon="@drawable/bell"
             android:title="Notification" />
         <item
-            android:id="@+id/eventFragment"
+            android:id="@+id/duesFragment"
             android:icon="@drawable/event"
             android:title="Event" />
         <item

@@ -8,6 +8,8 @@ import com.marufalam.dufa.data.models.get_districts.ResponseDistrict
 import com.marufalam.dufa.data.models.get_halls.ResponseHalls
 import com.marufalam.dufa.data.models.get_occupations.ResponseOccupations
 import com.marufalam.dufa.data.models.logout.ResponseLogout
+import com.marufalam.dufa.data.models.payRenew.RequestPayRenew
+import com.marufalam.dufa.data.models.payRenew.ResponsePayRenew
 import com.marufalam.dufa.data.models.search.RequestSearch
 import com.marufalam.dufa.data.models.search.ResponseSearch
 import com.marufalam.dufa.data.models.search.blood.ResponseBloodGroup
@@ -16,6 +18,8 @@ import com.marufalam.dufa.data.models.upload_profile_pic.ResponseUploadProfilePi
 import com.marufalam.dufa.ui.profile_update.RequestProfileUpdate
 import com.marufalam.dufa.ui.profile_update.ResponseUpdateProfile
 import okhttp3.MultipartBody
+import okhttp3.ResponseBody
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -60,6 +64,10 @@ interface SecuredApi {
         @Path("userID") userId: Int,
         @Part image: MultipartBody.Part,
     ): Response<ResponseUploadProfilePic>
+
+    @POST("pay-renew")
+ fun payRenew(@Body renew: RequestPayRenew): Call<ResponseBody>
+
 
 
     @POST("details-profile-update/{userID}")
