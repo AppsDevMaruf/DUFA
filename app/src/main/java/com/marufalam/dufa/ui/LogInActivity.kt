@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class LogInFragment : AppCompatActivity() {
+class LogInActivity : AppCompatActivity() {
     private val authViewModel :AuthViewModel by viewModels<AuthViewModel>()
 
     lateinit var binding: FragmentLogInBinding
@@ -85,7 +85,7 @@ class LogInFragment : AppCompatActivity() {
 
                     tokenManager.saveToken(Constants.TOKEN, it.data.token)
 
-                    startActivity(Intent(this@LogInFragment, MainActivity::class.java))
+                    startActivity(Intent(this@LogInActivity, MainActivity::class.java))
                     finish()
                 }
                 is NetworkResult.Error -> {

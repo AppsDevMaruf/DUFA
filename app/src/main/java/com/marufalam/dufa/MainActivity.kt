@@ -1,8 +1,10 @@
 package com.marufalam.dufa
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
@@ -10,6 +12,7 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
@@ -22,15 +25,15 @@ import com.google.android.material.navigation.NavigationView
 import com.marufalam.dufa.data.local.TokenManager
 import com.marufalam.dufa.data.models.getProfileInfo.ResponseProfileInfo
 import com.marufalam.dufa.databinding.ActivityMainBinding
+import com.marufalam.dufa.ui.LogInActivity
 import com.marufalam.dufa.utils.*
-import com.marufalam.dufa.viewmodel.AuthViewModel
 import com.marufalam.dufa.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     @Inject
     lateinit var tokenManager: TokenManager
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -38,7 +41,7 @@ class MainActivity : AppCompatActivity() {
     private var userId = 0
     private lateinit var progressBar: ProgressBar
     private val dashboardViewModel: DashboardViewModel by viewModels()
-    private val authViewModel by viewModels<AuthViewModel>()
+
     private var bundle = Bundle()
     lateinit var binding: ActivityMainBinding
     private lateinit var userProfilePicHeader: ShapeableImageView
@@ -67,17 +70,7 @@ class MainActivity : AppCompatActivity() {
 
         userProfilePicABHeader = nav.findViewById(R.id.profilePicABHeader)
 
-
-
-
-
-        authViewModel.loginResponseToken.observe(this) {
-            if (it.status) {
-                dashboardViewModel.profileInfoVM()
-            }
-        }
-
-
+        dashboardViewModel.profileInfoVM()
         binObserver()
 
         ///
@@ -108,14 +101,37 @@ class MainActivity : AppCompatActivity() {
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.DashboardFragment, R.id.signUpFragment
+                R.id.DashboardFragment,
+//                R.id.memberListFragment,
+//                R.id.duesPaymentFragment,
+//                R.id.logoutFragment,
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+       // navView.setNavigationItemSelectedListener(this)
 
     }
 
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        // Handle navigation view item clicks here.
+
+        when (item.itemId) {
+
+            R.id.logoutFragment -> {
+
+                startActivity(Intent(this@MainActivity, LogInActivity::class.java))
+
+                finish()
+
+            }
+
+
+        }
+
+        binding.drawerLayout.closeDrawer(GravityCompat.START)
+        return true
+    }
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)

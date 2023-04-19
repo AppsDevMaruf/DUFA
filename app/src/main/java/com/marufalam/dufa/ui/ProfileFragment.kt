@@ -2,6 +2,7 @@ package com.marufalam.dufa.ui
 
 import android.os.Bundle
 import android.provider.ContactsContract
+import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
@@ -74,6 +75,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                     binding.profilePicAB.hide()
 
                     val profileImg = Constants.IMG_PREFIX + userInfo.imagePath
+                    Log.i("TAG", "profileImg: $profileImg ")
                     binding.userProfilePic.loadImagesWithGlide(profileImg)
                 }
             }

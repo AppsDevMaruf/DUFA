@@ -33,6 +33,7 @@
                     android:layout_height="100dp"
                     android:layout_marginTop="30dp"
                     android:padding="1dp"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/ic_member"
                     android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="@+id/view"
@@ -44,6 +45,7 @@
                     app:strokeWidth="1dp"
                     tools:ignore="MissingConstraints" />
                 <TextView
+
                     android:id="@+id/profilePicAB"
                     android:layout_width="100dp"
                     android:layout_height="100dp"

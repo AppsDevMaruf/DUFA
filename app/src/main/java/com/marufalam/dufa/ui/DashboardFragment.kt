@@ -1,11 +1,14 @@
 package com.marufalam.dufa.ui
 
+import android.os.Bundle
 import android.util.Log
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.marufalam.dufa.BaseFragment
 import com.marufalam.dufa.R
 import com.marufalam.dufa.databinding.FragmentDashboardBinding
+import com.marufalam.dufa.ui.trans_history.TransationHistoryViewModel
 import com.marufalam.dufa.utils.NetworkResult
 import com.marufalam.dufa.utils.hide
 import com.marufalam.dufa.utils.show
@@ -16,6 +19,10 @@ import dagger.hilt.android.AndroidEntryPoint
 class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
 
     private val dashboardViewModel by viewModels<DashboardViewModel>()
+    private val transactionHistoryViewModel by activityViewModels<TransationHistoryViewModel>()
+
+    var totalDues = 0
+
 
     override fun getFragmentView(): Int {
         return R.layout.fragment_dashboard
@@ -35,7 +42,24 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
 
         binding.duesPaymentBtn.setOnClickListener {
 
-            findNavController().navigate(R.id.action_DashboardFragment_to_duesPaymentFragment)
+
+            transactionHistoryViewModel.setDueAmount(binding.totalDues.text.toString().toInt())
+
+            Log.i("TAG", "setupNavigation: ")
+
+            totalDues=binding.totalDues.text.toString().toInt()
+
+
+            val bundle = Bundle()
+
+            bundle.putInt("totalDues", totalDues)
+
+
+
+            findNavController().navigate(
+                R.id.action_DashboardFragment_to_duesPaymentFragment,
+                bundle
+            )
         }
 
 
@@ -55,6 +79,7 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
 
                 }
                 is NetworkResult.Success -> {
+                    it.data
                     Log.i("SuccessTAG", "DashboardSuccess: ${it.data!!}")
 
                 }
@@ -75,6 +100,8 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
 
                 }
                 is NetworkResult.Success -> {
+
+
                     binding.totalMember.text = it.data?.totalMember.toString()
                     binding.totalDues.text = it.data?.totalDues.toString()
                     binding.totalVouchers.text = it.data?.totalVoucher.toString()

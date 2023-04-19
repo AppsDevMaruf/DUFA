@@ -55,25 +55,38 @@ class UserDetailsFragment : BaseFragment<FragmentUserDetailsBinding>() {
                 )
             }
 
-            if (userInfo.imagePath == null) {
-                binding.userProfilePic.hide()
-                binding.profilePicAB.show()
-                binding.profilePicAB.text = userInfo.name?.let { it1 ->
-                    nameAbbreviationGenerator(
-                        it1
-                    )
-                }
-            } else {
-                binding.userProfilePic.show()
-                binding.profilePicAB.hide()
 
-                val profileImg = Constants.IMG_PREFIX + userInfo.imagePath
+            binding.userProfilePic.show()
+            binding.profilePicAB.hide()
+
+            val profileImg = Constants.IMG_PREFIX + userInfo.imagePath
 
 
-                Glide.with(requireActivity())
-                    .load(profileImg)
-                    .into(binding.userProfilePic)
-            }
+            Glide.with(requireActivity())
+                .load(profileImg)
+                .placeholder(R.drawable.avatar_placeholder)
+                .into(binding.userProfilePic)
+
+//            if (userInfo.imagePath == null) {
+//                binding.userProfilePic.hide()
+//                binding.profilePicAB.show()
+//                binding.profilePicAB.text = userInfo.name?.let { it1 ->
+//                    nameAbbreviationGenerator(
+//                        it1
+//                    )
+//                }
+//            } else {
+//                binding.userProfilePic.show()
+//                binding.profilePicAB.hide()
+//
+//                val profileImg = Constants.IMG_PREFIX + userInfo.imagePath
+//
+//
+//                Glide.with(requireActivity())
+//                    .load(profileImg)
+//                    .placeholder(R.drawable.avatar_placeholder)
+//                    .into(binding.userProfilePic)
+//            }
         }
 
     }

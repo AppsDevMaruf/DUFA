@@ -30,22 +30,23 @@
                 android:layout_margin="4dp"
                 android:padding="5dp"
                 android:visibility="visible"
+                android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/view"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                 app:srcCompat="@drawable/maruf"
-                app:strokeColor="@color/blue"
-                app:strokeWidth="2dp" />
+
+                app:strokeWidth="0dp" />
 
             <TextView
                 android:id="@+id/profilePicAB"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
                 android:layout_margin="4dp"
-                android:background="@drawable/cta_circle"
-                android:fontFamily="@font/dm_sans_medium"
+
+                android:fontFamily="@font/dm_sans_bold"
                 android:gravity="center"
                 android:includeFontPadding="false"
                 android:padding="5dp"
@@ -57,10 +58,9 @@
                 app:layout_constraintEnd_toStartOf="@+id/view"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
-                app:srcCompat="@drawable/maruf"
-                app:strokeColor="@color/blue"
-                app:strokeWidth="2dp"
+
+
+
                 tools:ignore="MissingConstraints" />
 
             <View

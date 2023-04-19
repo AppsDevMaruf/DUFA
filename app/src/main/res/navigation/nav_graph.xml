@@ -97,4 +97,8 @@
             android:id="@+id/action_duesPaymentFragment_to_transactionHistoryFragment"
             app:destination="@id/transactionHistoryFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/logoutFragment"
+        android:name="com.marufalam.dufa.ui.LogoutFragment"
+        android:label="LogoutFragment" />
 </navigation>
