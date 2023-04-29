@@ -86,7 +86,7 @@ class DuesPaymentFragment : BaseFragment<FragmentDuesPaymentBinding>(){
     override fun setupNavigation() {
         binding.continue2000Payment.setOnClickListener {
             val request = RequestPayRenew(
-                amount = 2000,
+                amount = 0,
                 membership ="yearly",
                 userinfoID = 1382,
                 renewFee = "renew_fee"
