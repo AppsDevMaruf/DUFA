@@ -41,6 +41,7 @@ import com.marufalam.dufa.ui.profile_update.UserUpdateFragment
 import com.marufalam.dufa.utils.*
 import com.marufalam.dufa.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import de.hdodenhof.circleimageview.CircleImageView
 import id.zelory.compressor.Compressor
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -66,6 +67,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private var bundle = Bundle()
     lateinit var binding: ActivityMainBinding
     private lateinit var userProfilePicHeader: ShapeableImageView
+    private lateinit var uploadProfilePicBtn: CircleImageView
 
     private lateinit var userProfilePicABHeader: TextView
     private lateinit var profilePicAB: TextView
@@ -109,6 +111,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         nav = binding.navigationView.getHeaderView(0)
 
         userProfilePicHeader = nav.findViewById(R.id.userProfilePicHeader)
+        uploadProfilePicBtn = nav.findViewById(R.id.uploadProfilePicBtn)
 
         userProfilePicABHeader = nav.findViewById(R.id.profilePicABHeader)
 
@@ -140,7 +143,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         }
 
-        userProfilePicHeader.setOnClickListener {
+        uploadProfilePicBtn.setOnClickListener {
 
             requestPermissions(permissionsRequest, PERMISSIONS)
             startCameraWithoutUri(includeCamera = true, includeGallery = false)

@@ -33,6 +33,21 @@
             app:strokeWidth="1dp"
             tools:ignore="MissingConstraints" />
 
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            app:civ_border_width="@dimen/_1sdp"
+            app:civ_border_color="@color/bluedeep"
+            android:translationZ="@dimen/_2sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
+            android:padding="@dimen/_2sdp"
+         android:id="@+id/uploadProfilePicBtn"
+            app:layout_constraintEnd_toEndOf="@id/userProfilePicHeader"
+            app:layout_constraintBottom_toBottomOf="@id/userProfilePicHeader"
+            android:src="@drawable/ic_gallary"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"/>
+
+
         <TextView
             android:id="@+id/profilePicABHeader"
             android:layout_width="100dp"
