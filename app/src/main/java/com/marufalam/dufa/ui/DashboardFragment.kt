@@ -1,7 +1,7 @@
 package com.marufalam.dufa.ui
 
 import android.util.Log
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.marufalam.dufa.BaseFragment
 import com.marufalam.dufa.R
@@ -15,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
 
-    private val dashboardViewModel by viewModels<DashboardViewModel>()
+    private val dashboardViewModel by activityViewModels<DashboardViewModel>()
 
     override fun getFragmentView(): Int {
         return R.layout.fragment_dashboard
@@ -36,8 +36,6 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
 
             findNavController().navigate(R.id.action_DashboardFragment_to_duesPaymentFragment)
         }
-
-
 
 
     }
@@ -76,6 +74,8 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
 
                 }
                 is NetworkResult.Success -> {
+
+                    it.data?.totalDues?.let { it1 -> dashboardViewModel.savePaymentDues(it1) }
                     binding.totalMember.text = it.data?.totalMember.toString()
                     binding.totalDues.text = it.data?.totalDues.toString()
                     binding.totalVouchers.text = it.data?.totalVoucher.toString()

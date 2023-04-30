@@ -1,17 +1,15 @@
 package com.marufalam.dufa.ui.dues_payment
 
-import android.annotation.SuppressLint
 import android.util.Log
-import android.webkit.*
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.google.gson.Gson
 import com.marufalam.dufa.BaseFragment
 import com.marufalam.dufa.R
 import com.marufalam.dufa.data.models.payRenew.RequestPayRenew
 import com.marufalam.dufa.databinding.FragmentDuesPaymentBinding
 import com.marufalam.dufa.utils.NetworkResult
 import com.marufalam.dufa.utils.gone
+import com.marufalam.dufa.utils.show
 import com.marufalam.dufa.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -31,9 +29,28 @@ class DuesPaymentFragment : BaseFragment<FragmentDuesPaymentBinding>() {
     }
 
     override fun setupNavigation() {
+
+        binding.showHistory.setOnClickListener {
+
+            findNavController().navigate(R.id.action_duesPaymentFragment_to_transactionHistoryFragment)
+
+        }
+
+
+
         binding.continue2000Payment.setOnClickListener {
             val request = RequestPayRenew(
-                amount = 2000,
+                amount = binding.duesAmount.text.toString().toInt(),
+                membership = "yearly",
+                userinfoID = userid,
+                renewFee = "renew_fee"
+            )
+            dashboardViewModel.payRenewVM(request)
+        }
+
+        binding.continue10000Payment.setOnClickListener {
+            val request = RequestPayRenew(
+                amount = 10000,
                 membership = "yearly",
                 userinfoID = userid,
                 renewFee = "renew_fee"
@@ -44,6 +61,22 @@ class DuesPaymentFragment : BaseFragment<FragmentDuesPaymentBinding>() {
     }
 
     override fun binObserver() {
+        dashboardViewModel.paymentDues.observe(viewLifecycleOwner) {
+
+            if (it == 0) {
+                binding.paymentsLayout.gone()
+            } else {
+
+                binding.paymentsLayout.show()
+                binding.duesAmount.text = it.toString()
+
+            }
+
+
+        }
+
+
+
         dashboardViewModel.responsePayRenewVMLD.observe(this) {
 
             when (it) {
@@ -57,8 +90,6 @@ class DuesPaymentFragment : BaseFragment<FragmentDuesPaymentBinding>() {
 
                 }
                 is NetworkResult.Success -> {
-
-
 
 
                     dashboardViewModel.savePaymentUrl(it.data.toString())

@@ -4,9 +4,9 @@ import android.annotation.SuppressLint
 import android.util.Log
 import android.webkit.*
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.google.gson.Gson
 import com.marufalam.dufa.databinding.FragmentSSLBinding
-import com.marufalam.dufa.utils.NetworkResult
 import com.marufalam.dufa.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,8 +20,6 @@ class SSLFragment : BaseFragment<FragmentSSLBinding>() {
 
 
     private val dashboardViewModel by activityViewModels<DashboardViewModel>()
-
-
 
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -61,6 +59,12 @@ class SSLFragment : BaseFragment<FragmentSSLBinding>() {
 
                 Log.i("TAG", "onPageFinished: $url")
 
+                if (url == "http://dufa9596.org/success") {
+
+                    findNavController().navigate(R.id.action_SSLFragment_to_payentSuccessFragment)
+                    findNavController().popBackStack()
+
+                }
 
 
             }
@@ -94,8 +98,6 @@ class SSLFragment : BaseFragment<FragmentSSLBinding>() {
             loadWeb(it)
 
         }
-
-
 
 
     }

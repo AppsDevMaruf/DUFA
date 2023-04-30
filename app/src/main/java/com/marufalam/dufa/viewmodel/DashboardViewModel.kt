@@ -50,6 +50,17 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
 
     }
 
+    var _paymentDues = MutableLiveData<Int>()
+    val paymentDues: LiveData<Int> = _paymentDues
+
+
+    fun savePaymentDues(dues: Int) {
+
+        _paymentDues.postValue(dues)
+
+
+    }
+
 
     fun getMemberSearchVMLD(
 
