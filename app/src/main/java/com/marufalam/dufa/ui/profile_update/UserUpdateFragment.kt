@@ -67,6 +67,8 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
 
     lateinit var dialog: ProgressDialog
 
+    var userid = 0
+
     companion object {
         private val PERMISSIONS = arrayOf(
             android.Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -257,7 +259,7 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
 
             val part = MultipartBody.Part.createFormData("profile_pic", file.name, requestBody)
 
-            dashboardViewModel.uploadProfilePicVM(1384, part)
+            dashboardViewModel.uploadProfilePicVM(userId = userid, part = part)
         }
 
 
@@ -547,6 +549,30 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
                 is NetworkResult.Success -> {
 
                     bloodGroupList = bloodGroups.data!!.bloodgroups as ArrayList<Bloodgroup>
+
+                }
+
+            }
+
+        }
+
+        dashboardViewModel.profileInfoVMLD.observe(viewLifecycleOwner) {
+            //progressBar.isVisible = false
+            when (it) {
+
+                is NetworkResult.Error -> {
+                    Log.i("Error", "NetworkResult.Error: ${it.data!!}")
+                    //Log.i("TAG1", "binObserver: ${it.data!!.message.toString()}")
+                }
+                is NetworkResult.Loading -> {
+                    // progressBar.isVisible = true
+
+                }
+                is NetworkResult.Success -> {
+                    userid = it.data?.id!!
+
+
+                    Log.i("SuccessTAG", "DashboardSuccess: ${it.data?.id}")
 
                 }
 

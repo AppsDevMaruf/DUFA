@@ -36,10 +36,7 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
 
             findNavController().navigate(R.id.action_DashboardFragment_to_duesPaymentFragment)
         }
-        binding.paymentCard.setOnClickListener {
 
-            findNavController().navigate(R.id.action_DashboardFragment_to_transactionHistoryFragment)
-        }
 
 
 

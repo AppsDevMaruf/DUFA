@@ -19,9 +19,6 @@
         <action
             android:id="@+id/action_DashboardFragment_to_duesPaymentFragment"
             app:destination="@id/duesPaymentFragment" />
-        <action
-            android:id="@+id/action_DashboardFragment_to_transactionHistoryFragment"
-            app:destination="@id/transactionHistoryFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -99,9 +96,42 @@
         <action
             android:id="@+id/action_duesPaymentFragment_to_transactionHistoryFragment"
             app:destination="@id/transactionHistoryFragment" />
+        <action
+            android:id="@+id/action_duesPaymentFragment_to_SSLFragment"
+            app:destination="@id/SSLFragment" />
     </fragment>
     <fragment
         android:id="@+id/logoutFragment"
         android:name="com.marufalam.dufa.ui.LogoutFragment"
         android:label="LogoutFragment" />
+    <fragment
+        android:id="@+id/SSLFragment"
+        android:name="com.marufalam.dufa.SSLFragment"
+        android:label="fragment_s_s_l"
+        tools:layout="@layout/fragment_s_s_l" >
+        <action
+            android:id="@+id/action_SSLFragment_to_payentSuccessFragment"
+            app:destination="@id/payentSuccessFragment" />
+        <action
+            android:id="@+id/action_SSLFragment_to_paymentFailledFragment"
+            app:destination="@id/paymentFailledFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/payentSuccessFragment"
+        android:name="com.marufalam.dufa.PayentSuccessFragment"
+        android:label="fragment_payent_success"
+        tools:layout="@layout/fragment_payent_success" >
+        <action
+            android:id="@+id/action_payentSuccessFragment_to_DashboardFragment"
+            app:destination="@id/DashboardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentFailledFragment"
+        android:name="com.marufalam.dufa.PaymentFailledFragment"
+        android:label="fragment_payment_failled"
+        tools:layout="@layout/fragment_payment_failled" >
+        <action
+            android:id="@+id/action_paymentFailledFragment_to_DashboardFragment"
+            app:destination="@id/DashboardFragment" />
+    </fragment>
 </navigation>

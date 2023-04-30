@@ -11,21 +11,7 @@
         android:layout_height="match_parent"
         tools:context=".ui.dues_payment.DuesPaymentFragment">
 
-        <FrameLayout
-            android:id="@+id/webViewLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
 
-            <WebView
-                android:id="@+id/webView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-        </FrameLayout>
 
         <LinearLayout
             android:id="@+id/paymentsLayout"
@@ -189,7 +175,21 @@
             </androidx.cardview.widget.CardView>
 
 
+            <androidx.appcompat.widget.AppCompatButton
+
+                android:id="@+id/showHistory"
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:background="@drawable/btn_enable"
+                android:includeFontPadding="false"
+                android:text="Continue to Payment"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+
         </LinearLayout>
+
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

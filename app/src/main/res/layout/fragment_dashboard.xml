@@ -48,7 +48,7 @@
                         android:layout_width="190dp"
                         android:layout_height="140dp"
                         android:layout_gravity="center"
-                        android:layout_marginVertical="@dimen/_30sdp"
+                        android:layout_marginVertical="@dimen/_20sdp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:srcCompat="@drawable/dufa_logo" />
@@ -186,137 +186,7 @@
 
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="8dp"
-                        android:weightSum="2"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/imageView">
 
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/paymentCard"
-                            android:layout_width="166dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="8dp"
-                            android:layout_weight="1"
-                            android:padding="@dimen/_8sdp"
-                            app:cardBackgroundColor="@color/white"
-                            app:cardCornerRadius="10dp"
-                            app:cardElevation="5dp"
-                            app:cardMaxElevation="12dp"
-                            app:cardPreventCornerOverlap="true"
-                            app:cardUseCompatPadding="false">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="60dp"
-                                    android:layout_marginTop="10dp"
-                                    android:paddingVertical="3dp"
-                                    android:paddingStart="20dp"
-                                    android:scaleType="fitStart"
-                                    android:src="@drawable/ic_payment_history" />
-
-                                <TextView
-                                    android:id="@+id/totalPaymentHistory"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="16dp"
-                                    android:letterSpacing="-0.02"
-                                    android:lineSpacingExtra="1sp"
-                                    android:text="0"
-                                    android:textColor="@color/text_black"
-                                    android:textSize="28sp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="16dp"
-                                    android:layout_marginBottom="12dp"
-                                    android:fontFamily="@font/dm_sans_medium"
-                                    android:letterSpacing="0.02"
-                                    android:lineSpacingExtra="1sp"
-                                    android:padding="5dp"
-                                    android:text="Payments History"
-                                    android:textColor="@color/text_gray"
-                                    android:textSize="14sp" />
-
-                            </LinearLayout>
-
-
-                        </androidx.cardview.widget.CardView>
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="166dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="8dp"
-                            android:layout_weight="1"
-                            android:padding="@dimen/_8sdp"
-                            app:cardBackgroundColor="@color/white"
-                            app:cardCornerRadius="10dp"
-                            app:cardElevation="5dp"
-                            app:cardMaxElevation="12dp"
-                            app:cardPreventCornerOverlap="true"
-                            app:cardUseCompatPadding="false">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical">
-
-
-                                <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="@dimen/_60sdp"
-                                    android:layout_marginLeft="-60dp"
-                                    android:layout_marginTop="-8dp"
-                                    android:padding="4dp"
-                                    android:scaleType="centerInside"
-                                    android:src="@drawable/voucher" />
-
-                                <TextView
-                                    android:id="@+id/totalVouchers"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="16dp"
-
-                                    android:letterSpacing="-0.02"
-                                    android:lineSpacingExtra="1sp"
-                                    android:text="∞"
-                                    android:textColor="@color/text_black"
-                                    android:textSize="28sp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="16dp"
-                                    android:layout_marginBottom="12dp"
-                                    android:fontFamily="@font/dm_sans_medium"
-                                    android:letterSpacing="0.02"
-                                    android:lineSpacingExtra="1sp"
-                                    android:padding="5dp"
-                                    android:text="Vouchers"
-                                    android:textColor="@color/text_gray"
-                                    android:textSize="14sp" />
-
-                            </LinearLayout>
-
-
-                        </androidx.cardview.widget.CardView>
-
-
-                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -436,6 +306,80 @@
                                     android:lineSpacingExtra="1sp"
                                     android:padding="5dp"
                                     android:text="Event"
+                                    android:textColor="@color/text_gray"
+                                    android:textSize="14sp" />
+
+                            </LinearLayout>
+
+
+                        </androidx.cardview.widget.CardView>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+
+>
+
+
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:layout_weight="1"
+                            android:padding="@dimen/_8sdp"
+                            app:cardBackgroundColor="@color/white"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="5dp"
+                            app:cardMaxElevation="12dp"
+                            app:cardPreventCornerOverlap="true"
+                            app:cardUseCompatPadding="false">
+
+                            <LinearLayout
+                                android:gravity="center"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+
+                                <ImageView
+                                    android:layout_width="@dimen/_100sdp"
+                                    android:layout_height="@dimen/_60sdp"
+                                    android:layout_marginLeft="1dp"
+                                    android:layout_marginTop="8dp"
+                                    android:padding="4dp"
+                                    android:scaleType="centerInside"
+                                    android:src="@drawable/voucher" />
+
+                                <TextView
+                                    android:id="@+id/totalVouchers"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="16dp"
+
+                                    android:letterSpacing="-0.02"
+                                    android:lineSpacingExtra="1sp"
+                                    android:text="∞"
+                                    android:textColor="@color/text_black"
+                                    android:textSize="28sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="16dp"
+                                    android:layout_marginBottom="12dp"
+                                    android:fontFamily="@font/dm_sans_medium"
+                                    android:letterSpacing="0.02"
+                                    android:lineSpacingExtra="1sp"
+                                    android:padding="5dp"
+                                    android:text="Vouchers"
                                     android:textColor="@color/text_gray"
                                     android:textSize="14sp" />
 

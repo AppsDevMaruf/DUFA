@@ -17,13 +17,11 @@ import com.marufalam.dufa.data.models.get_halls.ResponseHalls
 import com.marufalam.dufa.data.models.get_occupations.ResponseOccupations
 import com.marufalam.dufa.data.models.logout.ResponseLogout
 import com.marufalam.dufa.data.models.payRenew.RequestPayRenew
-import com.marufalam.dufa.data.models.payRenew.ResponsePayRenew
 import com.marufalam.dufa.data.models.search.Data
 import com.marufalam.dufa.data.models.search.RequestSearch
 import com.marufalam.dufa.data.models.upload_profile_pic.ResponseUploadProfilePic
 import com.marufalam.dufa.repos.SecuredRepository
 import com.marufalam.dufa.ui.profile_update.RequestProfileUpdate
-import com.marufalam.dufa.ui.profile_update.ResponseUpdateProfile
 import com.marufalam.dufa.utils.NetworkResult
 import com.marufalam.dufa.utils.NoInternetException
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -34,13 +32,24 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 @HiltViewModel
 class DashboardViewModel @Inject constructor(private val securedRepository: SecuredRepository) :
     ViewModel() {
+
+
+    var _paymentUrl = MutableLiveData<String>()
+    val paymentUrl: LiveData<String> = _paymentUrl
+
+
+    fun savePaymentUrl(url: String) {
+
+        _paymentUrl.postValue(url)
+
+
+    }
+
 
     fun getMemberSearchVMLD(
 
@@ -88,7 +97,7 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
     val logoutVMLD: LiveData<NetworkResult<ResponseLogout>>
         get() = _responseLogout
 
-     fun logoutVM() {
+    fun logoutVM() {
 
         _responseLogout.postValue(NetworkResult.Loading())
 
@@ -220,17 +229,17 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
 
         _responseDistrict.postValue(NetworkResult.Loading())
 
-          viewModelScope.launch {
+        viewModelScope.launch {
 
             try {
                 val response = securedRepository.getDistricts()
 
-                  if (response.isSuccessful && response.body() != null) {
+                if (response.isSuccessful && response.body() != null) {
 
 
                     _responseDistrict.postValue(NetworkResult.Success(response.body()!!))
 
-                  } else if (response.errorBody() != null) {
+                } else if (response.errorBody() != null) {
 
                     val errorObj = JSONObject(response.errorBody()!!.charStream().readText())
                     _responseDistrict.postValue(NetworkResult.Error(errorObj.getString("message")))
@@ -244,9 +253,9 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
                 })
             }
 
-          }
+        }
 
-      }
+    }
 
 
     //   District info  end
@@ -488,23 +497,28 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
                 call: Call<ResponseBody>, response: Response<ResponseBody>
             ) {
                 try {
-                    if (response.isSuccessful && response.body()!=null) {
-                        _responsePayRenew.postValue(NetworkResult.Success(response.body()?.string()!!))
+                    if (response.isSuccessful && response.body() != null) {
+                        _responsePayRenew.postValue(
+                            NetworkResult.Success(
+                                response.body()?.string()!!
+                            )
+                        )
                     } else {
                         val errorObj = JSONObject(response.errorBody()!!.charStream().readText())
                         _responsePayRenew.postValue(NetworkResult.Error(errorObj.getString("message")))
                     }
-                }catch (e:Exception){
+                } catch (e: Exception) {
 
                     _responsePayRenew.postValue(e.localizedMessage?.let {
-                            NetworkResult.Error(
-                                it
-                            )
-                        })
+                        NetworkResult.Error(
+                            it
+                        )
+                    })
 
                 }
 
             }
+
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 Log.i("TAG", "onFailure: ${t.message} ")
             }
