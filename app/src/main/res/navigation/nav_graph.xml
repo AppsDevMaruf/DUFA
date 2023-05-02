@@ -19,6 +19,10 @@
         <action
             android:id="@+id/action_DashboardFragment_to_duesPaymentFragment"
             app:destination="@id/duesPaymentFragment" />
+        <action
+            android:id="@+id/action_DashboardFragment_to_QRFragment"
+            app:destination="@id/QRFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -134,4 +138,5 @@
             android:id="@+id/action_paymentFailledFragment_to_DashboardFragment"
             app:destination="@id/DashboardFragment" />
     </fragment>
+
 </navigation>

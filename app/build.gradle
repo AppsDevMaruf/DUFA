@@ -126,5 +126,7 @@ dependencies {
 
     implementation 'id.zelory:compressor:3.0.1'
 
+    implementation 'com.github.androidmads:QRGenerator:1.0.1'
+
 
 }

@@ -37,6 +37,13 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
             findNavController().navigate(R.id.action_DashboardFragment_to_duesPaymentFragment)
         }
 
+        binding.userQr.setOnClickListener {
+
+            findNavController().navigate(R.id.action_DashboardFragment_to_QRFragment)
+
+
+        }
+
 
     }
 

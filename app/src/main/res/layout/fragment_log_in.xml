@@ -115,6 +115,7 @@
                         app:boxStrokeWidth="0dp"
                         app:boxStrokeWidthFocused="0dp"
                         app:hintEnabled="false"
+
                         app:passwordToggleEnabled="true">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -125,6 +126,7 @@
                             android:layout_marginBottom="15dp"
                             android:background="@drawable/rectangle_8"
                             android:hint="*******"
+                            android:inputType="textWebPassword"
                             android:padding="@dimen/_9sdp"
                             android:fontFamily="@font/dm_sans"
                             android:textAppearance="@style/TextAppearance.Material3.TitleSmall"

@@ -201,6 +201,8 @@
 
                         <androidx.cardview.widget.CardView
 
+                            android:id="@+id/userQr"
+
                             android:layout_width="166dp"
                             android:layout_height="match_parent"
                             android:layout_margin="8dp"

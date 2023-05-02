@@ -127,19 +127,25 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
 
         binding.userProfilePic.setOnClickListener {
             requestPermissions(permissionsRequest, PERMISSIONS)
-            startCameraWithoutUri(includeCamera = false, includeGallery = true)
+            startCameraWithoutUri(includeCamera = true, includeGallery = true)
 
         }
         binding.profilePicAB.setOnClickListener {
             requestPermissions(permissionsRequest, PERMISSIONS)
-            startCameraWithoutUri(includeCamera = true, includeGallery = false)
+            startCameraWithoutUri(includeCamera = true, includeGallery = true)
+
+        }
+
+        binding.uploadProfilePicBtn.setOnClickListener {
+            requestPermissions(permissionsRequest, PERMISSIONS)
+            startCameraWithoutUri(includeCamera = true, includeGallery = true)
 
         }
 
 
         binding.updateBtn.setOnClickListener {
 
-            var request = RequestProfileUpdate(
+            val request = RequestProfileUpdate(
                 binding.name.text.toString(),
                 binding.address.text.toString(),
                 binding.phone.text.toString(),

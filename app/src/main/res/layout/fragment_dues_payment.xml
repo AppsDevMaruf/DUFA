@@ -16,6 +16,8 @@
 
 
         <LinearLayout
+
+            android:visibility="gone"
             android:id="@+id/paymentsLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -104,7 +106,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="@dimen/_8sdp"
                         android:fontFamily="@font/dm_sans_bold"
-                        android:text="2000 Tk"
+                        android:text="0Tk"
                         android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
                         android:textColor="@color/text_black"
                         app:layout_constraintEnd_toEndOf="parent"
