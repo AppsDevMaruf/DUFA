@@ -19,7 +19,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class LogInActivity : AppCompatActivity() {
-    private val authViewModel :AuthViewModel by viewModels<AuthViewModel>()
+    private val authViewModel: AuthViewModel by viewModels<AuthViewModel>()
 
     lateinit var binding: FragmentLogInBinding
 
@@ -37,41 +37,53 @@ class LogInActivity : AppCompatActivity() {
     fun configUi() {
         binding.logIn.setOnClickListener {
             binding.loginErrorText.isVisible = false
-            if (!isValidEmail(binding.loginEmail.text.toString().trim())) {
+            //debug
+            val email = "masummehedi1@gmail.com"
+            val password = "12345678"
 
-                Log.i("TAG", "onCreate: Clicked ")
-                binding.loginErrorText.error = "Email Pattern is Not Correct !"
-                binding.loginErrorText.isVisible = true
+            val loginRequestLogin = RequestLogin(email, password)
 
-
-            } else if (binding.passwordInput.text.toString().trim() == "") {
-                binding.loginErrorText.error = "Password Required!"
-                binding.loginErrorText.isVisible = true
-
-            } else if (binding.passwordInput.text.toString().trim().length < 8) {
-
-                binding.loginErrorText.error = "Password Length Minimum 8 char"
-                binding.loginErrorText.isVisible = true
-
-
-            } else {
-
-                val email = binding.loginEmail.text.toString().trim()
-                val password = binding.passwordInput.text.toString().trim()
-
-                val loginRequestLogin = RequestLogin(email, password)
-
-                lifecycleScope.launch {
-                    authViewModel.loginUserVM(loginRequestLogin)
-                }
-
-
+            lifecycleScope.launch {
+                authViewModel.loginUserVM(loginRequestLogin)
             }
+
+
+            //production
+//            if (!isValidEmail(binding.loginEmail.text.toString().trim())) {
+//
+//                Log.i("TAG", "onCreate: Clicked ")
+//                binding.loginErrorText.error = "Email Pattern is Not Correct !"
+//                binding.loginErrorText.isVisible = true
+//
+//
+//            } else if (binding.passwordInput.text.toString().trim() == "") {
+//                binding.loginErrorText.error = "Password Required!"
+//                binding.loginErrorText.isVisible = true
+//
+//            } else if (binding.passwordInput.text.toString().trim().length < 8) {
+//
+//                binding.loginErrorText.error = "Password Length Minimum 8 char"
+//                binding.loginErrorText.isVisible = true
+//
+//
+//            } else {
+//                val email = binding.loginEmail.text.toString().trim()
+//                val password = binding.passwordInput.text.toString().trim()
+//
+//
+//
+//                val loginRequestLogin = RequestLogin(email, password)
+//
+//                lifecycleScope.launch {
+//                    authViewModel.loginUserVM(loginRequestLogin)
+//                }
+//
+//
+//            }
         }
 
 
     }
-
 
 
     fun binObserver() {

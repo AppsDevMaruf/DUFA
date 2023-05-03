@@ -13,6 +13,7 @@ import com.marufalam.dufa.data.models.payRenew.RequestPayRenew
 import com.marufalam.dufa.data.models.search.RequestSearch
 import com.marufalam.dufa.data.models.search.blood.ResponseBloodGroup
 import com.marufalam.dufa.data.models.transaction_history.TransHistory
+import com.marufalam.dufa.data.models.vouchers.RequestVoucher
 import com.marufalam.dufa.paging.MemberSearchPagingSource
 import com.marufalam.dufa.ui.profile_update.RequestProfileUpdate
 import com.marufalam.dufa.utils.NetworkResult
@@ -217,6 +218,10 @@ class SecuredRepository @Inject constructor(private val securedApi: SecuredApi) 
 
     suspend fun updateProfile(userId: Int, requestProfileUpdate: RequestProfileUpdate) =
         securedApi.updateProfile(userId, requestProfileUpdate)
+
+    suspend fun uploadVoucher(request: RequestVoucher, part: MultipartBody.Part) =
+        securedApi.uploadVoucher(part)
+
     fun payRenew(requestPayRenew: RequestPayRenew) = securedApi.payRenew(requestPayRenew)
 
 }

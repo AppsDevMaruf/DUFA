@@ -187,7 +187,6 @@
                     </LinearLayout>
 
 
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -326,11 +325,11 @@
                         android:orientation="horizontal"
                         android:padding="8dp"
 
->
-
+                        >
 
 
                         <androidx.cardview.widget.CardView
+                            android:id="@+id/voucher"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
@@ -344,9 +343,9 @@
                             app:cardUseCompatPadding="false">
 
                             <LinearLayout
-                                android:gravity="center"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
+                                android:gravity="center"
                                 android:orientation="vertical">
 
 

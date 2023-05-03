@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_DashboardFragment_to_QRFragment"
             app:destination="@id/QRFragment" />
+        <action
+            android:id="@+id/action_DashboardFragment_to_voucherFragment"
+            app:destination="@id/voucherFragment" />
 
     </fragment>
     <fragment
@@ -138,5 +141,10 @@
             android:id="@+id/action_paymentFailledFragment_to_DashboardFragment"
             app:destination="@id/DashboardFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/voucherFragment"
+        android:name="com.marufalam.dufa.VoucherFragment"
+        android:label="fragment_voucher"
+        tools:layout="@layout/fragment_voucher" />
 
 </navigation>

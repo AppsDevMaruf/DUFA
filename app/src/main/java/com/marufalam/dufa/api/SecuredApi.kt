@@ -15,6 +15,8 @@ import com.marufalam.dufa.data.models.search.ResponseSearch
 import com.marufalam.dufa.data.models.search.blood.ResponseBloodGroup
 import com.marufalam.dufa.data.models.transaction_history.TransHistory
 import com.marufalam.dufa.data.models.upload_profile_pic.ResponseUploadProfilePic
+import com.marufalam.dufa.data.models.vouchers.RequestVoucher
+import com.marufalam.dufa.data.models.vouchers.ResponseVoucherUpload
 import com.marufalam.dufa.ui.profile_update.RequestProfileUpdate
 import com.marufalam.dufa.ui.profile_update.ResponseUpdateProfile
 import okhttp3.MultipartBody
@@ -66,8 +68,7 @@ interface SecuredApi {
     ): Response<ResponseUploadProfilePic>
 
     @POST("pay-renew")
- fun payRenew(@Body renew: RequestPayRenew): Call<ResponseBody>
-
+    fun payRenew(@Body renew: RequestPayRenew): Call<ResponseBody>
 
 
     @POST("details-profile-update/{userID}")
@@ -79,6 +80,12 @@ interface SecuredApi {
 
     @GET("payment-history")
     suspend fun getTransactionHistory(): Response<TransHistory>
+
+    @Multipart
+    @POST("send-voucher")
+    suspend fun uploadVoucher(
+        @Part image: MultipartBody.Part,
+    ): Response<ResponseVoucherUpload>
 
 
     /* @POST("search")

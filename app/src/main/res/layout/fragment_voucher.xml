@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:context=".VoucherFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/back_grey"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+
+            <LinearLayout
+                android:id="@+id/mainLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="70dp"
+
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+                <!--Voucher Number-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/dm_sans_medium"
+                        android:lines="1"
+                        android:padding="2dp"
+                        android:text="Voucher Number"
+                        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                        android:textColor="@color/blue" />
+
+                    <EditText
+                        android:id="@+id/voucherNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_gravity="start"
+                        android:layout_weight="1"
+                        android:background="@drawable/white_back_react"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/dm_sans_medium"
+                        android:lines="1"
+                        android:padding="2dp"
+                        android:paddingStart="10dp"
+                        android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+                        android:textColor="@color/text_primary"
+                        tools:text="AB123987" />
+
+                </LinearLayout>
+
+
+                <!-- Amount-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/dm_sans_medium"
+                        android:lines="1"
+                        android:padding="2dp"
+                        android:text="Amount"
+                        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                        android:textColor="@color/blue" />
+
+                    <EditText
+                        android:id="@+id/voucherAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_gravity="start"
+                        android:layout_weight="1"
+                        android:background="@drawable/white_back_react"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/dm_sans_medium"
+                        android:lines="1"
+                        android:padding="2dp"
+                        android:paddingStart="10dp"
+                        android:text="000"
+                        android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+                        android:textColor="@color/text_primary" />
+
+                </LinearLayout>
+
+
+                <!-- birthday-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/dm_sans_medium"
+                        android:lines="1"
+                        android:padding="2dp"
+                        android:text="Date"
+                        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                        android:textColor="@color/blue" />
+
+                    <TextView
+                        android:id="@+id/birthdate"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_gravity="start"
+                        android:layout_weight="1"
+                        android:background="@drawable/white_back_react"
+                        android:drawableEnd="@drawable/baseline_date_range_24"
+                        android:drawablePadding="10dp"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/dm_sans_medium"
+                        android:gravity="center_vertical"
+                        android:hint="yyyy-mm-dd"
+                        android:lines="1"
+                        android:padding="2dp"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+                        android:textColor="@color/text_primary" />
+
+                </LinearLayout>
+
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/uploadVoucher"
+                    android:layout_width="@dimen/_150sdp"
+                    android:layout_height="@dimen/_100sdp"
+                    android:layout_margin="@dimen/_50sdp"
+                    android:layout_marginEnd="@dimen/_4sdp"
+                    android:background="@color/white"
+                    android:padding="@dimen/_2sdp"
+                    android:src="@drawable/ic_gallary"
+                    android:translationZ="@dimen/_2sdp"
+                    app:civ_border_color="@color/bluedeep"
+                    app:civ_border_width="@dimen/_1sdp"
+                    app:layout_constraintBottom_toBottomOf="@id/userProfilePic"
+                    app:layout_constraintEnd_toEndOf="@id/userProfilePic" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/uploadVoucherBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_50sdp"
+                    android:background="@drawable/btn_enable"
+                    android:fontFamily="@font/dm_sans_bold"
+                    android:text="Upload Voucher"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white" />
+
+
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+
+</layout>

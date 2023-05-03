@@ -20,6 +20,8 @@ import com.marufalam.dufa.data.models.payRenew.RequestPayRenew
 import com.marufalam.dufa.data.models.search.Data
 import com.marufalam.dufa.data.models.search.RequestSearch
 import com.marufalam.dufa.data.models.upload_profile_pic.ResponseUploadProfilePic
+import com.marufalam.dufa.data.models.vouchers.RequestVoucher
+import com.marufalam.dufa.data.models.vouchers.ResponseVoucherUpload
 import com.marufalam.dufa.repos.SecuredRepository
 import com.marufalam.dufa.ui.profile_update.RequestProfileUpdate
 import com.marufalam.dufa.utils.NetworkResult
@@ -444,6 +446,56 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
     }
 
     //   upload profile pic  end
+
+    //  upload profile pic start
+
+    private var _responseUploadVoucher =
+        MutableLiveData<NetworkResult<ResponseVoucherUpload>>()
+    val responseUploadVoucherVMLD: LiveData<NetworkResult<ResponseVoucherUpload>>
+        get() = _responseUploadVoucher
+
+    suspend fun uploadVoucherVm(request: RequestVoucher, part: MultipartBody.Part) {
+
+        _responseUploadVoucher.postValue(NetworkResult.Loading())
+
+
+        viewModelScope.launch {
+
+            try {
+                val response = securedRepository.uploadVoucher(request, part)
+
+                Log.i("TAG", "uploadProfilePicVM: $response")
+
+                if (response.isSuccessful && response.body() != null) {
+
+
+                    _responseUploadVoucher.postValue(NetworkResult.Success(response.body()!!))
+
+                } else if (response.errorBody() != null) {
+
+                    val errorObj = JSONObject(response.errorBody()!!.charStream().readText())
+                    _responseUploadVoucher.postValue(NetworkResult.Error(errorObj.getString("message")))
+
+                }
+            } catch (noInternetException: Exception) {
+                _responseUploadVoucher.postValue(noInternetException.localizedMessage?.let {
+                    NetworkResult.Error(
+                        it
+                    )
+                })
+            }
+
+        }
+
+    }
+
+    //   upload profile pic  end
+
+
+
+
+
+
 
     //  upload profile pic start
 
