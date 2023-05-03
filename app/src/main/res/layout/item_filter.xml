@@ -36,7 +36,7 @@
             android:layout_height="40dp"
             android:contentDescription="@string/app_name"
             android:padding="8dp"
-            android:src="@drawable/ic_filter"
+            android:src="@drawable/email"
             app:tint="@color/blue" />
 
         <TextView
@@ -71,7 +71,7 @@
             android:layout_height="40dp"
             android:contentDescription="@string/app_name"
             android:padding="8dp"
-            android:src="@drawable/ic_filter"
+            android:src="@drawable/blood"
             app:tint="@color/blue" />
 
         <TextView
@@ -108,7 +108,7 @@
             android:layout_height="40dp"
             android:contentDescription="@string/app_name"
             android:padding="8dp"
-            android:src="@drawable/ic_filter"
+            android:src="@drawable/pin"
             app:tint="@color/blue" />
 
         <TextView
@@ -145,7 +145,7 @@
             android:layout_height="40dp"
             android:contentDescription="@string/app_name"
             android:padding="8dp"
-            android:src="@drawable/ic_filter"
+            android:src="@drawable/briefcase"
             app:tint="@color/blue" />
 
         <TextView
@@ -181,7 +181,7 @@
             android:layout_height="40dp"
             android:contentDescription="@string/app_name"
             android:padding="8dp"
-            android:src="@drawable/ic_filter"
+            android:src="@drawable/department"
             app:tint="@color/blue" />
 
         <TextView
@@ -215,7 +215,7 @@
             android:layout_height="40dp"
             android:contentDescription="@string/app_name"
             android:padding="8dp"
-            android:src="@drawable/ic_filter"
+            android:src="@drawable/birthday"
             app:tint="@color/blue" />
 
         <TextView

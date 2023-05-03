@@ -1,9 +1,11 @@
 package com.marufalam.dufa.utils
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Context
 import android.content.pm.PackageManager
+import android.os.Build
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -22,6 +24,10 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.marufalam.dufa.R
 import java.math.RoundingMode
 import java.text.DecimalFormat
+import java.text.SimpleDateFormat
+import java.time.ZoneId
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 
@@ -202,6 +208,41 @@ fun ImageView.loadImagesWithGlide(url: String) {
         .diskCacheStrategy(DiskCacheStrategy.ALL)
         .into(this)
 }
+fun Any.removeUnderscore(originalString: String): String? {
+    val str = originalString.lowercase(Locale.ROOT)
+    val stringWithoutUnderscores = str.replace("_", " ")
+        .split(" ")
+        .joinToString(" ")
+        {
+            it.replaceFirstChar { char ->
+                if (char.isLowerCase()) char.titlecase(
+                    Locale.ROOT
+                ) else char.toString()
+            }
+        }
+    return stringWithoutUnderscores
+}
+@SuppressLint("SimpleDateFormat")
+fun Any.getZonedTime(zoneTime: String): String {
+
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+        val parsed =
+            ZonedDateTime.parse(zoneTime, DateTimeFormatter.ISO_DATE_TIME).withZoneSameInstant(
+                ZoneId.of(TimeZone.getDefault().id)
+            )
+        //  val parsedDate = LocalDateTime.parse(zoneTime, DateTimeFormatter.ISO_DATE_TIME)
+        parsed.format(DateTimeFormatter.ofPattern("yyyy.MM.dd hh:mm a"))
+    } else {
+        val parser = SimpleDateFormat("yyyy-MM-dd 'T' HH:mm")
+        val formatter = SimpleDateFormat("dd.MM.yyyy hh:mm a")
+        formatter.format(parser.parse(zoneTime))
+    }
+
+
+
+}
+
 
 
 

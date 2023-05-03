@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="8dp"
     app:cardCornerRadius="8dp">
 
@@ -18,9 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
             android:layout_marginVertical="2dp"
-            android:drawableLeft="@drawable/name_account_24"
             android:drawablePadding="3dp"
-            android:drawableTint="@color/colorPrimaryDark"
             android:ellipsize="end"
             android:fontFamily="@font/dm_sans_bold"
             android:gravity="center_vertical"
@@ -29,7 +28,9 @@
             android:padding="4dp"
             android:text="Mehedi Hasan"
             android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-            android:textColor="@color/colorPrimaryDark" />
+            android:textColor="@color/colorPrimaryDark"
+            app:drawableLeftCompat="@drawable/name_account_24"
+            app:drawableTint="@color/colorPrimaryDark" />
 
         <TextView
             android:id="@+id/email"
@@ -37,9 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
             android:layout_marginVertical="0dp"
-            android:drawableLeft="@drawable/round_alternate_email_24"
             android:drawablePadding="4dp"
-            android:drawableTint="@color/colorPrimaryDark"
             android:ellipsize="end"
             android:fontFamily="@font/dm_sans"
             android:gravity="center_vertical"
@@ -48,7 +47,9 @@
             android:padding="2dp"
             android:text="MehediHasan@gmail.com"
             android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
-            android:textColor="@color/colorPrimary" />
+            android:textColor="@color/colorPrimary"
+            app:drawableLeftCompat="@drawable/round_alternate_email_24"
+            app:drawableTint="@color/colorPrimaryDark" />
 
         <TextView
             android:id="@+id/mobile"
@@ -56,9 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
             android:layout_marginVertical="0dp"
-            android:drawableLeft="@drawable/baseline_mobile_friendly_24"
             android:drawablePadding="4dp"
-            android:drawableTint="@color/colorPrimaryDark"
             android:ellipsize="end"
             android:fontFamily="@font/dm_sans"
             android:gravity="center_vertical"
@@ -67,7 +66,9 @@
             android:padding="2dp"
             android:text="01713602644"
             android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
-            android:textColor="@color/colorPrimary" />
+            android:textColor="@color/colorPrimary"
+            app:drawableLeftCompat="@drawable/baseline_mobile_friendly_24"
+            app:drawableTint="@color/colorPrimaryDark" />
 
         <TextView
             android:id="@+id/amount"
@@ -75,9 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
             android:layout_marginVertical="0dp"
-            android:drawableLeft="@drawable/baseline_attach_money_24"
             android:drawablePadding="4dp"
-            android:drawableTint="@color/colorPrimaryDark"
             android:ellipsize="end"
             android:fontFamily="@font/dm_sans"
             android:gravity="center_vertical"
@@ -85,10 +84,10 @@
             android:maxLines="1"
             android:padding="2dp"
             android:text="100"
-
             android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
-            android:textColor="@color/colorPrimary" />
-
+            android:textColor="@color/colorPrimary"
+            app:drawableLeftCompat="@drawable/baseline_attach_money_24"
+            app:drawableTint="@color/colorPrimaryDark" />
         <TextView
             android:id="@+id/status"
             android:layout_width="match_parent"
@@ -150,7 +149,24 @@
             android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
             android:textColor="@color/colorPrimary" />
 
-
+        <TextView
+            android:id="@+id/paymentDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="0dp"
+            android:drawablePadding="4dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/dm_sans"
+            android:gravity="center_vertical"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:padding="2dp"
+            tools:text="23-10-11"
+            android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+            android:textColor="@color/colorPrimary"
+            app:drawableLeftCompat="@drawable/baseline_date_range_24"
+            app:drawableTint="@color/colorPrimaryDark" />
     </LinearLayout>
 
 

@@ -22,7 +22,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
             android:layout_centerInParent="true"
             android:orientation="vertical"
             android:padding="@dimen/spacing_mlarge">
@@ -35,15 +34,12 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/spacing_large"
                 android:layout_marginBottom="@dimen/spacing_mlarge"
-                android:padding="1dp"
-                android:scaleType="centerCrop"
+                android:background="@color/white"
+                android:padding="2dp"
+                android:scaleType="fitCenter"
                 android:src="@drawable/dufa_logo"
-                app:contentPaddingEnd="10dp"
-                app:contentPaddingTop="1dp"
-                app:contentPaddingBottom="1dp"
+                app:contentPadding="2dp"
                 app:shapeAppearanceOverlay="@style/ShapeAppearance.Image.PILL"
-                app:strokeColor="@color/red_700"
-                app:strokeWidth="2dp"
                 tools:ignore="MissingConstraints" />
 
             <androidx.cardview.widget.CardView
@@ -77,7 +73,6 @@
                         android:layout_height="wrap_content"
                         android:text="EMAIL"
                         android:textAlignment="center"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
                         android:textColor="@color/grey_40" />
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -87,16 +82,16 @@
                         android:layout_marginLeft="-4dp"
                         android:layout_marginRight="-4dp"
                         android:layout_marginBottom="10dp"
-                        android:textColor="@color/black"
                         android:background="@drawable/rectangle_8"
-                        android:hint="Type your email"
+                        android:fontFamily="@font/dm_sans"
+                        android:hint="Type Your Email"
                         android:inputType="text"
                         android:maxLength="50"
                         android:maxLines="1"
                         android:paddingLeft="15dp"
                         android:singleLine="true"
-                        android:fontFamily="@font/dm_sans"
                         android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+                        android:textColor="@color/black"
                         android:theme="@style/EditText.Grey" />
 
                     <TextView
@@ -104,31 +99,29 @@
                         android:layout_height="wrap_content"
                         android:text="PASSWORD"
                         android:textAlignment="center"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
-                        />
+                        android:textColor="@color/grey_40" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"
+                        android:layout_height="match_parent"
                         android:padding="0dp"
                         app:boxStrokeWidth="0dp"
                         app:boxStrokeWidthFocused="0dp"
-                        app:hintEnabled="false"
-
-                        app:passwordToggleEnabled="true">
+                        app:endIconDrawable="@drawable/custom_eye"
+                        app:endIconMode="password_toggle"
+                        app:hintEnabled="false">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/password_input"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:layout_marginBottom="15dp"
                             android:background="@drawable/rectangle_8"
-                            android:hint="*******"
-                            android:inputType="textWebPassword"
-                            android:padding="@dimen/_9sdp"
                             android:fontFamily="@font/dm_sans"
+                            android:hint="*******"
+                            android:inputType="textPassword"
+                            android:padding="@dimen/_9sdp"
                             android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_13sdp" />
