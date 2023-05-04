@@ -13,6 +13,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.content.res.AppCompatResources
@@ -208,6 +209,7 @@ fun ImageView.loadImagesWithGlide(url: String) {
         .diskCacheStrategy(DiskCacheStrategy.ALL)
         .into(this)
 }
+
 fun Any.removeUnderscore(originalString: String): String? {
     val str = originalString.lowercase(Locale.ROOT)
     val stringWithoutUnderscores = str.replace("_", " ")
@@ -222,6 +224,7 @@ fun Any.removeUnderscore(originalString: String): String? {
         }
     return stringWithoutUnderscores
 }
+
 @SuppressLint("SimpleDateFormat")
 fun Any.getZonedTime(zoneTime: String): String {
 
@@ -243,6 +246,10 @@ fun Any.getZonedTime(zoneTime: String): String {
 
 }
 
-
+fun TextView.setTextNonNull(str: String?) {
+    str?.let {
+        this.text = it
+    }
+}
 
 

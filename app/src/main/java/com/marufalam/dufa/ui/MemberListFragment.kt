@@ -73,7 +73,7 @@ open class MemberListFragment :
 
         bottomSheetDialogSearchItem = BottomSheetDialog(requireContext())
         searchAdapter = SearchMemberListAdapter(this)
-        searchItemAdapter = SearchItemAdapter(this)
+        searchItemAdapter = SearchItemAdapter(this,type)
         binding.memberListRv.adapter = searchAdapter
 
         searchBYSelectedItem(SearchBy(null, null))
@@ -165,6 +165,7 @@ open class MemberListFragment :
             hasData = false
             bottomSheetDialog.dismiss()
         }
+        searchItemAdapter = SearchItemAdapter(this,type)
         bottomSheetDialog.show()
     }
 

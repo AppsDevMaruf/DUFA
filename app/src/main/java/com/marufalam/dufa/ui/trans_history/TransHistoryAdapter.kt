@@ -11,6 +11,7 @@ import com.marufalam.dufa.data.models.transaction_history.TransHistory
 import com.marufalam.dufa.databinding.ItemTransHistoryBinding
 import com.marufalam.dufa.utils.getZonedTime
 import com.marufalam.dufa.utils.removeUnderscore
+import com.marufalam.dufa.utils.setTextNonNull
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -56,8 +57,10 @@ class TransHistoryAdapter : ListAdapter<Order, TransHistoryAdapter.TransViewHold
                 name.text = order.name
                 email.text = order.email
                 mobile.text = order.phone
-                amount.text = "Tk. ${order.amount}"
-                paymentDate.text = "PaymentDate: ${getZonedTime(order.created_at.toString())}"
+                order.created_at?.let {
+                    paymentDate.text = "PaymentDate: ${getZonedTime(it)}"
+                }
+                amount.setTextNonNull("Tk. ${order.amount}")
                 status.text = order.status
                 paymentMethod.text = order.payment_method
                 paymentPurpose.text = order.payment_purpose?.let { removeUnderscore(it) }
