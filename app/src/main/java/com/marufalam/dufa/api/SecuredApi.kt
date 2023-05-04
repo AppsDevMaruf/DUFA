@@ -20,6 +20,7 @@ import com.marufalam.dufa.data.models.vouchers.ResponseVoucherUpload
 import com.marufalam.dufa.ui.profile_update.RequestProfileUpdate
 import com.marufalam.dufa.ui.profile_update.ResponseUpdateProfile
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Response
@@ -85,6 +86,9 @@ interface SecuredApi {
     @POST("send-voucher")
     suspend fun uploadVoucher(
         @Part image: MultipartBody.Part,
+        @Part("date")  date: RequestBody,
+        @Part("amount")  amount: RequestBody,
+        @Part("voucher_number")  voucher_number: RequestBody,
     ): Response<ResponseVoucherUpload>
 
 
