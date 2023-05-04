@@ -29,6 +29,7 @@ import com.marufalam.dufa.utils.NoInternetException
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import org.json.JSONObject
 import retrofit2.Call
@@ -454,7 +455,12 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
     val responseUploadVoucherVMLD: LiveData<NetworkResult<ResponseVoucherUpload>>
         get() = _responseUploadVoucher
 
-    suspend fun uploadVoucherVm(request: RequestVoucher, part: MultipartBody.Part) {
+    suspend fun uploadVoucherVm(
+        date: RequestBody,
+        amount: RequestBody,
+        voucher_number: RequestBody,
+        part: MultipartBody.Part
+    ) {
 
         _responseUploadVoucher.postValue(NetworkResult.Loading())
 
@@ -462,7 +468,12 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
         viewModelScope.launch {
 
             try {
-                val response = securedRepository.uploadVoucher(request, part)
+                val response = securedRepository.uploadVoucher(
+                    part = part,
+                    date = date,
+                    amount = amount,
+                    voucher_number = voucher_number
+                )
 
                 Log.i("TAG", "uploadProfilePicVM: $response")
 
@@ -490,11 +501,6 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
     }
 
     //   upload profile pic  end
-
-
-
-
-
 
 
     //  upload profile pic start

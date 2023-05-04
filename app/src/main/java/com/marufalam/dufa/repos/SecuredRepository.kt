@@ -18,8 +18,10 @@ import com.marufalam.dufa.paging.MemberSearchPagingSource
 import com.marufalam.dufa.ui.profile_update.RequestProfileUpdate
 import com.marufalam.dufa.utils.NetworkResult
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import org.json.JSONObject
 import retrofit2.Response
+import retrofit2.http.Part
 import javax.inject.Inject
 
 class SecuredRepository @Inject constructor(private val securedApi: SecuredApi) {
@@ -219,8 +221,20 @@ class SecuredRepository @Inject constructor(private val securedApi: SecuredApi) 
     suspend fun updateProfile(userId: Int, requestProfileUpdate: RequestProfileUpdate) =
         securedApi.updateProfile(userId, requestProfileUpdate)
 
-    suspend fun uploadVoucher(request: RequestVoucher, part: MultipartBody.Part) =
-        securedApi.uploadVoucher(part)
+    suspend fun uploadVoucher(
+
+        date: RequestBody,
+        amount: RequestBody,
+        voucher_number: RequestBody,
+        part: MultipartBody.Part
+    ) =
+        securedApi.uploadVoucher(
+            date = date,
+            amount = amount,
+            voucher_number = voucher_number,
+            image = part
+        )
+
 
     fun payRenew(requestPayRenew: RequestPayRenew) = securedApi.payRenew(requestPayRenew)
 

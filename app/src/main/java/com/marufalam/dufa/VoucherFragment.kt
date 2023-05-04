@@ -1,6 +1,5 @@
 package com.marufalam.dufa
 
-import android.R.attr.password
 import android.app.Dialog
 import android.app.ProgressDialog
 import android.net.Uri
@@ -23,10 +22,12 @@ import id.zelory.compressor.Compressor
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 import java.io.FileOutputStream
 
@@ -129,22 +130,44 @@ class VoucherFragment : BaseFragment<FragmentVoucherBinding>() {
         CoroutineScope(Dispatchers.IO).launch {
             val nFile = Compressor.compress(requireContext(), file)
 
-            val requestBodys = nFile.asRequestBody("image/*".toMediaTypeOrNull())
-            val requestBody: RequestBody = MultipartBody.Builder()
-                .setType(MultipartBody.FORM)
-                .addFormDataPart(file.name, "file_name", requestBodys)
-                .addFormDataPart("date", "23-5-23")
-                .addFormDataPart("amount", "2000")
-                .addFormDataPart("voucher_number", "password33")
-                .build()
+         //   val requestBodys = nFile.asRequestBody("image/*".toMediaTypeOrNull())
+//            val requestBody: RequestBody = MultipartBody.Builder()
+//                .setType(MultipartBody.FORM)
+//                .addFormDataPart(file.name, "file_name", requestBodys)
+//                .addFormDataPart("date", "23-5-23")
+//                .addFormDataPart("amount", "2000")
+//                .addFormDataPart("voucher_number", "password33")
+//                .build()
+//
+//
+//            val part = MultipartBody.Part.createFormData("file_name", file.name, requestBody)
 
 
-            val part = MultipartBody.Part.createFormData("file_name", file.name, requestBody)
+            val requestFile: RequestBody = RequestBody.create(
+                "multipart/form-data".toMediaTypeOrNull(),
+                nFile
+            )
+
+            val body = MultipartBody.Part.createFormData("file_name", file.name, requestFile)
+
+            val amount: RequestBody =
+                requestVoucher.amount.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+            val date: RequestBody =
+                requestVoucher.date.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+            val voucherNumber: RequestBody = requestVoucher.voucher_number
+                .toRequestBody("multipart/form-data".toMediaTypeOrNull())
 
 
 
 
-            dashboardViewModel.uploadVoucherVm(request = requestVoucher, part = part)
+
+
+            dashboardViewModel.uploadVoucherVm(
+                part = body,
+                amount = amount,
+                date = date,
+                voucher_number = voucherNumber
+            )
         }
 
 
