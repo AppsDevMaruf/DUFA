@@ -1,15 +1,17 @@
 package com.marufalam.dufa.ui
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.marufalam.dufa.R
 import com.marufalam.dufa.data.models.SearchBy
 import com.marufalam.dufa.databinding.ItemSearchBinding
 import com.marufalam.dufa.interfaces.SearchByListener
 
-class SearchItemAdapter(var seaSearchByListener: SearchByListener) :
+class SearchItemAdapter(var seaSearchByListener: SearchByListener, var type: String) :
     ListAdapter<SearchBy, SearchItemAdapter.SearchItemViewHolder>(comparator) {
 
 
@@ -46,7 +48,36 @@ class SearchItemAdapter(var seaSearchByListener: SearchByListener) :
     override fun onBindViewHolder(holder: SearchItemViewHolder, position: Int) {
 
         getItem(position).let {
-            holder.binding.searchByItemTv.text = it.name
+            Log.i("type", "onBindViewHolder: $type ")
+
+            when (type) {
+                "Blood Group" -> {
+                    holder.binding.searchByItemTv.text = it.name
+                    holder.binding.itemIcon.setImageResource(R.drawable.blood)
+
+
+                }
+                "District" -> {
+                    holder.binding.searchByItemTv.text = it.name
+                    holder.binding.itemIcon.setImageResource(R.drawable.pin)
+
+
+                }
+                "Occupation" -> {
+                    holder.binding.searchByItemTv.text = it.name
+                    holder.binding.itemIcon.setImageResource(R.drawable.occupation)
+
+
+                }
+                "Department" -> {
+                    holder.binding.searchByItemTv.text = it.name
+                    holder.binding.itemIcon.setImageResource(R.drawable.department)
+
+
+                }
+
+            }
+
 
             holder.itemView.setOnClickListener { _ ->
                 seaSearchByListener.searchBYSelectedItem(it)

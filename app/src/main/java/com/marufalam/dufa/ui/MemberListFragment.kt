@@ -73,7 +73,7 @@ open class MemberListFragment :
 
         bottomSheetDialogSearchItem = BottomSheetDialog(requireContext())
         searchAdapter = SearchMemberListAdapter(this)
-        searchItemAdapter = SearchItemAdapter(this)
+        searchItemAdapter = SearchItemAdapter(this, type)
         binding.memberListRv.adapter = searchAdapter
 
         searchBYSelectedItem(SearchBy(null, null))
@@ -118,6 +118,8 @@ open class MemberListFragment :
             binding.searchET.show()
             type = it.tag.toString()
             hasData = false
+            searchItemAdapter = SearchItemAdapter(this, type)
+
             bottomSheetDialog.dismiss()
         }
         bottomSheetDialog.findViewById<LinearLayout>(R.id.bloodGroupBtn)!!.setOnClickListener {
@@ -127,6 +129,8 @@ open class MemberListFragment :
             type = it.tag.toString()
             dashboardViewModel.getBloodGroupVM()
             hasData = false
+            searchItemAdapter = SearchItemAdapter(this, type)
+
             bottomSheetDialog.dismiss()
         }
         bottomSheetDialog.findViewById<LinearLayout>(R.id.districtBtn)!!.setOnClickListener {
@@ -136,6 +140,8 @@ open class MemberListFragment :
             type = it.tag.toString()
             dashboardViewModel.districtVM()
             hasData = false
+            searchItemAdapter = SearchItemAdapter(this, type)
+
             bottomSheetDialog.dismiss()
         }
         bottomSheetDialog.findViewById<LinearLayout>(R.id.occupationBtn)!!.setOnClickListener {
@@ -145,6 +151,8 @@ open class MemberListFragment :
             type = it.tag.toString()
             dashboardViewModel.occupationsVM()
             hasData = false
+            searchItemAdapter = SearchItemAdapter(this, type)
+
             bottomSheetDialog.dismiss()
         }
         bottomSheetDialog.findViewById<LinearLayout>(R.id.departmentBtn)!!.setOnClickListener {
@@ -154,6 +162,8 @@ open class MemberListFragment :
             type = it.tag.toString()
             dashboardViewModel.getDepartmentsVM()
             hasData = false
+            searchItemAdapter = SearchItemAdapter(this, type)
+
             bottomSheetDialog.dismiss()
         }
         bottomSheetDialog.findViewById<LinearLayout>(R.id.dobBtn)!!.setOnClickListener {
@@ -163,8 +173,13 @@ open class MemberListFragment :
             type = it.tag.toString()
             binding.dobTV.show()
             hasData = false
+            searchItemAdapter = SearchItemAdapter(this, type)
+
             bottomSheetDialog.dismiss()
         }
+
+
+
         bottomSheetDialog.show()
     }
 
@@ -181,11 +196,6 @@ open class MemberListFragment :
         val itemRcv: RecyclerView =
             bottomSheetDialogSearchItem.findViewById<RecyclerView>(R.id.itemKeywordRCV)!!
         itemRcv.adapter = searchItemAdapter
-
-        // TODO: gg
-       // bottomSheetDialogSearchItem.findViewById<ImageView>(R.id.itemIcon)!!.setImageResource(R.drawable.blood)
-
-
 
         bottomSheetDialogSearchItem.show()
     }
@@ -309,15 +319,19 @@ open class MemberListFragment :
 
         binding.titleText.text = "${binding.titleText.text}  ${searchBy.name ?: ""}"
 
+        searchItemAdapter = SearchItemAdapter(this, type)
+        Log.i("type", "type: $type")
+
+
         val requestSearch =
             when (type) {
-                "BloodGroup" -> {
+                "Blood Group" -> {
                     RequestSearch(null, searchBy.name, null, null, null, null, 0)
                 }
                 "District" -> {
                     RequestSearch(null, null, null, searchBy.name, null, null, 0)
                 }
-                "occupation" -> {
+                "Occupation" -> {
                     RequestSearch(null, null, null, null, searchBy.name, null, 0)
                 }
                 "Department" -> {
