@@ -54,7 +54,7 @@
 
             <TextView
                 android:id="@+id/titleText"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:ellipsize="end"
@@ -62,6 +62,7 @@
                 android:includeFontPadding="false"
                 android:maxLines="1"
                 android:tag="false"
+                app:layout_constraintEnd_toStartOf="@id/imageView4"
                 android:text="@string/select_filter_type"
                 android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                 android:textColor="@color/text_grey"

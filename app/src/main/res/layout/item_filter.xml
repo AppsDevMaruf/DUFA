@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/_16sdp"
     android:orientation="vertical">
 
     <ImageView
@@ -26,9 +27,9 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="8dp"
         android:layout_marginTop="50dp"
-        android:tag="NameorEmail"
         android:background="@drawable/stroke_boarder"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:tag="Name or Email">
 
         <ImageView
             android:id="@+id/allTimeImg"
@@ -47,7 +48,7 @@
             android:layout_margin="0dp"
             android:includeFontPadding="false"
             android:paddingStart="10dp"
-            android:tag="SAVINGS"
+
             android:text="Name or Email"
             android:textColor="@color/text_black"
             android:textSize="20sp"
@@ -62,9 +63,9 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="8dp"
-        android:tag="BloodGroup"
         android:background="@drawable/stroke_boarder"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:tag="Blood Group">
 
         <ImageView
             android:layout_width="40dp"
@@ -83,7 +84,7 @@
             android:layout_margin="0dp"
             android:includeFontPadding="false"
             android:paddingStart="10dp"
-            android:tag="CHECKING"
+
             android:text="Blood Group"
             android:textColor="@color/text_black"
             android:textSize="20sp"
@@ -98,9 +99,9 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="8dp"
-        android:tag="District"
         android:background="@drawable/stroke_boarder"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:tag="District">
 
         <ImageView
 
@@ -120,7 +121,7 @@
             android:layout_margin="0dp"
             android:includeFontPadding="false"
             android:paddingStart="10dp"
-            android:tag="CHECKING"
+
             android:text="District"
             android:textColor="@color/text_black"
             android:textSize="20sp"
@@ -130,7 +131,6 @@
     </LinearLayout>
 
     <LinearLayout
-        android:tag="occupation"
         android:id="@+id/occupationBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -138,7 +138,8 @@
         android:layout_marginVertical="8dp"
         android:layout_marginTop="50dp"
         android:background="@drawable/stroke_boarder"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:tag="Occupation">
 
         <ImageView
             android:layout_width="40dp"
@@ -149,14 +150,14 @@
             app:tint="@color/blue" />
 
         <TextView
-            android:id="@+id/last7daysText"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_margin="0dp"
             android:includeFontPadding="false"
             android:paddingStart="10dp"
-            android:tag="SAVINGS"
+
             android:text="Occupation"
             android:textColor="@color/text_black"
             android:textSize="20sp"
@@ -171,9 +172,9 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="8dp"
-        android:tag="Department"
         android:background="@drawable/stroke_boarder"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:tag="Department">
 
         <ImageView
 
@@ -185,7 +186,7 @@
             app:tint="@color/blue" />
 
         <TextView
-            android:id="@+id/last30daysText"
+
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -200,15 +201,16 @@
 
 
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/dobBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="8dp"
-        android:tag="DateofBirth"
         android:background="@drawable/stroke_boarder"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:tag="Date of Birth">
 
         <ImageView
             android:layout_width="40dp"
@@ -225,7 +227,7 @@
             android:layout_margin="0dp"
             android:includeFontPadding="false"
             android:paddingStart="10dp"
-            android:tag="CHECKING"
+
             android:text="Date of Birth"
             android:textColor="@color/text_black"
             android:textSize="20sp"

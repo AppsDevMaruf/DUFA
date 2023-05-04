@@ -34,7 +34,13 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
         }
         binding.duesPaymentBtn.setOnClickListener {
 
-            findNavController().navigate(R.id.action_DashboardFragment_to_duesPaymentFragment)
+            val dues = binding.totalDues.text.toString().toInt()
+            if (dues > 0) {
+                findNavController().navigate(R.id.action_DashboardFragment_to_duesPaymentFragment)
+            } else {
+                findNavController().navigate(R.id.action_DashboardFragment_to_transactionHistoryFragment)
+            }
+
         }
 
         binding.userQr.setOnClickListener {
