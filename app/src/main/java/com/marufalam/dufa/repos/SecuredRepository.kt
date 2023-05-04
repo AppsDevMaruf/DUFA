@@ -236,11 +236,6 @@ class SecuredRepository @Inject constructor(private val securedApi: SecuredApi) 
         )
 
 
-
-    date: RequestBody,
-    amount: RequestBody,
-    voucher_number: RequestBody
-
     fun payRenew(requestPayRenew: RequestPayRenew) = securedApi.payRenew(requestPayRenew)
 
 }

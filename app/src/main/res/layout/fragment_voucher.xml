@@ -54,6 +54,7 @@
                         android:textColor="@color/blue" />
 
                     <EditText
+                        android:inputType="text"
                         android:id="@+id/voucherNumber"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
@@ -89,6 +90,7 @@
                         android:textColor="@color/blue" />
 
                     <EditText
+                        android:inputType="number"
                         android:id="@+id/voucherAmount"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
@@ -100,7 +102,7 @@
                         android:lines="1"
                         android:padding="2dp"
                         android:paddingStart="10dp"
-                        android:text="000"
+                        android:hint="000"
                         android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
                         android:textColor="@color/text_primary" />
 
@@ -146,9 +148,10 @@
                 </LinearLayout>
 
 
-                <de.hdodenhof.circleimageview.CircleImageView
+                <ImageView
+
                     android:id="@+id/uploadVoucher"
-                    android:layout_width="@dimen/_150sdp"
+                    android:layout_width="@dimen/_200sdp"
                     android:layout_height="@dimen/_100sdp"
                     android:layout_margin="@dimen/_50sdp"
                     android:layout_marginEnd="@dimen/_4sdp"
@@ -156,8 +159,6 @@
                     android:padding="@dimen/_2sdp"
                     android:src="@drawable/ic_gallary"
                     android:translationZ="@dimen/_2sdp"
-                    app:civ_border_color="@color/bluedeep"
-                    app:civ_border_width="@dimen/_1sdp"
                     app:layout_constraintBottom_toBottomOf="@id/userProfilePic"
                     app:layout_constraintEnd_toEndOf="@id/userProfilePic" />
 
