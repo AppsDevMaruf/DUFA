@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private var bundle = Bundle()
     lateinit var binding: ActivityMainBinding
     private lateinit var userProfilePicHeader: ShapeableImageView
-    private lateinit var uploadProfilePicBtn: CircleImageView
+    private lateinit var uploadProfilePicBtn: ImageView
 
     private lateinit var userProfilePicABHeader: TextView
     private lateinit var profilePicAB: TextView
@@ -111,7 +111,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         nav = binding.navigationView.getHeaderView(0)
 
         userProfilePicHeader = nav.findViewById(R.id.userProfilePicHeader)
-        uploadProfilePicBtn = nav.findViewById(R.id.uploadProfilePicBtn)
+         uploadProfilePicBtn = nav.findViewById(R.id.uploadProfilePicBtn)
 
         userProfilePicABHeader = nav.findViewById(R.id.profilePicABHeader)
 

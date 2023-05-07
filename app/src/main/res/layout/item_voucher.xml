@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="8dp"
     app:cardCornerRadius="8dp">
 
@@ -14,14 +14,14 @@
         android:paddingBottom="8dp">
 
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/voucherNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
             android:layout_marginVertical="2dp"
             android:drawablePadding="3dp"
             android:ellipsize="end"
-            android:fontFamily="@font/dm_sans_bold"
+            android:fontFamily="@font/dm_sans"
             android:gravity="center_vertical"
             android:includeFontPadding="false"
             android:maxLines="1"
@@ -29,49 +29,12 @@
             android:text="Mehedi Hasan"
             android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
             android:textColor="@color/blue"
-            app:drawableLeftCompat="@drawable/name_account_24"
+            app:drawableLeftCompat="@drawable/baseline_numbers_24"
             app:drawableTint="@color/blue" />
 
-        <TextView
-            android:id="@+id/email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
-            android:layout_marginVertical="0dp"
-            android:drawablePadding="4dp"
-            android:ellipsize="end"
-            android:fontFamily="@font/dm_sans"
-            android:gravity="center_vertical"
-            android:includeFontPadding="false"
-            android:maxLines="1"
-            android:padding="2dp"
-            android:text="MehediHasan@gmail.com"
-            android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
-            android:textColor="@color/blue"
-            app:drawableLeftCompat="@drawable/round_alternate_email_24"
-            app:drawableTint="@color/blue" />
 
         <TextView
-            android:id="@+id/mobile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
-            android:layout_marginVertical="0dp"
-            android:drawablePadding="4dp"
-            android:ellipsize="end"
-            android:fontFamily="@font/dm_sans"
-            android:gravity="center_vertical"
-            android:includeFontPadding="false"
-            android:maxLines="1"
-            android:padding="2dp"
-            android:text="01713602644"
-            android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
-            android:textColor="@color/blue"
-            app:drawableLeftCompat="@drawable/baseline_mobile_friendly_24"
-            app:drawableTint="@color/blue" />
-
-        <TextView
-            android:id="@+id/amount"
+            android:id="@+id/voucherAmount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
@@ -88,8 +51,9 @@
             android:textColor="@color/blue"
             app:drawableLeftCompat="@drawable/ic_taka"
             app:drawableTint="@color/blue" />
+
         <TextView
-            android:id="@+id/status"
+            android:id="@+id/voucherStatus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
@@ -101,7 +65,7 @@
             android:includeFontPadding="false"
             android:maxLines="1"
             android:padding="2dp"
-            android:text="@string/processing"
+            android:text="Processing"
             android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
             android:textColor="@color/blue"
             app:drawableLeftCompat="@drawable/baseline_wifi_protected_setup_24"
@@ -109,7 +73,7 @@
 
 
         <TextView
-            android:id="@+id/payment_method"
+            android:id="@+id/voucherPaymentDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
@@ -121,50 +85,31 @@
             android:includeFontPadding="false"
             android:maxLines="1"
             android:padding="2dp"
-            android:text="@string/bkash"
-            android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
-            android:textColor="@color/blue"
-            app:drawableLeftCompat="@drawable/baseline_payments_24"
-            app:drawableTint="@color/blue" />
-
-
-        <TextView
-            android:id="@+id/payment_purpose"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
-            android:layout_marginVertical="0dp"
-            android:layout_marginBottom="8dp"
-            android:drawablePadding="4dp"
-            android:ellipsize="end"
-            android:fontFamily="@font/dm_sans"
-            android:gravity="center_vertical"
-            android:includeFontPadding="false"
-            android:maxLines="1"
-            android:padding="2dp"
-            android:text="@string/yearly_fee"
-            android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
-            android:textColor="@color/blue"
-            app:drawableTint="@color/blue"
-            app:drawableLeftCompat="@drawable/fee" />
-
-        <TextView
-            android:id="@+id/paymentDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
-            android:layout_marginVertical="0dp"
-            android:drawablePadding="4dp"
-            android:ellipsize="end"
-            android:fontFamily="@font/dm_sans"
-            android:gravity="center_vertical"
-            android:includeFontPadding="false"
-            android:maxLines="1"
-            android:padding="2dp"
-            tools:text="23-10-11"
             android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
             android:textColor="@color/blue"
             app:drawableLeftCompat="@drawable/baseline_date_range_24"
+            app:drawableTint="@color/blue"
+            tools:text="23-10-11" />
+
+        <TextView
+            android:id="@+id/voucherDownloadBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="2dp"
+            android:background="@drawable/border_back_blue"
+            android:drawablePadding="4dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/dm_sans"
+            android:gravity="center_vertical"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="4dp"
+            android:text="@string/download"
+            android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+            android:textColor="@color/blue"
+            app:drawableLeftCompat="@drawable/round_file_download_24"
             app:drawableTint="@color/blue" />
     </LinearLayout>
 

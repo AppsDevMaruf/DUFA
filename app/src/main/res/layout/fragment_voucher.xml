@@ -18,7 +18,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@color/back_grey"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -49,7 +49,7 @@
                         android:fontFamily="@font/dm_sans_medium"
                         android:lines="1"
                         android:padding="2dp"
-                        android:text="Voucher Number"
+                        android:text="@string/voucher_number"
                         android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
                         android:textColor="@color/blue" />
 
@@ -85,7 +85,7 @@
                         android:fontFamily="@font/dm_sans_medium"
                         android:lines="1"
                         android:padding="2dp"
-                        android:text="Amount"
+                        android:text="@string/voucher_amount"
                         android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
                         android:textColor="@color/blue" />
 
@@ -121,12 +121,12 @@
                         android:fontFamily="@font/dm_sans_medium"
                         android:lines="1"
                         android:padding="2dp"
-                        android:text="Date"
+                        android:text="@string/voucher_date"
                         android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
                         android:textColor="@color/blue" />
 
                     <TextView
-                        android:id="@+id/birthdate"
+                        android:id="@+id/voucherDate"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:layout_gravity="start"
@@ -155,21 +155,20 @@
                     android:layout_height="@dimen/_100sdp"
                     android:layout_margin="@dimen/_50sdp"
                     android:layout_marginEnd="@dimen/_4sdp"
-                    android:background="@color/white"
                     android:padding="@dimen/_2sdp"
-                    android:src="@drawable/ic_gallary"
+                    android:src="@drawable/round_cloud_upload_24"
                     android:translationZ="@dimen/_2sdp"
                     app:layout_constraintBottom_toBottomOf="@id/userProfilePic"
                     app:layout_constraintEnd_toEndOf="@id/userProfilePic" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/uploadVoucherBtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginVertical="@dimen/_50sdp"
-                    android:background="@drawable/btn_enable"
+                    android:background="@drawable/ic_rectangle_disable"
                     android:fontFamily="@font/dm_sans_bold"
-                    android:text="Upload Voucher"
+                    android:text="@string/submit"
                     android:textAllCaps="false"
                     android:textColor="@color/white" />
 

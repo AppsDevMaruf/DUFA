@@ -251,5 +251,12 @@ fun TextView.setTextNonNull(str: String?) {
         this.text = it
     }
 }
-
+fun TextView.replaceFirstLC(str: String?) {
+    str?.replaceFirstChar {
+        if (it.isLowerCase()) it.titlecase(
+            Locale.ROOT
+        ) else it.toString()
+    }
+}
+fun String.titleCaseFirstChar() = replaceFirstChar(Char::titlecase)
 

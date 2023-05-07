@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class TransationHistoryViewModel @Inject constructor(private val securedRepository: SecuredRepository) :
+class TransactionHistoryViewModel @Inject constructor(private val securedRepository: SecuredRepository) :
     ViewModel() {
 
 

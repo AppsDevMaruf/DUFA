@@ -12,7 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class TransactionHistoryFragment : BaseFragment<FragmentTransactionHistoryBinding>() {
 
 
-    private val viewModel by viewModels<TransationHistoryViewModel>()
+    private val viewModel by viewModels<TransactionHistoryViewModel>()
 
 
     lateinit var adapter: TransHistoryAdapter

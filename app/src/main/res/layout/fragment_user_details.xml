@@ -120,6 +120,7 @@
                             android:fontFamily="@font/dm_sans_medium"
                             android:lines="1"
                             android:padding="2dp"
+                            android:inputType = "textCapCharacters"
                             android:text=" Saiful Khandaker"
                             android:textAlignment="textEnd"
                             android:textAppearance="@style/TextAppearance.Material3.TitleSmall"

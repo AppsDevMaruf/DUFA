@@ -23,11 +23,11 @@
             android:id="@+id/action_DashboardFragment_to_QRFragment"
             app:destination="@id/QRFragment" />
         <action
-            android:id="@+id/action_DashboardFragment_to_voucherFragment"
-            app:destination="@id/voucherFragment" />
-        <action
             android:id="@+id/action_DashboardFragment_to_transactionHistoryFragment"
             app:destination="@id/transactionHistoryFragment" />
+        <action
+            android:id="@+id/action_DashboardFragment_to_voucherListFragment"
+            app:destination="@id/voucherListFragment" />
 
     </fragment>
     <fragment
@@ -149,5 +149,14 @@
         android:name="com.marufalam.dufa.VoucherFragment"
         android:label="fragment_voucher"
         tools:layout="@layout/fragment_voucher" />
+    <fragment
+        android:id="@+id/voucherListFragment"
+        android:name="com.marufalam.dufa.ui.VoucherListFragment"
+        android:label="fragment_voucher_list"
+        tools:layout="@layout/fragment_voucher_list" >
+        <action
+            android:id="@+id/action_voucherListFragment_to_voucherFragment"
+            app:destination="@id/voucherFragment" />
+    </fragment>
 
 </navigation>

@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.util.Log
 import androidmads.library.qrgenearator.QRGContents
 import androidmads.library.qrgenearator.QRGEncoder
+import androidx.core.text.HtmlCompat
 import androidx.fragment.app.activityViewModels
 import com.marufalam.dufa.BaseFragment
 import com.marufalam.dufa.R
@@ -48,20 +49,26 @@ class QRFragment : BaseFragment<FragmentQRBinding>() {
 
                 }
                 is NetworkResult.Success -> {
-
                     val name = it.data?.memberInfo?.name
-                    val address = " DEPT:\n ${it.data?.memberInfo?.department}\n Email:" +
+                    val address = " DEPT: ${it.data?.memberInfo?.department}\n Email:" +
                             " ${it.data?.memberInfo?.email}\n  Phone:" +
-                            " ${it.data?.memberInfo?.phone}\n Status: " +
-                            " ${it.data?.memberInfo?.status}   "
+                            " ${it.data?.memberInfo?.phone}"
 
                     binding.userName.text = name
                     binding.userAdress.text = address
 
+                    if (it.data?.memberInfo?.subscription == "none") {
+                        val text =
+                            "<font color=#4d4d4d>Status: </font> <font color=#EB5757>Inactive</font>"
+                        binding.status.text = HtmlCompat.fromHtml(text, HtmlCompat.FROM_HTML_MODE_LEGACY);
+                    } else {
+                        val text =
+                            "<font color=#4d4d4d>Status: </font> <font color=#00AA0E>Active</font>"
+                        binding.status.text = HtmlCompat.fromHtml(text, HtmlCompat.FROM_HTML_MODE_LEGACY)
+                    }
+
 
                     profileQr = "$name \n $address"
-
-
 
                     qrGenerate(profileQr)
 

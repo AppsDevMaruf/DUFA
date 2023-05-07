@@ -60,12 +60,11 @@ class TransHistoryAdapter : ListAdapter<Order, TransHistoryAdapter.TransViewHold
                 order.created_at?.let {
                     paymentDate.text = "PaymentDate: ${getZonedTime(it)}"
                 }
-                amount.setTextNonNull("Tk. ${order.amount}")
+                amount.setTextNonNull("Tk. ${order.amount} Tk")
                 status.text = order.status
                 paymentMethod.text = order.payment_method
                 paymentPurpose.text = order.payment_purpose?.let { removeUnderscore(it) }
             }
-
 
         }
     }

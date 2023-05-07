@@ -14,6 +14,7 @@ import com.marufalam.dufa.data.models.search.RequestSearch
 import com.marufalam.dufa.data.models.search.blood.ResponseBloodGroup
 import com.marufalam.dufa.data.models.transaction_history.TransHistory
 import com.marufalam.dufa.data.models.vouchers.RequestVoucher
+import com.marufalam.dufa.data.models.vouchers.ResponseVoucherList
 import com.marufalam.dufa.paging.MemberSearchPagingSource
 import com.marufalam.dufa.ui.profile_update.RequestProfileUpdate
 import com.marufalam.dufa.utils.NetworkResult
@@ -82,46 +83,72 @@ class SecuredRepository @Inject constructor(private val securedApi: SecuredApi) 
         }
 
 
-        //getTransactionHistory end
 
+    }   //getTransactionHistory end
 
-    }
+    //getVoucher List  start
+    private var _responseVoucherList= MutableLiveData<NetworkResult<ResponseVoucherList>>()
 
+    val responseVoucherList: LiveData<NetworkResult<ResponseVoucherList>>
+        get() = _responseVoucherList
 
-    /*//My profile start
-    private var _responseMyProfileRepo =
-        MutableLiveData<NetworkResult<ResponseProfileInfo>>()
-    val responseMyProfileRepo: LiveData<NetworkResult<ResponseProfileInfo>>
-        get() = _responseMyProfileRepo
+    suspend fun getVoucherListRepo() {
 
-    fun getMyProfileRepo() {
-
-        _responseMyProfileRepo.postValue(NetworkResult.Loading())
+        _responseVoucherList.postValue(NetworkResult.Loading())
         try {
-            val response = securedApi.getProfileInfo()
-
+            val response: Response<ResponseVoucherList> =
+                securedApi.getVoucherList()
             if (response.isSuccessful && response.body() != null) {
-
-                _responseMyProfileRepo.postValue(NetworkResult.Success(response.body()!!))
-
+                _responseVoucherList.postValue(NetworkResult.Success(response.body()!!))
             } else if (response.errorBody() != null) {
-
                 val errorObj = JSONObject(response.errorBody()!!.charStream().readText())
-                _responseMyProfileRepo.postValue(NetworkResult.Error(errorObj.getString("message")))
-
+                _responseVoucherList.postValue(NetworkResult.Error(errorObj.getString("message")))
             } else {
-
-                _responseMyProfileRepo.postValue(NetworkResult.Error("Something Went Wrong!"))
+                _responseVoucherList.postValue(NetworkResult.Error("Something Went Wrong!"))
             }
         } catch (e: Exception) {
-
-            Log.i("catch", "DashboardApiRepo: ${e.localizedMessage}")
-
+            Log.i("catch", "VoucherList: ${e.localizedMessage}")
         }
 
-
     }
-    //My profile end*/
+        //getVoucher List end
+
+
+
+        /*//My profile start
+        private var _responseMyProfileRepo =
+            MutableLiveData<NetworkResult<ResponseProfileInfo>>()
+        val responseMyProfileRepo: LiveData<NetworkResult<ResponseProfileInfo>>
+            get() = _responseMyProfileRepo
+
+        fun getMyProfileRepo() {
+
+            _responseMyProfileRepo.postValue(NetworkResult.Loading())
+            try {
+                val response = securedApi.getProfileInfo()
+
+                if (response.isSuccessful && response.body() != null) {
+
+                    _responseMyProfileRepo.postValue(NetworkResult.Success(response.body()!!))
+
+                } else if (response.errorBody() != null) {
+
+                    val errorObj = JSONObject(response.errorBody()!!.charStream().readText())
+                    _responseMyProfileRepo.postValue(NetworkResult.Error(errorObj.getString("message")))
+
+                } else {
+
+                    _responseMyProfileRepo.postValue(NetworkResult.Error("Something Went Wrong!"))
+                }
+            } catch (e: Exception) {
+
+                Log.i("catch", "DashboardApiRepo: ${e.localizedMessage}")
+
+            }
+
+
+        }
+        //My profile end*/
 
     //get Departments start
     private var _responseDepartmentsRepo =

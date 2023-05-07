@@ -48,6 +48,15 @@
                 android:gravity="center"
                 android:text="Mohammadpur , Dhaka"
                 android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/dm_sans"
+                android:gravity="center"
+                android:text="active"
+                android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />
+
 
 
         </LinearLayout>

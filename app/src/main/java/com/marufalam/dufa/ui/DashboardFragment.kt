@@ -52,8 +52,7 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
 
         binding.voucher.setOnClickListener {
 
-
-            findNavController().navigate(R.id.action_DashboardFragment_to_voucherFragment)
+            findNavController().navigate(R.id.action_DashboardFragment_to_voucherListFragment)
         }
 
 

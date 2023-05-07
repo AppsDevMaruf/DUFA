@@ -6,11 +6,9 @@ import com.marufalam.dufa.BaseFragment
 import com.marufalam.dufa.R
 import com.marufalam.dufa.data.models.search.Data
 import com.marufalam.dufa.databinding.FragmentUserDetailsBinding
-import com.marufalam.dufa.utils.Constants
-import com.marufalam.dufa.utils.hide
-import com.marufalam.dufa.utils.nameAbbreviationGenerator
-import com.marufalam.dufa.utils.show
+import com.marufalam.dufa.utils.*
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 @AndroidEntryPoint
 class UserDetailsFragment : BaseFragment<FragmentUserDetailsBinding>() {
@@ -23,10 +21,10 @@ class UserDetailsFragment : BaseFragment<FragmentUserDetailsBinding>() {
     override fun configUi() {
         if (arguments != null) {
             val userInfo: Data = requireArguments().getParcelable("memberInfo")!!
-            binding.name.text = userInfo.name
+            binding.name.replaceFirstLC(userInfo.name)
             binding.phoneNumber.text = userInfo.phone
             binding.email.text = userInfo.email
-            binding.address.text = userInfo.address
+            binding.address.replaceFirstLC(userInfo.address)
             binding.nid.text = userInfo.nid
             binding.gender.text = userInfo.gender
             binding.birthdate.text = userInfo.birthdate

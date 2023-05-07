@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.canhub.cropper.CropImage
 import com.canhub.cropper.CropImageContract
 import com.canhub.cropper.CropImageContractOptions
@@ -35,6 +36,10 @@ import java.io.FileOutputStream
 @AndroidEntryPoint
 class VoucherFragment : BaseFragment<FragmentVoucherBinding>() {
     private val dashboardViewModel by viewModels<DashboardViewModel>()
+    var hasVoucherNum = false
+    var hasVoucherAmount = false
+    var hasVoucherDate = false
+    var hasVoucherImg = false
 
     lateinit var dialog: ProgressDialog
 
@@ -66,9 +71,32 @@ class VoucherFragment : BaseFragment<FragmentVoucherBinding>() {
         dialog = ProgressDialog(requireContext())
         dialog.setTitle("Voucher Uploading...")
 
+        binding.voucherNumber.onTextChanged {
+            if (it != null) {
+                hasVoucherNum = true
+                enableBtn(
+                    (hasVoucherNum && hasVoucherAmount && hasVoucherDate && hasVoucherImg),
+                    binding.uploadVoucherBtn
+                )
+            }
+        }
+        binding.voucherAmount.onTextChanged {
+            if (it != null) {
+                hasVoucherAmount = true
+                enableBtn(
+                    (hasVoucherNum && hasVoucherAmount && hasVoucherDate && hasVoucherImg),
+                    binding.uploadVoucherBtn
+                )
+            }
+        }
 
-        binding.birthdate.setOnClickListener {
-            datePickerFun(binding.birthdate)
+        binding.voucherDate.setOnClickListener {
+            datePickerFun(binding.voucherDate)
+            hasVoucherDate = true
+            enableBtn(
+                (hasVoucherNum && hasVoucherAmount && hasVoucherDate && hasVoucherImg),
+                binding.uploadVoucherBtn
+            )
         }
 
 
@@ -103,13 +131,18 @@ class VoucherFragment : BaseFragment<FragmentVoucherBinding>() {
         voucherUri = uri
 
         binding.uploadVoucher.setImageURI(uri)
+        hasVoucherImg = true
+        enableBtn(
+            (hasVoucherNum && hasVoucherAmount && hasVoucherDate && hasVoucherImg),
+            binding.uploadVoucherBtn
+        )
 
 
     }
 
     private fun upload(fileUri: Uri) {
         val requestVoucher = RequestVoucher(
-            binding.birthdate.text.toString(),
+            binding.voucherDate.text.toString(),
             binding.voucherAmount.text.toString(),
             binding.voucherNumber.text.toString()
         )
@@ -129,8 +162,9 @@ class VoucherFragment : BaseFragment<FragmentVoucherBinding>() {
 
         CoroutineScope(Dispatchers.IO).launch {
             val nFile = Compressor.compress(requireContext(), file)
+            Log.i("TAG", "uploadREQ: $nFile")
 
-         //   val requestBodys = nFile.asRequestBody("image/*".toMediaTypeOrNull())
+            //   val requestBodys = nFile.asRequestBody("image/*".toMediaTypeOrNull())
 //            val requestBody: RequestBody = MultipartBody.Builder()
 //                .setType(MultipartBody.FORM)
 //                .addFormDataPart(file.name, "file_name", requestBodys)
@@ -147,6 +181,7 @@ class VoucherFragment : BaseFragment<FragmentVoucherBinding>() {
                 "multipart/form-data".toMediaTypeOrNull(),
                 nFile
             )
+            Log.i("TAG", "uploadREQ: $requestFile")
 
             val body = MultipartBody.Part.createFormData("file_name", file.name, requestFile)
 
@@ -159,7 +194,7 @@ class VoucherFragment : BaseFragment<FragmentVoucherBinding>() {
 
 
 
-
+            Log.i("TAG", "uploadImg: ${body.toString()}")
 
 
             dashboardViewModel.uploadVoucherVm(
@@ -229,7 +264,7 @@ class VoucherFragment : BaseFragment<FragmentVoucherBinding>() {
 
                     dialog.dismiss()
                     Log.i("TAG", "Error: ${it.data} ")
-                    Log.i("TAG", "Error: ${it} ")
+                    Log.i("TAG", "Error: $it ")
                 }
                 is NetworkResult.Loading -> {
                     dialog.show()
@@ -237,6 +272,7 @@ class VoucherFragment : BaseFragment<FragmentVoucherBinding>() {
                 is NetworkResult.Success -> {
                     dialog.dismiss()
                     if (it.data?.success == true) {
+                        findNavController().popBackStack()
 
                         Log.i("TAG", "success: $it ")
 

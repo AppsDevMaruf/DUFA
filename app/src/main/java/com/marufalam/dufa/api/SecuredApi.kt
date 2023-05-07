@@ -9,16 +9,14 @@ import com.marufalam.dufa.data.models.get_halls.ResponseHalls
 import com.marufalam.dufa.data.models.get_occupations.ResponseOccupations
 import com.marufalam.dufa.data.models.logout.ResponseLogout
 import com.marufalam.dufa.data.models.payRenew.RequestPayRenew
-import com.marufalam.dufa.data.models.payRenew.ResponsePayRenew
 import com.marufalam.dufa.data.models.search.RequestSearch
 import com.marufalam.dufa.data.models.search.ResponseSearch
 import com.marufalam.dufa.data.models.search.blood.ResponseBloodGroup
 import com.marufalam.dufa.data.models.transaction_history.TransHistory
 import com.marufalam.dufa.data.models.upload_profile_pic.ResponseUploadProfilePic
-import com.marufalam.dufa.data.models.vouchers.RequestVoucher
 import com.marufalam.dufa.data.models.vouchers.ResponseVoucherUpload
+import com.marufalam.dufa.data.models.vouchers.ResponseVoucherList
 import com.marufalam.dufa.ui.profile_update.RequestProfileUpdate
-import com.marufalam.dufa.ui.profile_update.ResponseUpdateProfile
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
@@ -90,6 +88,9 @@ interface SecuredApi {
         @Part("amount")  amount: RequestBody,
         @Part("voucher_number")  voucher_number: RequestBody,
     ): Response<ResponseVoucherUpload>
+
+    @GET("voucher-lists")
+    suspend fun getVoucherList(): Response<ResponseVoucherList>
 
 
     /* @POST("search")

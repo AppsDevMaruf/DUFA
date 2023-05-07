@@ -15,9 +15,18 @@
     <string name="mr">Mr</string>
     <string name="mrs">Mrs</string>
     <string name="todo">TODO</string>
+    <string name="voucher_number">Voucher Number<font color="#E72A02">*</font></string>
+    <string name="voucher_amount">Amount<font color="#E72A02">*</font></string>
+    <string name="voucher_date">Date<font color="#E72A02">*</font></string>
     <string name="male">Male</string>
     <string name="female">Female</string>
     <string name="saiful_khandaker">Saiful Khandaker</string>
+    <string name="you_have_not_added_any_voucher_yet">You have not added any voucher yet</string>
+    <string name="submit">Submit</string>
+    <string name="download">Download</string>
+    <string name="processing">Processing</string>
+    <string name="bkash">BKASH</string>
+    <string name="yearly_fee">yearly_fee</string>
 
     <string-array name="paymentsType">
         <item>Registration Fee</item>
