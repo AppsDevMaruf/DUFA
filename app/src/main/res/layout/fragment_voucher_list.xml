@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/back_grey"
-        tools:context=".ui.VoucherListFragment">
+        tools:context=".ui.voucher.VoucherListFragment">
 
 
         <androidx.recyclerview.widget.RecyclerView

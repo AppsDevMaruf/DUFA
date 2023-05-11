@@ -1,7 +1,11 @@
 package com.marufalam.dufa.adapter
 
+
 import android.annotation.SuppressLint
-import android.util.Log
+import android.app.DownloadManager
+import android.content.Context
+import android.net.Uri
+import android.os.Environment
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -10,10 +14,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.marufalam.dufa.data.models.vouchers.Vouchers
-
-
 import com.marufalam.dufa.databinding.ItemVoucherBinding
 import com.marufalam.dufa.utils.*
+import java.net.URLConnection
+
 
 class VoucherAdapter : ListAdapter<Vouchers, VoucherAdapter.VoucherViewHolder>(comparator) {
 
@@ -56,7 +60,7 @@ class VoucherAdapter : ListAdapter<Vouchers, VoucherAdapter.VoucherViewHolder>(c
                 voucherImg.loadImagesWithGlide(voucherImgUrl)*/
                 voucherNumber.text = "Number : ${voucher.voucherNumber}"
                 voucherAmount.text = "Amount : ${voucher.amount} Tk"
-                voucherPaymentDate.text ="Date : ${voucher.date}"
+                voucherPaymentDate.text = "Date : ${voucher.date}"
                 when (voucher.adminIndicate) {
                     0 -> {
                         val text =
@@ -81,7 +85,41 @@ class VoucherAdapter : ListAdapter<Vouchers, VoucherAdapter.VoucherViewHolder>(c
 
                 }
                 voucherDownloadBtn.setOnClickListener {
-                    Toast.makeText(holder.itemView.context, "Work in Ongoing..", Toast.LENGTH_LONG).show()
+                    Toast.makeText(holder.itemView.context, "Downloading...", Toast.LENGTH_LONG)
+                        .show()
+
+                    val voucherImgUrl = Constants.IMG_PREFIX + voucher.fileName
+
+                    val uri: Uri = Uri.parse(voucherImgUrl)
+                    // Create request for android download manager
+                    // Create request for android download manager
+                    val downloadManager = holder.itemView.context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager?
+                    val request = DownloadManager.Request(uri)
+                    request.setAllowedNetworkTypes(
+                        DownloadManager.Request.NETWORK_WIFI or
+                                DownloadManager.Request.NETWORK_MOBILE
+                    )
+
+// set title and description
+
+// set title and description
+                    request.setTitle("voucher${System.currentTimeMillis()}.png")
+                    request.setDescription("Android Data download using DownloadManager.")
+
+                    request.allowScanningByMediaScanner()
+                    request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+
+//set the local destination for download file to a path within the application's external files directory
+
+//set the local destination for download file to a path within the application's external files directory
+                    request.setDestinationInExternalPublicDir(
+                        Environment.DIRECTORY_DOWNLOADS,
+                        "voucher${System.currentTimeMillis()}"
+                    )
+                    val mimeType: String = URLConnection.guessContentTypeFromName(voucherImgUrl)
+                    println(mimeType)
+                    request.setMimeType("application/*")
+                    downloadManager!!.enqueue(request)
 
                 }
             }

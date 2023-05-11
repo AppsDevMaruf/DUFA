@@ -102,7 +102,7 @@ class VoucherFragment : BaseFragment<FragmentVoucherBinding>() {
 
         binding.uploadVoucher.setOnClickListener {
 
-            startCameraWithoutUri(includeCamera = false, includeGallery = true)
+            startCameraWithoutUri(includeCamera = true, includeGallery = true)
         }
 
 
@@ -151,7 +151,7 @@ class VoucherFragment : BaseFragment<FragmentVoucherBinding>() {
 
 
         val filesDir = requireActivity().filesDir
-        val file = File(filesDir, "profile${System.currentTimeMillis()}.png")
+        val file = File(filesDir, "voucher${System.currentTimeMillis()}.png")
 
         Log.i("uploadFileDir", "upload:$file")
 

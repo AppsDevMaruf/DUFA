@@ -151,7 +151,7 @@
         tools:layout="@layout/fragment_voucher" />
     <fragment
         android:id="@+id/voucherListFragment"
-        android:name="com.marufalam.dufa.ui.VoucherListFragment"
+        android:name="com.marufalam.dufa.ui.voucher.VoucherListFragment"
         android:label="fragment_voucher_list"
         tools:layout="@layout/fragment_voucher_list" >
         <action

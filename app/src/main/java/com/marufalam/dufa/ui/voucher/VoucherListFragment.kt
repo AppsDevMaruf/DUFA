@@ -1,4 +1,4 @@
-package com.marufalam.dufa.ui
+package com.marufalam.dufa.ui.voucher
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
