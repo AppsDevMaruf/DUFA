@@ -54,11 +54,7 @@
         android:name="com.marufalam.dufa.ui.PaymentFragment"
         android:label=" Payment"
         tools:layout="@layout/fragment_payment" />
-    <fragment
-        android:id="@+id/eventFragment"
-        android:name="com.marufalam.dufa.ui.EventFragment"
-        android:label="Event"
-        tools:layout="@layout/fragment_event" />
+
     <fragment
         android:id="@+id/notificationFragment"
         android:name="com.marufalam.dufa.ui.NotificationFragment"
@@ -130,20 +126,12 @@
         android:id="@+id/payentSuccessFragment"
         android:name="com.marufalam.dufa.PayentSuccessFragment"
         android:label="fragment_payent_success"
-        tools:layout="@layout/fragment_payent_success">
-        <action
-            android:id="@+id/action_payentSuccessFragment_to_DashboardFragment"
-            app:destination="@id/DashboardFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_payent_success"/>
     <fragment
         android:id="@+id/paymentFailledFragment"
         android:name="com.marufalam.dufa.PaymentFailledFragment"
         android:label="fragment_payment_failled"
-        tools:layout="@layout/fragment_payment_failled">
-        <action
-            android:id="@+id/action_paymentFailledFragment_to_DashboardFragment"
-            app:destination="@id/DashboardFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_payment_failled"/>
     <fragment
         android:id="@+id/voucherFragment"
         android:name="com.marufalam.dufa.VoucherFragment"
@@ -153,7 +141,7 @@
         android:id="@+id/voucherListFragment"
         android:name="com.marufalam.dufa.ui.voucher.VoucherListFragment"
         android:label="fragment_voucher_list"
-        tools:layout="@layout/fragment_voucher_list" >
+        tools:layout="@layout/fragment_voucher_list">
         <action
             android:id="@+id/action_voucherListFragment_to_voucherFragment"
             app:destination="@id/voucherFragment" />

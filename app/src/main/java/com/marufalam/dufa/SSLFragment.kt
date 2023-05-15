@@ -7,6 +7,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.gson.Gson
 import com.marufalam.dufa.databinding.FragmentSSLBinding
+import com.marufalam.dufa.utils.toast
 import com.marufalam.dufa.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -61,9 +62,28 @@ class SSLFragment : BaseFragment<FragmentSSLBinding>() {
 
                 if (url == "http://dufa9596.org/success") {
 
-                    findNavController().navigate(R.id.action_SSLFragment_to_payentSuccessFragment)
-                    findNavController().popBackStack()
+                    findNavController().navigate(R.id.payentSuccessFragment)
+                    toast("success")
 
+
+                }
+
+
+                if (url == "http://dufa9596.org/fail") {
+
+                    findNavController().navigate(R.id.paymentFailledFragment)
+
+                    toast("failed")
+
+                }
+
+
+                if (url == "http://dufa9596.org/cancel") {
+
+                    findNavController().navigate(R.id.paymentFailledFragment)
+
+
+                    toast("canceled")
                 }
 
 
