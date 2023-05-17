@@ -27,7 +27,7 @@
     <string name="processing">Processing</string>
     <string name="bkash">BKASH</string>
     <string name="yearly_fee">yearly_fee</string>
-
+    <string name="map_api_key">AIzaSyC0m-NtpWucyNalAxy893so6dbNwerckOM</string>
     <string-array name="paymentsType">
         <item>Registration Fee</item>
         <item>One Time Fee</item>
@@ -193,5 +193,6 @@
         <item>Other</item>
 
     </string-array>
+
 
 </resources>

@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_DashboardFragment_to_voucherListFragment"
             app:destination="@id/voucherListFragment" />
+        <action
+            android:id="@+id/action_DashboardFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
 
     </fragment>
     <fragment
@@ -146,5 +149,14 @@
             android:id="@+id/action_voucherListFragment_to_voucherFragment"
             app:destination="@id/voucherFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.marufalam.dufa.MapsFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_maps" />
+    <fragment
+        android:id="@+id/getLocationFragment"
+        android:name="com.marufalam.dufa.GetLocationFragment"
+        android:label="GetLocationFragment" />
 
 </navigation>
