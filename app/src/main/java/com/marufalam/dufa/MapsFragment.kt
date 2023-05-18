@@ -1,15 +1,10 @@
 package com.marufalam.dufa
 
-import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.Drawable
-import android.view.LayoutInflater
 import android.view.View
-import android.widget.ImageView
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.content.getSystemService
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -18,11 +13,13 @@ import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.marufalam.dufa.data.models.map.MarkerData
 import com.marufalam.dufa.databinding.FragmentMapsBinding
 
 class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
     private var mapFrag: SupportMapFragment? = null
     private var myGoogleMap: GoogleMap? = null
+    private val markerList = ArrayList<MarkerData>()
 
 
     override fun getFragmentView(): Int {
@@ -38,40 +35,47 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         myGoogleMap = googleMap
+        val bd = LatLng(23.6850, 90.3563)
+        markerList.add(MarkerData(22.8246, 91.1017,"Noakhali","sub-noakhali",R.drawable.occupation))
+        markerList.add(MarkerData(23.4607, 91.1809,"Comilla","sub-farmGate",R.drawable.occupation))
+        markerList.add(MarkerData(22.3569, 91.7832,"Chattogram","sub-Chattogram",R.drawable.occupation))
+        val markerLayout = layoutInflater.inflate(R.layout.marker_layout, null, false)
+        //val userImg = markerLayout.findViewById<ImageView>(R.id.userImg)
+        val bitmap = Bitmap.createScaledBitmap(
+            viewToBitmap(markerLayout)!!, 128,128,false)
+        markerList.forEach{ markerData ->
+            googleMap.addMarker(MarkerOptions()
+                .position(LatLng(markerData.latitude, markerData.longitude))
+                .anchor(0.5f, 0.5f)
+                .title(markerData.title)
+                .snippet(markerData.snippets)
+                .icon(BitmapDescriptorFactory.fromBitmap(bitmap)))
+            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(bd,9f))
+            googleMap.uiSettings.isZoomControlsEnabled
 
-        // Add a marker in Sydney and move the camera
+        }
+
+/*        // Add a marker in Sydney and move the camera
         val sydney = LatLng(-34.0, 151.0)
         val dhaka = LatLng(23.8103, 90.4125)
-        val farmGate = LatLng(-23.7561, 90.3872)
+        val farmGate = LatLng(-23.7561, 90.3872)*/
 
-        val markerLayout = layoutInflater.inflate(R.layout.marker_layout, null, false)
-        val userImg = markerLayout.findViewById<ImageView>(R.id.userImg)
 
-        val bitmap = Bitmap.createScaledBitmap(
-            viewToBitmap(markerLayout)!!,
-            128,
-            128,
-            false
-        )
+
+       /* val bitmap = Bitmap.createScaledBitmap(
+            viewToBitmap(markerLayout)!!, 128,128,false)
         val bitmap2 = Bitmap.createScaledBitmap(
-            viewToBitmap(markerLayout)!!,
-            128,
-            128,
-            false
-        )
+            viewToBitmap(markerLayout)!!,128,128,false)
         val bitmap3 = Bitmap.createScaledBitmap(
-            viewToBitmap(markerLayout)!!,
-            128,
-            128,
-            false
-        )
+            viewToBitmap(markerLayout)!!,128,128,false)
+
         val markerIcon = BitmapDescriptorFactory.fromBitmap(bitmap)
         myGoogleMap!!.addMarker(MarkerOptions().position(dhaka).icon(markerIcon))
         val markerIcon2 = BitmapDescriptorFactory.fromBitmap(bitmap2)
         myGoogleMap!!.addMarker(MarkerOptions().position(sydney).icon(markerIcon2))
         val markerIcon3 = BitmapDescriptorFactory.fromBitmap(bitmap3)
         myGoogleMap!!.addMarker(MarkerOptions().position(farmGate).icon(markerIcon3))
-
+*/
 /*
 
 
@@ -111,9 +115,9 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
         return bitmap
     }
 
-    private fun BitmapFromVector(context: Context, vectorResId: Int): BitmapDescriptor? {
+    private fun BitmapFromVector( vectorResId: Int): BitmapDescriptor? {
         //drawable generator
-        val vectorDrawable: Drawable = ContextCompat.getDrawable(context, vectorResId)!!
+        val vectorDrawable: Drawable = ContextCompat.getDrawable(requireActivity(), vectorResId)!!
         vectorDrawable.setBounds(
             0,
             0,
@@ -127,6 +131,7 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
                 vectorDrawable.intrinsicHeight,
                 Bitmap.Config.ARGB_8888
             )
+
         //canvas generate
         //pass bitmap in canvas constructor
         val canvas = Canvas(bitmap)
