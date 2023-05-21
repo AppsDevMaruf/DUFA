@@ -1,10 +1,24 @@
 package com.marufalam.dufa
 
+import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.Drawable
+import android.location.Address
+import android.location.Geocoder
+import android.location.Location
+import android.location.LocationManager
+import android.provider.Settings
+import android.util.Log
 import android.view.View
+import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -15,10 +29,16 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.marufalam.dufa.data.models.map.MarkerData
 import com.marufalam.dufa.databinding.FragmentMapsBinding
+import java.util.*
 
 class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
+    private lateinit var mFusedLocationClient: FusedLocationProviderClient
+    private val permissionId = 2
     private var mapFrag: SupportMapFragment? = null
     private var myGoogleMap: GoogleMap? = null
+    private var lat=23.6850
+    private var log=90.3563
+
     private val markerList = ArrayList<MarkerData>()
 
 
@@ -29,13 +49,86 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
     override fun configUi() {
         mapFrag = binding.map.getFragment()
         mapFrag?.getMapAsync(this)
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+        getLocation()
+    }
+
+    private fun isLocationEnabled(): Boolean {
+        val locationManager: LocationManager =
+            requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
+            LocationManager.NETWORK_PROVIDER
+        )
+    }
+    private fun checkPermissions(): Boolean {
+        if (ActivityCompat.checkSelfPermission(
+                requireActivity(),
+                android.Manifest.permission.ACCESS_COARSE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(
+                requireActivity(),
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            return true
+        }
+        return false
+    }
+    private fun requestPermissions() {
+        ActivityCompat.requestPermissions(
+            requireActivity(),
+            arrayOf(
+                android.Manifest.permission.ACCESS_COARSE_LOCATION,
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            ),
+            permissionId
+        )
+    }
+    @SuppressLint("MissingSuperCall")
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        if (requestCode == permissionId) {
+            if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                getLocation()
+            }
+        }
+    }
+    @SuppressLint("MissingPermission", "SetTextI18n")
+    private fun getLocation() {
+        if (checkPermissions()) {
+            if (isLocationEnabled()) {
+                mFusedLocationClient.lastLocation.addOnCompleteListener(requireActivity()) { task ->
+                    val location: Location? = task.result
+                    if (location != null) {
+                        val geocoder = Geocoder(requireActivity(), Locale.getDefault())
+                        //myGoogleMap!!.isMyLocationEnabled=true
+                        val list: List<Address> =
+                            geocoder.getFromLocation(location.latitude, location.longitude, 1) as List<Address>
+                        lat = list[0].latitude
+                        log = list[0].longitude
+
+                        Log.i("TAG", "getLocation: ${list[0].latitude}\n${list[0].longitude}")
+                    }
+                }
+            } else {
+                Toast.makeText(requireActivity(), "Please turn on location", Toast.LENGTH_LONG).show()
+                val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                startActivity(intent)
+            }
+        } else {
+            requestPermissions()
+        }
     }
 
 
 
     override fun onMapReady(googleMap: GoogleMap) {
+        myGoogleMap?.clear()
         myGoogleMap = googleMap
-        val bd = LatLng(23.6850, 90.3563)
+        val myLocation = LatLng(23.6850, 90.3563)
         markerList.add(MarkerData(22.8246, 91.1017,"Noakhali","sub-noakhali",R.drawable.occupation))
         markerList.add(MarkerData(23.4607, 91.1809,"Comilla","sub-farmGate",R.drawable.occupation))
         markerList.add(MarkerData(22.3569, 91.7832,"Chattogram","sub-Chattogram",R.drawable.occupation))
@@ -50,7 +143,7 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
                 .title(markerData.title)
                 .snippet(markerData.snippets)
                 .icon(BitmapDescriptorFactory.fromBitmap(bitmap)))
-            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(bd,9f))
+            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(myLocation,9f))
             googleMap.uiSettings.isZoomControlsEnabled
 
         }

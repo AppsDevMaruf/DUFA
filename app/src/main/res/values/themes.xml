@@ -45,6 +45,10 @@
         <item name="android:textColor">@color/grey_40</item>
         <item name="android:colorButtonNormal">@color/blue</item>
     </style>
+    <style name="roundedImageViewRounded">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
 
 
 <!--    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">-->
