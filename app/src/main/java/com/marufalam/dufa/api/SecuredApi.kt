@@ -7,6 +7,9 @@ import com.marufalam.dufa.data.models.get_departments.ResponseDepartments
 import com.marufalam.dufa.data.models.get_districts.ResponseDistrict
 import com.marufalam.dufa.data.models.get_halls.ResponseHalls
 import com.marufalam.dufa.data.models.get_occupations.ResponseOccupations
+import com.marufalam.dufa.data.models.locations.RequestSetCLocation
+import com.marufalam.dufa.data.models.locations.ResponseSetCLocantion
+import com.marufalam.dufa.data.models.locations.ResponseUserLocation
 import com.marufalam.dufa.data.models.logout.ResponseLogout
 import com.marufalam.dufa.data.models.payRenew.RequestPayRenew
 import com.marufalam.dufa.data.models.search.RequestSearch
@@ -92,6 +95,11 @@ interface SecuredApi {
     @GET("voucher-lists")
     suspend fun getVoucherList(): Response<ResponseVoucherList>
 
+    @POST("set-app-location")
+    suspend fun setCurrentLocations(@Body req:RequestSetCLocation ): Response<ResponseSetCLocantion>
+    //user Locations
+    @GET("locations")
+    suspend fun getUserLocations(): Response<ResponseUserLocation>
 
     /* @POST("search")
      suspend fun getUserByDepartment(@Body department: String): Response<ResponseMemberList>

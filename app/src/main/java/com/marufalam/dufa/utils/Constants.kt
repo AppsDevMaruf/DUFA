@@ -1,9 +1,10 @@
 package com.marufalam.dufa.utils
 
 object Constants {
-    const val TAG = "DuFaAPPTAG"
+    const val TAG = "DuFaAppTAG"
     const val BASE_URL = "http://dufa9596.org/api/"
     const val TEST_BASE_URL = "https://mocki.io/v1/"
+
 
     const val USER_TOKEN = "user_token"
     const val USER_ID = "user_id"

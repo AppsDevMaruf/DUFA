@@ -23,6 +23,7 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.GoogleMap
 import com.marufalam.dufa.MainActivity
 import com.marufalam.dufa.data.local.TokenManager
+import com.marufalam.dufa.data.models.locations.RequestSetCLocation
 import com.marufalam.dufa.data.models.login.RequestLogin
 import com.marufalam.dufa.databinding.FragmentLogInBinding
 import com.marufalam.dufa.utils.*
@@ -31,14 +32,15 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
+import kotlin.properties.Delegates
 
 @AndroidEntryPoint
 class LogInActivity : AppCompatActivity() {
     private val authViewModel by viewModels<AuthViewModel>()
     private lateinit var mFusedLocationClient: FusedLocationProviderClient
+    private var userId :Int = 0
     private val permissionId = 2
     lateinit var binding: FragmentLogInBinding
-    private var myGoogleMap: GoogleMap? = null
 
     @Inject
     lateinit var tokenManager: TokenManager
@@ -52,8 +54,8 @@ class LogInActivity : AppCompatActivity() {
     }
 
     fun configUi() {
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         binding.logIn.setOnClickListener {
 
             binding.loginErrorText.isVisible = false
@@ -115,6 +117,7 @@ class LogInActivity : AppCompatActivity() {
             LocationManager.NETWORK_PROVIDER
         )
     }
+
     private fun checkPermissions(): Boolean {
         if (ActivityCompat.checkSelfPermission(
                 this,
@@ -129,6 +132,7 @@ class LogInActivity : AppCompatActivity() {
         }
         return false
     }
+
     private fun requestPermissions() {
         ActivityCompat.requestPermissions(
             this,
@@ -139,6 +143,7 @@ class LogInActivity : AppCompatActivity() {
             permissionId
         )
     }
+
     @SuppressLint("MissingSuperCall")
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -151,6 +156,7 @@ class LogInActivity : AppCompatActivity() {
             }
         }
     }
+
     @SuppressLint("MissingPermission", "SetTextI18n")
     private fun getLocation() {
         if (checkPermissions()) {
@@ -160,9 +166,24 @@ class LogInActivity : AppCompatActivity() {
                     if (location != null) {
                         val geocoder = Geocoder(this, Locale.getDefault())
 
-                        val list: List<Address> = geocoder.getFromLocation(location.latitude, location.longitude, 1) as List<Address>
-                        Log.i("TAG", "LoginPageGetLocation: ${list[0].latitude}\n${list[0].longitude}")
-                        myGoogleMap?.clear()
+                        val list: List<Address> = geocoder.getFromLocation(
+                            location.latitude,
+                            location.longitude,
+                            1
+                        ) as List<Address>
+                        Log.i(
+                            "TAG",
+                            "LoginPageGetLocation: ${list[0].latitude}\n${list[0].longitude}"
+                        )
+
+                        val requestSetCLocation = RequestSetCLocation(
+                            userId,
+                            cityName = list[0].adminArea,
+                            latitude = list[0].latitude,
+                            longitude = list[0].longitude
+                        )
+                        Log.i("TAG", "requestSetCLocation: $requestSetCLocation")
+                        authViewModel.setCurrentLocationVM(requestSetCLocation)
                     }
                 }
             } else {
@@ -181,11 +202,13 @@ class LogInActivity : AppCompatActivity() {
             when (it) {
                 is NetworkResult.Success -> {
                     getLocation()
+
                     //token
                     Log.e("SuccessToken", "binObserver: ${it.data}")
                     authViewModel.setLoginResponseToken(it.data!!)
 
                     tokenManager.saveToken(Constants.TOKEN, it.data.token)
+                    userId = it.data.user_id
 
                     startActivity(Intent(this@LogInActivity, MainActivity::class.java))
                     finish()
@@ -199,10 +222,23 @@ class LogInActivity : AppCompatActivity() {
                 }
             }
         }
+        authViewModel.setCurrentLocationVMLD.observe(this) {
+            binding.progressBar.gone()
+            when (it) {
+                is NetworkResult.Success -> {
+                    Log.i("TAG", "setCurrentLocationVMLD: ${ it.data?.message }")
+                }
+                is NetworkResult.Error -> {
+                    binding.loginErrorText.show()
+                    binding.loginErrorText.text = it.message
+                }
+                is NetworkResult.Loading -> {
+                    binding.progressBar.show()
+                }
+            }
+        }
 
     }
-
-
 
 
 //     fun onResume() {
