@@ -14,6 +14,7 @@ import android.location.LocationManager
 import android.provider.Settings
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
@@ -189,12 +190,17 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
                     myGoogleMap = googleMap
                     val myLocation = LatLng(23.6850, 90.3563)
                     val markerLayout = layoutInflater.inflate(R.layout.marker_layout, null, false)
+
                     //val userImg = markerLayout.findViewById<ImageView>(R.id.userImg)
                     val bitmap = Bitmap.createScaledBitmap(
                         viewToBitmap(markerLayout)!!, 128, 128, false
                     )
                     Log.e(TAG, "onMapReadyMarkerList: $markerList")
                     markerList.forEach { markerData ->
+                        val userImg = markerLayout.findViewById<ImageView>(R.id.userImg)
+                        markerData.profilePic?.let {
+
+                        }
                         Log.e(TAG, "afterMapList: ${markerData.name}")
                         googleMap.addMarker(
                             MarkerOptions()

@@ -35,7 +35,7 @@ data class ResponseUserLocation(
         @SerializedName("phone")
         val phone: String?,
         @SerializedName("profile_pic")
-        val profilePic: Any?,
+        val profilePic: String?,
         @SerializedName("role")
         val role: String?,
         @SerializedName("status")
