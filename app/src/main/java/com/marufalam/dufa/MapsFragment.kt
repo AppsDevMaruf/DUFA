@@ -6,47 +6,29 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
-import android.graphics.drawable.Drawable
+import android.graphics.Color
 import android.location.Address
 import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
+import android.net.Uri
 import android.provider.Settings
 import android.util.Log
-import android.view.View
-import android.widget.ImageView
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.*
-import com.google.android.gms.maps.model.BitmapDescriptor
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
-import com.marufalam.dufa.data.models.locations.RequestSetCLocation
-import com.marufalam.dufa.data.models.locations.ResponseSetCLocantion
+import com.google.android.gms.maps.model.*
 import com.marufalam.dufa.data.models.locations.ResponseUserLocation
-import com.marufalam.dufa.data.models.map.MarkerData
 import com.marufalam.dufa.databinding.FragmentMapsBinding
-import com.marufalam.dufa.utils.Constants.TAG
 import com.marufalam.dufa.utils.NetworkResult
-import com.marufalam.dufa.utils.NoInternetException
-import com.marufalam.dufa.utils.gone
-import com.marufalam.dufa.utils.show
-import com.marufalam.dufa.viewmodel.AuthViewModel
 import com.marufalam.dufa.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import org.json.JSONObject
 import java.util.*
+
 
 @AndroidEntryPoint
 class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
@@ -76,28 +58,6 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
 
 
     }
-/*    override fun binObserver() {
-        Log.e(TAG, "binObserver: ")
-        mapsViewModel.userLocationsVMLD.observe(viewLifecycleOwner) {
-            when (it) {
-                is NetworkResult.Success -> {
-                    markerList = it.data?.data as ArrayList<ResponseUserLocation.Data>
-                    Log.e(TAG, "markerList: $markerList")
-                }
-                is NetworkResult.Error -> {
-
-                }
-                is NetworkResult.Loading -> {
-
-                }
-            }
-        }
-
-
-
-        //   user Locations  end
-    }*/
-
 
     private fun isLocationEnabled(): Boolean {
         val locationManager: LocationManager =
@@ -178,42 +138,49 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
     }
 
 
+    @SuppressLint("PotentialBehaviorOverride")
     override fun onMapReady(googleMap: GoogleMap) {
-        Log.e(TAG, "onMapReady11111: ")
+
         mapsViewModel.userLocationsVMLD.observe(this) {
             when (it) {
                 is NetworkResult.Success -> {
                     markerList = it.data?.data as ArrayList<ResponseUserLocation.Data>
-                    Log.e(TAG, "markerList: $markerList")
-
                     myGoogleMap?.clear()
                     myGoogleMap = googleMap
-                    val myLocation = LatLng(23.6850, 90.3563)
-                    val markerLayout = layoutInflater.inflate(R.layout.marker_layout, null, false)
-
-                    //val userImg = markerLayout.findViewById<ImageView>(R.id.userImg)
-                    val bitmap = Bitmap.createScaledBitmap(
-                        viewToBitmap(markerLayout)!!, 128, 128, false
-                    )
-                    Log.e(TAG, "onMapReadyMarkerList: $markerList")
                     markerList.forEach { markerData ->
-                        val userImg = markerLayout.findViewById<ImageView>(R.id.userImg)
-                        markerData.profilePic?.let {
-
-                        }
-                        Log.e(TAG, "afterMapList: ${markerData.name}")
                         googleMap.addMarker(
                             MarkerOptions()
                                 .position(LatLng(markerData.latitude, markerData.longitude))
                                 .anchor(0.5f, 0.5f)
                                 .title(markerData.name)
                                 .snippet(markerData.phone)
-                                .icon(BitmapDescriptorFactory.fromBitmap(bitmap))
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
                         )
-                        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 5f))
+                        googleMap.animateCamera(
+                            CameraUpdateFactory.newLatLngZoom(
+                                LatLng(lat, log),
+                                10f
+                            )
+                        )
+
+                        googleMap.addCircle(
+                            CircleOptions()
+                                .center(LatLng(lat, log))
+                                .radius(10000.0)
+                                .strokeColor(Color.RED)
+                                .fillColor(Color.TRANSPARENT)
+                        )
                         googleMap.uiSettings.isZoomControlsEnabled
 
+                        googleMap.setOnMarkerClickListener { _ ->
+                            val callIntent = Intent(Intent.ACTION_CALL)
+                            callIntent.data = Uri.parse(markerData.phone)
+                            startActivity(callIntent)
+                            true
+                        }
+
                     }
+
                 }
                 is NetworkResult.Error -> {
 
@@ -225,86 +192,15 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
         }
 
 
-/*        // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        val dhaka = LatLng(23.8103, 90.4125)
-        val farmGate = LatLng(-23.7561, 90.3872)*/
-
-
-        /* val bitmap = Bitmap.createScaledBitmap(
-             viewToBitmap(markerLayout)!!, 128,128,false)
-         val bitmap2 = Bitmap.createScaledBitmap(
-             viewToBitmap(markerLayout)!!,128,128,false)
-         val bitmap3 = Bitmap.createScaledBitmap(
-             viewToBitmap(markerLayout)!!,128,128,false)
-
-         val markerIcon = BitmapDescriptorFactory.fromBitmap(bitmap)
-         myGoogleMap!!.addMarker(MarkerOptions().position(dhaka).icon(markerIcon))
-         val markerIcon2 = BitmapDescriptorFactory.fromBitmap(bitmap2)
-         myGoogleMap!!.addMarker(MarkerOptions().position(sydney).icon(markerIcon2))
-         val markerIcon3 = BitmapDescriptorFactory.fromBitmap(bitmap3)
-         myGoogleMap!!.addMarker(MarkerOptions().position(farmGate).icon(markerIcon3))
- */
-/*
-
-        val sydneyMarker = MarkerOptions()
-            .position(sydney)
-            .title("Marker in Sydney")
-        val dhakaMarker = MarkerOptions()
-            .position(dhaka)
-            .title("Marker in Sydney")
-        val farmGateMarker = MarkerOptions()
-            .position(farmGate)
-            .title("Marker in Sydney")
-        //set custom icon
-        sydneyMarker.icon(BitmapFromVector(requireActivity(), R.drawable.baseline_location_on_24))
-        //add marker
-        myGoogleMap!!.addMarker(sydneyMarker)
-        myGoogleMap!!.addMarker(dhakaMarker)
-        myGoogleMap!!.addMarker(farmGateMarker)
-*/
-
-        // myGoogleMap!!.moveCamera(CameraUpdateFactory.newLatLng(sydney))
-
     }
+/*    private fun bitmapDescriptorFromVector( vectorResId: Int): BitmapDescriptor? {
+        return ContextCompat.getDrawable(requireActivity(), vectorResId)?.run {
+            setBounds(0, 0, intrinsicWidth, intrinsicHeight)
+            val bitmap = Bitmap.createBitmap(intrinsicWidth, intrinsicHeight, Bitmap.Config.ARGB_8888)
+            draw(Canvas(bitmap))
+            BitmapDescriptorFactory.fromBitmap(bitmap)
+        }
+    }*/
 
-    private fun viewToBitmap(markerLayout: View?): Bitmap? {
-        markerLayout!!.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
-        val bitmap = Bitmap.createBitmap(
-            markerLayout.measuredWidth,
-            markerLayout.measuredHeight,
-            Bitmap.Config.ARGB_8888
-        )
-        val canvas = Canvas(bitmap)
-        markerLayout.layout(0, 0, requireView().measuredWidth, requireView().measuredHeight)
-        markerLayout.draw(canvas)
-        return bitmap
-    }
-
-    private fun BitmapFromVector(vectorResId: Int): BitmapDescriptor? {
-        //drawable generator
-        val vectorDrawable: Drawable = ContextCompat.getDrawable(requireActivity(), vectorResId)!!
-        vectorDrawable.setBounds(
-            0,
-            0,
-            vectorDrawable.intrinsicWidth,
-            vectorDrawable.intrinsicHeight
-        )
-        //bitmap generator
-        val bitmap: Bitmap =
-            Bitmap.createBitmap(
-                vectorDrawable.intrinsicWidth,
-                vectorDrawable.intrinsicHeight,
-                Bitmap.Config.ARGB_8888
-            )
-
-        //canvas generate
-        //pass bitmap in canvas constructor
-        val canvas = Canvas(bitmap)
-        //pass canvas in drawable
-        vectorDrawable.draw(canvas)
-        //return BitmapDescriptorFactory
-        return BitmapDescriptorFactory.fromBitmap(bitmap)
-    }
 
 }
