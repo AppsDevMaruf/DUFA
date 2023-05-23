@@ -4,62 +4,102 @@ package com.marufalam.dufa.data.models.locations
 import com.google.gson.annotations.SerializedName
 
 data class ResponseUserLocation(
-    @SerializedName("data")
-    val `data`: List<Data?>?,
+    @SerializedName("allMembers")
+    val allMembers: List<AllMember?>?,
     @SerializedName("message")
     val message: String?,
     @SerializedName("status")
     val status: String?,
-    @SerializedName("userInfo")
-    val userInfo: UserInfo?
+    @SerializedName("user")
+    val user: User?
 ) {
-    data class Data(
+    data class AllMember(
         @SerializedName("address")
         val address: String?,
-        @SerializedName("cityName")
-        val cityName: String?,
+        @SerializedName("birthdate")
+        val birthdate: String?,
+        @SerializedName("bloodgroup")
+        val bloodgroup: String?,
         @SerializedName("created_at")
         val createdAt: String?,
+        @SerializedName("department")
+        val department: String?,
+        @SerializedName("district")
+        val district: String?,
         @SerializedName("email")
         val email: String?,
-        @SerializedName("email_verified_at")
-        val emailVerifiedAt: String?,
+        @SerializedName("gender")
+        val gender: String?,
+        @SerializedName("hall")
+        val hall: String?,
         @SerializedName("id")
         val id: Int?,
+        @SerializedName("image_path")
+        val imagePath: String?,
         @SerializedName("latitude")
-        val latitude: Double,
+        val latitude: Double?,
         @SerializedName("longitude")
-        val longitude: Double,
+        val longitude: Double?,
         @SerializedName("name")
         val name: String?,
+        @SerializedName("nickname")
+        val nickname: String?,
+        @SerializedName("nid")
+        val nid: String?,
+        @SerializedName("occupation")
+        val occupation: String?,
         @SerializedName("phone")
-        val phone: String?,
-        @SerializedName("profile_pic")
-        val profilePic: String?,
-        @SerializedName("role")
-        val role: String?,
+        var phone: String?,
         @SerializedName("status")
-        val status: Int?,
+        val status: String?,
+        @SerializedName("subscription")
+        val subscription: String?,
         @SerializedName("updated_at")
-        val updatedAt: String?,
-        @SerializedName("user_id")
-        val userId: Int?
+        val updatedAt: String?
     )
 
-    data class UserInfo(
-        @SerializedName("cityName")
-        val cityName: String?,
+    data class User(
+        @SerializedName("address")
+        val address: String?,
+        @SerializedName("birthdate")
+        val birthdate: String?,
+        @SerializedName("bloodgroup")
+        val bloodgroup: String?,
         @SerializedName("created_at")
         val createdAt: String?,
+        @SerializedName("department")
+        val department: String?,
+        @SerializedName("district")
+        val district: String?,
+        @SerializedName("email")
+        val email: String?,
+        @SerializedName("gender")
+        val gender: String?,
+        @SerializedName("hall")
+        val hall: String?,
         @SerializedName("id")
         val id: Int?,
+        @SerializedName("image_path")
+        val imagePath: String?,
         @SerializedName("latitude")
-        val latitude: String?,
+        val latitude: Double?,
         @SerializedName("longitude")
-        val longitude: String?,
+        val longitude: Double?,
+        @SerializedName("name")
+        val name: String?,
+        @SerializedName("nickname")
+        val nickname: Any?,
+        @SerializedName("nid")
+        val nid: String?,
+        @SerializedName("occupation")
+        val occupation: String?,
+        @SerializedName("phone")
+        val phone: String?,
+        @SerializedName("status")
+        val status: String?,
+        @SerializedName("subscription")
+        val subscription: String?,
         @SerializedName("updated_at")
-        val updatedAt: String?,
-        @SerializedName("user_id")
-        val userId: Int?
+        val updatedAt: String?
     )
 }

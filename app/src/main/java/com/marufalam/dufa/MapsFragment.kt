@@ -4,8 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.Canvas
 import android.graphics.Color
 import android.location.Address
 import android.location.Geocoder
@@ -16,7 +14,6 @@ import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -24,7 +21,7 @@ import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.*
 import com.marufalam.dufa.data.models.locations.ResponseUserLocation
 import com.marufalam.dufa.databinding.FragmentMapsBinding
-import com.marufalam.dufa.utils.NetworkResult
+import com.marufalam.dufa.utils.*
 import com.marufalam.dufa.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -40,7 +37,7 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
     private var lat = 23.6850
     private var log = 90.3563
 
-    private var markerList = ArrayList<ResponseUserLocation.Data>()
+    private var markerList = ArrayList<ResponseUserLocation.AllMember>()
 
 
     override fun getFragmentView(): Int {
@@ -142,20 +139,30 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
 
         mapsViewModel.userLocationsVMLD.observe(this) {
+            binding.progressBar.gone()
             when (it) {
                 is NetworkResult.Success -> {
-                    markerList = it.data?.data as ArrayList<ResponseUserLocation.Data>
+                    markerList = it.data?.allMembers as ArrayList<ResponseUserLocation.AllMember>
                     myGoogleMap?.clear()
                     myGoogleMap = googleMap
                     markerList.forEach { markerData ->
-                        googleMap.addMarker(
-                            MarkerOptions()
-                                .position(LatLng(markerData.latitude, markerData.longitude))
-                                .anchor(0.5f, 0.5f)
-                                .title(markerData.name)
-                                .snippet(markerData.phone)
-                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
-                        )
+                        markerData.latitude?.let { it1 -> markerData.longitude?.let { it2 ->
+                            LatLng(it1,
+                                it2
+                            )
+                        } }
+                            ?.let { it2 ->
+                                MarkerOptions()
+                                    .position(it2)
+                                    .anchor(0.5f, 0.5f)
+                                    .title(markerData.name)
+                                    .snippet(markerData.phone)
+                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+                            }?.let { it3 ->
+                                googleMap.addMarker(
+                                    it3
+                                )
+                            }
                         googleMap.animateCamera(
                             CameraUpdateFactory.newLatLngZoom(
                                 LatLng(lat, log),
@@ -167,15 +174,16 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
                             CircleOptions()
                                 .center(LatLng(lat, log))
                                 .radius(10000.0)
-                                .strokeColor(Color.RED)
+                                .strokeColor(Color.BLUE)
                                 .fillColor(Color.TRANSPARENT)
                         )
                         googleMap.uiSettings.isZoomControlsEnabled
 
                         googleMap.setOnMarkerClickListener { _ ->
-                            val callIntent = Intent(Intent.ACTION_CALL)
-                            callIntent.data = Uri.parse(markerData.phone)
-                            startActivity(callIntent)
+                            val dialIntent = Intent(Intent.ACTION_DIAL)
+                            dialIntent.data = Uri.parse("tel:" + markerData.phone)
+                            requireActivity().startActivity(dialIntent)
+                            toast("Thanks ${markerData.name}")
                             true
                         }
 
@@ -186,7 +194,7 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
 
                 }
                 is NetworkResult.Loading -> {
-
+                    binding.progressBar.show()
                 }
             }
         }

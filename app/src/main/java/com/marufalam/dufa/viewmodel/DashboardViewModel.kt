@@ -15,15 +15,12 @@ import com.marufalam.dufa.data.models.getProfileInfo.ResponseProfileInfo
 import com.marufalam.dufa.data.models.get_districts.ResponseDistrict
 import com.marufalam.dufa.data.models.get_halls.ResponseHalls
 import com.marufalam.dufa.data.models.get_occupations.ResponseOccupations
-import com.marufalam.dufa.data.models.locations.RequestSetCLocation
-import com.marufalam.dufa.data.models.locations.ResponseSetCLocantion
 import com.marufalam.dufa.data.models.locations.ResponseUserLocation
 import com.marufalam.dufa.data.models.logout.ResponseLogout
 import com.marufalam.dufa.data.models.payRenew.RequestPayRenew
 import com.marufalam.dufa.data.models.search.Data
 import com.marufalam.dufa.data.models.search.RequestSearch
 import com.marufalam.dufa.data.models.upload_profile_pic.ResponseUploadProfilePic
-import com.marufalam.dufa.data.models.vouchers.RequestVoucher
 import com.marufalam.dufa.data.models.vouchers.ResponseVoucherUpload
 import com.marufalam.dufa.repos.SecuredRepository
 import com.marufalam.dufa.ui.profile_update.RequestProfileUpdate
