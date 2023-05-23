@@ -73,6 +73,8 @@ class QRFragment : BaseFragment<FragmentQRBinding>() {
 
         }
 
+        //
+
 //        dashboardViewModel.profileInfoVMLD.observe(viewLifecycleOwner) {
 //
 //            when (it) {
