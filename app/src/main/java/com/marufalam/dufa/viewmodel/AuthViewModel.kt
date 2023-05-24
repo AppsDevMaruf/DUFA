@@ -38,7 +38,6 @@ class AuthViewModel @Inject constructor(private val userRepository: PublicReposi
         get() = userRepository.loginResponseLiveDataRepo
 
 
-
     fun registerUserVM(requestRegister: RequestRegister){
        viewModelScope.launch {
            userRepository.registerUserRepo(requestRegister)
@@ -63,7 +62,6 @@ class AuthViewModel @Inject constructor(private val userRepository: PublicReposi
 
         _setCurrentLocation.postValue(NetworkResult.Loading())
 
-
         viewModelScope.launch {
 
             try {
@@ -78,7 +76,6 @@ class AuthViewModel @Inject constructor(private val userRepository: PublicReposi
 
                     val errorObj = JSONObject(response.errorBody()!!.charStream().readText())
                     _setCurrentLocation.postValue(NetworkResult.Error(errorObj.getString("message")))
-
                 }
             } catch (noInternetException: NoInternetException) {
                 _setCurrentLocation.postValue(noInternetException.localizedMessage?.let {
@@ -87,7 +84,6 @@ class AuthViewModel @Inject constructor(private val userRepository: PublicReposi
                     )
                 })
             }
-
         }
 
     }

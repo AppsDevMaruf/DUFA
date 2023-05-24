@@ -35,9 +35,7 @@ class PublicRepository @Inject constructor(private val userApi: PublicApi) {
 
         } else {
             _registerResponseLiveDataRepo.postValue(NetworkResult.Error(".Something Wrong....."))
-
         }
-
 
     }
 

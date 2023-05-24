@@ -6,34 +6,41 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.Canvas
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.location.Address
 import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
 import android.net.Uri
+import android.os.Build
+import android.os.StrictMode
+import android.os.StrictMode.ThreadPolicy
 import android.provider.Settings
 import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import coil.load
 import coil.transform.CircleCropTransformation
+import com.bumptech.glide.Glide
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.*
-import com.google.android.material.imageview.ShapeableImageView
 import com.marufalam.dufa.data.models.locations.ResponseUserLocation
 import com.marufalam.dufa.databinding.FragmentMapsBinding
 import com.marufalam.dufa.utils.*
+import com.marufalam.dufa.utils.Constants.IMG_PREFIX
 import com.marufalam.dufa.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import de.hdodenhof.circleimageview.CircleImageView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.net.URL
 import java.util.*
 
 
@@ -46,7 +53,6 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
     private var myGoogleMap: GoogleMap? = null
     private var lat = 23.6850
     private var log = 90.3563
-
     private var markerList = ArrayList<ResponseUserLocation.AllMember>()
 
 
@@ -165,17 +171,22 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
                             }
                         }
                             ?.let { it2 ->
-                                MarkerOptions()
-                                    .position(it2)
-                                    .anchor(0.5f, 0.5f)
-                                    .title(markerData.name)
-                                    .snippet(markerData.phone)
-                                    .icon(bitmapDescriptorFromVector(R.drawable.baseline_location_on_24))
+                                if (Build.VERSION.SDK_INT > 9) {
+                                    val policy = ThreadPolicy.Builder().permitAll().build()
+                                    StrictMode.setThreadPolicy(policy)
+                                }
+                                if (markerData.imagePath != null && markerData.imagePath != "") {
+                                    val profileImg = IMG_PREFIX + markerData.imagePath
+                                    googleMap.addMarker(
+                                        MarkerOptions()
+                                            .position(it2)
+                                            .anchor(0.5f, 0.5f)
+                                            .title(markerData.name)
+                                            .snippet(markerData.phone)
+                                            .icon(BitmapDescriptorFactory.fromBitmap(Glide.with(requireActivity()).asBitmap().load(profileImg).submit().get()))
+                                            )
+                                }
 
-                            }?.let { it3 ->
-                                googleMap.addMarker(
-                                    it3
-                                )
                             }
                         userInfo?.latitude?.let { latitude -> lat = latitude }
                         userInfo?.longitude?.let { longitude -> log = longitude }
@@ -190,7 +201,7 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
                             override fun getInfoWindow(marker: Marker): View? {
                                 marker.title = marker.title
                                 marker.snippet = marker.snippet
-                                    //todo set Icon
+                                //todo set Icon
                                 return null
                             }
 
@@ -204,15 +215,14 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
                                     v.findViewById<CircleImageView>(R.id.mapUserProfilePic)
                                 name.text = marker.title
                                 phone.text = marker.snippet
-                                if (markerData.imagePath != null && markerData.imagePath != "") {
-                                    val profileUrl = Constants.IMG_PREFIX + markerData.imagePath
-                                    profile.load(profileUrl) {
-                                        crossfade(true)
-                                        placeholder(R.drawable.avatar_placeholder)
-                                        transformations(CircleCropTransformation())
-                                    }
-                                }
-
+                                /*  if (markerData.imagePath != null && markerData.imagePath != "") {
+                                      val profileUrl = Constants.IMG_PREFIX + markerData.imagePath
+                                      profile.load(profileUrl) {
+                                          crossfade(true)
+                                          placeholder(R.drawable.avatar_placeholder)
+                                          transformations(CircleCropTransformation())
+                                      }
+                                  }*/
 
                                 return v
                             }
@@ -250,14 +260,9 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
 
     }
 
-    private fun bitmapDescriptorFromVector(vectorResId: Int): BitmapDescriptor? {
-        return ContextCompat.getDrawable(requireActivity(), vectorResId)?.run {
-            setBounds(0, 0, intrinsicWidth, intrinsicHeight)
-            val bitmap =
-                Bitmap.createBitmap(intrinsicWidth, intrinsicHeight, Bitmap.Config.ARGB_8888)
-            draw(Canvas(bitmap))
-            BitmapDescriptorFactory.fromBitmap(bitmap)
-        }
+    private fun bitmapDescriptorFromUrl(imgUrl: String): Bitmap {
+        val url = URL(imgUrl)
+        return BitmapFactory.decodeStream(url.openConnection().getInputStream())
     }
 
 

@@ -61,9 +61,7 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
 
         _paymentDues.postValue(dues)
 
-
     }
-
 
     fun getMemberSearchVMLD(
 

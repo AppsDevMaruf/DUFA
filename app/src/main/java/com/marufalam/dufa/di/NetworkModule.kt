@@ -51,6 +51,5 @@ class NetworkModule {
     fun providesDashboardApi(retrofitBuilder: Retrofit.Builder, okHttpClient: OkHttpClient): SecuredApi {
         return retrofitBuilder.client(okHttpClient).build().create(SecuredApi::class.java)
     }
-
-
+    
 }

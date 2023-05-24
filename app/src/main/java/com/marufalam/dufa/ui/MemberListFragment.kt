@@ -78,7 +78,7 @@ open class MemberListFragment :
 
         searchBYSelectedItem(SearchBy(null, null))
 
-        binding.searchET.onTextChanged {
+        binding.searchET.onTextChanged { it ->
             if (it.length >= 3) {
                 timer = Timer()
                 timer.schedule(
