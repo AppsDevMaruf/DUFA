@@ -6,6 +6,7 @@ plugins {
     id 'kotlin-parcelize'
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 
+
 }
 
 android {
@@ -48,10 +49,10 @@ android {
 }
 
 dependencies {
-    implementation "androidx.fragment:fragment-ktx:1.5.6"
-    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation "androidx.fragment:fragment-ktx:1.5.7"
+    implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'com.google.android.material:material:1.9.0'
     implementation 'com.miguelcatalan:materialsearchview:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
@@ -66,7 +67,7 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     //dialog
     implementation 'com.github.chnouman:AwesomeDialog:1.0.5'
-
+    implementation 'io.coil-kt:coil:2.4.0'
     //Camera Library
     def camerax_version = "1.2.1"
     implementation "androidx.camera:camera-core:${camerax_version}"
@@ -101,13 +102,13 @@ dependencies {
 
 
     def hilt_version = "2.44"
-    //noinspection GradleDependency
+
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
 
     def lifecycle_version = "2.5.0-beta01"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
-    //noinspection GradleDependency
+
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
 
 

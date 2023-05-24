@@ -1,9 +1,12 @@
 package com.marufalam.dufa
 
+
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.graphics.Color
 import android.location.Address
 import android.location.Geocoder
@@ -12,18 +15,25 @@ import android.location.LocationManager
 import android.net.Uri
 import android.provider.Settings
 import android.util.Log
+import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import coil.load
+import coil.transform.CircleCropTransformation
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.*
+import com.google.android.material.imageview.ShapeableImageView
 import com.marufalam.dufa.data.models.locations.ResponseUserLocation
 import com.marufalam.dufa.databinding.FragmentMapsBinding
 import com.marufalam.dufa.utils.*
 import com.marufalam.dufa.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import de.hdodenhof.circleimageview.CircleImageView
 import java.util.*
 
 
@@ -142,27 +152,33 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
             binding.progressBar.gone()
             when (it) {
                 is NetworkResult.Success -> {
+                    val userInfo = it.data?.user
                     markerList = it.data?.allMembers as ArrayList<ResponseUserLocation.AllMember>
-                    myGoogleMap?.clear()
                     myGoogleMap = googleMap
                     markerList.forEach { markerData ->
-                        markerData.latitude?.let { it1 -> markerData.longitude?.let { it2 ->
-                            LatLng(it1,
-                                it2
-                            )
-                        } }
+                        markerData.latitude?.let { it1 ->
+                            markerData.longitude?.let { it2 ->
+                                LatLng(
+                                    it1,
+                                    it2
+                                )
+                            }
+                        }
                             ?.let { it2 ->
                                 MarkerOptions()
                                     .position(it2)
                                     .anchor(0.5f, 0.5f)
                                     .title(markerData.name)
                                     .snippet(markerData.phone)
-                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+                                    .icon(bitmapDescriptorFromVector(R.drawable.baseline_location_on_24))
+
                             }?.let { it3 ->
                                 googleMap.addMarker(
                                     it3
                                 )
                             }
+                        userInfo?.latitude?.let { latitude -> lat = latitude }
+                        userInfo?.longitude?.let { longitude -> log = longitude }
                         googleMap.animateCamera(
                             CameraUpdateFactory.newLatLngZoom(
                                 LatLng(lat, log),
@@ -170,22 +186,54 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
                             )
                         )
 
+                        googleMap.setInfoWindowAdapter(object : GoogleMap.InfoWindowAdapter {
+                            override fun getInfoWindow(marker: Marker): View? {
+                                marker.title = marker.title
+                                marker.snippet = marker.snippet
+                                    //todo set Icon
+                                return null
+                            }
+
+                            @SuppressLint("MissingInflatedId")
+                            override fun getInfoContents(marker: Marker): View? {
+                                val v: View =
+                                    layoutInflater.inflate(R.layout.custom_info_window, null, false)
+                                val name = v.findViewById<TextView>(R.id.title)
+                                val phone = v.findViewById<TextView>(R.id.snippet)
+                                val profile =
+                                    v.findViewById<CircleImageView>(R.id.mapUserProfilePic)
+                                name.text = marker.title
+                                phone.text = marker.snippet
+                                if (markerData.imagePath != null && markerData.imagePath != "") {
+                                    val profileUrl = Constants.IMG_PREFIX + markerData.imagePath
+                                    profile.load(profileUrl) {
+                                        crossfade(true)
+                                        placeholder(R.drawable.avatar_placeholder)
+                                        transformations(CircleCropTransformation())
+                                    }
+                                }
+
+
+                                return v
+                            }
+                        })
+
+                        googleMap.setOnInfoWindowClickListener { info ->
+                            val dialIntent = Intent(Intent.ACTION_DIAL)
+                            dialIntent.data = Uri.parse("tel:" + info.snippet)
+                            requireActivity().startActivity(dialIntent)
+                        }
                         googleMap.addCircle(
                             CircleOptions()
                                 .center(LatLng(lat, log))
                                 .radius(10000.0)
+                                .strokeWidth(8F)
                                 .strokeColor(Color.BLUE)
                                 .fillColor(Color.TRANSPARENT)
                         )
                         googleMap.uiSettings.isZoomControlsEnabled
+                        googleMap.uiSettings.isZoomGesturesEnabled
 
-                        googleMap.setOnMarkerClickListener { _ ->
-                            val dialIntent = Intent(Intent.ACTION_DIAL)
-                            dialIntent.data = Uri.parse("tel:" + markerData.phone)
-                            requireActivity().startActivity(dialIntent)
-                            toast("Thanks ${markerData.name}")
-                            true
-                        }
 
                     }
 
@@ -201,14 +249,16 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
 
 
     }
-/*    private fun bitmapDescriptorFromVector( vectorResId: Int): BitmapDescriptor? {
+
+    private fun bitmapDescriptorFromVector(vectorResId: Int): BitmapDescriptor? {
         return ContextCompat.getDrawable(requireActivity(), vectorResId)?.run {
             setBounds(0, 0, intrinsicWidth, intrinsicHeight)
-            val bitmap = Bitmap.createBitmap(intrinsicWidth, intrinsicHeight, Bitmap.Config.ARGB_8888)
+            val bitmap =
+                Bitmap.createBitmap(intrinsicWidth, intrinsicHeight, Bitmap.Config.ARGB_8888)
             draw(Canvas(bitmap))
             BitmapDescriptorFactory.fromBitmap(bitmap)
         }
-    }*/
+    }
 
 
 }
