@@ -20,6 +20,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
 import com.bumptech.glide.Glide
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -33,6 +34,7 @@ import com.marufalam.dufa.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.coroutines.*
+import java.io.IOException
 import java.net.URL
 import java.util.*
 
@@ -144,6 +146,7 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
     }
 
 
+    @OptIn(DelicateCoroutinesApi::class)
     @SuppressLint("PotentialBehaviorOverride")
     override fun onMapReady(googleMap: GoogleMap) {
 
@@ -166,26 +169,51 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
                             ?.let { it2 ->
 
                                 if (markerData.imagePath != null && markerData.imagePath != "") {
-                                    val profileImg = IMG_PREFIX + markerData.imagePath
-                                    GlobalScope.launch {
-                                        delay(10000L)
-                                        googleMap.addMarker(
-                                            MarkerOptions()
-                                                .position(it2)
-                                                .anchor(0.5f, 0.5f)
-                                                .title(markerData.name)
-                                                .snippet(markerData.phone)
-                                                .icon(
-                                                    BitmapDescriptorFactory.fromBitmap(
-                                                        withContext(
-                                                            Dispatchers.IO
-                                                        ) {
-                                                            Glide.with(requireActivity()).asBitmap()
-                                                                .load(profileImg).submit().get()
-                                                        })
-                                                )
-                                        )
 
+
+                                    val bitmapLive = MutableLiveData<Bitmap>()
+
+
+
+
+
+                                    GlobalScope.launch {
+                                        val dispatcher = this.coroutineContext
+                                        CoroutineScope(dispatcher).launch {
+
+                                            withContext(Dispatchers.IO) {
+                                                val profileImg = IMG_PREFIX + markerData.imagePath
+
+                                                Log.i("TAG", "onMapReady: $profileImg")
+
+                                                val bit = Glide.with(requireActivity()).asBitmap()
+                                                    .load("https://t4.ftcdn.net/jpg/04/08/24/43/360_F_408244382_Ex6k7k8XYzTbiXLNJgIL8gssebpLLBZQ.jpg").submit().get()
+                                                bitmapLive.postValue(bit)
+
+                                            }
+
+                                            withContext(Dispatchers.Main){
+                                                bitmapLive.observe(viewLifecycleOwner) { bit ->
+
+                                                    googleMap.addMarker(
+                                                        MarkerOptions()
+                                                            .position(it2)
+                                                            .anchor(0.5f, 0.5f)
+                                                            .title(markerData.name)
+                                                            .snippet(markerData.phone)
+                                                            .icon(
+                                                                BitmapDescriptorFactory.fromBitmap(
+                                                                    bit
+                                                                )
+                                                            )
+                                                    )
+                                                }
+
+
+                                            }
+
+
+                                        }
                                     }
 
 
@@ -259,9 +287,11 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
                     }
 
                 }
+
                 is NetworkResult.Error -> {
 
                 }
+
                 is NetworkResult.Loading -> {
                     binding.progressBar.show()
                 }
