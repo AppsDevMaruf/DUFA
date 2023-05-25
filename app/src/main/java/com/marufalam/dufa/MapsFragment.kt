@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Canvas
 import android.graphics.Color
 import android.location.Address
 import android.location.Geocoder
@@ -19,6 +20,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -35,8 +37,6 @@ import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.coroutines.*
 import java.net.URL
 import java.util.*
-
-
 @AndroidEntryPoint
 class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
     private val mapsViewModel by viewModels<DashboardViewModel>()
@@ -164,32 +164,15 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
                             }
                         }
                             ?.let { it2 ->
+                                googleMap.addMarker(
+                                    MarkerOptions()
+                                        .position(it2)
+                                        .anchor(0.5f, 0.5f)
+                                        .title(markerData.name)
+                                        .snippet(markerData.phone)
+                                        .icon(bitmapDescriptorFromVector(R.drawable.baseline_location_on_24))
+                                )
 
-                                if (markerData.imagePath != null && markerData.imagePath != "") {
-                                    val profileImg = IMG_PREFIX + markerData.imagePath
-                                    GlobalScope.launch {
-                                        delay(10000L)
-                                        googleMap.addMarker(
-                                            MarkerOptions()
-                                                .position(it2)
-                                                .anchor(0.5f, 0.5f)
-                                                .title(markerData.name)
-                                                .snippet(markerData.phone)
-                                                .icon(
-                                                    BitmapDescriptorFactory.fromBitmap(
-                                                        withContext(
-                                                            Dispatchers.IO
-                                                        ) {
-                                                            Glide.with(requireActivity()).asBitmap()
-                                                                .load(profileImg).submit().get()
-                                                        })
-                                                )
-                                        )
-
-                                    }
-
-
-                                }
 
                             }
                         userInfo?.latitude?.let { latitude -> lat = latitude }
@@ -217,24 +200,8 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
                                     layoutInflater.inflate(R.layout.custom_info_window, null, false)
                                 val name = v.findViewById<TextView>(R.id.title)
                                 val phone = v.findViewById<TextView>(R.id.snippet)
-                                val profile =
-                                    v.findViewById<CircleImageView>(R.id.mapUserProfilePic)
                                 name.text = marker.title
                                 phone.text = marker.snippet
-                                /*if (markerData.imagePath != null && markerData.imagePath != "") {
-                                    val profileUrl = Constants.IMG_PREFIX + markerData.imagePath
-                                    profile.load(profileUrl) {
-                                        crossfade(true)
-                                        placeholder(R.drawable.avatar_placeholder)
-                                        transformations(CircleCropTransformation())
-                                    }
-                                }*/
-
-                                val photoUri =
-                                    "https://raw.githubusercontent.com/square/picasso/master/website/static/sample.png"
-                                Log.d("InfoWindowAdapter", "getInfoContents: $photoUri")
-
-
                                 return v
                             }
                         })
@@ -271,10 +238,13 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
 
     }
 
-    private fun bitmapDescriptorFromUrl(imgUrl: String, profileImg: ImageView): Bitmap {
-        Glide.with(requireActivity()).asBitmap().load(profileImg).submit().get()
-        val url = URL(imgUrl)
-        return BitmapFactory.decodeStream(url.openConnection().getInputStream())
+    private fun bitmapDescriptorFromVector( vectorResId: Int): BitmapDescriptor? {
+        return ContextCompat.getDrawable(requireActivity(), vectorResId)?.run {
+            setBounds(0, 0, intrinsicWidth, intrinsicHeight)
+            val bitmap = Bitmap.createBitmap(intrinsicWidth, intrinsicHeight, Bitmap.Config.ARGB_8888)
+            draw(Canvas(bitmap))
+            BitmapDescriptorFactory.fromBitmap(bitmap)
+        }
     }
 
 

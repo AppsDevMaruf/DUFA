@@ -47,7 +47,6 @@ interface SecuredApi {
     suspend fun getHalls(): Response<ResponseHalls>
 
     @GET("get-userinfo-profile")
-    //@Header("AUTHORIZATION") value: String
     suspend fun getProfileInfo(): Response<ResponseProfileInfo>
 
     @POST("search")

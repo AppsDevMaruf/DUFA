@@ -71,7 +71,7 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
                     //Log.i("TAG1", "binObserver: ${it.data!!.message.toString()}")
                 }
                 is NetworkResult.Loading -> {
-                    // progressBar.isVisible = true
+                  // progressBar.isVisible = true
 
                 }
                 is NetworkResult.Success -> {

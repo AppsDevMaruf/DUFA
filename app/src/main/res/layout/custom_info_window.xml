@@ -4,26 +4,14 @@
 
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/mapUserProfilePic"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        app:strokeWidth="2dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:strokeColor="@color/white"
-        app:shapeAppearanceOverlay="@style/ShapeAppearance.Image.PILL"
-        android:src="@drawable/avatar_placeholder"
- />
+
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="@+id/mapUserProfilePic"
-        app:layout_constraintStart_toEndOf="@+id/mapUserProfilePic"
-        app:layout_constraintTop_toTopOf="@id/mapUserProfilePic">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/title"

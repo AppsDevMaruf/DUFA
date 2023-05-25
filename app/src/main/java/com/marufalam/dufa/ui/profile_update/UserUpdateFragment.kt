@@ -92,6 +92,7 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
     }
 
 
+
     override fun setupNavigation() {
 
 
@@ -142,7 +143,6 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
 
         }
 
-
         binding.updateBtn.setOnClickListener {
 
             val request = RequestProfileUpdate(
@@ -158,21 +158,12 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
                 binding.hallTypeText.text.toString(),
                 binding.nid.text.toString()
             )
-
             dialog.setCancelable(false)
             dialog.show()
-
-
-
             try {
                 CoroutineScope(Dispatchers.IO).launch {
-
-
-                    dashboardViewModel.updateProfileVM(1384, requestProfileUpdate = request)
-
+                    dashboardViewModel.updateProfileVM(userid, requestProfileUpdate = request)
                 }
-
-
             } catch (e: Exception) {
 
                 Log.i("TAG", "setupNavigation: ${e.message} ")
@@ -318,9 +309,7 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
 
     override fun configUi() {
         permissionsRequest = getPermissionsRequest()
-
-
-
+        dashboardViewModel.profileInfoVM()
         dashboardViewModel.occupationsVM()
         dashboardViewModel.districtVM()
         dashboardViewModel.hallsVM()
