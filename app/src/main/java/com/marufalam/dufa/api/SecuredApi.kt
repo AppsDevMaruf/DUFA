@@ -1,6 +1,6 @@
 package com.marufalam.dufa.api
 
-import com.marufalam.dufa.data.models.dashboard.ResponseAllMember
+import com.marufalam.dufa.data.models.dashboard.all_member.ResponseAllMember
 import com.marufalam.dufa.data.models.dashboard.dasboard_info.ResponseDashboardInfo
 import com.marufalam.dufa.data.models.getProfileInfo.ResponseProfileInfo
 import com.marufalam.dufa.data.models.get_departments.ResponseDepartments
@@ -17,8 +17,8 @@ import com.marufalam.dufa.data.models.search.ResponseSearch
 import com.marufalam.dufa.data.models.search.blood.ResponseBloodGroup
 import com.marufalam.dufa.data.models.transaction_history.TransHistory
 import com.marufalam.dufa.data.models.upload_profile_pic.ResponseUploadProfilePic
-import com.marufalam.dufa.data.models.vouchers.ResponseVoucherUpload
 import com.marufalam.dufa.data.models.vouchers.ResponseVoucherList
+import com.marufalam.dufa.data.models.vouchers.ResponseVoucherUpload
 import com.marufalam.dufa.ui.profile_update.RequestProfileUpdate
 import okhttp3.MultipartBody
 import okhttp3.RequestBody

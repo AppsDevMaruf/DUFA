@@ -73,6 +73,10 @@ class SearchItemAdapter(var seaSearchByListener: SearchByListener, var type: Str
                     holder.binding.searchByItemTv.text = it.name
                     holder.binding.itemIcon.setImageResource(R.drawable.department)
 
+                }
+                "Hall" -> {
+                    holder.binding.searchByItemTv.text = it.name
+                    holder.binding.itemIcon.setImageResource(R.drawable.hall)
 
                 }
 

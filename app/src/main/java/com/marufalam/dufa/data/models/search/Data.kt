@@ -40,6 +40,10 @@ data class Data(
     val phone: String?,
     @SerializedName("status")
     val status: String?,
+    @SerializedName("latitude")
+    val latitude: Double?,
+    @SerializedName("longitude")
+    val longitude: Double?,
     @SerializedName("subscription")
     val subscription: String?,
     @SerializedName("updated_at")

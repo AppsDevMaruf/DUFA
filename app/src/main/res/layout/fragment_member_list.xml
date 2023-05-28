@@ -92,6 +92,8 @@
             android:drawableStart="@drawable/ic_search"
             android:drawablePadding="10dp"
             android:hint="@string/name_or_email"
+            android:maxLines="1"
+            android:inputType="text"
             android:imeOptions="actionSearch"
             android:paddingStart="16dp"
             android:textColor="@color/text_black"

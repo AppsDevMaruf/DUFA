@@ -6,10 +6,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.marufalam.dufa.data.models.dashboard.Allmember
+import com.marufalam.dufa.data.models.dashboard.all_member.ResponseAllMember
 import com.marufalam.dufa.databinding.MemberListRowBinding
 
-class MemberListAdapter(var context: Context, var data: MutableList<Allmember>) :
+class MemberListAdapter(var context: Context, var data: MutableList<ResponseAllMember.Data.Member>) :
     RecyclerView.Adapter<MemberListAdapter.MemberListViewHolder>() {
 
 
@@ -23,7 +23,7 @@ class MemberListAdapter(var context: Context, var data: MutableList<Allmember>) 
     }
 
     // method for filtering our recyclerview items.
-    fun filterList(filterList: ArrayList<Allmember>) {
+    fun filterList(filterList: ArrayList<ResponseAllMember.Data.Member>) {
         // below line is to add our filtered
         // list in our course array list.
         data = filterList
@@ -55,17 +55,17 @@ class MemberListAdapter(var context: Context, var data: MutableList<Allmember>) 
 
     companion object {
         private val Comparator =
-            object : DiffUtil.ItemCallback<Allmember>() {
+            object : DiffUtil.ItemCallback<ResponseAllMember.Data.Member>() {
                 override fun areItemsTheSame(
-                    oldItem: Allmember,
-                    newItem: Allmember
+                    oldItem: ResponseAllMember.Data.Member,
+                    newItem: ResponseAllMember.Data.Member
                 ): Boolean {
                     return oldItem.id == newItem.id
                 }
 
                 override fun areContentsTheSame(
-                    oldItem: Allmember,
-                    newItem: Allmember
+                    oldItem: ResponseAllMember.Data.Member,
+                    newItem: ResponseAllMember.Data.Member
                 ): Boolean {
                     return oldItem == newItem
                 }

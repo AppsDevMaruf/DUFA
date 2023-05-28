@@ -15,6 +15,7 @@ import com.marufalam.dufa.BaseFragment
 import com.marufalam.dufa.R
 import com.marufalam.dufa.adapter.SearchMemberListAdapter
 import com.marufalam.dufa.data.models.SearchBy
+import com.marufalam.dufa.data.models.get_districts.District
 import com.marufalam.dufa.data.models.search.Data
 import com.marufalam.dufa.data.models.search.RequestSearch
 import com.marufalam.dufa.databinding.FragmentMemberListBinding
@@ -84,8 +85,7 @@ open class MemberListFragment :
                 timer.schedule(
                     object : TimerTask() {
                         override fun run() {
-                            requestSearch = RequestSearch(null, null, null, null, null, it, 0)
-
+                            requestSearch = RequestSearch(null, null, null, null, null, it, null,0)
                             dashboardViewModel.getMemberSearchVMLD(requestSearch)
                             GlobalScope.launch(Dispatchers.Main) {
                                 dashboardViewModel.getMemberSearchVMLD(requestSearch).observe(
@@ -166,6 +166,17 @@ open class MemberListFragment :
 
             bottomSheetDialog.dismiss()
         }
+        bottomSheetDialog.findViewById<LinearLayout>(R.id.hallBtn)!!.setOnClickListener {
+            binding.titleText.text = it.tag.toString()
+            binding.filterTypeIcon.setImageResource(R.drawable.hall)
+            binding.titleText.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
+            type = it.tag.toString()
+            dashboardViewModel.hallsVM()
+            hasData = false
+            searchItemAdapter = SearchItemAdapter(this, type)
+
+            bottomSheetDialog.dismiss()
+        }
         bottomSheetDialog.findViewById<LinearLayout>(R.id.dobBtn)!!.setOnClickListener {
             binding.titleText.text = it.tag.toString()
             binding.filterTypeIcon.setImageResource(R.drawable.birthday)
@@ -174,10 +185,8 @@ open class MemberListFragment :
             binding.dobTV.show()
             hasData = false
             searchItemAdapter = SearchItemAdapter(this, type)
-
             bottomSheetDialog.dismiss()
         }
-
 
 
         bottomSheetDialog.show()
@@ -208,8 +217,7 @@ open class MemberListFragment :
         binding.dobTV.setOnClickListener {
             datePickerFun {
                 binding.dobTV.text = it
-
-                requestSearch = RequestSearch(it, null, null, null, null, null, 0)
+                requestSearch = RequestSearch(it, null, null, null, null, null,hall = null, 0)
                 Log.i("TAG", "requestSearch: $requestSearch")
                 dashboardViewModel.getMemberSearchVMLD(requestSearch).observe(viewLifecycleOwner) {
                     searchAdapter.submitData(lifecycle, it)
@@ -228,13 +236,11 @@ open class MemberListFragment :
                 is NetworkResult.Success -> {
                     itemsBy.clear()
 
-                    it.data?.departments?.forEach { departments ->
-                        val searchBy: SearchBy = SearchBy("", departments?.name.toString())
+                    it.data?.departments?.sortedBy { department ->department?.name}?.forEach { departments ->
+                        val searchBy = SearchBy("", departments?.name.toString())
 
                         itemsBy.add(searchBy)
                     }
-
-                    Log.i("TAG", "departments: $itemsBy ")
 
                     searchItemAdapter.submitList(itemsBy)
                     hasData = true
@@ -250,15 +256,15 @@ open class MemberListFragment :
                 is NetworkResult.Success -> {
                     itemsBy.clear()
 
-                    it.data?.bloodgroups?.forEach { bloodGroup ->
-                        val searchBy: SearchBy = SearchBy("", bloodGroup?.name.toString())
+                    it.data?.bloodgroups?.sortedBy { bloodgroup ->bloodgroup?.name }?.forEach { bloodGroup ->
+                        val searchBy = SearchBy("", bloodGroup?.name.toString())
 
                         itemsBy.add(searchBy)
                     }
 
                     searchItemAdapter.submitList(itemsBy)
                     hasData = true
-                    Log.i("TAG", "departments: $itemsBy ")
+
                     showBottomSheetFilterItemType()
                 }
             }
@@ -269,16 +275,15 @@ open class MemberListFragment :
                 is NetworkResult.Loading -> {}
                 is NetworkResult.Success -> {
                     itemsBy.clear()
-
-                    it.data?.districts?.forEach { districts ->
-                        val searchBy: SearchBy = SearchBy("", districts.name)
+                    it.data?.districts?.sortedBy { district ->  district.name}?.forEach { districts ->
+                        val searchBy = SearchBy("", districts.name)
 
                         itemsBy.add(searchBy)
                     }
 
                     searchItemAdapter.submitList(itemsBy)
                     hasData = true
-                    Log.i("TAG", "departments: $itemsBy ")
+
                     showBottomSheetFilterItemType()
                 }
             }
@@ -290,15 +295,33 @@ open class MemberListFragment :
                 is NetworkResult.Success -> {
                     itemsBy.clear()
 
-                    it.data?.occupations?.forEach { occupations ->
-                        val searchBy: SearchBy = SearchBy("", occupations.name)
+                    it.data?.occupations?.sortedBy { occupation ->occupation.name}?.forEach { occupations ->
+                        val searchBy = SearchBy("", occupations.name)
 
                         itemsBy.add(searchBy)
                     }
 
                     searchItemAdapter.submitList(itemsBy)
                     hasData = true
-                    Log.i("TAG", "departments: $itemsBy ")
+
+                    showBottomSheetFilterItemType()
+                }
+            }
+        }
+        dashboardViewModel.hallsVMLD.observe(viewLifecycleOwner) {
+            when (it) {
+                is NetworkResult.Error -> {}
+                is NetworkResult.Loading -> {}
+                is NetworkResult.Success -> {
+                    itemsBy.clear()
+
+                    it.data?.halls?.sortedBy { hall -> hall?.name }?.forEach { occupations ->
+                        val searchBy = SearchBy("", occupations?.name)
+                        itemsBy.add(searchBy)
+                    }
+
+                    searchItemAdapter.submitList(itemsBy)
+                    hasData = true
                     showBottomSheetFilterItemType()
                 }
             }
@@ -317,7 +340,7 @@ open class MemberListFragment :
 
         bottomSheetDialogSearchItem.dismiss()
 
-        binding.titleText.text = "${binding.titleText.text}  ${searchBy.name ?: ""}"
+        binding.titleText.text = "${binding.titleText.text}: ${searchBy.name ?: ""}"
 
         searchItemAdapter = SearchItemAdapter(this, type)
         Log.i("type", "type: $type")
@@ -326,19 +349,22 @@ open class MemberListFragment :
         val requestSearch =
             when (type) {
                 "Blood Group" -> {
-                    RequestSearch(null, searchBy.name, null, null, null, null, 0)
+                    RequestSearch(null, searchBy.name, null, null, null, null, hall = null,0)
                 }
                 "District" -> {
-                    RequestSearch(null, null, null, searchBy.name, null, null, 0)
+                    RequestSearch(null, null, null, searchBy.name, null, null, hall = null,0)
                 }
                 "Occupation" -> {
-                    RequestSearch(null, null, null, null, searchBy.name, null, 0)
+                    RequestSearch(null, null, null, null, searchBy.name, null,hall = null, 0)
                 }
                 "Department" -> {
-                    RequestSearch(null, null, searchBy.name, null, null, null, 0)
+                    RequestSearch(null, null, searchBy.name, null, null, null,hall = null, 0)
+                }
+                "Hall" -> {
+                    RequestSearch(null, null, searchBy.name, null, null, null,hall = searchBy.name, 0)
                 }
                 else -> {
-                    RequestSearch(null, null, null, null, null, null, 0)
+                    RequestSearch(null, null, null, null, null, null,hall = null, 0)
                 }
             }
 

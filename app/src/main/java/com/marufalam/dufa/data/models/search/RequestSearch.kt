@@ -1,6 +1,4 @@
 package com.marufalam.dufa.data.models.search
-
-
 import com.google.gson.annotations.SerializedName
 
 data class RequestSearch(
@@ -16,6 +14,8 @@ data class RequestSearch(
     val occupation: String?,
     @SerializedName("search")
     val search: String?,
+    @SerializedName("hall")
+    val hall: String?,
     @SerializedName("page")
     val page: Int?
 )

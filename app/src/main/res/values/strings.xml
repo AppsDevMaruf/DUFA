@@ -28,6 +28,12 @@
     <string name="bkash">BKASH</string>
     <string name="yearly_fee">yearly_fee</string>
     <string name="map_api_key">AIzaSyC0m-NtpWucyNalAxy893so6dbNwerckOM</string>
+    <string name="date_of_birth">Date of Birth</string>
+    <string name="hall">Hall</string>
+    <string name="occupation">Occupation</string>
+    <string name="district">District</string>
+    <string name="blood_group">Blood Group</string>
+    <string name="department">Department</string>
     <string-array name="paymentsType">
         <item>Registration Fee</item>
         <item>One Time Fee</item>

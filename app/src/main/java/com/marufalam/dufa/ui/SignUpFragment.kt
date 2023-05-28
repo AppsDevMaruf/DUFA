@@ -1,17 +1,14 @@
 package com.marufalam.dufa.ui
 
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.marufalam.dufa.R
-import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.marufalam.dufa.databinding.FragmentSignUpBinding
 import com.marufalam.dufa.BaseFragment
+import com.marufalam.dufa.R
 import com.marufalam.dufa.data.models.register.RequestRegister
+import com.marufalam.dufa.databinding.FragmentSignUpBinding
 import com.marufalam.dufa.utils.*
 import com.marufalam.dufa.viewmodel.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,194 +32,122 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
 
     override fun configUi() {
 
-        binding.nameEt.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        binding.nameEt.onTextChanged {
+            if (it.trim().isEmpty()) {
+                hasName = false
+                binding.nameEt.error = "Name is required"
+                enableBtn(false, binding.signUpBtn)
+            } else {
+                hasName = true
+                if (hasName && hasEmail && hasPhone && hasAddress && hasPassword && hasConfirmPass) {
 
-            }
 
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                if (p0.toString().trim().isEmpty()) {
-                    hasName = false
-                    binding.nameEt.error = "Name is required"
-                    enableBtn(false, binding.signUpBtn)
+                    enableBtn(true, binding.signUpBtn)
+
                 } else {
-                    hasName = true
-                    if (hasName && hasEmail && hasPhone && hasAddress && hasPassword && hasConfirmPass) {
 
-
-                        enableBtn(true, binding.signUpBtn)
-
-                    } else {
-
-                        enableBtn(false, binding.signUpBtn)
-                    }
-                }
-
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-
-            }
-
-        })
-        binding.emailEt.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                if (p0.toString().trim().isEmpty()) {
-                    hasEmail = false
-                    binding.emailEt.error = "Email is required"
                     enableBtn(false, binding.signUpBtn)
-                } else {
-                    isValidEmail(p0.toString().trim())
-                    hasEmail = true
-                    if (hasName && hasEmail && hasPhone && hasAddress && hasPassword && hasConfirmPass) {
-
-
-                        enableBtn(true, binding.signUpBtn)
-
-                    } else {
-
-                        enableBtn(false, binding.signUpBtn)
-                    }
-                }
-
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-
-            }
-
-        })
-        binding.contactEt.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                if (p0.toString().trim().isEmpty()) {
-                    hasPhone = false
-                    binding.contactEt.error = "Contract Number is required"
-                    enableBtn(false, binding.signUpBtn)
-                } else {
-                    hasPhone = true
-                    if (hasName && hasEmail && hasPhone && hasAddress && hasPassword && hasConfirmPass) {
-
-
-                        enableBtn(true, binding.signUpBtn)
-
-                    } else {
-
-                        enableBtn(false, binding.signUpBtn)
-                    }
-                }
-
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-
-            }
-
-        })
-        binding.addressEt.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                if (p0.toString().trim().isEmpty()) {
-                    hasAddress = false
-                    binding.addressEt.error = "Address is required"
-                    enableBtn(false, binding.signUpBtn)
-                } else {
-                    hasAddress = true
-                    if (hasName && hasEmail && hasPhone && hasAddress && hasPassword && hasConfirmPass) {
-
-
-                        enableBtn(true, binding.signUpBtn)
-
-                    } else {
-
-                        enableBtn(false, binding.signUpBtn)
-                    }
-                }
-
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-
-            }
-
-        })
-        binding.passwordInput.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (s.toString().trim().isEmpty()) {
-                    hasPassword = false
-                    binding.addressEt.error = "Password is required"
-                    enableBtn(false, binding.signUpBtn)
-                } else {
-                    validatePassWord(s.toString().trim())
-                    hasPassword = true
-                    if (hasName && hasEmail && hasPhone && hasAddress && hasPassword && hasConfirmPass) {
-
-
-                        enableBtn(true, binding.signUpBtn)
-
-                    } else {
-
-                        enableBtn(false, binding.signUpBtn)
-                    }
                 }
             }
+        }
+        binding.emailEt.onTextChanged {
+            if (it.trim().isEmpty()) {
+                hasEmail = false
+                binding.emailEt.error = "Email is required"
+                enableBtn(false, binding.signUpBtn)
+            } else {
+                isValidEmail(it.trim())
+                hasEmail = true
+                if (hasName && hasEmail && hasPhone && hasAddress && hasPassword && hasConfirmPass) {
 
-            override fun afterTextChanged(s: Editable?) {
 
-            }
+                    enableBtn(true, binding.signUpBtn)
 
-
-        })
-        binding.confPassword.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                if (p0.toString().trim().isEmpty()) {
-                    hasConfirmPass = false
-                    binding.confPassword.error = "Confirm Password Required"
-                    enableBtn(false, binding.signUpBtn)
                 } else {
-                    enableBtn(
-                        isPasswordMatch(
-                            binding.passwordInput.toString().trim(),
-                            binding.confPassword.toString().trim()
-                        ), binding.signUpBtn
-                    )
-                    hasConfirmPass = true
-                    if (hasName && hasEmail && hasPhone && hasAddress && hasPassword && hasConfirmPass) {
 
-
-                        enableBtn(true, binding.signUpBtn)
-
-                    } else {
-
-                        enableBtn(false, binding.signUpBtn)
-                    }
+                    enableBtn(false, binding.signUpBtn)
                 }
-
             }
+        }
+        binding.contactEt.onTextChanged {
+            if (it.trim().isEmpty()) {
+                hasPhone = false
+                binding.contactEt.error = "Contract Number is required"
+                enableBtn(false, binding.signUpBtn)
+            } else {
+                hasPhone = true
+                if (hasName && hasEmail && hasPhone && hasAddress && hasPassword && hasConfirmPass) {
 
-            override fun afterTextChanged(p0: Editable?) {
 
+                    enableBtn(true, binding.signUpBtn)
+
+                } else {
+
+                    enableBtn(false, binding.signUpBtn)
+                }
             }
+        }
+        binding.addressEt.onTextChanged {
+            if (it.trim().isEmpty()) {
+                hasAddress = false
+                binding.addressEt.error = "Address is required"
+                enableBtn(false, binding.signUpBtn)
+            } else {
+                hasAddress = true
+                if (hasName && hasEmail && hasPhone && hasAddress && hasPassword && hasConfirmPass) {
 
-        })
+
+                    enableBtn(true, binding.signUpBtn)
+
+                } else {
+
+                    enableBtn(false, binding.signUpBtn)
+                }
+            }
+        }
+        binding.passwordInput.onTextChanged {
+            if (it.trim().isEmpty()) {
+                hasPassword = false
+                binding.addressEt.error = "Password is required"
+                enableBtn(false, binding.signUpBtn)
+            } else {
+                validatePassWord(it.trim())
+                hasPassword = true
+                if (hasName && hasEmail && hasPhone && hasAddress && hasPassword && hasConfirmPass) {
+
+
+                    enableBtn(true, binding.signUpBtn)
+
+                } else {
+
+                    enableBtn(false, binding.signUpBtn)
+                }
+            }
+        }
+        binding.confPassword.onTextChanged {
+            if (it.trim().isEmpty()) {
+                hasConfirmPass = false
+                binding.confPassword.error = "Confirm Password Required"
+                enableBtn(false, binding.signUpBtn)
+            } else {
+                enableBtn(
+                    isPasswordMatch(
+                        binding.passwordInput.toString().trim(),
+                        binding.confPassword.toString().trim()
+                    ), binding.signUpBtn
+                )
+                hasConfirmPass = true
+                if (hasName && hasEmail && hasPhone && hasAddress && hasPassword && hasConfirmPass) {
+
+
+                    enableBtn(true, binding.signUpBtn)
+
+                } else {
+
+                    enableBtn(false, binding.signUpBtn)
+                }
+            }
+        }
 
 
 
@@ -331,7 +256,7 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
 
     override fun binObserver() {
         authViewModel.registerResponseLiveDataVM.observe(viewLifecycleOwner, Observer {
-            binding.progressBar.isVisible = false
+            binding.progressBar.gone()
             when (it) {
                 is NetworkResult.Success -> {
 
@@ -344,7 +269,7 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
                     binding.signupErrorText.text = it.message
                 }
                 is NetworkResult.Loading -> {
-                    binding.progressBar.isVisible = true
+                    binding.progressBar.show()
 
                 }
             }

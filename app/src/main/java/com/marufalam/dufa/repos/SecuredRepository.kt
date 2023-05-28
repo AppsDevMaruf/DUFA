@@ -7,14 +7,13 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.liveData
 import com.marufalam.dufa.api.SecuredApi
-import com.marufalam.dufa.data.models.dashboard.ResponseAllMember
+import com.marufalam.dufa.data.models.dashboard.all_member.ResponseAllMember
 import com.marufalam.dufa.data.models.get_departments.ResponseDepartments
 import com.marufalam.dufa.data.models.locations.RequestSetCLocation
 import com.marufalam.dufa.data.models.payRenew.RequestPayRenew
 import com.marufalam.dufa.data.models.search.RequestSearch
 import com.marufalam.dufa.data.models.search.blood.ResponseBloodGroup
 import com.marufalam.dufa.data.models.transaction_history.TransHistory
-import com.marufalam.dufa.data.models.vouchers.RequestVoucher
 import com.marufalam.dufa.data.models.vouchers.ResponseVoucherList
 import com.marufalam.dufa.paging.MemberSearchPagingSource
 import com.marufalam.dufa.ui.profile_update.RequestProfileUpdate
@@ -23,7 +22,6 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import org.json.JSONObject
 import retrofit2.Response
-import retrofit2.http.Part
 import javax.inject.Inject
 
 class SecuredRepository @Inject constructor(private val securedApi: SecuredApi) {

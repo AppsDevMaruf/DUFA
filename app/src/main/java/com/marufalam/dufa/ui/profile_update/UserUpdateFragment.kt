@@ -323,12 +323,12 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
 
             binding.address.setText(userInfo.address)
             binding.nid.setText(userInfo.nid)
-            binding.genderTypeText.setText(userInfo.gender)
+            binding.genderTypeText.text = userInfo.gender
             binding.birthdate.text = userInfo.birthdate
-            binding.departmentTypeText.setText(userInfo.department)
-            binding.hallTypeText.setText(userInfo.hall)
-            binding.occupationTypeText.setText(userInfo.occupation)
-            binding.bloodGroupTypeText.setText(userInfo.bloodgroup)
+            binding.departmentTypeText.text = userInfo.department
+            binding.hallTypeText.text = userInfo.hall
+            binding.occupationTypeText.text = userInfo.occupation
+            binding.bloodGroupTypeText.text = userInfo.bloodgroup
             binding.bloodGroupTypeText.setTextColor(
                 ContextCompat.getColor(
                     requireActivity(),
@@ -336,7 +336,7 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
                 )
             )
 
-            binding.districtTypeText.setText(userInfo.district)
+            binding.districtTypeText.text = userInfo.district
 
 //            if (userInfo.subscription == "none") {
 //                binding. status.text = "Inactive"
@@ -416,7 +416,6 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
             when (it) {
                 is NetworkResult.Error -> {
                     dialog.dismiss()
-
                     Log.i("TAG", "Error: ${it.data.toString()}")
 
                 }
@@ -432,7 +431,6 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
                     Log.i("TAG", "data: ${it.data?.message}")
 
                     //   it.data?.let { it1 -> toast(it1.message) }
-
 
                 }
             }
