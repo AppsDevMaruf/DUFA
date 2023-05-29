@@ -57,6 +57,9 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
         binding.mapCard.setOnClickListener {
             findNavController().navigate(R.id.action_DashboardFragment_to_mapsFragment)
         }
+        binding.fundCollectionCard.setOnClickListener {
+            findNavController().navigate(R.id.action_DashboardFragment_to_fundCollectionFragment)
+        }
 
 
     }

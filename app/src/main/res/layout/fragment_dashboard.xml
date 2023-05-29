@@ -150,7 +150,7 @@
                                     android:layout_marginTop="10dp"
                                     android:layout_marginEnd="10dp"
                                     android:scaleType="centerInside"
-                                    android:src="@drawable/income" />
+                                    android:src="@drawable/atm_card" />
 
                                 <TextView
                                     android:id="@+id/totalDues"
@@ -380,13 +380,13 @@
                         </androidx.cardview.widget.CardView>
 
                         <androidx.cardview.widget.CardView
-                            android:id="@+id/event"
+                            android:id="@+id/fundCollectionCard"
                             android:layout_width="166dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
                             android:layout_weight="1"
                             android:padding="@dimen/_8sdp"
-                            android:visibility="invisible"
+                            android:visibility="visible"
                             app:cardBackgroundColor="@color/white"
                             app:cardCornerRadius="10dp"
                             app:cardElevation="5dp"
@@ -406,7 +406,7 @@
                                     android:layout_marginTop="10dp"
                                     android:layout_marginEnd="10dp"
                                     android:scaleType="centerInside"
-                                    android:src="@drawable/event" />
+                                    android:src="@drawable/income" />
 
                                 <TextView
                                     android:layout_width="match_parent"
@@ -428,7 +428,7 @@
                                     android:letterSpacing="0.02"
                                     android:lineSpacingExtra="1sp"
                                     android:padding="5dp"
-                                    android:text="Event"
+                                    android:text="Fund Collection"
                                     android:textColor="@color/text_gray"
                                     android:textSize="14sp" />
 

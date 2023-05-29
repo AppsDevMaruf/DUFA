@@ -1,4 +1,4 @@
-package com.marufalam.dufa
+package com.marufalam.dufa.ui
 
 import android.app.Dialog
 import android.app.ProgressDialog
@@ -14,6 +14,8 @@ import com.canhub.cropper.CropImage
 import com.canhub.cropper.CropImageContract
 import com.canhub.cropper.CropImageContractOptions
 import com.canhub.cropper.CropImageOptions
+import com.marufalam.dufa.BaseFragment
+import com.marufalam.dufa.R
 import com.marufalam.dufa.data.models.vouchers.RequestVoucher
 import com.marufalam.dufa.databinding.FragmentVoucherBinding
 import com.marufalam.dufa.utils.*
@@ -23,11 +25,9 @@ import id.zelory.compressor.Compressor
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 import java.io.FileOutputStream

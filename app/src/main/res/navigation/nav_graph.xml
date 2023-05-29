@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_DashboardFragment_to_mapsFragment"
             app:destination="@id/mapsFragment" />
+        <action
+            android:id="@+id/action_DashboardFragment_to_fundCollectionFragment"
+            app:destination="@id/fundCollectionFragment" />
 
     </fragment>
     <fragment
@@ -137,7 +140,7 @@
         tools:layout="@layout/fragment_payment_failled"/>
     <fragment
         android:id="@+id/voucherFragment"
-        android:name="com.marufalam.dufa.VoucherFragment"
+        android:name="com.marufalam.dufa.ui.VoucherFragment"
         android:label="fragment_voucher"
         tools:layout="@layout/fragment_voucher" />
     <fragment
@@ -151,12 +154,13 @@
     </fragment>
     <fragment
         android:id="@+id/mapsFragment"
-        android:name="com.marufalam.dufa.MapsFragment"
+        android:name="com.marufalam.dufa.ui.MapsFragment"
         android:label="fragment_maps"
         tools:layout="@layout/fragment_maps" />
     <fragment
-        android:id="@+id/getLocationFragment"
-        android:name="com.marufalam.dufa.GetLocationFragment"
-        android:label="GetLocationFragment" />
+        android:id="@+id/fundCollectionFragment"
+        android:name="com.marufalam.dufa.FundCollectionFragment"
+        android:label="fragment_fund_collection"
+        tools:layout="@layout/fragment_fund_collection" />
 
 </navigation>

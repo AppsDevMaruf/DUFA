@@ -22,8 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_8sdp"
-            android:orientation="vertical"
-            tools:context=".ui.dues_payment.DuesPaymentFragment">
+            android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
                 android:visibility="gone"
@@ -63,7 +62,7 @@
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/continue1000Payment"
-                        android:layout_width="@dimen/_150sdp"
+                        android:layout_width="wrap_content"
                         android:layout_height="@dimen/_30sdp"
                         android:background="@drawable/btn_enable"
                         android:includeFontPadding="false"
@@ -184,11 +183,11 @@
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatButton
-
             android:id="@+id/showHistory"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/_30sdp"
             android:layout_margin="@dimen/_50sdp"
+            android:minHeight="40dp"
             android:background="@drawable/btn_enable"
             android:includeFontPadding="false"
             android:text="Show History"
