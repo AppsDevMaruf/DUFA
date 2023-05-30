@@ -2,6 +2,7 @@ package com.marufalam.dufa.api
 
 import com.marufalam.dufa.data.models.dashboard.all_member.ResponseAllMember
 import com.marufalam.dufa.data.models.dashboard.dasboard_info.ResponseDashboardInfo
+import com.marufalam.dufa.data.models.fund_collection.RequestFundCollection
 import com.marufalam.dufa.data.models.getProfileInfo.ResponseProfileInfo
 import com.marufalam.dufa.data.models.get_departments.ResponseDepartments
 import com.marufalam.dufa.data.models.get_districts.ResponseDistrict
@@ -71,7 +72,8 @@ interface SecuredApi {
     @POST("pay-renew")
     fun payRenew(@Body renew: RequestPayRenew): Call<ResponseBody>
 
-
+    @POST("fund-payment")
+    fun fundPayment(@Body fund: RequestFundCollection): Call<ResponseBody>
     @POST("details-profile-update/{userID}")
     suspend fun updateProfile(
         @Path("userID") userId: Int,

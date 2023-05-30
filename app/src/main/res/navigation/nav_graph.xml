@@ -161,6 +161,10 @@
         android:id="@+id/fundCollectionFragment"
         android:name="com.marufalam.dufa.FundCollectionFragment"
         android:label="fragment_fund_collection"
-        tools:layout="@layout/fragment_fund_collection" />
+        tools:layout="@layout/fragment_fund_collection" >
+        <action
+            android:id="@+id/action_fundCollectionFragment_to_SSLFragment"
+            app:destination="@id/SSLFragment" />
+    </fragment>
 
 </navigation>

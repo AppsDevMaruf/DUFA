@@ -90,8 +90,7 @@ class DuesPaymentFragment : BaseFragment<FragmentDuesPaymentBinding>() {
 
                 }
                 is NetworkResult.Success -> {
-
-
+                    Log.i("TAG", "payRenew: ${it.data.toString()}")
                     dashboardViewModel.savePaymentUrl(it.data.toString())
                     findNavController().navigate(R.id.action_duesPaymentFragment_to_SSLFragment)
 

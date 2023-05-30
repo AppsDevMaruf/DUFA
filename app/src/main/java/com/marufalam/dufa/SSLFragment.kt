@@ -113,8 +113,6 @@ class SSLFragment : BaseFragment<FragmentSSLBinding>() {
     override fun binObserver() {
 
         dashboardViewModel.paymentUrl.observe(viewLifecycleOwner) {
-
-
             loadWeb(it)
 
         }

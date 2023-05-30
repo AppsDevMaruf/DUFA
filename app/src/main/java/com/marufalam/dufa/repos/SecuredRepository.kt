@@ -8,6 +8,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.liveData
 import com.marufalam.dufa.api.SecuredApi
 import com.marufalam.dufa.data.models.dashboard.all_member.ResponseAllMember
+import com.marufalam.dufa.data.models.fund_collection.RequestFundCollection
 import com.marufalam.dufa.data.models.get_departments.ResponseDepartments
 import com.marufalam.dufa.data.models.locations.RequestSetCLocation
 import com.marufalam.dufa.data.models.payRenew.RequestPayRenew
@@ -263,6 +264,7 @@ class SecuredRepository @Inject constructor(private val securedApi: SecuredApi) 
 
 
     fun payRenew(requestPayRenew: RequestPayRenew) = securedApi.payRenew(requestPayRenew)
+    fun fundCollection(fund: RequestFundCollection) = securedApi.fundPayment(fund)
 
     suspend fun setCurrentLocation( requestSetCLocation: RequestSetCLocation) = securedApi.setCurrentLocations(requestSetCLocation)
 

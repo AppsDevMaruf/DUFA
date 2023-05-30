@@ -11,6 +11,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.marufalam.dufa.data.models.dashboard.dasboard_info.ResponseDashboardInfo
+import com.marufalam.dufa.data.models.fund_collection.RequestFundCollection
 import com.marufalam.dufa.data.models.getProfileInfo.ResponseProfileInfo
 import com.marufalam.dufa.data.models.get_districts.ResponseDistrict
 import com.marufalam.dufa.data.models.get_halls.ResponseHalls
@@ -593,6 +594,52 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
     }
     //   payRenew  end
 
+    //  fundCollection  start
+
+    private var _responseFundCollection =
+        MutableLiveData<NetworkResult<String>>()
+    val responseFundCollectionVMLD: LiveData<NetworkResult<String>>
+        get() = _responseFundCollection
+
+    fun fundCollectionVM(fund: RequestFundCollection) {
+
+        _responseFundCollection.postValue(NetworkResult.Loading())
+        val response = securedRepository.fundCollection(fund)
+
+        response.enqueue(object : Callback<ResponseBody> {
+            @RequiresApi(Build.VERSION_CODES.O)
+            override fun onResponse(
+                call: Call<ResponseBody>, response: Response<ResponseBody>
+            ) {
+                try {
+                    if (response.isSuccessful && response.body() != null) {
+                        _responseFundCollection.postValue(
+                            NetworkResult.Success(
+                                response.body()?.string()!!
+                            )
+                        )
+                    } else {
+                        val errorObj = JSONObject(response.errorBody()!!.charStream().readText())
+                        _responseFundCollection.postValue(NetworkResult.Error(errorObj.getString("message")))
+                    }
+                } catch (e: Exception) {
+
+                    _responseFundCollection.postValue(e.localizedMessage?.let {
+                        NetworkResult.Error(
+                            it
+                        )
+                    })
+
+                }
+
+            }
+
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                Log.i("TAG", "onFailure: ${t.message} ")
+            }
+        })
+    }
+    //   fundCollection  end
 
 
     //  user locations  start
