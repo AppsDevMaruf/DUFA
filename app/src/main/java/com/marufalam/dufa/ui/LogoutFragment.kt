@@ -10,11 +10,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.marufalam.dufa.data.local.TokenManager
 import com.marufalam.dufa.databinding.FragmentLogoutBinding
+import com.marufalam.dufa.utils.Constants
 import com.marufalam.dufa.utils.NetworkResult
 import com.marufalam.dufa.utils.toast
 import com.marufalam.dufa.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class LogoutFragment : DialogFragment() {
@@ -22,6 +25,8 @@ class LogoutFragment : DialogFragment() {
 
     lateinit var binding: FragmentLogoutBinding
 
+    @Inject
+    lateinit var tokenManager: TokenManager
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -64,6 +69,7 @@ class LogoutFragment : DialogFragment() {
 
                 }
                 is NetworkResult.Success -> {
+                    tokenManager.saveToken(Constants.TOKEN, Constants.NO_DATA)
 
                     toast(it.data!!.message)
                     Log.i("logout", "DashboardSuccess: ${it.data!!.message}")

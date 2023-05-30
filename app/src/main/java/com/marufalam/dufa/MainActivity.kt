@@ -18,7 +18,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.GravityCompat
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
@@ -37,11 +36,9 @@ import com.marufalam.dufa.data.local.TokenManager
 import com.marufalam.dufa.data.models.getProfileInfo.ResponseProfileInfo
 import com.marufalam.dufa.databinding.ActivityMainBinding
 import com.marufalam.dufa.ui.LogInActivity
-import com.marufalam.dufa.ui.profile_update.UserUpdateFragment
 import com.marufalam.dufa.utils.*
 import com.marufalam.dufa.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import de.hdodenhof.circleimageview.CircleImageView
 import id.zelory.compressor.Compressor
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -174,9 +171,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             R.id.logoutFragment -> {
 
-                startActivity(Intent(this@MainActivity, LogInActivity::class.java))
-
-                finish()
+//                startActivity(Intent(this@MainActivity, LogInActivity::class.java))
+//
+//                finish()
 
             }
 

@@ -1,27 +1,37 @@
 package com.marufalam.dufa.ui
 
+import android.content.Intent
 import android.util.Log
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.marufalam.dufa.BaseFragment
 import com.marufalam.dufa.R
+import com.marufalam.dufa.data.local.TokenManager
 import com.marufalam.dufa.databinding.FragmentDashboardBinding
+import com.marufalam.dufa.utils.Constants
 import com.marufalam.dufa.utils.NetworkResult
+import com.marufalam.dufa.utils.gone
 import com.marufalam.dufa.utils.hide
 import com.marufalam.dufa.utils.show
 import com.marufalam.dufa.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
 
     private val dashboardViewModel by activityViewModels<DashboardViewModel>()
 
+    @Inject
+    lateinit var tokenManager: TokenManager
     override fun getFragmentView(): Int {
         return R.layout.fragment_dashboard
     }
 
     override fun configUi() {
+
+        binding.progressBar.show()
+        binding.mainLayout.gone()
         dashboardViewModel.profileInfoVM()
         dashboardViewModel.dashboardInfoVM()
 
@@ -65,39 +75,25 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
     }
 
     override fun binObserver() {
-        dashboardViewModel.profileInfoVMLD.observe(viewLifecycleOwner) {
-            //progressBar.isVisible = false
-            when (it) {
 
-                is NetworkResult.Error -> {
-                    Log.i("Error", "NetworkResult.Error: ${it.data!!}")
-                    //Log.i("TAG1", "binObserver: ${it.data!!.message.toString()}")
-                }
-                is NetworkResult.Loading -> {
-                  // progressBar.isVisible = true
-
-                }
-                is NetworkResult.Success -> {
-                    Log.i("SuccessTAG", "DashboardSuccess: ${it.data!!}")
-
-                }
-
-            }
-
-        }
         dashboardViewModel.dashboardInfoVMLD.observe(viewLifecycleOwner) {
             binding.progressBar.hide()
             when (it) {
 
                 is NetworkResult.Error -> {
-
-                    //Log.i("TAG1", "binObserver: ${it.data!!.message.toString()}")
+                   // sendToLoginPage()
+                    Log.i("TAG1", "binObserver: ${it.data!!.toString()}")
                 }
+
                 is NetworkResult.Loading -> {
                     binding.progressBar.show()
 
                 }
+
                 is NetworkResult.Success -> {
+
+                    binding.progressBar.gone()
+                    binding.mainLayout.show()
 
                     it.data?.totalDues?.let { it1 -> dashboardViewModel.savePaymentDues(it1) }
                     binding.totalMember.text = it.data?.totalMember.toString()
@@ -111,6 +107,16 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
             }
 
         }
+    }
+
+
+    fun sendToLoginPage() {
+        tokenManager.saveToken(Constants.TOKEN, Constants.NO_DATA)
+
+        startActivity(Intent(requireActivity(), LogInActivity::class.java))
+        requireActivity().finish()
+
+
     }
 
 
