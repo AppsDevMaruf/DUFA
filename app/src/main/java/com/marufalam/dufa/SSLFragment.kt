@@ -1,7 +1,9 @@
 package com.marufalam.dufa
 
 import android.annotation.SuppressLint
+import android.os.Build
 import android.util.Log
+import android.view.View
 import android.webkit.*
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -14,18 +16,28 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SSLFragment : BaseFragment<FragmentSSLBinding>() {
 
-
+    private val dashboardViewModel by activityViewModels<DashboardViewModel>()
+    private var fundPaymentUrl: String? = null
     override fun getFragmentView(): Int {
         return R.layout.fragment_s_s_l
     }
 
+    override fun configUi() {
+        if (arguments != null) {
+            fundPaymentUrl = requireArguments().getString("fundPaymentUrl")!!
 
-    private val dashboardViewModel by activityViewModels<DashboardViewModel>()
+        }
+
+    }
 
 
     @SuppressLint("SetJavaScriptEnabled")
     private fun loadWeb(url: String) {
-
+        binding.webView.apply {
+            val layerType =
+                if (Build.VERSION.SDK_INT >= 19) View.LAYER_TYPE_HARDWARE else View.LAYER_TYPE_SOFTWARE
+            setLayerType(layerType, null)
+        }
         binding.webView.loadUrl(url)
         binding.webView.webViewClient = object : WebViewClient() {
             override fun shouldInterceptRequest(
@@ -112,8 +124,14 @@ class SSLFragment : BaseFragment<FragmentSSLBinding>() {
 
     override fun binObserver() {
 
-        dashboardViewModel.paymentUrl.observe(viewLifecycleOwner) {
-            loadWeb(it)
+        if (fundPaymentUrl != null) {
+            loadWeb(fundPaymentUrl!!)
+
+        } else {
+            dashboardViewModel.paymentUrl.observe(viewLifecycleOwner) {
+                loadWeb(it)
+            }
+
 
         }
 

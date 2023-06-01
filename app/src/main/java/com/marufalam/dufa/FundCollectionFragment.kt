@@ -1,5 +1,6 @@
 package com.marufalam.dufa
 
+import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.EditText
@@ -18,6 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class FundCollectionFragment : BaseFragment<FragmentFundCollectionBinding>() {
     private lateinit var fund: RequestFundCollection
+    private var bundle = Bundle()
     private val dashboardViewModel by activityViewModels<DashboardViewModel>()
     override fun getFragmentView(): Int {
         return R.layout.fragment_fund_collection
@@ -108,11 +110,9 @@ class FundCollectionFragment : BaseFragment<FragmentFundCollectionBinding>() {
 
                 }
                 is NetworkResult.Success -> {
-                    Log.i("TAG", "fundResponse: ${it.data.toString()}")
+                    bundle.putString("fundPaymentUrl",it.data.toString())
 
-                    dashboardViewModel.savePaymentUrl(it.data.toString())
-
-                    findNavController().navigate(R.id.action_fundCollectionFragment_to_SSLFragment)
+                    findNavController().navigate(R.id.action_fundCollectionFragment_to_SSLFragment,bundle)
 
 
                 }
