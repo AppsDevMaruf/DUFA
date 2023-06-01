@@ -14,6 +14,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -404,6 +405,9 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
                     Log.i("TAG", "data: ${it.data?.message}")
 
                     //   it.data?.let { it1 -> toast(it1.message) }
+
+
+                    findNavController().popBackStack()
 
 
                 }

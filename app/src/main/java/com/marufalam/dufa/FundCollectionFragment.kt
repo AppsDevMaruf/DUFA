@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.marufalam.dufa.data.models.fund_collection.RequestFundCollection
 import com.marufalam.dufa.databinding.FragmentFundCollectionBinding
@@ -20,7 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class FundCollectionFragment : BaseFragment<FragmentFundCollectionBinding>() {
     private lateinit var fund: RequestFundCollection
     private var bundle = Bundle()
-    private val dashboardViewModel by activityViewModels<DashboardViewModel>()
+    private val dashboardViewModel by viewModels<DashboardViewModel>()
     override fun getFragmentView(): Int {
         return R.layout.fragment_fund_collection
 
