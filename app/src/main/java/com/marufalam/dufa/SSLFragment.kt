@@ -30,7 +30,6 @@ class SSLFragment : BaseFragment<FragmentSSLBinding>() {
 
     }
 
-
     @SuppressLint("SetJavaScriptEnabled")
     private fun loadWeb(url: String) {
         binding.webView.apply {
@@ -79,7 +78,6 @@ class SSLFragment : BaseFragment<FragmentSSLBinding>() {
 
 
                 }
-
 
                 if (url == "http://dufa9596.org/fail") {
 
