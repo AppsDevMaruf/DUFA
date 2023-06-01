@@ -569,8 +569,6 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
                     userid = it.data?.id!!
 
 
-                    Log.i("SuccessTAG", "DashboardSuccess: ${it.data?.id}")
-
                 }
 
             }

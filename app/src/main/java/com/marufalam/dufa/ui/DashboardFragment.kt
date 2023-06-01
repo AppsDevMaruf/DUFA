@@ -31,12 +31,8 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
     override fun configUi() {
 
 
-
-
-
         binding.progressBar.show()
         binding.mainLayout.gone()
-        dashboardViewModel.profileInfoVM()
         dashboardViewModel.dashboardInfoVM()
 
 
@@ -81,12 +77,12 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
     override fun binObserver() {
 
         dashboardViewModel.dashboardInfoVMLD.observe(viewLifecycleOwner) {
-            binding.progressBar.hide()
+            binding.progressBar.gone()
             when (it) {
 
                 is NetworkResult.Error -> {
                    sendToLoginPage()
-                    Log.i("TAG1", "binObserver: ${it.data!!.toString()}")
+                    Log.i("TAG1", "binObserver: ${it.data!!}")
                 }
 
                 is NetworkResult.Loading -> {
@@ -95,8 +91,6 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
                 }
 
                 is NetworkResult.Success -> {
-
-                    binding.progressBar.gone()
                     binding.mainLayout.show()
 
                     it.data?.totalDues?.let { it1 -> dashboardViewModel.savePaymentDues(it1) }
@@ -114,7 +108,7 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
     }
 
 
-    fun sendToLoginPage() {
+    private fun sendToLoginPage() {
         tokenManager.saveToken(Constants.TOKEN, Constants.NO_DATA)
 
         startActivity(Intent(requireActivity(), LogInActivity::class.java))

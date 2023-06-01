@@ -60,8 +60,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private var userId = 0
     private lateinit var progressBar: ProgressBar
     private val dashboardViewModel: DashboardViewModel by viewModels()
-
-    private var bundle = Bundle()
     lateinit var binding: ActivityMainBinding
     private lateinit var userProfilePicHeader: ShapeableImageView
     private lateinit var uploadProfilePicBtn: ImageView
@@ -81,7 +79,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     companion object {
         private val PERMISSIONS = arrayOf(
             android.Manifest.permission.READ_EXTERNAL_STORAGE,
-            android.Manifest.permission.CAMERA
+            android.Manifest.permission.CAMERA,
         )
     }
 
@@ -97,7 +95,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
-        //  supportActionBar?.hide()
+
         setContentView(binding.root)
 
         permissionsRequest = getPermissionsRequest()
@@ -132,11 +130,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         progressBar = findViewById(R.id.progress)
         userProfilePic.setOnClickListener {
-            navController.navigate(R.id.profileFragment, bundle)
+            navController.navigate(R.id.profileFragment)
 
         }
         profilePicAB.setOnClickListener {
-            navController.navigate(R.id.profileFragment, bundle)
+            navController.navigate(R.id.profileFragment)
 
         }
 
@@ -198,13 +196,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 is NetworkResult.Error -> {
                     dialog.dismiss()
 
-                    Log.i("TAG", "Error: ${it.data.toString()}")
 
                 }
                 is NetworkResult.Loading -> {
                     dialog.dismiss()
 
-                    Log.i("TAG", "Loading: ${it.data}")
                 }
                 is NetworkResult.Success -> {
                     dialog.dismiss()
@@ -212,7 +208,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     Log.i("TAG", "message: ${it.message}")
                     Log.i("TAG", "data: ${it.data?.message}")
 
-                    //   it.data?.let { it1 -> toast(it1.message) }
+
 
 
                 }
@@ -246,7 +242,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun setData(profile: ResponseProfileInfo) {
-        Log.i("TAG", "setData: $profile ")
         titleAb = toolbar.findViewById(R.id.profilePicAB)
         topImage = toolbar.findViewById(R.id.userProfilePic)
 
@@ -255,7 +250,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
         userId = profile.id
-        bundle.putParcelable("userinfo", profile)  // Key, value
+
         binding.navigationView.getHeaderView(0).findViewById<TextView>(R.id.userName).text =
             profile.name
         binding.navigationView.getHeaderView(0).findViewById<TextView>(R.id.userEmail).text =
@@ -334,7 +329,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val filesDir = filesDir
         val file = File(filesDir, "profile${System.currentTimeMillis()}.png")
 
-        Log.i("uploadFileDir", "upload:$file")
 
         val inputStream = contentResolver.openInputStream(fileUri)
         val outputStream = FileOutputStream(file)

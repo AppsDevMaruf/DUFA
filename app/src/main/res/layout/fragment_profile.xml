@@ -633,7 +633,7 @@
                         android:background="#F4F4F4" />
 
                     <Button
-                        android:id="@+id/updateBtn"
+                        android:id="@+id/editBtn"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
                         android:layout_marginHorizontal="64dp"
@@ -655,7 +655,7 @@
         </ScrollView>
 
         <ProgressBar
-            android:id="@+id/progress"
+            android:id="@+id/progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

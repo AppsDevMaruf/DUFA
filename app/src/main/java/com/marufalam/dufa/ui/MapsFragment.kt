@@ -179,7 +179,7 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
                                 .anchor(0.5f, 0.5f)
                                 .title("${userInfo?.name} (${userInfo?.bloodgroup})")
                                 .snippet(userInfo?.phone)
-                                .icon(bitmapDescriptorFromVector(R.drawable.baseline_location_on_24))
+                                .icon(bitmapDescriptorFromVector(R.drawable.ic_location_on_24))
                         )
                         googleMap.setInfoWindowAdapter(object : GoogleMap.InfoWindowAdapter {
                             override fun getInfoWindow(marker: Marker): View? {
