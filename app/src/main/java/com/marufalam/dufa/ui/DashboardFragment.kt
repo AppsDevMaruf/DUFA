@@ -30,6 +30,10 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
 
     override fun configUi() {
 
+
+
+
+
         binding.progressBar.show()
         binding.mainLayout.gone()
         dashboardViewModel.profileInfoVM()
@@ -81,7 +85,7 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
             when (it) {
 
                 is NetworkResult.Error -> {
-                   // sendToLoginPage()
+                   sendToLoginPage()
                     Log.i("TAG1", "binObserver: ${it.data!!.toString()}")
                 }
 
