@@ -127,6 +127,7 @@
                         </androidx.cardview.widget.CardView>
 
                         <androidx.cardview.widget.CardView
+                            android:id="@+id/paymentCard"
                             android:layout_width="166dp"
                             android:layout_height="match_parent"
                             android:layout_margin="8dp"
@@ -140,7 +141,6 @@
                             app:cardUseCompatPadding="false">
 
                             <LinearLayout
-                                android:id="@+id/duesPaymentBtn"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:orientation="vertical">

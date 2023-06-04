@@ -70,7 +70,7 @@ class LogInActivity : AppCompatActivity() {
             //debug
             //masummehedi1
 
-            val email = "masummehedi1@gmail.com"
+       /*     val email = "masummehedi1@gmail.com"
             val password = "12345678"
 
             val loginRequestLogin = RequestLogin(email, password)
@@ -78,12 +78,12 @@ class LogInActivity : AppCompatActivity() {
             lifecycleScope.launch {
                 authViewModel.loginUserVM(loginRequestLogin)
             }
-
+*/
             //debug end
 
 
             //production
-            /*  if (!isValidEmail(binding.loginEmail.text.toString().trim())) {
+              if (!isValidEmail(binding.loginEmail.text.toString().trim())) {
 
                   Log.i("TAG", "onCreate: Clicked ")
                   binding.loginErrorText.error = "Email Pattern is Not Correct !"
@@ -113,7 +113,7 @@ class LogInActivity : AppCompatActivity() {
                   }
 
 
-              }*/
+              }
             //production end
         }
 

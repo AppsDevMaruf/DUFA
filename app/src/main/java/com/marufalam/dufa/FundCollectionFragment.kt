@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.marufalam.dufa.data.models.fund_collection.RequestFundCollection
 import com.marufalam.dufa.databinding.FragmentFundCollectionBinding
 import com.marufalam.dufa.utils.NetworkResult
+import com.marufalam.dufa.utils.toast
 import com.marufalam.dufa.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -50,9 +51,14 @@ class FundCollectionFragment : BaseFragment<FragmentFundCollectionBinding>() {
         val dialog = builder.create()
         val continuePaymentBtn = customLayout.findViewById<AppCompatButton>(R.id.continuePayment)
         continuePaymentBtn.setOnClickListener {
+
             val editText = customLayout.findViewById<EditText>(R.id.editText)
-            sendDialogDataToActivity(fundType, editText.text.toString())
-            dialog.dismiss()
+            if (editText.text.toString().isNotEmpty()){
+                sendDialogDataToActivity(fundType, editText.text.toString())
+                dialog.dismiss()
+            }else{
+                toast("Please Enter the Valid Amount")
+            }
 
         }
 
@@ -92,9 +98,8 @@ class FundCollectionFragment : BaseFragment<FragmentFundCollectionBinding>() {
                 )
             }
         }
-        Log.i("TAG", "reqFund: $fund")
         dashboardViewModel.fundCollectionVM(fund)
-        Toast.makeText(requireActivity(), data, Toast.LENGTH_SHORT).show()
+
     }
 
     override fun binObserver() {

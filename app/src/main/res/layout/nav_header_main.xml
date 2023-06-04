@@ -11,45 +11,50 @@
         android:layout_width="match_parent"
         android:layout_height="176dp"
         android:background="@drawable/nav_head_bg"
-        android:gravity="bottom"
-        android:orientation="vertical"
-        android:paddingLeft="16dp"
-        android:paddingTop="16dp"
-        android:paddingRight="16dp"
-        android:paddingBottom="16dp"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/userProfilePicHeader"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
             android:padding="1dp"
+            android:scaleType="centerCrop"
             android:src="@drawable/maruf"
-            android:visibility="invisible"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/view"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/ShapeAppearance.Image.PILL"
             app:strokeColor="@color/white"
-            app:strokeWidth="1dp"
+            app:strokeWidth="1.5dp"
             tools:ignore="MissingConstraints" />
 
-
-        <ImageView
-            android:translationZ="@dimen/_2sdp"
-            android:layout_marginEnd="@dimen/_4sdp"
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/uploadProfilePicBtn"
-            app:layout_constraintEnd_toEndOf="@id/userProfilePicHeader"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@color/white"
+            android:padding="2dp"
+            android:src="@drawable/round_cloud_upload_24"
+            app:contentPadding="5dp"
             app:layout_constraintBottom_toBottomOf="@id/userProfilePicHeader"
-            android:src="@drawable/gallery"
-            app:tint="@color/blue"
-            android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_25sdp"/>
-
+            app:layout_constraintEnd_toEndOf="@id/userProfilePicHeader"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
+            app:strokeColor="@color/blue"
+            app:strokeWidth="1dp" />
 
         <TextView
             android:id="@+id/profilePicABHeader"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/cta_circle"
             android:fontFamily="@font/dm_sans_medium"
             android:gravity="center"
@@ -58,37 +63,54 @@
             android:text="AB"
             android:textAllCaps="false"
             android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="@id/userProfilePicHeader"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toEndOf="@id/userProfilePicHeader"
-            app:layout_constraintStart_toStartOf="@id/userProfilePicHeader"
-            app:layout_constraintTop_toTopOf="@id/userProfilePicHeader"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/view"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/ShapeAppearance.Image.PILL"
             app:strokeColor="@color/white"
-            app:strokeWidth="2dp"
+            app:strokeWidth="1.5dp"
             tools:ignore="MissingConstraints" />
 
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:fontFamily="@font/dm_sans_medium"
+            android:padding="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.691" />
 
         <TextView
             android:id="@+id/userName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:fontFamily="@font/dm_sans"
             android:paddingTop="4dp"
+            android:layout_marginTop="5dp"
             android:text="Maruf Alam"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+            android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="@+id/userProfilePicHeader"
-            app:layout_constraintTop_toBottomOf="@+id/userProfilePicHeader" />
+            app:layout_constraintTop_toBottomOf="@+id/view" />
 
         <TextView
             android:id="@+id/userEmail"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:fontFamily="@font/dm_sans"
             android:text="marufalam120@gmail.com"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+            android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="@+id/userName"
             app:layout_constraintTop_toBottomOf="@+id/userName" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

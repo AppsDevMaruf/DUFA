@@ -63,17 +63,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var binding: ActivityMainBinding
     private lateinit var userProfilePicHeader: ShapeableImageView
     private lateinit var uploadProfilePicBtn: ImageView
-
     private lateinit var userProfilePicABHeader: TextView
     private lateinit var profilePicAB: TextView
-
     private lateinit var toolbar: Toolbar
-
     lateinit var titleAb: TextView
     lateinit var topImage: ImageView
-
     lateinit var nav: View
-
     lateinit var dialog: ProgressDialog
 
     companion object {
@@ -106,7 +101,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         nav = binding.navigationView.getHeaderView(0)
 
         userProfilePicHeader = nav.findViewById(R.id.userProfilePicHeader)
-         uploadProfilePicBtn = nav.findViewById(R.id.uploadProfilePicBtn)
+        uploadProfilePicBtn = nav.findViewById(R.id.uploadProfilePicBtn)
 
         userProfilePicABHeader = nav.findViewById(R.id.profilePicABHeader)
 
@@ -141,7 +136,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         uploadProfilePicBtn.setOnClickListener {
 
             requestPermissions(permissionsRequest, PERMISSIONS)
-            startCameraWithoutUri(includeCamera = true, includeGallery = false)
+            startCameraWithoutUri(includeCamera = true, includeGallery = true)
 
         }
 

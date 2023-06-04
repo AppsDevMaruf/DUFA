@@ -62,11 +62,6 @@
         tools:layout="@layout/fragment_payment" />
 
     <fragment
-        android:id="@+id/notificationFragment"
-        android:name="com.marufalam.dufa.ui.NotificationFragment"
-        android:label="Notification"
-        tools:layout="@layout/fragment_notification" />
-    <fragment
         android:id="@+id/QRFragment"
         android:name="com.marufalam.dufa.ui.QRFragment"
         android:label="QR"

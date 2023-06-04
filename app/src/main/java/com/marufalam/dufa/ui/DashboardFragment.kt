@@ -1,6 +1,7 @@
 package com.marufalam.dufa.ui
 
 import android.content.Intent
+import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -24,6 +25,8 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
 
     @Inject
     lateinit var tokenManager: TokenManager
+    private var dues: Double? = null
+    private var bundle = Bundle()
     override fun getFragmentView(): Int {
         return R.layout.fragment_dashboard
     }
@@ -42,11 +45,14 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
         binding.memberListCard.setOnClickListener {
             findNavController().navigate(R.id.action_DashboardFragment_to_memberListFragment)
         }
-        binding.duesPaymentBtn.setOnClickListener {
+        binding.paymentCard.setOnClickListener {
 
-            val dues = binding.totalDues.text.toString().toInt()
-            if (dues > 0) {
-                findNavController().navigate(R.id.action_DashboardFragment_to_duesPaymentFragment)
+
+            if (dues!! > 0) {
+                bundle.putDouble("dues", dues!!)
+                findNavController().navigate(
+                    R.id.action_DashboardFragment_to_duesPaymentFragment, bundle
+                )
             } else {
                 findNavController().navigate(R.id.action_DashboardFragment_to_transactionHistoryFragment)
             }
@@ -81,7 +87,7 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
             when (it) {
 
                 is NetworkResult.Error -> {
-                   sendToLoginPage()
+                    sendToLoginPage()
                     Log.i("TAG1", "binObserver: ${it.data!!}")
                 }
 
@@ -95,7 +101,8 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
 
                     it.data?.totalDues?.let { it1 -> dashboardViewModel.savePaymentDues(it1) }
                     binding.totalMember.text = it.data?.totalMember.toString()
-                    binding.totalDues.text = it.data?.totalDues.toString()
+                    dues = it.data?.totalDues?.toDouble()
+                    binding.totalDues.text = dues.toString()
                     binding.totalVouchers.text = it.data?.totalVoucher.toString()
 
 

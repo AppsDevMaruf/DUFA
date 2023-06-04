@@ -1,7 +1,7 @@
 package com.marufalam.dufa.ui.dues_payment
 
 import android.util.Log
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.marufalam.dufa.BaseFragment
 import com.marufalam.dufa.R
@@ -15,15 +15,28 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class DuesPaymentFragment : BaseFragment<FragmentDuesPaymentBinding>() {
-    private val dashboardViewModel by activityViewModels<DashboardViewModel>()
+    private val dashboardViewModel by viewModels<DashboardViewModel>()
 
     var userid = 0
+    var dues: Double? = null
     override fun getFragmentView(): Int {
         return R.layout.fragment_dues_payment
     }
 
 
     override fun configUi() {
+        if (arguments != null) {
+            dues = requireArguments().getDouble("dues")
+        }
+        if (dues == 0.0) {
+            findNavController().navigate(R.id.action_duesPaymentFragment_to_transactionHistoryFragment)
+            binding.paymentsLayout.gone()
+
+        } else {
+
+            binding.paymentsLayout.show()
+            binding.duesAmount.text = dues.toString()
+        }
 
 
     }
@@ -40,7 +53,7 @@ class DuesPaymentFragment : BaseFragment<FragmentDuesPaymentBinding>() {
 
         binding.continue2000Payment.setOnClickListener {
             val request = RequestPayRenew(
-                amount = binding.duesAmount.text.toString().toInt(),
+                amount = dues,
                 membership = "yearly",
                 userinfoID = userid,
                 renewFee = "renew_fee"
@@ -50,8 +63,8 @@ class DuesPaymentFragment : BaseFragment<FragmentDuesPaymentBinding>() {
 
         binding.continue10000Payment.setOnClickListener {
             val request = RequestPayRenew(
-                amount = 10000,
-                membership = "yearly",
+                amount = 10000.0,
+                membership = "lifetime",
                 userinfoID = userid,
                 renewFee = "renew_fee"
             )
@@ -61,20 +74,19 @@ class DuesPaymentFragment : BaseFragment<FragmentDuesPaymentBinding>() {
     }
 
     override fun binObserver() {
-        dashboardViewModel.paymentDues.observe(viewLifecycleOwner) {
+      /*  dashboardViewModel.paymentDues.observe(viewLifecycleOwner) {
 
             if (it == 0) {
+                findNavController().navigate(R.id.action_duesPaymentFragment_to_transactionHistoryFragment)
                 binding.paymentsLayout.gone()
+
             } else {
 
                 binding.paymentsLayout.show()
                 binding.duesAmount.text = it.toString()
-
             }
 
-
-        }
-
+        }*/
 
 
         dashboardViewModel.responsePayRenewVMLD.observe(this) {
@@ -89,6 +101,7 @@ class DuesPaymentFragment : BaseFragment<FragmentDuesPaymentBinding>() {
                     // progressBar.isVisible = true
 
                 }
+
                 is NetworkResult.Success -> {
                     Log.i("TAG", "payRenew: ${it.data.toString()}")
                     dashboardViewModel.savePaymentUrl(it.data.toString())
@@ -109,15 +122,15 @@ class DuesPaymentFragment : BaseFragment<FragmentDuesPaymentBinding>() {
                     Log.i("Error", "NetworkResult.Error: ${it.data!!}")
                     //Log.i("TAG1", "binObserver: ${it.data!!.message.toString()}")
                 }
+
                 is NetworkResult.Loading -> {
                     // progressBar.isVisible = true
 
                 }
+
                 is NetworkResult.Success -> {
                     userid = it.data?.id!!
 
-
-                    Log.i("SuccessTAG", "DashboardSuccess: ${it.data?.id}")
 
                 }
 

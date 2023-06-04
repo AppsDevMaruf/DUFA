@@ -54,7 +54,7 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
 
     }
 
-    var _paymentDues = MutableLiveData<Int>()
+    private var _paymentDues = MutableLiveData<Int>()
     val paymentDues: LiveData<Int> = _paymentDues
 
 

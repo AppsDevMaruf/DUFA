@@ -125,6 +125,7 @@ dependencies {
 
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
+
     //image cropper
     implementation 'com.vanniktech:android-image-cropper:4.5.0'
 
@@ -135,5 +136,7 @@ dependencies {
     implementation 'com.google.maps.android:maps-utils-ktx:3.4.0'
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
     implementation 'com.squareup.picasso:picasso:2.8'
+
+    implementation "io.github.farimarwat:permissionmate:1.1"
 
 }

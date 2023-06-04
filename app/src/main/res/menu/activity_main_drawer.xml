@@ -14,16 +14,8 @@
         <item
             android:id="@+id/duesPaymentFragment"
             app:itemIconTint="@null"
-            android:icon="@drawable/payment"
+            android:icon="@drawable/atm_card"
             android:title="Payments" />
-        <item
-            android:id="@+id/notificationFragment"
-            android:icon="@drawable/bell"
-            android:title="Notification" />
-        <item
-            android:id="@+id/duesFragment"
-            android:icon="@drawable/event"
-            android:title="Event" />
         <item
             android:id="@+id/QRFragment"
             android:icon="@drawable/qr"

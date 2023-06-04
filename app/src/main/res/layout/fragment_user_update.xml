@@ -36,6 +36,7 @@
                     android:padding="1dp"
                     android:src="@drawable/maruf"
                     android:visibility="visible"
+                    android:scaleType="centerCrop"
                     app:layout_constraintBottom_toBottomOf="@+id/view"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -45,17 +46,18 @@
                     app:strokeWidth="1dp"
                     tools:ignore="MissingConstraints" />
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:background="@color/white"
-                    app:civ_border_width="@dimen/_1sdp"
-                    app:civ_border_color="@color/bluedeep"
-                    android:translationZ="@dimen/_2sdp"
+                <com.google.android.material.imageview.ShapeableImageView
+                    app:contentPadding="5dp"
                     android:layout_marginEnd="@dimen/_4sdp"
-                    android:padding="@dimen/_2sdp"
+                    app:strokeColor="@color/blue"
+                    app:strokeWidth="1dp"
+                    android:padding="2dp"
+                    android:background="@color/white"
+                    app:shapeAppearanceOverlay = "@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                     android:id="@+id/uploadProfilePicBtn"
                     app:layout_constraintEnd_toEndOf="@id/userProfilePic"
                     app:layout_constraintBottom_toBottomOf="@id/userProfilePic"
-                    android:src="@drawable/ic_gallary"
+                    android:src="@drawable/round_cloud_upload_24"
                     android:layout_width="@dimen/_25sdp"
                     android:layout_height="@dimen/_25sdp"/>
 
