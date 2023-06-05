@@ -269,4 +269,5 @@ class SecuredRepository @Inject constructor(private val securedApi: SecuredApi) 
     suspend fun setCurrentLocation( requestSetCLocation: RequestSetCLocation) = securedApi.setCurrentLocations(requestSetCLocation)
 
     suspend fun userLocations() = securedApi.getUserLocations()
+    suspend fun getFeeListRepo() = securedApi.getFeeList()
 }

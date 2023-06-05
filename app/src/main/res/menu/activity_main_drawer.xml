@@ -9,13 +9,24 @@
         <item
             android:id="@+id/memberListFragment"
             app:itemIconTint="@android:color/transparent"
-            android:icon="@drawable/location"
+            android:icon="@drawable/users"
             android:title="Search Friends" />
         <item
             android:id="@+id/duesPaymentFragment"
             app:itemIconTint="@null"
             android:icon="@drawable/atm_card"
             android:title="Payments" />
+        <item
+            android:id="@+id/voucherListFragment"
+            app:itemIconTint="@null"
+            android:icon="@drawable/voucher"
+            android:title="Voucher" />
+        <item
+            android:id="@+id/mapsFragment"
+            app:itemIconTint="@null"
+            android:icon="@drawable/location"
+            android:title="Dufians Nearby" />
+
         <item
             android:id="@+id/QRFragment"
             android:icon="@drawable/qr"

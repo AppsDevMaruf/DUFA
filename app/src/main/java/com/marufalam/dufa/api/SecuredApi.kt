@@ -2,6 +2,7 @@ package com.marufalam.dufa.api
 
 import com.marufalam.dufa.data.models.dashboard.all_member.ResponseAllMember
 import com.marufalam.dufa.data.models.dashboard.dasboard_info.ResponseDashboardInfo
+import com.marufalam.dufa.data.models.fee_list.ResponseFeeList
 import com.marufalam.dufa.data.models.fund_collection.RequestFundCollection
 import com.marufalam.dufa.data.models.getProfileInfo.ResponseProfileInfo
 import com.marufalam.dufa.data.models.get_departments.ResponseDepartments
@@ -93,7 +94,7 @@ interface SecuredApi {
         @Part("voucher_number")  voucher_number: RequestBody,
     ): Response<ResponseVoucherUpload>
 
-    @GET("voucher-lists")
+    @GET("voucher-list")
     suspend fun getVoucherList(): Response<ResponseVoucherList>
 
     @POST("set-app-location")
@@ -101,6 +102,8 @@ interface SecuredApi {
     //user Locations
     @GET("locations")
     suspend fun getUserLocations(): Response<ResponseUserLocation>
+    @GET("fee-list")
+    suspend fun getFeeList(): Response<ResponseFeeList>
 
     /* @POST("search")
      suspend fun getUserByDepartment(@Body department: String): Response<ResponseMemberList>

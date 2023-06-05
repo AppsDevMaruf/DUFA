@@ -1,9 +1,7 @@
 package com.marufalam.dufa
 
-
 import android.app.Dialog
 import android.app.ProgressDialog
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +11,7 @@ import android.view.Window
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -35,7 +34,6 @@ import com.google.android.material.navigation.NavigationView
 import com.marufalam.dufa.data.local.TokenManager
 import com.marufalam.dufa.data.models.getProfileInfo.ResponseProfileInfo
 import com.marufalam.dufa.databinding.ActivityMainBinding
-import com.marufalam.dufa.ui.LogInActivity
 import com.marufalam.dufa.utils.*
 import com.marufalam.dufa.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -58,6 +56,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var userProfilePic: ShapeableImageView
     private var userId = 0
+    private var dues: Double? = null
+    private var bundle = Bundle()
     private lateinit var progressBar: ProgressBar
     private val dashboardViewModel: DashboardViewModel by viewModels()
     lateinit var binding: ActivityMainBinding
@@ -106,6 +106,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         userProfilePicABHeader = nav.findViewById(R.id.profilePicABHeader)
 
         dashboardViewModel.profileInfoVM()
+        dashboardViewModel.dashboardInfoVM()
         binObserver()
 
         ///
@@ -153,14 +154,92 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-       // navView.setNavigationItemSelectedListener(this)
+
+        navView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.duesPaymentFragment -> {
+                    dues?.let {
+                        bundle.putDouble("dues", it)
+                        navController.navigateUp() // to clear previous navigation history
+                        navController.navigate(R.id.duesPaymentFragment, bundle)
+                    }
+
+                    if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                        binding.drawerLayout.closeDrawer(GravityCompat.START)
+                    }
+                    false
+                }
+
+                R.id.memberListFragment -> {
+                    navController.navigateUp() // to clear previous navigation history
+                    navController.navigate(R.id.memberListFragment)
+                    if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                        binding.drawerLayout.closeDrawer(GravityCompat.START)
+                    }
+                    false
+                }
+
+                R.id.mapsFragment -> {
+                    navController.navigateUp() // to clear previous navigation history
+                    navController.navigate(R.id.mapsFragment)
+                    if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                        binding.drawerLayout.closeDrawer(GravityCompat.START)
+                    }
+                    false
+                }
+
+                R.id.voucherListFragment -> {
+                    navController.navigateUp() // to clear previous navigation history
+                    navController.navigate(R.id.voucherListFragment)
+                    if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                        binding.drawerLayout.closeDrawer(GravityCompat.START)
+                    }
+                    false
+                }
+
+                R.id.QRFragment -> {
+                    navController.navigateUp() // to clear previous navigation history
+                    navController.navigate(R.id.QRFragment)
+                    if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                        binding.drawerLayout.closeDrawer(GravityCompat.START)
+                    }
+                    false
+                }
+
+                R.id.logoutFragment -> {
+                    navController.navigateUp() // to clear previous navigation history
+                    navController.navigate(R.id.logoutFragment)
+                    if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                        binding.drawerLayout.closeDrawer(GravityCompat.START)
+                    }
+                    false
+                }
+
+                else -> {
+                    if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                        binding.drawerLayout.closeDrawer(GravityCompat.START)
+                    }
+                    false
+                }
+            }
+        }
 
     }
+
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
 
         when (item.itemId) {
+
+            R.id.duesPaymentFragment -> {
+
+
+//                startActivity(Intent(this@MainActivity, LogInActivity::class.java))
+//
+//                finish()
+
+            }
 
             R.id.logoutFragment -> {
 
@@ -177,13 +256,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 
+
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
     fun binObserver() {
-
 
         dashboardViewModel.uploadProfilePicVMLD.observe(this) {
 
@@ -193,17 +272,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
                 }
+
                 is NetworkResult.Loading -> {
                     dialog.dismiss()
 
                 }
+
                 is NetworkResult.Success -> {
                     dialog.dismiss()
 
                     Log.i("TAG", "message: ${it.message}")
                     Log.i("TAG", "data: ${it.data?.message}")
-
-
 
 
                 }
@@ -218,14 +297,39 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 is NetworkResult.Error -> {
 
                 }
+
                 is NetworkResult.Loading -> {
                     progressBar.isVisible = true
 
                 }
+
                 is NetworkResult.Success -> {
                     Log.i("TAG", "binObserver: $it ")
 
                     it.data?.let { it1 -> setData(it1) }
+
+                }
+
+
+            }
+
+        }
+        dashboardViewModel.dashboardInfoVMLD.observe(this) {
+            progressBar.isVisible = false
+            when (it) {
+
+                is NetworkResult.Error -> {
+
+                }
+
+                is NetworkResult.Loading -> {
+                    progressBar.isVisible = true
+
+                }
+
+                is NetworkResult.Success -> {
+                    Log.i("TAG", "binObserver: $it ")
+                    dues = it.data?.totalDues?.toDouble()
 
                 }
 
@@ -256,7 +360,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             userProfilePicABHeader.show()
             userProfilePic.hide()
             profilePicAB.show()
-
 
 
             titleAb.show()
@@ -375,6 +478,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         dialog.show()
 
     }
+
 }
 
 

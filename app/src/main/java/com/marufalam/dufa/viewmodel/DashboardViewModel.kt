@@ -11,6 +11,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.marufalam.dufa.data.models.dashboard.dasboard_info.ResponseDashboardInfo
+import com.marufalam.dufa.data.models.fee_list.ResponseFeeList
 import com.marufalam.dufa.data.models.fund_collection.RequestFundCollection
 import com.marufalam.dufa.data.models.getProfileInfo.ResponseProfileInfo
 import com.marufalam.dufa.data.models.get_districts.ResponseDistrict
@@ -672,6 +673,47 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
                 }
             } catch (noInternetException: NoInternetException) {
                 _userLocations.postValue(noInternetException.localizedMessage?.let {
+                    NetworkResult.Error(
+                        it
+                    )
+                })
+            }
+
+        }
+
+    }
+    //   user locations  end
+
+    //  get fee list  start
+
+    private var _getFeeList =
+        MutableLiveData<NetworkResult<ResponseFeeList>>()
+    val getFeeListVMLD: LiveData<NetworkResult<ResponseFeeList>>
+        get() = _getFeeList
+
+    fun getFeeListVM() {
+
+        _getFeeList.postValue(NetworkResult.Loading())
+
+
+        viewModelScope.launch {
+
+            try {
+                val response = securedRepository.getFeeListRepo()
+
+                if (response.isSuccessful && response.body() != null) {
+
+
+                    _getFeeList.postValue(NetworkResult.Success(response.body()!!))
+
+                } else if (response.errorBody() != null) {
+
+                    val errorObj = JSONObject(response.errorBody()!!.charStream().readText())
+                    _getFeeList.postValue(NetworkResult.Error(errorObj.getString("message")))
+
+                }
+            } catch (noInternetException: NoInternetException) {
+                _getFeeList.postValue(noInternetException.localizedMessage?.let {
                     NetworkResult.Error(
                         it
                     )

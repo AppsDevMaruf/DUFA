@@ -3,7 +3,7 @@ import com.google.gson.annotations.SerializedName
 
 data class RequestPayRenew(
     @SerializedName("amount")
-    val amount: Double?,
+    val amount: Double,
     @SerializedName("membership")
     val membership: String?,
     @SerializedName("userinfo_id")

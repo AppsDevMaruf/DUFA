@@ -17,7 +17,7 @@
 
         <LinearLayout
 
-            android:visibility="gone"
+
             android:id="@+id/paymentsLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -152,6 +152,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
+                        android:id="@+id/lifetimeFee"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="@dimen/_8sdp"

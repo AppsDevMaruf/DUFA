@@ -1,5 +1,7 @@
 package com.marufalam.dufa.ui.dues_payment
 
+import android.annotation.SuppressLint
+import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -16,27 +18,20 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class DuesPaymentFragment : BaseFragment<FragmentDuesPaymentBinding>() {
     private val dashboardViewModel by viewModels<DashboardViewModel>()
+    val bundle = Bundle()
 
     var userid = 0
-    var dues: Double? = null
+    private var dues: Double? = null
+    private var lifetimeFee: Double? = null
+
     override fun getFragmentView(): Int {
         return R.layout.fragment_dues_payment
     }
 
 
+    @SuppressLint("SetTextI18n")
     override fun configUi() {
-        if (arguments != null) {
-            dues = requireArguments().getDouble("dues")
-        }
-        if (dues == 0.0) {
-            findNavController().navigate(R.id.action_duesPaymentFragment_to_transactionHistoryFragment)
-            binding.paymentsLayout.gone()
-
-        } else {
-
-            binding.paymentsLayout.show()
-            binding.duesAmount.text = dues.toString()
-        }
+        dashboardViewModel.getFeeListVM()
 
 
     }
@@ -53,7 +48,7 @@ class DuesPaymentFragment : BaseFragment<FragmentDuesPaymentBinding>() {
 
         binding.continue2000Payment.setOnClickListener {
             val request = RequestPayRenew(
-                amount = dues,
+                amount = dues!!,
                 membership = "yearly",
                 userinfoID = userid,
                 renewFee = "renew_fee"
@@ -63,7 +58,7 @@ class DuesPaymentFragment : BaseFragment<FragmentDuesPaymentBinding>() {
 
         binding.continue10000Payment.setOnClickListener {
             val request = RequestPayRenew(
-                amount = 10000.0,
+                amount = lifetimeFee!!.toDouble(),
                 membership = "lifetime",
                 userinfoID = userid,
                 renewFee = "renew_fee"
@@ -73,20 +68,21 @@ class DuesPaymentFragment : BaseFragment<FragmentDuesPaymentBinding>() {
 
     }
 
+    @SuppressLint("SetTextI18n")
     override fun binObserver() {
-      /*  dashboardViewModel.paymentDues.observe(viewLifecycleOwner) {
+        /*  dashboardViewModel.paymentDues.observe(viewLifecycleOwner) {
 
-            if (it == 0) {
-                findNavController().navigate(R.id.action_duesPaymentFragment_to_transactionHistoryFragment)
-                binding.paymentsLayout.gone()
+              if (it == 0) {
+                  findNavController().navigate(R.id.action_duesPaymentFragment_to_transactionHistoryFragment)
+                  binding.paymentsLayout.gone()
 
-            } else {
+              } else {
 
-                binding.paymentsLayout.show()
-                binding.duesAmount.text = it.toString()
-            }
+                  binding.paymentsLayout.show()
+                  binding.duesAmount.text = it.toString()
+              }
 
-        }*/
+          }*/
 
 
         dashboardViewModel.responsePayRenewVMLD.observe(this) {
@@ -103,9 +99,13 @@ class DuesPaymentFragment : BaseFragment<FragmentDuesPaymentBinding>() {
                 }
 
                 is NetworkResult.Success -> {
-                    Log.i("TAG", "payRenew: ${it.data.toString()}")
-                    dashboardViewModel.savePaymentUrl(it.data.toString())
-                    findNavController().navigate(R.id.action_duesPaymentFragment_to_SSLFragment)
+                    Log.e("TAG", "duesPaymentUrl: ${it.data}")
+                    Log.e("TAG", "duesPaymentUrl: ${it.data.toString()}")
+                    bundle.putString("paymentUrl", it.data.toString())
+                    findNavController().navigate(
+                        R.id.action_duesPaymentFragment_to_SSLFragment,
+                        bundle
+                    )
 
 
                 }
@@ -131,6 +131,41 @@ class DuesPaymentFragment : BaseFragment<FragmentDuesPaymentBinding>() {
                 is NetworkResult.Success -> {
                     userid = it.data?.id!!
 
+
+                }
+
+            }
+
+        }
+        dashboardViewModel.getFeeListVMLD.observe(viewLifecycleOwner) {
+            //progressBar.isVisible = false
+            when (it) {
+
+                is NetworkResult.Error -> {
+
+                }
+
+                is NetworkResult.Loading -> {
+                    // progressBar.isVisible = true
+
+                }
+
+                is NetworkResult.Success -> {
+                    Log.e("TAG", "lifetimeFee: ${it.data?.data?.get(1)?.fee}")
+                    lifetimeFee = it.data?.data?.get(1)?.fee
+                    if (arguments != null) {
+                        dues = requireArguments().getDouble("dues")
+                    }
+                    if (dues == 0.0) {
+                        findNavController().navigate(R.id.action_duesPaymentFragment_to_transactionHistoryFragment)
+                        binding.paymentsLayout.gone()
+
+                    } else {
+
+                        binding.paymentsLayout.show()
+                        binding.duesAmount.text = "${dues.toString()} TK"
+                        binding.lifetimeFee.text = "${lifetimeFee.toString()} TK"
+                    }
 
                 }
 

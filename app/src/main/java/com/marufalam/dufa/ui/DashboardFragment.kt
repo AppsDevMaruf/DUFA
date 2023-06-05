@@ -98,8 +98,6 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
 
                 is NetworkResult.Success -> {
                     binding.mainLayout.show()
-
-                    it.data?.totalDues?.let { it1 -> dashboardViewModel.savePaymentDues(it1) }
                     binding.totalMember.text = it.data?.totalMember.toString()
                     dues = it.data?.totalDues?.toDouble()
                     binding.totalDues.text = dues.toString()

@@ -21,26 +21,22 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SSLFragment : BaseFragment<FragmentSSLBinding>() {
 
-    private val dashboardViewModel by activityViewModels<DashboardViewModel>()
     private var fundPaymentUrl: String? = null
-    private val onBackPressedCallback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
-        override fun handleOnBackPressed() {
-            //                              showAppClosingDialog()
-        }
-    }
+    private var duesPaymentUrl: String? = null
+
     override fun getFragmentView(): Int {
         return R.layout.fragment_s_s_l
     }
 
     override fun configUi() {
 
-
-        requireActivity().onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
-
         if (arguments != null) {
             fundPaymentUrl = requireArguments().getString("fundPaymentUrl")!!
-
+            duesPaymentUrl = requireArguments().getString("paymentUrl")!!
+            Log.e("TAG", "fundPaymentUrl: $fundPaymentUrl")
+            Log.e("TAG", "duesPaymentUrl: $duesPaymentUrl")
         }
+
 
     }
 
@@ -59,7 +55,6 @@ class SSLFragment : BaseFragment<FragmentSSLBinding>() {
                 request: WebResourceRequest?
             ): WebResourceResponse? {
 
-
                 return super.shouldInterceptRequest(view, request)
             }
 
@@ -77,7 +72,6 @@ class SSLFragment : BaseFragment<FragmentSSLBinding>() {
             ): Boolean {
                 return super.onRenderProcessGone(view, detail)
             }
-
 
             @Deprecated("Deprecated in Java")
             override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
@@ -131,8 +125,6 @@ class SSLFragment : BaseFragment<FragmentSSLBinding>() {
             fun sendData(string: String, string2: String) {
                 var responseDwolla = ""
                 responseDwolla = Gson().fromJson(string, responseDwolla.javaClass)
-
-
             }
 
         }, "IAVCommunicator")
@@ -144,6 +136,7 @@ class SSLFragment : BaseFragment<FragmentSSLBinding>() {
 
 
     }
+
     override fun onResume() {
         super.onResume()
         (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
@@ -158,17 +151,11 @@ class SSLFragment : BaseFragment<FragmentSSLBinding>() {
 
         if (fundPaymentUrl != null) {
             loadWeb(fundPaymentUrl!!)
-
-        } else {
-            dashboardViewModel.paymentUrl.observe(viewLifecycleOwner) {
-                loadWeb(it)
-            }
-
-
+        }
+        if (duesPaymentUrl != null) {
+            loadWeb(duesPaymentUrl!!)
         }
 
-
     }
-
 
 }

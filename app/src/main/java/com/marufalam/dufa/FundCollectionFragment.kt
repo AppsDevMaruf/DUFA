@@ -117,7 +117,7 @@ class FundCollectionFragment : BaseFragment<FragmentFundCollectionBinding>() {
                 }
                 is NetworkResult.Success -> {
                     bundle.putString("fundPaymentUrl",it.data.toString())
-
+                    Log.e("TAG", "fundPaymentUrl: ${it.data.toString()}", )
                     findNavController().navigate(R.id.action_fundCollectionFragment_to_SSLFragment,bundle)
 
 
