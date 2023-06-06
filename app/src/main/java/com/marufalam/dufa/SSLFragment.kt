@@ -20,26 +20,17 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SSLFragment : BaseFragment<FragmentSSLBinding>() {
-
-    private var fundPaymentUrl: String? = null
-    private var duesPaymentUrl: String? = null
-
+    private var paymentUrl: String? = null
     override fun getFragmentView(): Int {
         return R.layout.fragment_s_s_l
     }
 
     override fun configUi() {
-
         if (arguments != null) {
-            fundPaymentUrl = requireArguments().getString("fundPaymentUrl")!!
-            duesPaymentUrl = requireArguments().getString("paymentUrl")!!
-            Log.e("TAG", "fundPaymentUrl: $fundPaymentUrl")
-            Log.e("TAG", "duesPaymentUrl: $duesPaymentUrl")
+            paymentUrl = requireArguments().getString("paymentUrl")!!
+            loadWeb(paymentUrl!!)
         }
-
-
     }
-
 
     @SuppressLint("SetJavaScriptEnabled")
     private fun loadWeb(url: String) {
@@ -111,7 +102,6 @@ class SSLFragment : BaseFragment<FragmentSSLBinding>() {
 
                     findNavController().navigate(R.id.paymentFailledFragment)
 
-
                     toast("canceled")
                 }
 
@@ -132,11 +122,6 @@ class SSLFragment : BaseFragment<FragmentSSLBinding>() {
 
     }
 
-    override fun setupNavigation() {
-
-
-    }
-
     override fun onResume() {
         super.onResume()
         (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
@@ -147,15 +132,5 @@ class SSLFragment : BaseFragment<FragmentSSLBinding>() {
         (activity as AppCompatActivity?)!!.supportActionBar!!.show()
     }
 
-    override fun binObserver() {
-
-        if (fundPaymentUrl != null) {
-            loadWeb(fundPaymentUrl!!)
-        }
-        if (duesPaymentUrl != null) {
-            loadWeb(duesPaymentUrl!!)
-        }
-
-    }
 
 }

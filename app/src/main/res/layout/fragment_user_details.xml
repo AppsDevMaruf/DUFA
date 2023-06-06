@@ -26,7 +26,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
-
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/userProfilePic"
                     android:layout_width="100dp"
@@ -45,7 +44,6 @@
                     app:strokeWidth="1dp"
                     tools:ignore="MissingConstraints" />
                 <TextView
-
                     android:id="@+id/profilePicAB"
                     android:layout_width="100dp"
                     android:layout_height="100dp"

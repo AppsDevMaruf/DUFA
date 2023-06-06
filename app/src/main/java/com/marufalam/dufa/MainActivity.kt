@@ -196,6 +196,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     }
                     false
                 }
+                R.id.fundCollectionFragment -> {
+                    navController.navigateUp() // to clear previous navigation history
+                    navController.navigate(R.id.fundCollectionFragment)
+                    if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                        binding.drawerLayout.closeDrawer(GravityCompat.START)
+                    }
+                    false
+                }
 
                 R.id.QRFragment -> {
                     navController.navigateUp() // to clear previous navigation history

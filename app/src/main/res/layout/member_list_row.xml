@@ -47,8 +47,10 @@
                 android:fontFamily="@font/dm_sans_bold"
                 android:gravity="center"
                 android:includeFontPadding="false"
+                android:background="@drawable/cta_circle"
                 android:padding="5dp"
                 android:text="MA"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Image.PILL"
                 android:textAllCaps="false"
                 android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
                 android:visibility="invisible"
@@ -56,9 +58,6 @@
                 app:layout_constraintEnd_toStartOf="@+id/view"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-
-
-
                 tools:ignore="MissingConstraints" />
 
             <View
@@ -129,7 +128,6 @@
                     android:textStyle="bold"
                     app:fontFamily="@font/dm_sans"
                     tools:text="A+" />
-
 
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

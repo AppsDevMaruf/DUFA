@@ -32,6 +32,10 @@
             android:icon="@drawable/qr"
             android:title="QR Code" />
         <item
+            android:id="@+id/fundCollectionFragment"
+            android:icon="@drawable/income"
+            android:title="Fund Collection" />
+        <item
             android:id="@+id/logoutFragment"
             android:iconTint="@color/red_A700"
             android:icon="@android:drawable/ic_menu_close_clear_cancel"

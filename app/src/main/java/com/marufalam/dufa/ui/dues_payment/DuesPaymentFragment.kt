@@ -39,11 +39,8 @@ class DuesPaymentFragment : BaseFragment<FragmentDuesPaymentBinding>() {
     override fun setupNavigation() {
 
         binding.showHistory.setOnClickListener {
-
             findNavController().navigate(R.id.action_duesPaymentFragment_to_transactionHistoryFragment)
-
         }
-
 
 
         binding.continue2000Payment.setOnClickListener {
@@ -95,12 +92,9 @@ class DuesPaymentFragment : BaseFragment<FragmentDuesPaymentBinding>() {
 
                 is NetworkResult.Loading -> {
                     // progressBar.isVisible = true
-
                 }
 
                 is NetworkResult.Success -> {
-                    Log.e("TAG", "duesPaymentUrl: ${it.data}")
-                    Log.e("TAG", "duesPaymentUrl: ${it.data.toString()}")
                     bundle.putString("paymentUrl", it.data.toString())
                     findNavController().navigate(
                         R.id.action_duesPaymentFragment_to_SSLFragment,
@@ -147,11 +141,9 @@ class DuesPaymentFragment : BaseFragment<FragmentDuesPaymentBinding>() {
 
                 is NetworkResult.Loading -> {
                     // progressBar.isVisible = true
-
                 }
 
                 is NetworkResult.Success -> {
-                    Log.e("TAG", "lifetimeFee: ${it.data?.data?.get(1)?.fee}")
                     lifetimeFee = it.data?.data?.get(1)?.fee
                     if (arguments != null) {
                         dues = requireArguments().getDouble("dues")
@@ -161,7 +153,6 @@ class DuesPaymentFragment : BaseFragment<FragmentDuesPaymentBinding>() {
                         binding.paymentsLayout.gone()
 
                     } else {
-
                         binding.paymentsLayout.show()
                         binding.duesAmount.text = "${dues.toString()} TK"
                         binding.lifetimeFee.text = "${lifetimeFee.toString()} TK"
