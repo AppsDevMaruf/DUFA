@@ -12,7 +12,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.marufalam.dufa"
+        applicationId "org.dufa.dufa9596"
         minSdkVersion 23
         targetSdkVersion 33
         versionCode 12
@@ -42,7 +42,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    namespace 'com.marufalam.dufa'
+    namespace 'org.dufa.dufa9596'
 
 }
 
