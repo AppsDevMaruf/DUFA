@@ -15,8 +15,8 @@ android {
         applicationId "org.dufa.dufa9596"
         minSdkVersion 23
         targetSdkVersion 33
-        versionCode 12
-        versionName "1.0.2"
+        versionCode 13
+        versionName "1.0.13"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
@@ -93,7 +93,7 @@ dependencies {
     def retrofit_version = "2.9.0"
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
-    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.11.0'
     //location
     implementation 'com.google.android.gms:play-services-location:21.0.1'
     //glide

@@ -1,6 +1,8 @@
-package org.dufa.dufa9596
+package org.dufa.dufa9596.ui
 
 import androidx.navigation.fragment.findNavController
+import org.dufa.dufa9596.BaseFragment
+import org.dufa.dufa9596.R
 import org.dufa.dufa9596.databinding.FragmentPayentSuccessBinding
 
 
