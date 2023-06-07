@@ -25,5 +25,7 @@ data class AuthInfo(
     @SerializedName("status")
     val status: Int?,
     @SerializedName("updated_at")
-    val updatedAt: String?
+    val updatedAt: String?,
+    @SerializedName("google_id")
+    val google_id: String?
 )

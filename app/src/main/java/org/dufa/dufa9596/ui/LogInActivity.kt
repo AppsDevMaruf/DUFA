@@ -82,7 +82,6 @@ class LogInActivity : AppCompatActivity() {
             //production
               if (!isValidEmail(binding.loginEmail.text.toString().trim())) {
 
-                  Log.i("TAG", "onCreate: Clicked ")
                   binding.loginErrorText.error = "Email Pattern is Not Correct !"
                   binding.loginErrorText.isVisible = true
 

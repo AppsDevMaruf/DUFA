@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
->
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -30,8 +29,7 @@
         android:theme="@style/Theme.DUFA"
         android:usesCleartextTraffic="true"
         tools:targetApi="33"
-        android:appComponentFactory="androidx"
-        tools:replace="android:appComponentFactory">
+    >
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
