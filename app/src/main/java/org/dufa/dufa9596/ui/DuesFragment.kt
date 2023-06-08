@@ -87,7 +87,7 @@ class DuesFragment : BaseFragment<FragmentDuesBinding>() {
     override fun setupNavigation() {
         binding.button.setOnClickListener {
             val request = RequestPayRenew(
-                amount = 2000.0,
+                amount = 2000,
                 membership ="yearly",
                 userinfoID = 1384,
                 renewFee = "renew_fee"

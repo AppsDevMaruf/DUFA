@@ -7,7 +7,7 @@ data class ResponseFeeList(
     @SerializedName("data")
     val `data`: List<Data?>?,
     @SerializedName("message")
-    val message: Any?,
+    val message: String?,
     @SerializedName("status")
     val status: String?
 ) {
@@ -15,7 +15,7 @@ data class ResponseFeeList(
         @SerializedName("created_at")
         val createdAt: String?,
         @SerializedName("fee")
-        val fee: Double?,
+        val fee: Int?,
         @SerializedName("id")
         val id: Int?,
         @SerializedName("type")

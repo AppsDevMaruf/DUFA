@@ -24,7 +24,8 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
 
     @Inject
     lateinit var tokenManager: TokenManager
-    private var dues: Double? = null
+    private var dues: Int? = null
+    private var voucher: Int? = null
     private var bundle = Bundle()
     override fun getFragmentView(): Int {
         return R.layout.fragment_dashboard
@@ -48,7 +49,7 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
 
 
             if (dues!! > 0) {
-                bundle.putDouble("dues", dues!!)
+                bundle.putInt("dues", dues!!)
                 findNavController().navigate(
                     R.id.action_DashboardFragment_to_duesPaymentFragment, bundle
                 )
@@ -61,13 +62,16 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
         binding.userQr.setOnClickListener {
 
             findNavController().navigate(R.id.action_DashboardFragment_to_QRFragment)
-
-
         }
 
         binding.voucher.setOnClickListener {
+            if (voucher==0){
+                findNavController().navigate(R.id.action_DashboardFragment_to_voucherFragment)
+            }else{
+                findNavController().navigate(R.id.action_DashboardFragment_to_voucherListFragment)
+            }
 
-            findNavController().navigate(R.id.action_DashboardFragment_to_voucherListFragment)
+
         }
         binding.mapCard.setOnClickListener {
             findNavController().navigate(R.id.action_DashboardFragment_to_mapsFragment)
@@ -92,22 +96,17 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
 
                 is NetworkResult.Loading -> {
                     binding.progressBar.show()
-
                 }
 
                 is NetworkResult.Success -> {
                     binding.mainLayout.show()
                     binding.totalMember.text = it.data?.totalMember.toString()
-                    dues = it.data?.totalDues?.toDouble()
+                    voucher = it.data?.totalVoucher
+                    dues = it.data?.totalDues
                     binding.totalDues.text = dues.toString()
                     binding.totalVouchers.text = it.data?.totalVoucher.toString()
-
-
                 }
-
-
             }
-
         }
     }
 

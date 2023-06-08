@@ -53,7 +53,7 @@
                     android:gravity="center"
                     android:includeFontPadding="false"
                     android:padding="1dp"
-                    android:text="AB"
+                    tools:text="AB"
                     android:textAllCaps="false"
                     android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
                     android:visibility="visible"
@@ -86,7 +86,6 @@
                     android:layout_marginBottom="70dp"
                     android:background="@color/white"
                     android:orientation="vertical"
-
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent">
@@ -118,8 +117,7 @@
                             android:fontFamily="@font/dm_sans_medium"
                             android:lines="1"
                             android:padding="2dp"
-                            android:inputType = "textCapCharacters"
-                            android:text=" Saiful Khandaker"
+                            tools:text=" Saiful Khandaker"
                             android:textAlignment="textEnd"
                             android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
                             android:textColor="#8F9BB3" />
@@ -366,7 +364,7 @@
                             android:fontFamily="@font/dm_sans_medium"
                             android:lines="1"
                             android:padding="2dp"
-                            android:text="saiful.khandaker@gmail.com"
+                            tools:text=""
                             android:textAlignment="textEnd"
                             android:textColor="#8F9BB3"
                             app:layout_constraintEnd_toStartOf="@+id/addressEditBtn" />
@@ -446,7 +444,7 @@
                             android:fontFamily="@font/dm_sans_medium"
                             android:lines="1"
                             android:padding="2dp"
-                            android:text="saiful.khandaker@gmail.com"
+                            tools:text="saiful.khandaker@gmail.com"
                             android:textAlignment="textEnd"
                             android:textColor="#8F9BB3"
                             app:layout_constraintEnd_toStartOf="@+id/addressEditBtn" />
@@ -487,7 +485,7 @@
                             android:fontFamily="@font/dm_sans_medium"
                             android:lines="1"
                             android:padding="2dp"
-                            android:text="saiful.khandaker@gmail.com"
+                            tools:text="saiful.khandaker@gmail.com"
                             android:textAlignment="textEnd"
                             android:textColor="#8F9BB3"
                             app:layout_constraintEnd_toStartOf="@+id/addressEditBtn" />
@@ -529,7 +527,7 @@
                             android:fontFamily="@font/dm_sans_medium"
                             android:lines="1"
                             android:padding="2dp"
-                            android:text="saiful.khandaker@gmail.com"
+                            tools:text="saiful.khandaker@gmail.com"
                             android:textAlignment="textEnd"
                             android:textColor="#8F9BB3"
                             app:layout_constraintEnd_toStartOf="@+id/addressEditBtn" />
@@ -569,7 +567,7 @@
                             android:fontFamily="@font/dm_sans_medium"
                             android:lines="1"
                             android:padding="2dp"
-                            android:text="saiful.khandaker@gmail.com"
+                            tools:text="saiful.khandaker@gmail.com"
                             android:textAlignment="textEnd"
                             android:textColor="#8F9BB3"
                             app:layout_constraintEnd_toStartOf="@+id/addressEditBtn" />
@@ -612,7 +610,7 @@
                             android:fontFamily="@font/dm_sans_medium"
                             android:lines="1"
                             android:padding="2dp"
-                            android:text="saiful.khandaker@gmail.com"
+                            tools:text="saiful.khandaker@gmail.com"
                             android:textAlignment="textEnd"
                             android:textColor="#8F9BB3"
                             app:layout_constraintEnd_toStartOf="@+id/addressEditBtn" />

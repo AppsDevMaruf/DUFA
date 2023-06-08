@@ -56,13 +56,13 @@ import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(){
     @Inject
     lateinit var tokenManager: TokenManager
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var userProfilePic: ShapeableImageView
     private var userId = 0
-    private var dues: Double? = null
+    private var dues: Int? = null
     private var bundle = Bundle()
     private lateinit var progressBar: ProgressBar
     private val dashboardViewModel: DashboardViewModel by viewModels()
@@ -165,9 +165,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             when (menuItem.itemId) {
                 R.id.duesPaymentFragment -> {
                     dues?.let {
-                        bundle.putDouble("dues", it)
-                        navController.navigateUp() // to clear previous navigation history
-                        navController.navigate(R.id.duesPaymentFragment, bundle)
+                        if (dues==0){
+                            bundle.putInt("dues", it)
+                            navController.navigateUp() // to clear previous navigation history
+                            navController.navigate(R.id.duesPaymentFragment, bundle)
+                        }else{
+                            navController.navigateUp() // to clear previous navigation history
+                            navController.navigate(R.id.transactionHistoryFragment)
+                        }
+
                     }
 
                     if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
@@ -240,35 +246,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     }
 
-
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        // Handle navigation view item clicks here.
-
-        when (item.itemId) {
-
-            R.id.duesPaymentFragment -> {
-
-
-//                startActivity(Intent(this@MainActivity, LogInActivity::class.java))
-//
-//                finish()
-
-            }
-
-            R.id.logoutFragment -> {
-
-//                startActivity(Intent(this@MainActivity, LogInActivity::class.java))
-//
-//                finish()
-
-            }
-
-
-        }
-
-        binding.drawerLayout.closeDrawer(GravityCompat.START)
-        return true
+    override fun onResume() {
+        super.onResume()
+        dashboardViewModel.profileInfoVM()
+        dashboardViewModel.dashboardInfoVM()
     }
+
 
 
     override fun onSupportNavigateUp(): Boolean {
@@ -283,21 +266,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             when (it) {
                 is NetworkResult.Error -> {
                     dialog.dismiss()
-
-
                 }
 
                 is NetworkResult.Loading -> {
                     dialog.dismiss()
-
                 }
-
                 is NetworkResult.Success -> {
                     dialog.dismiss()
-
-                    Log.i("TAG", "message: ${it.message}")
-                    Log.i("TAG", "data: ${it.data?.message}")
-
 
                 }
             }
@@ -331,20 +306,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         dashboardViewModel.dashboardInfoVMLD.observe(this) {
             progressBar.isVisible = false
             when (it) {
-
                 is NetworkResult.Error -> {
-
                 }
-
                 is NetworkResult.Loading -> {
                     progressBar.isVisible = true
-
                 }
-
                 is NetworkResult.Success -> {
                     Log.i("TAG", "binObserver: $it ")
-                    dues = it.data?.totalDues?.toDouble()
-
+                    dues = it.data?.totalDues
                 }
 
 

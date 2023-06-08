@@ -50,11 +50,8 @@ class TransHistoryAdapter : ListAdapter<Order, TransHistoryAdapter.TransViewHold
     override fun onBindViewHolder(holder: TransViewHolder, position: Int) {
         getItem(position)?.let { order ->
             holder.binding.run {
-                name.text = order.name
-                email.text = order.email
-                mobile.text = order.phone
                 order.created_at?.let {
-                    paymentDate.text = "PaymentDate: ${getZonedTime(it)}"
+                    paymentDate.text = getZonedTime(it)
                 }
                 amount.setTextNonNull("Tk. ${order.amount} Tk")
                 status.text = order.status

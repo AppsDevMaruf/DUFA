@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/mapsFragment"
+            android:icon="@drawable/location"
+            android:title="Dufians Nearby"
+            app:itemIconTint="@null" />
 
         <item
             android:id="@+id/memberListFragment"
-            app:itemIconTint="@android:color/transparent"
             android:icon="@drawable/users"
-            android:title="Search Friends" />
+            android:title="Search Friends"
+            app:itemIconTint="@android:color/transparent" />
         <item
             android:id="@+id/duesPaymentFragment"
-            app:itemIconTint="@null"
             android:icon="@drawable/atm_card"
-            android:title="Payments" />
+            android:title="Payments"
+            app:itemIconTint="@null" />
         <item
             android:id="@+id/voucherListFragment"
-            app:itemIconTint="@null"
             android:icon="@drawable/voucher"
-            android:title="Voucher" />
-        <item
-            android:id="@+id/mapsFragment"
-            app:itemIconTint="@null"
-            android:icon="@drawable/location"
-            android:title="Dufians Nearby" />
+            android:title="Voucher"
+            app:itemIconTint="@null" />
 
         <item
             android:id="@+id/QRFragment"
@@ -37,14 +37,11 @@
             android:title="Fund Collection" />
         <item
             android:id="@+id/logoutFragment"
-            android:iconTint="@color/red_A700"
             android:icon="@android:drawable/ic_menu_close_clear_cancel"
+            android:iconTint="@color/red_A700"
             android:title="@string/log_out" />
 
     </group>
-
-
-
 
 
 </menu>

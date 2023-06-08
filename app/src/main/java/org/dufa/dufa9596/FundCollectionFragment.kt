@@ -1,10 +1,13 @@
 package org.dufa.dufa9596
 
+import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.Window
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.viewModels
@@ -40,18 +43,23 @@ class FundCollectionFragment : BaseFragment<FragmentFundCollectionBinding>() {
     }
 
     private fun showAlertDialogButtonClicked(fundType: String) {
-        // Create an alert builder
+    /*    // Create an alert builder
         val builder = AlertDialog.Builder(requireActivity())
 
         // set the custom layout
-        val customLayout: View = layoutInflater.inflate(R.layout.alert_dialog_with_edittext, null)
+        val customLayout: View = layoutInflater.inflate(R.layout.dialog_edit_text, null)
         builder.setView(customLayout)
+        // val dialog = builder.create()*/
+        val dialog = Dialog(requireActivity())
 
-        val dialog = builder.create()
-        val continuePaymentBtn = customLayout.findViewById<AppCompatButton>(R.id.continuePayment)
-        continuePaymentBtn.setOnClickListener {
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(false)
+        dialog.setContentView(R.layout.dialog_edit_text)
 
-            val editText = customLayout.findViewById<EditText>(R.id.editText)
+        dialog.findViewById<AppCompatButton>(R.id.continuePayment).setOnClickListener {
+
+            val editText = dialog.findViewById<EditText>(R.id.editText)
             if (editText.text.toString().isNotEmpty()){
                 sendDialogDataToActivity(fundType, editText.text.toString())
                 dialog.dismiss()
@@ -61,10 +69,8 @@ class FundCollectionFragment : BaseFragment<FragmentFundCollectionBinding>() {
 
         }
 
-        val cancelBtn = customLayout.findViewById<ImageView>(R.id.cancelBtn)
-        cancelBtn.setOnClickListener {
+   dialog.findViewById<TextView>(R.id.cancelBtn).setOnClickListener {
             dialog.dismiss()
-
         }
         dialog.show()
     }

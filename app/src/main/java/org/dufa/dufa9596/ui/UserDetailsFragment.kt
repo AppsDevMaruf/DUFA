@@ -21,19 +21,19 @@ class UserDetailsFragment :BaseFragment<FragmentUserDetailsBinding>() {
     override fun configUi() {
         if (arguments != null) {
             val userInfo: Data = requireArguments().getParcelable("memberInfo")!!
-            binding.name.replaceFirstLC(userInfo.name)
+            binding.name.text=userInfo.name.toString().titleCaseFirstChar()
             binding.phoneNumber.text = userInfo.phone
             binding.email.text = userInfo.email
-            binding.address.replaceFirstLC(userInfo.address)
+            binding.address.text= userInfo.address.toString().titleCaseFirstChar()
             binding.nid.text = userInfo.nid
-            binding.gender.text = userInfo.gender
+            binding.gender.text = userInfo.gender.toString().titleCaseFirstChar()
             binding.birthdate.text = userInfo.birthdate
-            binding.department.text = userInfo.department
-            binding.hall.text = userInfo.hall
-            binding.bloodGroup.text = userInfo.bloodgroup
+            binding.department.text = userInfo.department.toString().titleCaseFirstChar()
+            binding.hall.text = userInfo.hall.toString().titleCaseFirstChar()
+            binding.bloodGroup.text = userInfo.bloodgroup.toString().titleCaseFirstChar()
             binding.bloodGroup.setTextColor(ContextCompat.getColor(requireActivity(), R.color.text_red))
-            binding.occupation.text = userInfo.occupation
-            binding.district.text = userInfo.district
+            binding.occupation.text = userInfo.occupation.toString().titleCaseFirstChar()
+            binding.district.text = userInfo.district.toString().titleCaseFirstChar()
 
             if (userInfo.subscription == "none") {
                 binding.status.text = "Inactive"
@@ -59,32 +59,10 @@ class UserDetailsFragment :BaseFragment<FragmentUserDetailsBinding>() {
 
             val profileImg = Constants.IMG_PREFIX + userInfo.imagePath
 
-
             Glide.with(requireActivity())
                 .load(profileImg)
                 .placeholder(R.drawable.avatar_placeholder)
                 .into(binding.userProfilePic)
-
-//            if (userInfo.imagePath == null) {
-//                binding.userProfilePic.hide()
-//                binding.profilePicAB.show()
-//                binding.profilePicAB.text = userInfo.name?.let { it1 ->
-//                    nameAbbreviationGenerator(
-//                        it1
-//                    )
-//                }
-//            } else {
-//                binding.userProfilePic.show()
-//                binding.profilePicAB.hide()
-//
-//                val profileImg = Constants.IMG_PREFIX + userInfo.imagePath
-//
-//
-//                Glide.with(requireActivity())
-//                    .load(profileImg)
-//                    .placeholder(R.drawable.avatar_placeholder)
-//                    .into(binding.userProfilePic)
-//            }
         }
 
     }

@@ -34,6 +34,9 @@
         <action
             android:id="@+id/action_DashboardFragment_to_fundCollectionFragment"
             app:destination="@id/fundCollectionFragment" />
+        <action
+            android:id="@+id/action_DashboardFragment_to_voucherFragment"
+            app:destination="@id/voucherFragment" />
 
     </fragment>
     <fragment
@@ -90,7 +93,11 @@
         android:id="@+id/transactionHistoryFragment"
         android:name="org.dufa.dufa9596.ui.trans_history.TransactionHistoryFragment"
         android:label="fragment_transaction_history"
-        tools:layout="@layout/fragment_transaction_history" />
+        tools:layout="@layout/fragment_transaction_history" >
+        <action
+            android:id="@+id/action_transactionHistoryFragment_to_DashboardFragment"
+            app:destination="@id/DashboardFragment" />
+    </fragment>
     <fragment
         android:id="@+id/duesPaymentFragment"
         android:name="org.dufa.dufa9596.ui.dues_payment.DuesPaymentFragment"
@@ -102,6 +109,9 @@
         <action
             android:id="@+id/action_duesPaymentFragment_to_SSLFragment"
             app:destination="@id/SSLFragment" />
+        <action
+            android:id="@+id/action_duesPaymentFragment_to_DashboardFragment"
+            app:destination="@id/DashboardFragment" />
     </fragment>
     <fragment
         android:id="@+id/logoutFragment"
@@ -133,7 +143,11 @@
         android:id="@+id/voucherFragment"
         android:name="org.dufa.dufa9596.ui.VoucherFragment"
         android:label="fragment_voucher"
-        tools:layout="@layout/fragment_voucher" />
+        tools:layout="@layout/fragment_voucher" >
+        <action
+            android:id="@+id/action_voucherFragment_to_voucherListFragment"
+            app:destination="@id/voucherListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/voucherListFragment"
         android:name="org.dufa.dufa9596.ui.voucher.VoucherListFragment"
@@ -142,6 +156,9 @@
         <action
             android:id="@+id/action_voucherListFragment_to_voucherFragment"
             app:destination="@id/voucherFragment" />
+        <action
+            android:id="@+id/action_voucherListFragment_to_DashboardFragment"
+            app:destination="@id/DashboardFragment" />
     </fragment>
     <fragment
         android:id="@+id/mapsFragment"

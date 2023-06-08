@@ -3,9 +3,9 @@ package org.dufa.dufa9596.ui.dues_payment
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.addCallback
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import org.dufa.dufa9596.BaseFragment
 import org.dufa.dufa9596.R
 import org.dufa.dufa9596.data.models.payRenew.RequestPayRenew
 import org.dufa.dufa9596.databinding.FragmentDuesPaymentBinding
@@ -21,8 +21,8 @@ class DuesPaymentFragment : org.dufa.dufa9596.BaseFragment<FragmentDuesPaymentBi
     val bundle = Bundle()
 
     var userid = 0
-    private var dues: Double? = null
-    private var lifetimeFee: Double? = null
+    private var dues: Int? = null
+    private var lifetimeFee: Int? = null
 
     override fun getFragmentView(): Int {
         return R.layout.fragment_dues_payment
@@ -32,7 +32,9 @@ class DuesPaymentFragment : org.dufa.dufa9596.BaseFragment<FragmentDuesPaymentBi
     @SuppressLint("SetTextI18n")
     override fun configUi() {
         dashboardViewModel.getFeeListVM()
-
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            findNavController().navigate(R.id.action_duesPaymentFragment_to_DashboardFragment)
+        }
 
     }
 
@@ -55,7 +57,7 @@ class DuesPaymentFragment : org.dufa.dufa9596.BaseFragment<FragmentDuesPaymentBi
 
         binding.continue10000Payment.setOnClickListener {
             val request = RequestPayRenew(
-                amount = lifetimeFee!!.toDouble(),
+                amount = lifetimeFee!!,
                 membership = "lifetime",
                 userinfoID = userid,
                 renewFee = "renew_fee"
@@ -146,12 +148,11 @@ class DuesPaymentFragment : org.dufa.dufa9596.BaseFragment<FragmentDuesPaymentBi
                 is NetworkResult.Success -> {
                     lifetimeFee = it.data?.data?.get(1)?.fee
                     if (arguments != null) {
-                        dues = requireArguments().getDouble("dues")
+                        dues = requireArguments().getInt("dues")
                     }
-                    if (dues == 0.0) {
+                    if (dues == 0) {
                         findNavController().navigate(R.id.action_duesPaymentFragment_to_transactionHistoryFragment)
                         binding.paymentsLayout.gone()
-
                     } else {
                         binding.paymentsLayout.show()
                         binding.duesAmount.text = "${dues.toString()} TK"

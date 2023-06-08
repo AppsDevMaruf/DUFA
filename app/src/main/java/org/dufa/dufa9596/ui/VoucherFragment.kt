@@ -261,10 +261,7 @@ class VoucherFragment : BaseFragment<FragmentVoucherBinding>() {
 
             when (it) {
                 is NetworkResult.Error -> {
-
                     dialog.dismiss()
-                    Log.i("TAG", "Error: ${it.data} ")
-                    Log.i("TAG", "Error: $it ")
                 }
                 is NetworkResult.Loading -> {
                     dialog.show()
@@ -272,9 +269,8 @@ class VoucherFragment : BaseFragment<FragmentVoucherBinding>() {
                 is NetworkResult.Success -> {
                     dialog.dismiss()
                     if (it.data?.success == true) {
-                        findNavController().popBackStack()
-
-                        Log.i("TAG", "success: $it ")
+                        findNavController().navigateUp()
+                        findNavController().navigate(R.id.action_voucherFragment_to_voucherListFragment)
 
                     }
 
