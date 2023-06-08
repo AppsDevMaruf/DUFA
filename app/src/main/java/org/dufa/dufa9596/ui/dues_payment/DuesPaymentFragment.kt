@@ -32,6 +32,12 @@ class DuesPaymentFragment : org.dufa.dufa9596.BaseFragment<FragmentDuesPaymentBi
     @SuppressLint("SetTextI18n")
     override fun configUi() {
         dashboardViewModel.getFeeListVM()
+        if (arguments != null) {
+            dues = requireArguments().getInt("dues")
+        }
+
+
+
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             findNavController().navigate(R.id.action_duesPaymentFragment_to_DashboardFragment)
         }
@@ -147,12 +153,10 @@ class DuesPaymentFragment : org.dufa.dufa9596.BaseFragment<FragmentDuesPaymentBi
 
                 is NetworkResult.Success -> {
                     lifetimeFee = it.data?.data?.get(1)?.fee
-                    if (arguments != null) {
-                        dues = requireArguments().getInt("dues")
-                    }
                     if (dues == 0) {
-                        findNavController().navigate(R.id.action_duesPaymentFragment_to_transactionHistoryFragment)
                         binding.paymentsLayout.gone()
+                        findNavController().navigate(R.id.action_duesPaymentFragment_to_transactionHistoryFragment)
+
                     } else {
                         binding.paymentsLayout.show()
                         binding.duesAmount.text = "${dues.toString()} TK"

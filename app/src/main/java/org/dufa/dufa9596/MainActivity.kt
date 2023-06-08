@@ -1,4 +1,5 @@
 package org.dufa.dufa9596
+
 import android.app.Dialog
 import android.app.ProgressDialog
 import android.net.Uri
@@ -56,13 +57,14 @@ import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(){
+class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var tokenManager: TokenManager
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var userProfilePic: ShapeableImageView
     private var userId = 0
     private var dues: Int? = null
+    private var voucher: Int? = null
     private var bundle = Bundle()
     private lateinit var progressBar: ProgressBar
     private val dashboardViewModel: DashboardViewModel by viewModels()
@@ -164,17 +166,17 @@ class MainActivity : AppCompatActivity(){
         navView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.duesPaymentFragment -> {
-                    dues?.let {
-                        if (dues==0){
-                            bundle.putInt("dues", it)
-                            navController.navigateUp() // to clear previous navigation history
-                            navController.navigate(R.id.duesPaymentFragment, bundle)
-                        }else{
-                            navController.navigateUp() // to clear previous navigation history
-                            navController.navigate(R.id.transactionHistoryFragment)
-                        }
-
+                    if (dues!! > 0) {
+                        bundle.putInt("dues", dues!!)
+                        Log.i("TAG", "onCreate2222: $dues")
+                        navController.navigateUp() // to clear previous navigation history
+                        navController.navigate(R.id.duesPaymentFragment, bundle)
+                    } else {
+                        navController.navigateUp() // to clear previous navigation history
+                        navController.navigate(R.id.transactionHistoryFragment)
                     }
+
+
 
                     if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
                         binding.drawerLayout.closeDrawer(GravityCompat.START)
@@ -201,13 +203,19 @@ class MainActivity : AppCompatActivity(){
                 }
 
                 R.id.voucherListFragment -> {
-                    navController.navigateUp() // to clear previous navigation history
-                    navController.navigate(R.id.voucherListFragment)
+                    if (voucher == 0) {
+                        navController.navigateUp() // to clear previous navigation history
+                        navController.navigate(R.id.voucherFragment)
+                    } else {
+                        navController.navigateUp() // to clear previous navigation history
+                        navController.navigate(R.id.voucherListFragment)
+                    }
                     if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
                         binding.drawerLayout.closeDrawer(GravityCompat.START)
                     }
                     false
                 }
+
                 R.id.fundCollectionFragment -> {
                     navController.navigateUp() // to clear previous navigation history
                     navController.navigate(R.id.fundCollectionFragment)
@@ -253,7 +261,6 @@ class MainActivity : AppCompatActivity(){
     }
 
 
-
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
@@ -271,6 +278,7 @@ class MainActivity : AppCompatActivity(){
                 is NetworkResult.Loading -> {
                     dialog.dismiss()
                 }
+
                 is NetworkResult.Success -> {
                     dialog.dismiss()
 
@@ -308,12 +316,18 @@ class MainActivity : AppCompatActivity(){
             when (it) {
                 is NetworkResult.Error -> {
                 }
+
                 is NetworkResult.Loading -> {
                     progressBar.isVisible = true
                 }
+
                 is NetworkResult.Success -> {
-                    Log.i("TAG", "binObserver: $it ")
                     dues = it.data?.totalDues
+
+                    Log.i("TAG", "load111111: $dues")
+                    voucher = it.data?.totalVoucher
+
+
                 }
 
 
