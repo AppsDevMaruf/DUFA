@@ -34,6 +34,18 @@
     <string name="district">District</string>
     <string name="blood_group">Blood Group</string>
     <string name="department">Department</string>
+    <string name="phone">Phone<font color="#E72A02">*</font></string>
+    <string name="address">Address<font color="#E72A02">*</font></string>
+    <string name="nid">NID</string>
+    <string name="gender">Gender</string>
+    <string name="birthdate">Birth Date</string>
+    <string name="bloodGroup">Blood Group</string>
+    <string name="e_mail">E-mail</string>
+    <string name="full_name">Full name</string>
+    <string name="status">Status</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="yyyy_mm_dd">yyyy-mm-dd</string>
+
     <string-array name="paymentsType">
         <item>Registration Fee</item>
         <item>One Time Fee</item>

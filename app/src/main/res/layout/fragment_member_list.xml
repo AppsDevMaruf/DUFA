@@ -10,7 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#DFDFDF"
+        android:background="#F6F6F6"
         android:orientation="vertical"
         android:padding="16dp"
         tools:context=".ui.MemberListFragment">

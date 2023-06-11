@@ -50,7 +50,7 @@ class QRFragment : BaseFragment<FragmentQRBinding>() {
                 }
                 is NetworkResult.Success -> {
                     val name = it.data?.memberInfo?.name
-                    val address = " DEPT: ${it.data?.memberInfo?.department}\n Email:" +
+                    val address = " Department: ${it.data?.memberInfo?.department}\n Email:" +
                             " ${it.data?.memberInfo?.email}\n  Phone:" +
                             " ${it.data?.memberInfo?.phone}"
 
@@ -66,8 +66,6 @@ class QRFragment : BaseFragment<FragmentQRBinding>() {
                             "<font color=#4d4d4d>Status: </font> <font color=#00AA0E>Active</font>"
                         binding.status.text = HtmlCompat.fromHtml(text, HtmlCompat.FROM_HTML_MODE_LEGACY)
                     }
-
-
                     profileQr = "$name \n $address"
 
                     qrGenerate(profileQr)
@@ -92,7 +90,7 @@ class QRFragment : BaseFragment<FragmentQRBinding>() {
 //                    val address = it.data?.address
 //
 //                    binding.userName.text = name
-//                    binding.userAdress.text = address
+//                    binding.userAddress.text = address
 //
 //
 //                    profileQr = "$name \n $address"

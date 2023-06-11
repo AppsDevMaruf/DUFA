@@ -13,7 +13,7 @@
         android:layout_margin="4dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="8dp"
-        app:cardMaxElevation="10dp"
+        app:cardMaxElevation="2dp"
         app:cardPreventCornerOverlap="true"
         app:cardUseCompatPadding="false">
 

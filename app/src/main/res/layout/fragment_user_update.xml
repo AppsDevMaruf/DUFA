@@ -34,9 +34,9 @@
                     android:layout_height="100dp"
                     android:layout_marginTop="30dp"
                     android:padding="1dp"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/maruf"
                     android:visibility="visible"
-                    android:scaleType="centerCrop"
                     app:layout_constraintBottom_toBottomOf="@+id/view"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -47,19 +47,19 @@
                     tools:ignore="MissingConstraints" />
 
                 <com.google.android.material.imageview.ShapeableImageView
-                    app:contentPadding="5dp"
-                    android:layout_marginEnd="@dimen/_4sdp"
-                    app:strokeColor="@color/blue"
-                    app:strokeWidth="1dp"
-                    android:padding="2dp"
-                    android:background="@color/white"
-                    app:shapeAppearanceOverlay = "@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                     android:id="@+id/uploadProfilePicBtn"
-                    app:layout_constraintEnd_toEndOf="@id/userProfilePic"
-                    app:layout_constraintBottom_toBottomOf="@id/userProfilePic"
-                    android:src="@drawable/round_cloud_upload_24"
                     android:layout_width="@dimen/_25sdp"
-                    android:layout_height="@dimen/_25sdp"/>
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_marginEnd="@dimen/_4sdp"
+                    android:background="@color/white"
+                    android:padding="2dp"
+                    android:src="@drawable/round_cloud_upload_24"
+                    app:contentPadding="5dp"
+                    app:layout_constraintBottom_toBottomOf="@id/userProfilePic"
+                    app:layout_constraintEnd_toEndOf="@id/userProfilePic"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
+                    app:strokeColor="@color/blue"
+                    app:strokeWidth="1dp" />
 
                 <TextView
                     android:id="@+id/profilePicAB"
@@ -175,28 +175,34 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
                                 android:paddingVertical="12dp"
-                                android:src="@drawable/ic_occupation"
+                                android:src="@drawable/occupation"
                                 android:visibility="visible"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:tint="@color/blue" />
 
                             <TextView
                                 android:id="@+id/occupationTypeText"
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="8dp"
                                 android:layout_marginStart="16dp"
                                 android:ellipsize="end"
-                                android:fontFamily="@font/dm_sans_medium"
+                                android:ems="12"
                                 android:maxLines="1"
+                                android:singleLine="true"
+                                android:fontFamily="@font/dm_sans_medium"
+
                                 android:tag="false"
                                 android:text="Select Occupation type"
                                 android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                                 android:textColor="#8F9BB3"
                                 app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toStartOf="@+id/imageView4"
                                 app:layout_constraintStart_toEndOf="@+id/occupationIcon"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:ignore="RtlSymmetry" />
 
                             <ImageView
                                 android:id="@+id/imageView4"
@@ -280,19 +286,22 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
                                 android:paddingVertical="12dp"
-                                android:src="@drawable/ic_occupation"
+                                android:src="@drawable/department"
                                 android:visibility="visible"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:tint="@color/blue" />
 
                             <TextView
                                 android:id="@+id/departmentTypeText"
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="8dp"
                                 android:layout_marginStart="16dp"
                                 android:ellipsize="end"
+                                android:ems="12"
+                                android:singleLine="true"
                                 android:fontFamily="@font/dm_sans_medium"
                                 android:maxLines="1"
                                 android:tag="false"
@@ -301,9 +310,11 @@
                                 android:textColor="@color/text_primary"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toEndOf="@+id/departmentIcon"
+                                app:layout_constraintEnd_toStartOf="@+id/departmentArrow"
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <ImageView
+                                android:id="@+id/departmentArrow"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:src="@drawable/round_keyboard_arrow_down_24"
@@ -347,21 +358,27 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
                                 android:paddingVertical="12dp"
-                                android:src="@drawable/ic_occupation"
+                                android:src="@drawable/hall"
                                 android:visibility="visible"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:tint="@color/blue" />
 
                             <TextView
                                 android:id="@+id/hallTypeText"
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="8dp"
                                 android:layout_marginStart="16dp"
                                 android:fontFamily="@font/dm_sans_medium"
                                 android:tag="false"
                                 android:text="Select hall"
+                                android:ellipsize="end"
+                                android:ems="12"
+                                android:maxLines="1"
+                                android:singleLine="true"
+                                app:layout_constraintEnd_toStartOf="@+id/hallArrow"
                                 android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                                 android:textColor="@color/text_primary"
                                 app:layout_constraintBottom_toBottomOf="parent"
@@ -369,6 +386,7 @@
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <ImageView
+                                android:id="@+id/hallArrow"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:src="@drawable/round_keyboard_arrow_down_24"
@@ -413,22 +431,26 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
                                 android:paddingVertical="12dp"
-                                android:src="@drawable/ic_occupation"
-                                android:visibility="visible"
+                                android:src="@drawable/blood"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:tint="@color/blue" />
 
                             <TextView
                                 android:id="@+id/bloodGroupTypeText"
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="8dp"
                                 android:layout_marginStart="16dp"
                                 android:ellipsize="end"
-                                android:fontFamily="@font/dm_sans_medium"
+                                android:ems="12"
                                 android:maxLines="1"
-                                android:tag="false"
+                                android:singleLine="true"
+                                app:layout_constraintEnd_toStartOf="@+id/blood_groupArrow"
+
+                                android:fontFamily="@font/dm_sans_medium"
+
                                 android:text="Select blood Group"
                                 android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                                 android:textColor="@color/text_primary"
@@ -437,6 +459,7 @@
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <ImageView
+                                android:id="@+id/blood_groupArrow"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:src="@drawable/round_keyboard_arrow_down_24"
@@ -479,23 +502,26 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
                                 android:paddingVertical="12dp"
-                                android:src="@drawable/ic_occupation"
-                                android:visibility="visible"
+                                android:src="@drawable/pin"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:tint="@color/blue" />
 
                             <TextView
                                 android:id="@+id/districtTypeText"
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="8dp"
                                 android:layout_marginStart="16dp"
-                                android:ellipsize="end"
                                 android:fontFamily="@font/dm_sans_medium"
-                                android:maxLines="1"
                                 android:tag="false"
                                 android:text="Select District"
+                                android:ellipsize="end"
+                                android:ems="12"
+                                android:maxLines="1"
+                                android:singleLine="true"
+                                app:layout_constraintEnd_toStartOf="@+id/districtArrow"
                                 android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                                 android:textColor="@color/text_primary"
                                 app:layout_constraintBottom_toBottomOf="parent"
@@ -503,6 +529,7 @@
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <ImageView
+                                android:id="@+id/districtArrow"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:src="@drawable/round_keyboard_arrow_down_24"
@@ -571,7 +598,7 @@
                         <EditText
                             android:id="@+id/nid"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="40dp"
                             android:layout_gravity="start"
                             android:layout_weight="1"
                             android:background="@drawable/white_back_react"
@@ -616,11 +643,11 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
                                 android:paddingVertical="12dp"
-                                android:src="@drawable/ic_occupation"
-                                android:visibility="visible"
+                                android:src="@drawable/ic_gender"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:tint="@color/blue" />
 
                             <TextView
                                 android:id="@+id/genderTypeText"
@@ -655,7 +682,6 @@
 
                     <!-- birthday-->
                     <LinearLayout
-                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
@@ -682,7 +708,7 @@
                             android:ellipsize="end"
                             android:fontFamily="@font/dm_sans_medium"
                             android:gravity="center_vertical"
-                            android:hint="yyyy-mm-dd"
+                            android:hint="@string/yyyy_mm_dd"
                             android:lines="1"
                             android:padding="2dp"
                             android:paddingStart="10dp"

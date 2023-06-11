@@ -12,6 +12,7 @@ data class RequestProfileUpdate(
     var gender: String,
     var hall: String,
     var nid: String,
+    var birthdate: String,
 
 
     )

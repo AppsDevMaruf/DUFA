@@ -15,8 +15,8 @@ android {
         applicationId "org.dufa.dufa9596"
         minSdkVersion 23
         targetSdkVersion 33
-        versionCode 13
-        versionName "1.0.13"
+        versionCode 15
+        versionName "1.0.15"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true

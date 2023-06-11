@@ -11,13 +11,15 @@ import org.dufa.dufa9596.data.models.search.Data
 import org.dufa.dufa9596.databinding.MemberListRowBinding
 import org.dufa.dufa9596.interfaces.MemberSelectListener
 import org.dufa.dufa9596.utils.Constants
+import org.dufa.dufa9596.utils.gone
 import org.dufa.dufa9596.utils.hide
+import org.dufa.dufa9596.utils.loadImagesWithGlide
 import org.dufa.dufa9596.utils.nameAbbreviationGenerator
 import org.dufa.dufa9596.utils.show
 
 
 class SearchMemberListAdapter(private val memberSelectListener: MemberSelectListener) :
-    PagingDataAdapter<Data, SearchMemberListAdapter.MemberListViewHolder>(orgparator) {
+    PagingDataAdapter<Data, SearchMemberListAdapter.MemberListViewHolder>(comparator) {
 
 
     class MemberListViewHolder(val binding: MemberListRowBinding) :
@@ -26,7 +28,7 @@ class SearchMemberListAdapter(private val memberSelectListener: MemberSelectList
 
     companion object {
 
-        val orgparator = object : DiffUtil.ItemCallback<Data>() {
+        val comparator = object : DiffUtil.ItemCallback<Data>() {
             override fun areItemsTheSame(oldItem: Data, newItem: Data): Boolean {
                 return oldItem.id == newItem.id
             }
@@ -44,17 +46,33 @@ class SearchMemberListAdapter(private val memberSelectListener: MemberSelectList
         getItem(position).let {
 
             if (it != null) {
-                holder.binding.name.text = it.name
-                holder.binding.phoneNumber.text = it.phone
-                holder.binding.bloodGroup.text = it.bloodgroup
-                holder.binding.department.text = it.department
+                if (it.name == "" || it.name.isNullOrBlank()) {
+                    holder.binding.name.gone()
+                } else {
+                    holder.binding.name.text = it.department
+                }
+                if (it.phone == "" || it.phone.isNullOrBlank()) {
+                    holder.binding.phoneNumber.gone()
+                } else {
+                    holder.binding.phoneNumber.text = it.department
+                }
+                if (it.bloodgroup == "" || it.bloodgroup.isNullOrBlank()) {
+                    holder.binding.bloodGroup.gone()
+                } else {
+                    holder.binding.bloodGroup.text = it.department
+                }
+
+                if (it.department == "" || it.department.isNullOrBlank()) {
+                    holder.binding.department.gone()
+                } else {
+                    holder.binding.department.text = it.department
+                }
+
 
                 holder.itemView.setOnClickListener { _ ->
                     memberSelectListener.selectedMember(it)
 
                 }
-
-
 
                 if (it.imagePath == null) {
                     holder.binding.userProfilePic.hide()
@@ -69,12 +87,7 @@ class SearchMemberListAdapter(private val memberSelectListener: MemberSelectList
                     holder.binding.profilePicAB.hide()
 
                     val profileImg = Constants.IMG_PREFIX + it.imagePath
-
-
-
-                    Glide.with(holder.itemView.context)
-                        .load(profileImg).placeholder(R.drawable.avatar_placeholder)
-                        .into(holder.binding.userProfilePic)
+                    holder.binding.userProfilePic.loadImagesWithGlide(profileImg)
                 }
 
             }

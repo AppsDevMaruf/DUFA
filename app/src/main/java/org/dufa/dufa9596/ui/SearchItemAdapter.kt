@@ -48,7 +48,6 @@ class SearchItemAdapter(var seaSearchByListener: SearchByListener, var type: Str
     override fun onBindViewHolder(holder: SearchItemViewHolder, position: Int) {
 
         getItem(position).let {
-            Log.i("type", "onBindViewHolder: $type ")
 
             when (type) {
                 "Blood Group" -> {
@@ -81,8 +80,6 @@ class SearchItemAdapter(var seaSearchByListener: SearchByListener, var type: Str
                 }
 
             }
-
-
             holder.itemView.setOnClickListener { _ ->
                 seaSearchByListener.searchBYSelectedItem(it)
             }

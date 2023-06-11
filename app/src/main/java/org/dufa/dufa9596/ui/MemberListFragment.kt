@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.WindowManager
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -29,9 +30,11 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), MemberSelectListener, SearchByListener {
+open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), MemberSelectListener,
+    SearchByListener {
     var bundle = Bundle()
     private val dashboardViewModel: DashboardViewModel by activityViewModels()
+    private var filterType = ""
 
     private lateinit var searchAdapter: SearchMemberListAdapter
 
@@ -60,15 +63,6 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
     @OptIn(DelicateCoroutinesApi::class)
     override fun configUi() {
 
-        //        val onBackPressedCallback = object : OnBackPressedCallback(true) {
-        //            override fun handleOnBackPressed() {
-        //                requireActivity().supportFragmentManager.beginTransaction()
-        //                    .remove(this@MemberListFragment).commit()
-        //               // requireActivity().supportFragmentManager.popBackStack()
-        //            }
-        //        }
-        //        requireActivity().onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
-
         bottomSheetDialogSearchItem = BottomSheetDialog(requireContext())
         searchAdapter = SearchMemberListAdapter(this)
         searchItemAdapter = SearchItemAdapter(this, type)
@@ -82,7 +76,7 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
                 timer.schedule(
                     object : TimerTask() {
                         override fun run() {
-                            requestSearch = RequestSearch(null, null, null, null, null, it, null,0)
+                            requestSearch = RequestSearch(null, null, null, null, null, it, null, 0)
                             dashboardViewModel.getMemberSearchVMLD(requestSearch)
                             GlobalScope.launch(Dispatchers.Main) {
                                 dashboardViewModel.getMemberSearchVMLD(requestSearch).observe(
@@ -105,9 +99,7 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
         val bottomSheetDialog = BottomSheetDialog(requireContext())
         bottomSheetDialog.setContentView(R.layout.item_filter)
         bottomSheetDialog.behavior.maxHeight = 2000 // set max height when expanded in PIXEL
-        bottomSheetDialog.window!!.setSoftInputMode(
-            WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE
-        )
+        bottomSheetDialog.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
         bottomSheetDialog.findViewById<LinearLayout>(R.id.nameOrEmailBtn)!!.setOnClickListener {
             binding.titleText.text = it.tag.toString()
             binding.filterTypeIcon.setImageResource(R.drawable.email)
@@ -127,7 +119,7 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
             dashboardViewModel.getBloodGroupVM()
             hasData = false
             searchItemAdapter = SearchItemAdapter(this, type)
-
+            filterType = "Select a blood group"
             bottomSheetDialog.dismiss()
         }
         bottomSheetDialog.findViewById<LinearLayout>(R.id.districtBtn)!!.setOnClickListener {
@@ -138,7 +130,7 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
             dashboardViewModel.districtVM()
             hasData = false
             searchItemAdapter = SearchItemAdapter(this, type)
-
+            filterType = "Select a district"
             bottomSheetDialog.dismiss()
         }
         bottomSheetDialog.findViewById<LinearLayout>(R.id.occupationBtn)!!.setOnClickListener {
@@ -149,7 +141,7 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
             dashboardViewModel.occupationsVM()
             hasData = false
             searchItemAdapter = SearchItemAdapter(this, type)
-
+            filterType = "Select an occupation"
             bottomSheetDialog.dismiss()
         }
         bottomSheetDialog.findViewById<LinearLayout>(R.id.departmentBtn)!!.setOnClickListener {
@@ -160,7 +152,7 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
             dashboardViewModel.getDepartmentsVM()
             hasData = false
             searchItemAdapter = SearchItemAdapter(this, type)
-
+            filterType = "Select a department"
             bottomSheetDialog.dismiss()
         }
         bottomSheetDialog.findViewById<LinearLayout>(R.id.hallBtn)!!.setOnClickListener {
@@ -171,7 +163,7 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
             dashboardViewModel.hallsVM()
             hasData = false
             searchItemAdapter = SearchItemAdapter(this, type)
-
+            filterType = "Select a hall"
             bottomSheetDialog.dismiss()
         }
         bottomSheetDialog.findViewById<LinearLayout>(R.id.dobBtn)!!.setOnClickListener {
@@ -185,7 +177,6 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
             bottomSheetDialog.dismiss()
         }
 
-
         bottomSheetDialog.show()
     }
 
@@ -197,10 +188,10 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
         bottomSheetDialogSearchItem.window!!.setSoftInputMode(
             WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE
         )
-
-
         val itemRcv: RecyclerView =
             bottomSheetDialogSearchItem.findViewById<RecyclerView>(R.id.itemKeywordRCV)!!
+        val filterTitle = bottomSheetDialogSearchItem.findViewById<TextView>(R.id.filterTypeId)!!
+        filterTitle.text = filterType
         itemRcv.adapter = searchItemAdapter
 
         bottomSheetDialogSearchItem.show()
@@ -214,7 +205,7 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
         binding.dobTV.setOnClickListener {
             datePickerFun {
                 binding.dobTV.text = it
-                requestSearch = RequestSearch(it, null, null, null, null, null,hall = null, 0)
+                requestSearch = RequestSearch(it, null, null, null, null, null, hall = null, 0)
                 Log.i("TAG", "requestSearch: $requestSearch")
                 dashboardViewModel.getMemberSearchVMLD(requestSearch).observe(viewLifecycleOwner) {
                     searchAdapter.submitData(lifecycle, it)
@@ -233,11 +224,12 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
                 is NetworkResult.Success -> {
                     itemsBy.clear()
 
-                    it.data?.departments?.sortedBy { department ->department?.name}?.forEach { departments ->
-                        val searchBy = SearchBy("", departments?.name.toString())
+                    it.data?.departments?.sortedBy { department -> department?.name }
+                        ?.forEach { departments ->
+                            val searchBy = SearchBy("", departments?.name.toString())
 
-                        itemsBy.add(searchBy)
-                    }
+                            itemsBy.add(searchBy)
+                        }
 
                     searchItemAdapter.submitList(itemsBy)
                     hasData = true
@@ -253,11 +245,12 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
                 is NetworkResult.Success -> {
                     itemsBy.clear()
 
-                    it.data?.bloodgroups?.sortedBy { bloodgroup ->bloodgroup?.name }?.forEach { bloodGroup ->
-                        val searchBy = SearchBy("", bloodGroup?.name.toString())
+                    it.data?.bloodgroups?.sortedBy { bloodgroup -> bloodgroup?.name }
+                        ?.forEach { bloodGroup ->
+                            val searchBy = SearchBy("", bloodGroup?.name.toString())
 
-                        itemsBy.add(searchBy)
-                    }
+                            itemsBy.add(searchBy)
+                        }
 
                     searchItemAdapter.submitList(itemsBy)
                     hasData = true
@@ -272,11 +265,12 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
                 is NetworkResult.Loading -> {}
                 is NetworkResult.Success -> {
                     itemsBy.clear()
-                    it.data?.districts?.sortedBy { district ->  district.name}?.forEach { districts ->
-                        val searchBy = SearchBy("", districts.name)
+                    it.data?.districts?.sortedBy { district -> district.name }
+                        ?.forEach { districts ->
+                            val searchBy = SearchBy("", districts.name)
 
-                        itemsBy.add(searchBy)
-                    }
+                            itemsBy.add(searchBy)
+                        }
 
                     searchItemAdapter.submitList(itemsBy)
                     hasData = true
@@ -292,11 +286,12 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
                 is NetworkResult.Success -> {
                     itemsBy.clear()
 
-                    it.data?.occupations?.sortedBy { occupation ->occupation.name}?.forEach { occupations ->
-                        val searchBy = SearchBy("", occupations.name)
+                    it.data?.occupations?.sortedBy { occupation -> occupation.name }
+                        ?.forEach { occupations ->
+                            val searchBy = SearchBy("", occupations.name)
 
-                        itemsBy.add(searchBy)
-                    }
+                            itemsBy.add(searchBy)
+                        }
 
                     searchItemAdapter.submitList(itemsBy)
                     hasData = true
@@ -346,22 +341,38 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
         val requestSearch =
             when (type) {
                 "Blood Group" -> {
-                    RequestSearch(null, searchBy.name, null, null, null, null, hall = null,0)
+
+                    RequestSearch(null, searchBy.name, null, null, null, null, hall = null, 0)
                 }
+
                 "District" -> {
-                    RequestSearch(null, null, null, searchBy.name, null, null, hall = null,0)
+
+                    RequestSearch(null, null, null, searchBy.name, null, null, hall = null, 0)
                 }
+
                 "Occupation" -> {
-                    RequestSearch(null, null, null, null, searchBy.name, null,hall = null, 0)
+                    RequestSearch(null, null, null, null, searchBy.name, null, hall = null, 0)
                 }
+
                 "Department" -> {
-                    RequestSearch(null, null, searchBy.name, null, null, null,hall = null, 0)
+                    RequestSearch(null, null, searchBy.name, null, null, null, hall = null, 0)
                 }
+
                 "Hall" -> {
-                    RequestSearch(null, null, searchBy.name, null, null, null,hall = searchBy.name, 0)
+                    RequestSearch(
+                        null,
+                        null,
+                        searchBy.name,
+                        null,
+                        null,
+                        null,
+                        hall = searchBy.name,
+                        0
+                    )
                 }
+
                 else -> {
-                    RequestSearch(null, null, null, null, null, null,hall = null, 0)
+                    RequestSearch(null, null, null, null, null, null, hall = null, 0)
                 }
             }
 

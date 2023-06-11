@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -29,16 +30,6 @@
                 android:layout_gravity="end"
                 android:src="@drawable/handler" />
 
-            <androidx.appcompat.widget.SearchView
-                android:drawableEnd="@drawable/border_back_grey_stock"
-                android:id="@+id/searchText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/back_grey"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
 
             <TextView
                 android:padding="16dp"
@@ -49,18 +40,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:drawableLeft="@drawable/ic_round_warning_24"
                 android:drawablePadding="8dp"
-                android:drawableTint="@color/text_red"
                 android:fontFamily="@font/dm_sans_medium"
                 android:gravity="center"
                 android:includeFontPadding="false"
                 android:text="No data available"
                 android:textAlignment="center"
-                android:textColor="@color/text_red" />
-
+                android:textColor="@color/text_red"
+                app:drawableLeftCompat="@drawable/ic_round_warning_24"
+                app:drawableTint="@color/text_red" />
+            <TextView
+                android:id="@+id/filterTypeId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingVertical="2dp"
+                android:fontFamily="@font/dm_sans_medium"
+                android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                android:text="Select Filter Type" />
 
             <androidx.recyclerview.widget.RecyclerView
+                tools:listitem=""
                 android:id="@+id/countryRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
