@@ -40,8 +40,13 @@
             android:icon="@android:drawable/ic_menu_close_clear_cancel"
             android:iconTint="@color/red_A700"
             android:title="@string/log_out" />
+    </group>
+    <group
+        android:id="@+id/nav_footer">
+        <item
+            android:id="@+id/nav_log_version"
+            android:title="" />
 
     </group>
-
 
 </menu>

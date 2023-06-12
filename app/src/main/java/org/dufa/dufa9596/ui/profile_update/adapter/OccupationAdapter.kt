@@ -12,7 +12,7 @@ import org.dufa.dufa9596.interfaces.OccupationSelectListener
 
 class OccupationAdapter(
     var occupationSelectListener: OccupationSelectListener,
-    private var occupationList: ArrayList<Occupation>,
+    private var occupationList: List<Occupation>,
     var context: Context
 ) :
     RecyclerView.Adapter<OccupationAdapter.ViewHolder>() {
@@ -21,7 +21,7 @@ class OccupationAdapter(
 
 
     // method for filtering our recyclerview items.
-    fun filterList(filterList: ArrayList<Occupation>) {
+    fun filterList(filterList: List<Occupation>) {
         // below line is to add our filtered
         // list in our course array list.
         occupationList = filterList

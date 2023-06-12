@@ -12,7 +12,7 @@ import org.dufa.dufa9596.interfaces.DepartmentSelectListener
 
 class DepartmentAdapter(
     private var departmentSelectListener: DepartmentSelectListener,
-    private var departmentList: ArrayList<Department>,
+    private var departmentList: List<Department>,
     var context: Context
 ) :
     RecyclerView.Adapter<DepartmentAdapter.ViewHolder>() {
@@ -21,7 +21,7 @@ class DepartmentAdapter(
 
 
     // method for filtering our recyclerview items.
-    fun filterList(filterList: ArrayList<Department>) {
+    fun filterList(filterList: List<Department>) {
         // below line is to add our filtered
         // list in our course array list.
         departmentList = filterList

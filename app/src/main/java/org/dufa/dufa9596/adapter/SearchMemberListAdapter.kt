@@ -1,5 +1,6 @@
 package org.dufa.dufa9596.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
@@ -46,23 +47,22 @@ class SearchMemberListAdapter(private val memberSelectListener: MemberSelectList
         getItem(position).let {
 
             if (it != null) {
-                if (it.name == "" || it.name.isNullOrBlank()) {
+                if (it.name.isNullOrBlank()) {
                     holder.binding.name.gone()
                 } else {
-                    holder.binding.name.text = it.department
+                    holder.binding.name.text = it.name
                 }
-                if (it.phone == "" || it.phone.isNullOrBlank()) {
+                if (it.phone.isNullOrBlank()) {
                     holder.binding.phoneNumber.gone()
                 } else {
-                    holder.binding.phoneNumber.text = it.department
+                    holder.binding.phoneNumber.text = it.phone
                 }
-                if (it.bloodgroup == "" || it.bloodgroup.isNullOrBlank()) {
+                if (it.bloodgroup.isNullOrBlank()) {
                     holder.binding.bloodGroup.gone()
                 } else {
-                    holder.binding.bloodGroup.text = it.department
+                    holder.binding.bloodGroup.text = it.bloodgroup
                 }
-
-                if (it.department == "" || it.department.isNullOrBlank()) {
+                if (it.department.isNullOrBlank()) {
                     holder.binding.department.gone()
                 } else {
                     holder.binding.department.text = it.department

@@ -2,6 +2,7 @@ package org.dufa.dufa9596
 
 import android.app.Dialog
 import android.app.ProgressDialog
+import android.content.pm.PackageInfo
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -55,7 +56,6 @@ import java.io.File
 import java.io.FileOutputStream
 import javax.inject.Inject
 
-
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     @Inject
@@ -96,6 +96,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val pInfo: PackageInfo = this.packageManager.getPackageInfo(this.packageName, 0)
+        val version: String = pInfo.versionName //Version Name
 
         binding = ActivityMainBinding.inflate(layoutInflater)
 
@@ -162,7 +164,7 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
+        navView.menu.findItem(R.id.nav_log_version).title = "version $version"
         navView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.duesPaymentFragment -> {

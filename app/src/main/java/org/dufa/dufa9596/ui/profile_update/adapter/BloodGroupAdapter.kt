@@ -12,7 +12,7 @@ import org.dufa.dufa9596.interfaces.BloodGroupSelectListener
 
 class BloodGroupAdapter(
     private var bloodGroupSelectListener: BloodGroupSelectListener,
-    private var bloodGroupList: ArrayList<Bloodgroup>,
+    private var bloodGroupList: List<Bloodgroup>,
     var context: Context
 ) :
     RecyclerView.Adapter<BloodGroupAdapter.ViewHolder>() {
@@ -59,7 +59,7 @@ class BloodGroupAdapter(
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         // creating variables for our views.
-        lateinit var name: TextView
+        var name: TextView
 
         init {
             // initializing our views with their ids.

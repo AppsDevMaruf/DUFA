@@ -12,7 +12,7 @@ import org.dufa.dufa9596.interfaces.HallSelectListener
 
 class HallAdapter(
     var hallSelectListener: HallSelectListener,
-    private var hallList: ArrayList<Hall>,
+    private var hallList: List<Hall>,
     var context: Context
 ) :
     RecyclerView.Adapter<HallAdapter.ViewHolder>() {

@@ -12,7 +12,6 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -63,18 +62,18 @@ import org.dufa.dufa9596.utils.show
 import org.dufa.dufa9596.viewmodel.DashboardViewModel
 import java.io.File
 import java.io.FileOutputStream
-import java.util.Locale
+
 
 @AndroidEntryPoint
 class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), DepartmentSelectListener,
     DistrictSelectListener, BloodGroupSelectListener, HallSelectListener, OccupationSelectListener {
     private val dashboardViewModel by viewModels<DashboardViewModel>()
     private lateinit var bottomSheetDialog: BottomSheetDialog
-    private lateinit var departmentList: ArrayList<Department>
-    private lateinit var districtList: ArrayList<District>
-    private lateinit var hallList: ArrayList<Hall>
-    private lateinit var bloodGroupList: ArrayList<Bloodgroup>
-    private lateinit var occupationList: ArrayList<Occupation>
+    private lateinit var departmentList: List<Department>
+    private lateinit var districtList: List<District>
+    private lateinit var hallList: List<Hall>
+    private lateinit var bloodGroupList: List<Bloodgroup>
+    private lateinit var occupationList: List<Occupation>
 
     private lateinit var departmentAdapter: DepartmentAdapter
     private lateinit var districtAdapter: DistrictAdapter
@@ -84,6 +83,7 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
     private var title = "Male"
 
     lateinit var dialog: ProgressDialog
+
 
     var userid = 0
 
@@ -159,56 +159,47 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
         }
 
         binding.updateBtn.setOnClickListener {
-            val name = binding.name.text.toString()
-            val phone = binding.phone.text.toString()
-            val address = binding.address.text.toString()
-            val department = binding.departmentTypeText.text.toString()
-            val district = binding.districtTypeText.text.toString()
-            val occupation = binding.occupationTypeText.text.toString()
-            val bloodGroup = binding.bloodGroupTypeText.text.toString()
-            val gender = binding.genderTypeText.text.toString()
-            val hall = binding.hallTypeText.text.toString()
-            val nid = binding.nid.text.toString()
-            val birthdate = binding.birthdate.text.toString()
+            //if(!validatedRequest(binding)) return@setOnClickListener
 
             val request = RequestProfileUpdate(
-                name = name,
-                address = address,
-                phone = phone,
+                name = binding.name.text.toString(),
+                address = binding.address.text.toString(),
+                phone = binding.phone.text.toString(),
                 " ",
-                department = department,
-                district = district,
-                occupation = occupation,
-                bloodgroup = bloodGroup,
-                gender = gender,
-                hall = hall,
-                nid = nid,
-                birthdate = birthdate
+                department = binding.departmentTypeText.text.toString(),
+                district = binding.districtTypeText.text.toString(),
+                occupation = binding.occupationTypeText.text.toString(),
+                bloodgroup = binding.bloodGroupTypeText.text.toString(),
+                gender = binding.genderTypeText.text.toString(),
+                hall = binding.hallTypeText.text.toString(),
+                nid = binding.nid.text.toString(),
+                birthdate = binding.birthdate.text.toString()
             )
-            dialog.setCancelable(false)
-            dialog.show()
-            if (phone.trim() != "" && address.trim() != "") {
-                try {
-                    CoroutineScope(Dispatchers.IO).launch {
-                        dashboardViewModel.updateProfileVM(userid, requestProfileUpdate = request)
-                    }
-                } catch (e: Exception) {
+            updateUserInfo(request)
+        }
+    }
 
-                    Log.e("TAG", "Exception: ${e.message} ")
-                }
+    private fun validatedRequest(binding: FragmentUserUpdateBinding): Boolean {
+        if (binding.phone.text?.trim().isNullOrBlank()) {
+            Log.d("TAG", "validatedRequest: ")
+            binding.phone.error = "Phone Number Empty"
+        } else if (binding.address.text.trim().isNullOrBlank()) {
+            binding.address.error = "Address Empty"
+        } else {
+            return true
+        }
+        return false
+    }
 
-                dialog.setCancelable(false)
-                dialog.show()
-            } else {
-                if (phone.trim() == "") {
-                    binding.phone.error = "Phone Number Empty"
-                } else {
-                    binding.address.error = "Address Empty"
-                }
-                dialog.dismiss()
+    private fun updateUserInfo(request: RequestProfileUpdate) {
+        try {
+            CoroutineScope(Dispatchers.IO).launch {
+                dashboardViewModel.updateProfileVM(userid, requestProfileUpdate = request)
+
             }
 
-
+        } catch (e: Exception) {
+            Log.e("UpdateUserFragment", "updateUserInfo() | ${request.name} | Error: ${e.message} ")
         }
     }
 
@@ -472,13 +463,12 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
 
                 is NetworkResult.Success -> {
 
-                    occupationList = occupations.data!!.occupations as ArrayList<Occupation>
+                    occupationList = occupations.data!!.occupations.sortedBy { it.name }
 
                 }
-
             }
-
         }
+
         dashboardViewModel.getDepartmentsVMLD.observe(viewLifecycleOwner) { departments ->
             binding.progress.hide()
 
@@ -496,7 +486,8 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
 
                 is NetworkResult.Success -> {
 
-                    departmentList = departments.data!!.departments as ArrayList<Department>
+                    departmentList =
+                        departments.data?.departments?.sortedBy { it?.name } as List<Department>
 
                 }
 
@@ -519,7 +510,8 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
                 }
 
                 is NetworkResult.Success -> {
-                    districtList = districts.data!!.districts as ArrayList<District>
+                    districtList =
+                        districts.data!!.districts.sortedBy { it.name }
 
 
                 }
@@ -543,7 +535,7 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
                 }
 
                 is NetworkResult.Success -> {
-                    hallList = halls.data!!.halls as ArrayList<Hall>
+                    hallList = halls.data!!.halls?.sortedBy { it?.name } as List<Hall>
 
 
                 }
@@ -568,7 +560,8 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
 
                 is NetworkResult.Success -> {
 
-                    bloodGroupList = bloodGroups.data!!.bloodgroups as ArrayList<Bloodgroup>
+                    bloodGroupList =
+                        bloodGroups.data!!.bloodgroups?.sortedBy { it?.name } as List<Bloodgroup>
 
                 }
 
@@ -826,8 +819,8 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
         bottomSheetDialog.dismiss()
     }
 
-    override fun selectedDistrict(departments: District) {
-        binding.districtTypeText.text = departments.name
+    override fun selectedDistrict(district: District) {
+        binding.districtTypeText.text = district.name
         bottomSheetDialog.dismiss()
     }
 
@@ -836,13 +829,13 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
         bottomSheetDialog.dismiss()
     }
 
-    override fun selectedOccupation(occupation: Occupation) {
-        binding.occupationTypeText.text = occupation.name
+    override fun selectedOccupation(occupations: Occupation) {
+        binding.occupationTypeText.text = occupations.name
         bottomSheetDialog.dismiss()
     }
 
-    override fun selectedHall(hall: Hall) {
-        binding.hallTypeText.text = hall.name
+    override fun selectedHall(halls: Hall) {
+        binding.hallTypeText.text = halls.name
         bottomSheetDialog.dismiss()
     }
 

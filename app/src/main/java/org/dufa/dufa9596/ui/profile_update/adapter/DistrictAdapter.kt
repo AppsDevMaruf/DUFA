@@ -12,7 +12,7 @@ import org.dufa.dufa9596.interfaces.DistrictSelectListener
 
 class DistrictAdapter(
     var districtSelectListener: DistrictSelectListener,
-    private var districtList: ArrayList<District>,
+    private var districtList: List<District>,
     var context: Context
 ) :
     RecyclerView.Adapter<DistrictAdapter.ViewHolder>() {
