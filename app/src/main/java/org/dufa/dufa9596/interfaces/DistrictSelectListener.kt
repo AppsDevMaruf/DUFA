@@ -5,6 +5,6 @@ import org.dufa.dufa9596.data.models.get_districts.District
 
 interface DistrictSelectListener {
 
-    fun selectedDistrict( departments: District)
+    fun selectedDistrict( district: District)
 
 }

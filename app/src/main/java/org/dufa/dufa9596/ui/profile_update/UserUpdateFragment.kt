@@ -105,7 +105,6 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
         dialog = ProgressDialog(requireContext())
         dialog.setTitle("Profile Updating...")
 
-
         return R.layout.fragment_user_update
     }
 
@@ -159,7 +158,7 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
         }
 
         binding.updateBtn.setOnClickListener {
-            //if(!validatedRequest(binding)) return@setOnClickListener
+            if(!validatedRequest(binding)) return@setOnClickListener
 
             val request = RequestProfileUpdate(
                 name = binding.name.text.toString(),
@@ -640,6 +639,7 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
     }
 
     //Districts
+    @SuppressLint("SetTextI18n")
     private fun showBottomSheetDistricts() {
         bottomSheetDialog = BottomSheetDialog(requireContext())
         bottomSheetDialog.setContentView(R.layout.bottom_dialog)
@@ -763,12 +763,8 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
         val manager = LinearLayoutManager(requireContext())
         recyclerView.setHasFixedSize(true)
 
-        // setting layout manager
-        // to our recycler view.
         recyclerView.layoutManager = manager
 
-        // setting adapter to
-        // our recycler view.
         recyclerView.adapter = occupationAdapter
 
 
@@ -782,7 +778,6 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
         bottomSheetDialog.behavior.maxHeight = 1000 // set max height when expanded in PIXEL
         bottomSheetDialog.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
 
-        // bottomSheetDialog.window?.setBackgroundDrawableResource(android.R.color.transparent);
         bottomSheetDialog.findViewById<ImageView>(R.id.cancel_buttonSheet)?.setOnClickListener {
             bottomSheetDialog.dismiss()
         }
@@ -829,13 +824,13 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
         bottomSheetDialog.dismiss()
     }
 
-    override fun selectedOccupation(occupations: Occupation) {
-        binding.occupationTypeText.text = occupations.name
+    override fun selectedOccupation(occupation: Occupation) {
+        binding.occupationTypeText.text = occupation.name
         bottomSheetDialog.dismiss()
     }
 
-    override fun selectedHall(halls: Hall) {
-        binding.hallTypeText.text = halls.name
+    override fun selectedHall(hall: Hall) {
+        binding.hallTypeText.text = hall.name
         bottomSheetDialog.dismiss()
     }
 
