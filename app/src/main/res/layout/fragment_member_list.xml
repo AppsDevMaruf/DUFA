@@ -7,135 +7,168 @@
 
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#F6F6F6"
-        android:orientation="vertical"
-        android:padding="16dp"
-        tools:context=".ui.MemberListFragment">
+        android:layout_height="match_parent">
 
-        <ProgressBar
-            android:id="@+id/progress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/filterName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="4dp"
-            android:text="Filter By" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/filterTypeSpinner"
-            android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/white_back_react"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/showTitle">
-
-
-            <ImageView
-                android:id="@+id/filterTypeIcon"
-                android:layout_width="30dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:paddingVertical="4dp"
-                android:src="@drawable/ic_filter"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/blue" />
-
-            <TextView
-                android:id="@+id/titleText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:ellipsize="end"
-                android:fontFamily="@font/dm_sans_medium"
-                android:includeFontPadding="false"
-                android:maxLines="1"
-                android:tag="false"
-                app:layout_constraintEnd_toStartOf="@id/imageView4"
-                android:text="@string/select_filter_type"
-                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-                android:textColor="@color/text_grey"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/filterTypeIcon"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-            <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:src="@drawable/round_keyboard_arrow_down_24"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/blue" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <EditText
-            android:id="@+id/searchET"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/border_back_grey"
-            android:drawableStart="@drawable/ic_search"
-            android:drawablePadding="10dp"
-            android:hint="@string/name_or_email"
-            android:maxLines="1"
-            android:inputType="text"
-            android:imeOptions="actionSearch"
-            android:paddingStart="16dp"
-            android:textColor="@color/text_black"
-            android:visibility="gone"
-            tools:ignore="RtlSymmetry" />
-
-        <TextView
-            android:id="@+id/dobTV"
-            android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"
-            android:layout_marginTop="4dp"
-            android:background="@drawable/border_back_grey_stock"
-            android:clickable="true"
-            android:visibility="gone"
-            android:drawablePadding="4dp"
-            android:focusable="true"
-            android:fontFamily="@font/dm_sans"
-            android:gravity="center_vertical"
-            android:hint="yyyy-mm-dd"
-            android:includeFontPadding="false"
-            android:paddingHorizontal="10dp"
-            android:paddingStart="10dp"
-            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-            app:drawableRightCompat="@drawable/baseline_date_range_24" />
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/memberListRv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="visible"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/member_list_row" />
-
-        <ImageView
-            android:id="@+id/noData"
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/progressBar"
+            style="@style/SpinKitView.Circle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/_50sdp"
-            android:src="@drawable/no_data"
-            android:visibility="gone" />
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:visibility="gone"
+            app:SpinKit_Color="@color/blue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#F6F6F6"
+            android:orientation="vertical"
+            android:padding="16dp"
+            tools:context=".ui.MemberListFragment">
+
+            <TextView
+                android:id="@+id/filterName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="Filter By" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/filterTypeSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/white_back_react"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/showTitle">
 
 
-    </LinearLayout>
+                <ImageView
+                    android:id="@+id/filterTypeIcon"
+                    android:layout_width="24dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:paddingVertical="4dp"
+                    android:src="@drawable/ic_filter"
+
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/blue" />
+
+                <TextView
+                    android:id="@+id/titleText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/dm_sans_medium"
+                    android:includeFontPadding="false"
+                    android:maxLines="1"
+                    android:gravity="center_vertical"
+                    android:tag="false"
+                    android:text="@string/select_filter_type"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                    android:textColor="@color/text_grey"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/clearFilter"
+                    app:layout_constraintStart_toEndOf="@+id/filterTypeIcon"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/clearFilter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:text="@string/clear"
+                    android:fontFamily="@font/dm_sans_medium"
+                    android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                    android:textColor="@color/blue"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/arrow"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/round_keyboard_arrow_down_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/blue" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <EditText
+                android:id="@+id/searchET"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border_back_grey"
+                android:drawableStart="@drawable/ic_search"
+                android:drawablePadding="10dp"
+                android:hint="@string/name_or_email"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingStart="16dp"
+                android:textColor="@color/text_black"
+                android:visibility="gone"
+                tools:ignore="RtlSymmetry" />
+
+            <TextView
+                android:id="@+id/dobTV"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/border_back_grey_stock"
+                android:clickable="true"
+                android:drawablePadding="4dp"
+                android:focusable="true"
+                android:fontFamily="@font/dm_sans"
+                android:gravity="center_vertical"
+                android:hint="yyyy-mm-dd"
+                android:includeFontPadding="false"
+                android:paddingHorizontal="10dp"
+                android:paddingStart="10dp"
+                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                android:visibility="gone"
+                app:drawableRightCompat="@drawable/baseline_date_range_24" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/memberListRv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/member_list_row" />
+
+            <ImageView
+                android:id="@+id/noData"
+                android:layout_marginTop="-100dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/nodata_found"
+                android:visibility="gone"
+                app:tint="@color/blue" />
+
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 </layout>

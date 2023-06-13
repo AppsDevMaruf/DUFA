@@ -45,6 +45,8 @@
     <string name="status">Status</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="yyyy_mm_dd">yyyy-mm-dd</string>
+    <string name="clear"><u>Clear</u></string>
+
 
     <string-array name="paymentsType">
         <item>Registration Fee</item>

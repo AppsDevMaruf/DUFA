@@ -27,6 +27,7 @@
             android:layout_height="40dp"
             android:contentDescription="@string/app_name"
             android:padding="8dp"
+            android:layout_gravity="center_vertical"
             android:src="@drawable/ic_mr"
             app:tint="@color/blue" />
 
@@ -60,6 +61,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:padding="8dp"
+            android:layout_gravity="center_vertical"
             android:contentDescription="@string/todo"             android:src="@drawable/ic_mrs"
             app:tint="@color/blue" />
 

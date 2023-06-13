@@ -18,10 +18,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
         android:text="Select Filter Type" />
 
     <androidx.recyclerview.widget.RecyclerView
-
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:id="@+id/itemKeywordRCV"
         android:layout_width="match_parent"

@@ -44,35 +44,15 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
     ViewModel() {
 
 
-    var _paymentUrl = MutableLiveData<String>()
-    val paymentUrl: LiveData<String> = _paymentUrl
-
-
-    fun savePaymentUrl(url: String) {
-
-        _paymentUrl.postValue(url)
-
-
-    }
-
-    private var _paymentDues = MutableLiveData<Int>()
-    val paymentDues: LiveData<Int> = _paymentDues
-
-
-    fun savePaymentDues(dues: Int) {
-
-        _paymentDues.postValue(dues)
-
-    }
-
     fun getMemberSearchVMLD(
-
-        requestSearch: RequestSearch
+        requestSearch: RequestSearch,
+        hasData: (hasData: Boolean) -> Unit
 
     ): LiveData<PagingData<Data>> {
-        return securedRepository.getMemberSearchRepo(requestSearch)
+        return securedRepository.getMemberSearchRepo(requestSearch, hasData)
             .cachedIn(viewModelScope)
     }
+
 
     // get all Member start
     val getAllMemberVMLD = securedRepository.responseAllMember
@@ -650,7 +630,7 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
     val userLocationsVMLD: LiveData<NetworkResult<ResponseUserLocation>>
         get() = _userLocations
 
-     fun userLocationsVM() {
+    fun userLocationsVM() {
 
         _userLocations.postValue(NetworkResult.Loading())
 

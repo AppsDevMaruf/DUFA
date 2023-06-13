@@ -1,6 +1,5 @@
 package org.dufa.dufa9596.paging
 
-import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import org.dufa.dufa9596.api.SecuredApi
@@ -10,12 +9,10 @@ import org.dufa.dufa9596.data.models.search.ResponseSearch
 
 class MemberSearchPagingSource(
     private val api: SecuredApi,
-//    var totalPage: Int,
-//    private var searchParam: String,
+    var requestSearch: RequestSearch,
+    var hasData: (hasData: Boolean) -> Unit,
 
-    var requestSearch: RequestSearch
-
-) :    PagingSource<Int, Data>() {
+) : PagingSource<Int, Data>() {
 
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Data> {
@@ -25,12 +22,13 @@ class MemberSearchPagingSource(
             val position = params.key ?: 1
             val newRequestSearch = requestSearch.copy(page = position)
             val response: ResponseSearch = api.getSearchResult(newRequestSearch)
+            if (response.searchData.data.isEmpty()) {
+                hasData.invoke(false)
+            } else {
+                hasData.invoke(true)
+            }
 
-            Log.i("TAG", "position: $position \n\n $response ")
 
-
-
-            Log.i("TAG", "lastPage: ${response.searchData.lastPage} ")
             LoadResult.Page(
                 data = response.searchData.data,
                 prevKey = if (position == 1) null else position - 1,

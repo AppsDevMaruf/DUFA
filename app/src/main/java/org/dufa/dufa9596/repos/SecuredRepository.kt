@@ -21,6 +21,7 @@ import org.dufa.dufa9596.data.models.vouchers.ResponseVoucherList
 import org.dufa.dufa9596.paging.MemberSearchPagingSource
 import org.dufa.dufa9596.ui.profile_update.RequestProfileUpdate
 import org.dufa.dufa9596.utils.NetworkResult
+import org.dufa.dufa9596.viewmodel.DashboardViewModel
 import org.json.JSONObject
 import retrofit2.Response
 import javax.inject.Inject
@@ -83,11 +84,10 @@ class SecuredRepository @Inject constructor(private val securedApi: SecuredApi) 
         }
 
 
-
     }   //getTransactionHistory end
 
     //getVoucher List  start
-    private var _responseVoucherList= MutableLiveData<NetworkResult<ResponseVoucherList>>()
+    private var _responseVoucherList = MutableLiveData<NetworkResult<ResponseVoucherList>>()
 
     val responseVoucherList: LiveData<NetworkResult<ResponseVoucherList>>
         get() = _responseVoucherList
@@ -111,44 +111,43 @@ class SecuredRepository @Inject constructor(private val securedApi: SecuredApi) 
         }
 
     }
-        //getVoucher List end
+    //getVoucher List end
 
 
+    /*//My profile start
+    private var _responseMyProfileRepo =
+        MutableLiveData<NetworkResult<ResponseProfileInfo>>()
+    val responseMyProfileRepo: LiveData<NetworkResult<ResponseProfileInfo>>
+        get() = _responseMyProfileRepo
 
-        /*//My profile start
-        private var _responseMyProfileRepo =
-            MutableLiveData<NetworkResult<ResponseProfileInfo>>()
-        val responseMyProfileRepo: LiveData<NetworkResult<ResponseProfileInfo>>
-            get() = _responseMyProfileRepo
+    fun getMyProfileRepo() {
 
-        fun getMyProfileRepo() {
+        _responseMyProfileRepo.postValue(NetworkResult.Loading())
+        try {
+            val response = securedApi.getProfileInfo()
 
-            _responseMyProfileRepo.postValue(NetworkResult.Loading())
-            try {
-                val response = securedApi.getProfileInfo()
+            if (response.isSuccessful && response.body() != null) {
 
-                if (response.isSuccessful && response.body() != null) {
+                _responseMyProfileRepo.postValue(NetworkResult.Success(response.body()!!))
 
-                    _responseMyProfileRepo.postValue(NetworkResult.Success(response.body()!!))
+            } else if (response.errorBody() != null) {
 
-                } else if (response.errorBody() != null) {
+                val errorObj = JSONObject(response.errorBody()!!.charStream().readText())
+                _responseMyProfileRepo.postValue(NetworkResult.Error(errorObj.getString("message")))
 
-                    val errorObj = JSONObject(response.errorBody()!!.charStream().readText())
-                    _responseMyProfileRepo.postValue(NetworkResult.Error(errorObj.getString("message")))
+            } else {
 
-                } else {
-
-                    _responseMyProfileRepo.postValue(NetworkResult.Error("Something Went Wrong!"))
-                }
-            } catch (e: Exception) {
-
-                Log.i("catch", "DashboardApiRepo: ${e.localizedMessage}")
-
+                _responseMyProfileRepo.postValue(NetworkResult.Error("Something Went Wrong!"))
             }
+        } catch (e: Exception) {
 
+            Log.i("catch", "DashboardApiRepo: ${e.localizedMessage}")
 
         }
-        //My profile end*/
+
+
+    }
+    //My profile end*/
 
     //get Departments start
     private var _responseDepartmentsRepo =
@@ -223,13 +222,15 @@ class SecuredRepository @Inject constructor(private val securedApi: SecuredApi) 
 
     fun getMemberSearchRepo(
 
-        requestSearch: RequestSearch
+        requestSearch: RequestSearch,
+        hasData: (hasData: Boolean) -> Unit
     ) = Pager(
         config = PagingConfig(pageSize = 15, maxSize = 150),
         pagingSourceFactory = {
             MemberSearchPagingSource(
                 securedApi,
-                requestSearch
+                requestSearch,
+                hasData
             )
         }
     ).liveData
@@ -266,7 +267,8 @@ class SecuredRepository @Inject constructor(private val securedApi: SecuredApi) 
     fun payRenew(requestPayRenew: RequestPayRenew) = securedApi.payRenew(requestPayRenew)
     fun fundCollection(fund: RequestFundCollection) = securedApi.fundPayment(fund)
 
-    suspend fun setCurrentLocation( requestSetCLocation: RequestSetCLocation) = securedApi.setCurrentLocations(requestSetCLocation)
+    suspend fun setCurrentLocation(requestSetCLocation: RequestSetCLocation) =
+        securedApi.setCurrentLocations(requestSetCLocation)
 
     suspend fun userLocations() = securedApi.getUserLocations()
     suspend fun getFeeListRepo() = securedApi.getFeeList()

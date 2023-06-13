@@ -11,7 +11,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
 @AndroidEntryPoint
-class UserDetailsFragment :BaseFragment<FragmentUserDetailsBinding>() {
+class UserDetailsFragment : BaseFragment<FragmentUserDetailsBinding>() {
 
 
     override fun getFragmentView(): Int {
@@ -21,17 +21,22 @@ class UserDetailsFragment :BaseFragment<FragmentUserDetailsBinding>() {
     override fun configUi() {
         if (arguments != null) {
             val userInfo: Data = requireArguments().getParcelable("memberInfo")!!
-            binding.name.text=userInfo.name.toString().titleCaseFirstChar()
+            binding.name.text = userInfo.name.toString().titleCaseFirstChar()
             binding.phoneNumber.text = userInfo.phone
             binding.email.text = userInfo.email
-            binding.address.text= userInfo.address.toString().titleCaseFirstChar()
+            binding.address.text = userInfo.address.toString().titleCaseFirstChar()
             binding.nid.text = userInfo.nid
             binding.gender.text = userInfo.gender.toString().titleCaseFirstChar()
             binding.birthdate.text = userInfo.birthdate
             binding.department.text = userInfo.department.toString().titleCaseFirstChar()
             binding.hall.text = userInfo.hall.toString().titleCaseFirstChar()
             binding.bloodGroup.text = userInfo.bloodgroup.toString().titleCaseFirstChar()
-            binding.bloodGroup.setTextColor(ContextCompat.getColor(requireActivity(), R.color.text_red))
+            binding.bloodGroup.setTextColor(
+                ContextCompat.getColor(
+                    requireActivity(),
+                    R.color.text_red
+                )
+            )
             binding.occupation.text = userInfo.occupation.toString().titleCaseFirstChar()
             binding.district.text = userInfo.district.toString().titleCaseFirstChar()
 
@@ -58,11 +63,7 @@ class UserDetailsFragment :BaseFragment<FragmentUserDetailsBinding>() {
             binding.profilePicAB.hide()
 
             val profileImg = Constants.IMG_PREFIX + userInfo.imagePath
-
-            Glide.with(requireActivity())
-                .load(profileImg)
-                .placeholder(R.drawable.avatar_placeholder)
-                .into(binding.userProfilePic)
+            binding.userProfilePic.loadImagesWithGlide(profileImg)
         }
 
     }

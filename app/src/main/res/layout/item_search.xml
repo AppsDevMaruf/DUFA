@@ -19,10 +19,10 @@
         <ImageView
             android:id="@+id/itemIcon"
             android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
             android:contentDescription="@string/app_name"
             android:padding="8dp"
-            android:layout_gravity="center_vertical"
             android:src="@drawable/ic_filter"
             app:tint="@color/blue" />
 
@@ -31,15 +31,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_margin="0dp"
-            android:includeFontPadding="true"
-            android:paddingStart="4dp"
-            android:text="@string/date_of_birth"
+            android:fontFamily="@font/dm_sans"
+            android:includeFontPadding="false"
+            android:lineSpacingMultiplier="0.8"
             android:paddingVertical="3dp"
-            android:paddingEnd="4dp"
+            android:paddingStart="4dp"
+            android:paddingEnd="6dp"
+            android:text="@string/date_of_birth"
             android:textColor="@color/text_black"
-            android:textSize="20sp"
-            tools:ignore="RtlSymmetry" />
+            android:textSize="16dp" />
 
 
     </LinearLayout>

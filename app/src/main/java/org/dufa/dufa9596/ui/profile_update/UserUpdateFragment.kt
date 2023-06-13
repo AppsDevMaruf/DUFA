@@ -102,8 +102,7 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
     }
 
     override fun getFragmentView(): Int {
-        dialog = ProgressDialog(requireContext())
-        dialog.setTitle("Profile Updating...")
+
 
         return R.layout.fragment_user_update
     }
@@ -446,7 +445,7 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
         }
 
         dashboardViewModel.occupationsVMLD.observe(viewLifecycleOwner) { occupations ->
-            binding.progress.hide()
+            binding.progressBar.hide()
 
             when (occupations) {
                 is NetworkResult.Error -> {
@@ -455,7 +454,7 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
                 }
 
                 is NetworkResult.Loading -> {
-                    binding.progress.show()
+                    binding.progressBar.show()
 
 
                 }
@@ -469,7 +468,7 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
         }
 
         dashboardViewModel.getDepartmentsVMLD.observe(viewLifecycleOwner) { departments ->
-            binding.progress.hide()
+            binding.progressBar.hide()
 
             when (departments) {
                 is NetworkResult.Error -> {
@@ -478,7 +477,7 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
                 }
 
                 is NetworkResult.Loading -> {
-                    binding.progress.show()
+                    binding.progressBar.show()
 
 
                 }
@@ -494,7 +493,7 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
 
         }
         dashboardViewModel.districtVMLD.observe(viewLifecycleOwner) { districts ->
-            binding.progress.hide()
+            binding.progressBar.hide()
 
             when (districts) {
                 is NetworkResult.Error -> {
@@ -503,7 +502,7 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
                 }
 
                 is NetworkResult.Loading -> {
-                    binding.progress.show()
+                    binding.progressBar.show()
 
 
                 }
@@ -519,7 +518,7 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
 
         }
         dashboardViewModel.hallsVMLD.observe(viewLifecycleOwner) { halls ->
-            binding.progress.hide()
+            binding.progressBar.hide()
 
             when (halls) {
                 is NetworkResult.Error -> {
@@ -528,7 +527,7 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
                 }
 
                 is NetworkResult.Loading -> {
-                    binding.progress.show()
+                    binding.progressBar.show()
 
 
                 }
@@ -543,7 +542,7 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
 
         }
         dashboardViewModel.getBloodGroupVMLD.observe(viewLifecycleOwner) { bloodGroups ->
-            binding.progress.hide()
+            binding.progressBar.hide()
 
             when (bloodGroups) {
                 is NetworkResult.Error -> {
@@ -552,7 +551,7 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
                 }
 
                 is NetworkResult.Loading -> {
-                    binding.progress.show()
+                    binding.progressBar.show()
 
 
                 }
@@ -569,7 +568,7 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
         }
 
         dashboardViewModel.profileInfoVMLD.observe(viewLifecycleOwner) {
-            //progressBar.isVisible = false
+            binding.progressBar.hide()
             when (it) {
 
                 is NetworkResult.Error -> {
@@ -578,7 +577,7 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
                 }
 
                 is NetworkResult.Loading -> {
-                    // progressBar.isVisible = true
+                    binding.progressBar.show()
 
                 }
 

@@ -54,7 +54,6 @@ class LogInActivity : AppCompatActivity() {
             finish()
         }
 
-
         configUi()
         binObserver()
     }
@@ -68,48 +67,47 @@ class LogInActivity : AppCompatActivity() {
             //debug
             //masummehedi1
 
- /*           val email = "masummehedi1@gmail.com"
-            val password = "12345678"
+            /*           val email = "masummehedi1@gmail.com"
+                       val password = "12345678"
 
-            val loginRequestLogin = RequestLogin(email, password)
+                       val loginRequestLogin = RequestLogin(email, password)
 
-            lifecycleScope.launch {
-                authViewModel.loginUserVM(loginRequestLogin)
-            }*/
+                       lifecycleScope.launch {
+                           authViewModel.loginUserVM(loginRequestLogin)
+                       }*/
             //debug end
 
 
             //production
-              if (!isValidEmail(binding.loginEmail.text.toString().trim())) {
+            if (!isValidEmail(binding.loginEmail.text.toString().trim())) {
 
-                  binding.loginErrorText.error = "Email Pattern is Not Correct !"
-                  binding.loginErrorText.isVisible = true
-
-
-              } else if (binding.passwordInput.text.toString().trim() == "") {
-                  binding.loginErrorText.error = "Password Required!"
-                  binding.loginErrorText.isVisible = true
-
-              } else if (binding.passwordInput.text.toString().trim().length < 8) {
-
-                  binding.loginErrorText.error = "Password Length Minimum 8 char"
-                  binding.loginErrorText.isVisible = true
+                binding.loginErrorText.error = "Email Pattern is Not Correct !"
+                binding.loginErrorText.isVisible = true
 
 
-              } else {
-                  val email = binding.loginEmail.text.toString().trim()
-                  val password = binding.passwordInput.text.toString().trim()
+            } else if (binding.passwordInput.text.toString().trim() == "") {
+                binding.loginErrorText.error = "Password Required!"
+                binding.loginErrorText.isVisible = true
+
+            } else if (binding.passwordInput.text.toString().trim().length < 8) {
+
+                binding.loginErrorText.error = "Password Length Minimum 8 char"
+                binding.loginErrorText.isVisible = true
 
 
-
-                  val loginRequestLogin = RequestLogin(email, password)
-
-                  lifecycleScope.launch {
-                      authViewModel.loginUserVM(loginRequestLogin)
-                  }
+            } else {
+                val email = binding.loginEmail.text.toString().trim()
+                val password = binding.passwordInput.text.toString().trim()
 
 
-              }
+                val loginRequestLogin = RequestLogin(email, password)
+
+                lifecycleScope.launch {
+                    authViewModel.loginUserVM(loginRequestLogin)
+                }
+
+
+            }
             //production end
         }
 

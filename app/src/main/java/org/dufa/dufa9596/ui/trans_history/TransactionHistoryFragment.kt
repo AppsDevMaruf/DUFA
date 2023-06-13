@@ -19,11 +19,6 @@ class TransactionHistoryFragment : BaseFragment<FragmentTransactionHistoryBindin
         return R.layout.fragment_transaction_history
     }
     override fun configUi() {
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            findNavController().navigateUp() // to clear previous navigation history
-            findNavController().navigate(R.id.action_transactionHistoryFragment_to_DashboardFragment)
-
-        }
 
     }
 

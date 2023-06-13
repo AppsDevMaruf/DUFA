@@ -44,6 +44,8 @@ class SearchMemberListAdapter(private val memberSelectListener: MemberSelectList
 
     override fun onBindViewHolder(holder: MemberListViewHolder, position: Int) {
 
+
+
         getItem(position).let {
 
             if (it != null) {

@@ -18,8 +18,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
-        android:text="Select Filter Type" />
+        android:text="Select Filter Type"
+        android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
 
     <LinearLayout
         android:id="@+id/nameOrEmailBtn"
@@ -27,15 +27,14 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="8dp"
-        android:layout_marginTop="50dp"
         android:background="@drawable/stroke_boarder"
         android:orientation="horizontal"
         android:tag="Name or Email">
 
         <ImageView
             android:id="@+id/allTimeImg"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:contentDescription="@string/app_name"
             android:padding="8dp"
             android:src="@drawable/email"
@@ -47,11 +46,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_margin="0dp"
+            android:fontFamily="@font/dm_sans_medium"
             android:includeFontPadding="false"
-            android:paddingStart="10dp"
             android:text="@string/name_or_email"
+            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
             android:textColor="@color/text_black"
-            android:textSize="20sp"
             tools:ignore="RtlSymmetry" />
 
 
@@ -68,8 +67,8 @@
         android:tag="Blood Group">
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:contentDescription="@string/app_name"
             android:padding="8dp"
             android:src="@drawable/blood"
@@ -80,11 +79,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_margin="0dp"
+            android:fontFamily="@font/dm_sans_medium"
             android:includeFontPadding="false"
-            android:paddingStart="10dp"
             android:text="@string/blood_group"
+            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
             android:textColor="@color/text_black"
-            android:textSize="20sp"
             tools:ignore="RtlSymmetry" />
 
 
@@ -102,8 +101,8 @@
 
         <ImageView
 
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:contentDescription="@string/app_name"
             android:padding="8dp"
             android:src="@drawable/pin"
@@ -115,10 +114,10 @@
             android:layout_gravity="center_vertical"
             android:layout_margin="0dp"
             android:includeFontPadding="false"
-            android:paddingStart="10dp"
             android:text="@string/district"
             android:textColor="@color/text_black"
-            android:textSize="20sp"
+            android:fontFamily="@font/dm_sans_medium"
+            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
             tools:ignore="RtlSymmetry" />
 
 
@@ -136,8 +135,8 @@
         android:tag="Occupation">
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:contentDescription="@string/app_name"
             android:padding="8dp"
             android:src="@drawable/briefcase"
@@ -150,11 +149,10 @@
             android:layout_gravity="center_vertical"
             android:layout_margin="0dp"
             android:includeFontPadding="false"
-            android:paddingStart="10dp"
-
             android:text="@string/occupation"
+            android:fontFamily="@font/dm_sans_medium"
+            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
             android:textColor="@color/text_black"
-            android:textSize="20sp"
             tools:ignore="RtlSymmetry" />
 
 
@@ -172,8 +170,8 @@
 
         <ImageView
 
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:contentDescription="@string/app_name"
             android:padding="8dp"
             android:src="@drawable/department"
@@ -185,10 +183,10 @@
             android:layout_gravity="center_vertical"
             android:layout_margin="0dp"
             android:includeFontPadding="false"
-            android:paddingStart="10dp"
             android:text="@string/department"
             android:textColor="@color/text_black"
-            android:textSize="20sp"
+            android:fontFamily="@font/dm_sans_medium"
+            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
             tools:ignore="RtlSymmetry" />
 
 
@@ -206,8 +204,8 @@
 
         <ImageView
 
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:contentDescription="@string/app_name"
             android:padding="8dp"
             android:src="@drawable/hall"
@@ -220,10 +218,10 @@
             android:layout_gravity="center_vertical"
             android:layout_margin="0dp"
             android:includeFontPadding="false"
-            android:paddingStart="10dp"
             android:text="@string/hall"
             android:textColor="@color/text_black"
-            android:textSize="20sp"
+            android:fontFamily="@font/dm_sans_medium"
+            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
             tools:ignore="RtlSymmetry" />
 
 
@@ -240,8 +238,8 @@
         android:tag="Date of Birth">
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:contentDescription="@string/app_name"
             android:padding="8dp"
             android:src="@drawable/birthday"
@@ -253,10 +251,10 @@
             android:layout_gravity="center_vertical"
             android:layout_margin="0dp"
             android:includeFontPadding="false"
-            android:paddingStart="10dp"
             android:text="@string/date_of_birth"
             android:textColor="@color/text_black"
-            android:textSize="20sp"
+            android:fontFamily="@font/dm_sans_medium"
+            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
             tools:ignore="RtlSymmetry" />
 
     </LinearLayout>

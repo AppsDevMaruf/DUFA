@@ -8,7 +8,9 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import org.dufa.dufa9596.BaseFragment
@@ -27,10 +29,12 @@ import java.util.*
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import org.dufa.dufa9596.paging.LoaderAdapter
 
 @AndroidEntryPoint
-open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), MemberSelectListener,
+class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), MemberSelectListener,
     SearchByListener {
     var bundle = Bundle()
     private val dashboardViewModel: DashboardViewModel by activityViewModels()
@@ -66,7 +70,11 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
         bottomSheetDialogSearchItem = BottomSheetDialog(requireContext())
         searchAdapter = SearchMemberListAdapter(this)
         searchItemAdapter = SearchItemAdapter(this, type)
-        binding.memberListRv.adapter = searchAdapter
+        /*  binding.memberListRv.adapter = searchAdapter.withLoadStateHeaderAndFooter(
+              header = LoaderAdapter(),
+              footer = LoaderAdapter()
+          )*/
+        //binding.memberListRv.adapter = searchAdapter
 
         searchBYSelectedItem(SearchBy(null, null))
 
@@ -77,9 +85,18 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
                     object : TimerTask() {
                         override fun run() {
                             requestSearch = RequestSearch(null, null, null, null, null, it, null, 0)
-                            dashboardViewModel.getMemberSearchVMLD(requestSearch)
+                            //dashboardViewModel.getMemberSearchVMLD(requestSearch)
                             GlobalScope.launch(Dispatchers.Main) {
-                                dashboardViewModel.getMemberSearchVMLD(requestSearch).observe(
+                                dashboardViewModel.getMemberSearchVMLD(requestSearch) { dataFound ->
+                                    if (!dataFound) {
+                                        binding.memberListRv.gone()
+                                        binding.noData.show()
+                                    } else {
+                                        binding.memberListRv.show()
+                                        binding.noData.gone()
+                                    }
+
+                                }.observe(
                                     viewLifecycleOwner
                                 ) {
                                     searchAdapter.submitData(lifecycle, it)
@@ -91,7 +108,14 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
                 )
             }
         }
+        binding.clearFilter.setOnClickListener {
+            searchBYSelectedItem(SearchBy(null, null))
+            binding.titleText.text = "Select Filter Type:"
+            binding.filterTypeIcon.setImageResource(R.drawable.ic_filter)
+        }
+
     }
+
 
     private fun showBottomSheetFilterType() {
         binding.searchET.gone()
@@ -206,8 +230,16 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
             datePickerFun {
                 binding.dobTV.text = it
                 requestSearch = RequestSearch(it, null, null, null, null, null, hall = null, 0)
-                Log.i("TAG", "requestSearch: $requestSearch")
-                dashboardViewModel.getMemberSearchVMLD(requestSearch).observe(viewLifecycleOwner) {
+                dashboardViewModel.getMemberSearchVMLD(requestSearch) { dataFound ->
+                    if (!dataFound) {
+                        binding.memberListRv.gone()
+                        binding.noData.show()
+                    } else {
+                        binding.memberListRv.show()
+                        binding.noData.gone()
+                    }
+
+                }.observe(viewLifecycleOwner) {
                     searchAdapter.submitData(lifecycle, it)
                 }
                 hideSoftKeyboard()
@@ -216,11 +248,14 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
     }
 
     override fun binObserver() {
-
         dashboardViewModel.getDepartmentsVMLD.observe(viewLifecycleOwner) {
+            binding.progressBar.gone()
             when (it) {
                 is NetworkResult.Error -> {}
-                is NetworkResult.Loading -> {}
+                is NetworkResult.Loading -> {
+                    binding.progressBar.show()
+                }
+
                 is NetworkResult.Success -> {
                     itemsBy.clear()
 
@@ -239,9 +274,13 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
             }
         }
         dashboardViewModel.getBloodGroupVMLD.observe(viewLifecycleOwner) {
+            binding.progressBar.gone()
             when (it) {
                 is NetworkResult.Error -> {}
-                is NetworkResult.Loading -> {}
+                is NetworkResult.Loading -> {
+                    binding.progressBar.show()
+                }
+
                 is NetworkResult.Success -> {
                     itemsBy.clear()
 
@@ -260,9 +299,13 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
             }
         }
         dashboardViewModel.districtVMLD.observe(viewLifecycleOwner) {
+            binding.progressBar.gone()
             when (it) {
                 is NetworkResult.Error -> {}
-                is NetworkResult.Loading -> {}
+                is NetworkResult.Loading -> {
+                    binding.progressBar.show()
+                }
+
                 is NetworkResult.Success -> {
                     itemsBy.clear()
                     it.data?.districts?.sortedBy { district -> district.name }
@@ -280,9 +323,13 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
             }
         }
         dashboardViewModel.occupationsVMLD.observe(viewLifecycleOwner) {
+            binding.progressBar.gone()
             when (it) {
                 is NetworkResult.Error -> {}
-                is NetworkResult.Loading -> {}
+                is NetworkResult.Loading -> {
+                    binding.progressBar.show()
+                }
+
                 is NetworkResult.Success -> {
                     itemsBy.clear()
 
@@ -301,9 +348,13 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
             }
         }
         dashboardViewModel.hallsVMLD.observe(viewLifecycleOwner) {
+            binding.progressBar.gone()
             when (it) {
                 is NetworkResult.Error -> {}
-                is NetworkResult.Loading -> {}
+                is NetworkResult.Loading -> {
+                    binding.progressBar.show()
+                }
+
                 is NetworkResult.Success -> {
                     itemsBy.clear()
 
@@ -328,25 +379,21 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
     @SuppressLint("SetTextI18n")
     override fun searchBYSelectedItem(searchBy: SearchBy) {
 
-        Log.i("TAG", "searchBYSelectedItem: $searchBy ")
 
         bottomSheetDialogSearchItem.dismiss()
 
-        binding.titleText.text = "${binding.titleText.text}: ${searchBy.name ?: ""}"
+        binding.titleText.text = searchBy.name ?: "Select Filter Type"
 
         searchItemAdapter = SearchItemAdapter(this, type)
-        Log.i("type", "type: $type")
 
 
         val requestSearch =
             when (type) {
                 "Blood Group" -> {
-
                     RequestSearch(null, searchBy.name, null, null, null, null, hall = null, 0)
                 }
 
                 "District" -> {
-
                     RequestSearch(null, null, null, searchBy.name, null, null, hall = null, 0)
                 }
 
@@ -359,16 +406,7 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
                 }
 
                 "Hall" -> {
-                    RequestSearch(
-                        null,
-                        null,
-                        searchBy.name,
-                        null,
-                        null,
-                        null,
-                        hall = searchBy.name,
-                        0
-                    )
+                    RequestSearch(null, null, null, null, null, null, hall = searchBy.name, 0)
                 }
 
                 else -> {
@@ -376,8 +414,26 @@ open class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), Membe
                 }
             }
 
-        dashboardViewModel.getMemberSearchVMLD(requestSearch).observe(viewLifecycleOwner) {
+        dashboardViewModel.getMemberSearchVMLD(requestSearch) { dataFound ->
+            if (!dataFound) {
+                binding.memberListRv.gone()
+                binding.noData.show()
+            } else {
+                binding.memberListRv.show()
+                binding.noData.gone()
+            }
+
+        }.observe(viewLifecycleOwner) {
+
+            binding.memberListRv.adapter = searchAdapter.withLoadStateHeaderAndFooter(
+                header = LoaderAdapter(),
+                footer = LoaderAdapter()
+            )
+
             searchAdapter.submitData(lifecycle, it)
+
         }
     }
+
+
 }
