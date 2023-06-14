@@ -108,8 +108,17 @@ class VoucherFragment : BaseFragment<FragmentVoucherBinding>() {
 
         binding.uploadVoucherBtn.setOnClickListener {
 
-            upload(voucherUri)
-
+            if (binding.voucherNumber.text.isNullOrBlank()) {
+                toast("Voucher Number needed")
+            } else if (binding.voucherDate.text.isNullOrBlank()) {
+                toast("Voucher Date needed")
+            } else if (binding.voucherAmount.text.isNullOrBlank()) {
+                toast("Voucher Amount needed")
+            } else if (voucherUri == null) {
+                toast("Voucher Image  needed")
+            } else {
+                upload(voucherUri)
+            }
 
         }
 
@@ -248,14 +257,18 @@ class VoucherFragment : BaseFragment<FragmentVoucherBinding>() {
                 is NetworkResult.Error -> {
                     dialog.dismiss()
                 }
+
                 is NetworkResult.Loading -> {
                     dialog.show()
                 }
+
                 is NetworkResult.Success -> {
                     dialog.dismiss()
                     if (it.data?.success == true) {
-                        findNavController().navigateUp()
+
                         findNavController().navigate(R.id.action_voucherFragment_to_voucherListFragment)
+                        findNavController().popBackStack()
+
 
                     }
 

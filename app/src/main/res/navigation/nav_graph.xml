@@ -58,11 +58,7 @@
             android:id="@+id/action_memberListFragment_to_userDetailsFragment"
             app:destination="@id/userDetailsFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/paymentFragment"
-        android:name="org.dufa.dufa9596.ui.PaymentFragment"
-        android:label=" Payment"
-        tools:layout="@layout/fragment_payment" />
+
 
     <fragment
         android:id="@+id/QRFragment"
