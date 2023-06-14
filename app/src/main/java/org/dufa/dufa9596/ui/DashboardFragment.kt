@@ -110,13 +110,10 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
         }
     }
 
-
     private fun sendToLoginPage() {
         tokenManager.saveToken(Constants.TOKEN, Constants.NO_DATA)
         startActivity(Intent(requireActivity(), LogInActivity::class.java))
         requireActivity().finish()
-
-
     }
 
 

@@ -162,21 +162,6 @@ class VoucherFragment : BaseFragment<FragmentVoucherBinding>() {
 
         CoroutineScope(Dispatchers.IO).launch {
             val nFile = Compressor.compress(requireContext(), file)
-            Log.i("TAG", "uploadREQ: $nFile")
-
-            //   val requestBodys = nFile.asRequestBody("image/*".toMediaTypeOrNull())
-//            val requestBody: RequestBody = MultipartBody.Builder()
-//                .setType(MultipartBody.FORM)
-//                .addFormDataPart(file.name, "file_name", requestBodys)
-//                .addFormDataPart("date", "23-5-23")
-//                .addFormDataPart("amount", "2000")
-//                .addFormDataPart("voucher_number", "password33")
-//                .build()
-//
-//
-//            val part = MultipartBody.Part.createFormData("file_name", file.name, requestBody)
-
-
             val requestFile: RequestBody = RequestBody.create(
                 "multipart/form-data".toMediaTypeOrNull(),
                 nFile
