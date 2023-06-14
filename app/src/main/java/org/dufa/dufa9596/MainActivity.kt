@@ -154,7 +154,7 @@ class MainActivity : AppCompatActivity() {
         userProfilePic = toolbar.findViewById(R.id.userProfilePic)
         profilePicAB = toolbar.findViewById(R.id.profilePicAB)
 
-        progressBar = findViewById(R.id.progress)
+        progressBar = findViewById(R.id.progressBar)
         userProfilePic.setOnClickListener {
             navController.navigate(R.id.profileFragment)
 

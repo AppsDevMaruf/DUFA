@@ -14,9 +14,9 @@ import org.dufa.dufa9596.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ProfileFragment :BaseFragment<FragmentProfileBinding>() {
+class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     private val dashboardViewModel by viewModels<DashboardViewModel>()
-  var bundle= Bundle()
+    var bundle = Bundle()
     override fun getFragmentView(): Int {
         return R.layout.fragment_profile
     }
@@ -25,11 +25,7 @@ class ProfileFragment :BaseFragment<FragmentProfileBinding>() {
         dashboardViewModel.profileInfoVM()
 
 
-
-
-
-        }
-
+    }
 
 
     override fun setupNavigation() {
@@ -41,7 +37,7 @@ class ProfileFragment :BaseFragment<FragmentProfileBinding>() {
     }
 
     override fun binObserver() {
-        dashboardViewModel.profileInfoVMLD.observe(viewLifecycleOwner){
+        dashboardViewModel.profileInfoVMLD.observe(viewLifecycleOwner) {
             binding.progressBar.gone()
             when (it) {
 
@@ -57,7 +53,6 @@ class ProfileFragment :BaseFragment<FragmentProfileBinding>() {
                 is NetworkResult.Success -> {
                     setProfileInfo(it.data)
                     bundle.putParcelable("userinfo", it.data)  // Key, value
-
 
 
                 }
@@ -83,8 +78,7 @@ class ProfileFragment :BaseFragment<FragmentProfileBinding>() {
             binding.bloodGroup.text = userInfo.bloodgroup
             binding.bloodGroup.setTextColor(
                 ContextCompat.getColor(
-                    requireActivity(),
-                    R.color.text_red
+                    requireActivity(), R.color.text_red
                 )
             )
             binding.occupation.text = userInfo.occupation
@@ -94,16 +88,14 @@ class ProfileFragment :BaseFragment<FragmentProfileBinding>() {
                 binding.status.text = "Inactive"
                 binding.status.setTextColor(
                     ContextCompat.getColor(
-                        requireActivity(),
-                        R.color.text_red
+                        requireActivity(), R.color.text_red
                     )
                 )
             } else {
                 binding.status.text = "Active"
                 binding.status.setTextColor(
                     ContextCompat.getColor(
-                        requireActivity(),
-                        R.color.green100
+                        requireActivity(), R.color.green100
                     )
                 )
             }
