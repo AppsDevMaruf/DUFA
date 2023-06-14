@@ -1,10 +1,20 @@
 package org.dufa.dufa9596
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.app.ProgressDialog
+import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
+import android.location.Address
+import android.location.Geocoder
+import android.location.Location
+import android.location.LocationManager
 import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
@@ -12,11 +22,13 @@ import android.view.Window
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.app.ActivityCompat
 import androidx.core.view.GravityCompat
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
@@ -29,6 +41,8 @@ import com.canhub.cropper.CropImage
 import com.canhub.cropper.CropImageContract
 import com.canhub.cropper.CropImageContractOptions
 import com.canhub.cropper.CropImageOptions
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.navigation.NavigationView
 
@@ -42,9 +56,11 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import org.dufa.dufa9596.data.local.TokenManager
 import org.dufa.dufa9596.data.models.getProfileInfo.ResponseProfileInfo
+import org.dufa.dufa9596.data.models.locations.RequestSetCLocation
 import org.dufa.dufa9596.databinding.ActivityMainBinding
 import org.dufa.dufa9596.utils.Constants
 import org.dufa.dufa9596.utils.NetworkResult
+import org.dufa.dufa9596.utils.gone
 import org.dufa.dufa9596.utils.hide
 import org.dufa.dufa9596.utils.isAllPermissionsGranted
 import org.dufa.dufa9596.utils.loadImagesWithGlide
@@ -54,6 +70,7 @@ import org.dufa.dufa9596.utils.show
 import org.dufa.dufa9596.viewmodel.DashboardViewModel
 import java.io.File
 import java.io.FileOutputStream
+import java.util.Locale
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -63,6 +80,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var userProfilePic: ShapeableImageView
     private var userId = 0
+    private lateinit var mFusedLocationClient: FusedLocationProviderClient
+    private val permissionId = 2
     private var dues: Int? = null
     private var voucher: Int? = null
     private var bundle = Bundle()
@@ -81,8 +100,8 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private val PERMISSIONS = arrayOf(
-            android.Manifest.permission.READ_EXTERNAL_STORAGE,
-            android.Manifest.permission.CAMERA,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA,
         )
     }
 
@@ -104,7 +123,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         permissionsRequest = getPermissionsRequest()
-
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+        getLocation()
         dialog = ProgressDialog(this)
         dialog.setTitle("Profile Updating...")
 
@@ -119,7 +139,7 @@ class MainActivity : AppCompatActivity() {
         dashboardViewModel.dashboardInfoVM()
         binObserver()
 
-        ///
+
         val drawerLayout: DrawerLayout = findViewById(R.id.drawerLayout)
         val navView: NavigationView = findViewById(R.id.navigationView)
         navView.itemIconTintList = null;
@@ -256,6 +276,93 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun isLocationEnabled(): Boolean {
+        val locationManager: LocationManager =
+            getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
+            LocationManager.NETWORK_PROVIDER
+        )
+    }
+
+    private fun checkPermissions(): Boolean {
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            return true
+        }
+        return false
+    }
+
+    private fun requestPermissions() {
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ),
+            permissionId
+        )
+    }
+
+    @SuppressLint("MissingSuperCall")
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        if (requestCode == permissionId) {
+            if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                getLocation()
+            }
+        }
+    }
+
+    @SuppressLint("MissingPermission", "SetTextI18n")
+    private fun getLocation() {
+        if (checkPermissions()) {
+            if (isLocationEnabled()) {
+                mFusedLocationClient.lastLocation.addOnCompleteListener(this) { task ->
+                    val location: Location? = task.result
+                    if (location != null) {
+                        val geocoder = Geocoder(this, Locale.getDefault())
+
+                        val list: List<Address> = geocoder.getFromLocation(
+                            location.latitude,
+                            location.longitude,
+                            1
+                        ) as List<Address>
+                        Log.i(
+                            "TAG",
+                            "LoginPageGetLocation: ${list[0].latitude}\n${list[0].longitude}"
+                        )
+
+                        val requestSetCLocation = RequestSetCLocation(
+                            userId,
+                            cityName = list[0].adminArea,
+                            latitude = list[0].latitude,
+                            longitude = list[0].longitude
+                        )
+                        Log.i("TAG", "requestSetCLocation: $requestSetCLocation")
+                        dashboardViewModel.setCurrentLocationVM(requestSetCLocation)
+                    }
+                }
+            } else {
+                Toast.makeText(this, "Please turn on location", Toast.LENGTH_LONG).show()
+                val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                startActivity(intent)
+            }
+        } else {
+            requestPermissions()
+        }
+    }
+
+
     override fun onResume() {
         super.onResume()
         dashboardViewModel.profileInfoVM()
@@ -335,6 +442,21 @@ class MainActivity : AppCompatActivity() {
 
             }
 
+        }
+        dashboardViewModel.setCurrentLocationVMLD.observe(this) {
+            progressBar.isVisible = false
+            when (it) {
+                is NetworkResult.Success -> {
+                    Log.i("Success", "setCurrentLocationVMLD: ${it.data?.message}")
+                }
+
+                is NetworkResult.Error -> {
+                }
+
+                is NetworkResult.Loading -> {
+                    progressBar.isVisible = true
+                }
+            }
         }
 
     }

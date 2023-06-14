@@ -22,6 +22,8 @@ import org.dufa.dufa9596.data.models.getProfileInfo.ResponseProfileInfo
 import org.dufa.dufa9596.data.models.get_districts.ResponseDistrict
 import org.dufa.dufa9596.data.models.get_halls.ResponseHalls
 import org.dufa.dufa9596.data.models.get_occupations.ResponseOccupations
+import org.dufa.dufa9596.data.models.locations.RequestSetCLocation
+import org.dufa.dufa9596.data.models.locations.ResponseSetCLocantion
 import org.dufa.dufa9596.data.models.locations.ResponseUserLocation
 import org.dufa.dufa9596.data.models.logout.ResponseLogout
 import org.dufa.dufa9596.data.models.payRenew.RequestPayRenew
@@ -704,4 +706,41 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
 
     }
     //   user locations  end
+    //  setCurrentLocation  start
+
+    private var _setCurrentLocation =
+        MutableLiveData<NetworkResult<ResponseSetCLocantion>>()
+    val setCurrentLocationVMLD: LiveData<NetworkResult<ResponseSetCLocantion>>
+        get() = _setCurrentLocation
+
+    fun setCurrentLocationVM(setCLocation: RequestSetCLocation) {
+
+        _setCurrentLocation.postValue(NetworkResult.Loading())
+
+        viewModelScope.launch {
+
+            try {
+                val response = securedRepository.setCurrentLocation(setCLocation)
+
+                if (response.isSuccessful && response.body() != null) {
+
+
+                    _setCurrentLocation.postValue(NetworkResult.Success(response.body()!!))
+
+                } else if (response.errorBody() != null) {
+
+                    val errorObj = JSONObject(response.errorBody()!!.charStream().readText())
+                    _setCurrentLocation.postValue(NetworkResult.Error(errorObj.getString("message")))
+                }
+            } catch (noInternetException: NoInternetException) {
+                _setCurrentLocation.postValue(noInternetException.localizedMessage?.let {
+                    NetworkResult.Error(
+                        it
+                    )
+                })
+            }
+        }
+
+    }
+    //   setCurrentLocation  end
 }

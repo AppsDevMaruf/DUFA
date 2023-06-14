@@ -35,9 +35,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class LogInActivity : AppCompatActivity() {
     private val authViewModel by viewModels<AuthViewModel>()
-    private lateinit var mFusedLocationClient: FusedLocationProviderClient
     private var userId: Int = 0
-    private val permissionId = 2
     lateinit var binding: FragmentLogInBinding
 
     @Inject
@@ -60,7 +58,6 @@ class LogInActivity : AppCompatActivity() {
 
     fun configUi() {
 
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         binding.logIn.setOnClickListener {
 
             binding.loginErrorText.isVisible = false
@@ -113,99 +110,11 @@ class LogInActivity : AppCompatActivity() {
 
 
     }
-
-    private fun isLocationEnabled(): Boolean {
-        val locationManager: LocationManager =
-            getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
-            LocationManager.NETWORK_PROVIDER
-        )
-    }
-
-    private fun checkPermissions(): Boolean {
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED &&
-            ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-            return true
-        }
-        return false
-    }
-
-    private fun requestPermissions() {
-        ActivityCompat.requestPermissions(
-            this,
-            arrayOf(
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ),
-            permissionId
-        )
-    }
-
-    @SuppressLint("MissingSuperCall")
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String>,
-        grantResults: IntArray
-    ) {
-        if (requestCode == permissionId) {
-            if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                getLocation()
-            }
-        }
-    }
-
-    @SuppressLint("MissingPermission", "SetTextI18n")
-    private fun getLocation() {
-        if (checkPermissions()) {
-            if (isLocationEnabled()) {
-                mFusedLocationClient.lastLocation.addOnCompleteListener(this) { task ->
-                    val location: Location? = task.result
-                    if (location != null) {
-                        val geocoder = Geocoder(this, Locale.getDefault())
-
-                        val list: List<Address> = geocoder.getFromLocation(
-                            location.latitude,
-                            location.longitude,
-                            1
-                        ) as List<Address>
-                        Log.i(
-                            "TAG",
-                            "LoginPageGetLocation: ${list[0].latitude}\n${list[0].longitude}"
-                        )
-
-                        val requestSetCLocation = RequestSetCLocation(
-                            userId,
-                            cityName = list[0].adminArea,
-                            latitude = list[0].latitude,
-                            longitude = list[0].longitude
-                        )
-                        Log.i("TAG", "requestSetCLocation: $requestSetCLocation")
-                        authViewModel.setCurrentLocationVM(requestSetCLocation)
-                    }
-                }
-            } else {
-                Toast.makeText(this, "Please turn on location", Toast.LENGTH_LONG).show()
-                val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-                startActivity(intent)
-            }
-        } else {
-            requestPermissions()
-        }
-    }
-
     fun binObserver() {
         authViewModel.loginResponseLiveDataVM.observe(this) {
             binding.progressBar.gone()
             when (it) {
                 is NetworkResult.Success -> {
-                    getLocation()
 
                     //token
                     Log.e("SuccessToken", "binObserver: ${it.data}")
@@ -228,23 +137,7 @@ class LogInActivity : AppCompatActivity() {
                 }
             }
         }
-        authViewModel.setCurrentLocationVMLD.observe(this) {
-            binding.progressBar.gone()
-            when (it) {
-                is NetworkResult.Success -> {
-                    Log.i("TAG", "setCurrentLocationVMLD: ${it.data?.message}")
-                }
 
-                is NetworkResult.Error -> {
-                    binding.loginErrorText.show()
-                    binding.loginErrorText.text = it.message
-                }
-
-                is NetworkResult.Loading -> {
-                    binding.progressBar.show()
-                }
-            }
-        }
 
     }
 
