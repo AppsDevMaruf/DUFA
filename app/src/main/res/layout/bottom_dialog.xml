@@ -56,11 +56,11 @@
                 android:layout_gravity="center"
                 android:paddingVertical="2dp"
                 android:fontFamily="@font/dm_sans_medium"
-                android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                 android:text="Select Filter Type" />
 
             <androidx.recyclerview.widget.RecyclerView
-
+                tools:listitem="@layout/item_search"
                 android:id="@+id/countryRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

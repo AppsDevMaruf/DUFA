@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import org.dufa.dufa9596.R
@@ -41,6 +42,7 @@ class DepartmentAdapter(
         // setting data to our views of recycler view.
         val model: Department = departmentList[position]
         holder.name.text = model.name
+        holder.icon.setImageResource(R.drawable.department)
 
 
         holder.itemView.setOnClickListener {
@@ -60,10 +62,12 @@ class DepartmentAdapter(
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         // creating variables for our views.
         lateinit var name: TextView
+        lateinit var icon: ImageView
 
         init {
             // initializing our views with their ids.
             name = itemView.findViewById(R.id.searchByItemTv)
+            icon= itemView.findViewById(R.id.itemIcon)
 
 
         }

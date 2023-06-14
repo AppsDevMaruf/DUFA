@@ -9,6 +9,7 @@ import org.dufa.dufa9596.adapter.VoucherAdapter
 import org.dufa.dufa9596.databinding.FragmentVoucherListBinding
 import org.dufa.dufa9596.utils.NetworkResult
 import dagger.hilt.android.AndroidEntryPoint
+import org.dufa.dufa9596.utils.show
 
 @AndroidEntryPoint
 class VoucherListFragment : BaseFragment<FragmentVoucherListBinding>() {
@@ -26,10 +27,6 @@ class VoucherListFragment : BaseFragment<FragmentVoucherListBinding>() {
         binding.addBtn.setOnClickListener {
             findNavController().navigate(R.id.action_voucherListFragment_to_voucherFragment)
         }
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            findNavController().navigateUp()
-            findNavController().navigate(R.id.action_voucherListFragment_to_DashboardFragment)
-        }
     }
 
 
@@ -38,11 +35,13 @@ class VoucherListFragment : BaseFragment<FragmentVoucherListBinding>() {
         adapter = VoucherAdapter()
         binding.voucherRecyclerView.adapter = adapter
         viewModel.getVoucherListVMLD.observe(viewLifecycleOwner) {
-
-
+            binding.progress.show()
             when (it) {
                 is NetworkResult.Error -> {}
-                is NetworkResult.Loading -> {}
+                is NetworkResult.Loading -> {
+                    binding.progress.show()
+                }
+
                 is NetworkResult.Success -> {
                     adapter.submitList(it.data?.vouchers)
 

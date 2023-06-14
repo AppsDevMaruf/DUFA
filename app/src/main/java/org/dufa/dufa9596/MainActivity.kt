@@ -85,7 +85,7 @@ class MainActivity : AppCompatActivity() {
     private var dues: Int? = null
     private var voucher: Int? = null
     private var bundle = Bundle()
-    private lateinit var progressBar: ProgressBar
+
     private val dashboardViewModel: DashboardViewModel by viewModels()
     lateinit var binding: ActivityMainBinding
     private lateinit var userProfilePicHeader: ShapeableImageView
@@ -154,7 +154,7 @@ class MainActivity : AppCompatActivity() {
         userProfilePic = toolbar.findViewById(R.id.userProfilePic)
         profilePicAB = toolbar.findViewById(R.id.profilePicAB)
 
-        progressBar = findViewById(R.id.progressBar)
+
         userProfilePic.setOnClickListener {
             navController.navigate(R.id.profileFragment)
 
@@ -397,7 +397,7 @@ class MainActivity : AppCompatActivity() {
 
         }
         dashboardViewModel.profileInfoVMLD.observe(this) {
-            progressBar.isVisible = false
+            binding.progress.isVisible = false
             when (it) {
 
                 is NetworkResult.Error -> {
@@ -405,7 +405,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 is NetworkResult.Loading -> {
-                    progressBar.isVisible = true
+                    binding.progress.isVisible = true
 
                 }
 
@@ -421,13 +421,13 @@ class MainActivity : AppCompatActivity() {
 
         }
         dashboardViewModel.dashboardInfoVMLD.observe(this) {
-            progressBar.isVisible = false
+            binding.progress.isVisible = false
             when (it) {
                 is NetworkResult.Error -> {
                 }
 
                 is NetworkResult.Loading -> {
-                    progressBar.isVisible = true
+                    binding.progress.isVisible = true
                 }
 
                 is NetworkResult.Success -> {
@@ -444,7 +444,7 @@ class MainActivity : AppCompatActivity() {
 
         }
         dashboardViewModel.setCurrentLocationVMLD.observe(this) {
-            progressBar.isVisible = false
+            binding.progress.isVisible = false
             when (it) {
                 is NetworkResult.Success -> {
                     Log.i("Success", "setCurrentLocationVMLD: ${it.data?.message}")
@@ -454,7 +454,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 is NetworkResult.Loading -> {
-                    progressBar.isVisible = true
+                    binding.progress.isVisible = true
                 }
             }
         }

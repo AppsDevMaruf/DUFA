@@ -49,7 +49,19 @@ class LogoutFragment : DialogFragment() {
         }
 
         binding.yesLogout.setOnClickListener {
-            dashboardViewModel.logoutVM()
+            //dashboardViewModel.logoutVM()
+            tokenManager.saveToken(Constants.TOKEN, Constants.NO_DATA)
+            requireActivity().run {
+                startActivity(
+                    Intent(
+                        requireContext(),
+                        LogInActivity::class.java
+                    )
+                )
+
+                finish()
+            }
+
         }
 
 

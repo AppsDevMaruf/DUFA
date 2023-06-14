@@ -23,16 +23,5 @@ class TokenManager @Inject constructor(@ApplicationContext context: Context) {
     }
 
 
-    fun setIsLoggedID(key: String, value: Boolean) {
-        val editor: SharedPreferences.Editor = prefs.edit()
-        editor.putBoolean(key, value)
-        editor.apply()
-    }
-    fun getIsLoggedIn(key: String): String {
-        val sharedNameValue = prefs.getString(key, Constants.NO_DATA)
-        return sharedNameValue.toString()
-    }
-
-
 
 }

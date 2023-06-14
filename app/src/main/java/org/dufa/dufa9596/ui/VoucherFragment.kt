@@ -72,7 +72,7 @@ class VoucherFragment : BaseFragment<FragmentVoucherBinding>() {
         dialog.setTitle("Voucher Uploading...")
 
         binding.voucherNumber.onTextChanged {
-            if (it != null) {
+            if (it.isNotBlank()) {
                 hasVoucherNum = true
                 enableBtn(
                     (hasVoucherNum && hasVoucherAmount && hasVoucherDate && hasVoucherImg),
@@ -81,7 +81,7 @@ class VoucherFragment : BaseFragment<FragmentVoucherBinding>() {
             }
         }
         binding.voucherAmount.onTextChanged {
-            if (it != null) {
+            if (it.isNotBlank()) {
                 hasVoucherAmount = true
                 enableBtn(
                     (hasVoucherNum && hasVoucherAmount && hasVoucherDate && hasVoucherImg),

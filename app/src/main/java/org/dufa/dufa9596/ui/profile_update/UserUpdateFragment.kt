@@ -9,6 +9,7 @@ import android.view.Window
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -52,6 +53,7 @@ import org.dufa.dufa9596.ui.profile_update.adapter.OccupationAdapter
 import org.dufa.dufa9596.utils.Constants
 import org.dufa.dufa9596.utils.NetworkResult
 import org.dufa.dufa9596.utils.datePickerFun
+import org.dufa.dufa9596.utils.gone
 import org.dufa.dufa9596.utils.hide
 import org.dufa.dufa9596.utils.hideSoftKeyboard
 import org.dufa.dufa9596.utils.isAllPermissionsGranted
@@ -82,7 +84,7 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
     private lateinit var hallAdapter: HallAdapter
     private var title = "Male"
 
-    lateinit var dialog: ProgressDialog
+    lateinit var dialog: ProgressBar
 
 
     var userid = 0
@@ -103,7 +105,7 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
 
     override fun getFragmentView(): Int {
 
-
+        dialog=ProgressBar(activity, null, android.R.attr.progressBarStyleSmall)
         return R.layout.fragment_user_update
     }
 
@@ -157,7 +159,7 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
         }
 
         binding.updateBtn.setOnClickListener {
-            if(!validatedRequest(binding)) return@setOnClickListener
+            if (!validatedRequest(binding)) return@setOnClickListener
 
             val request = RequestProfileUpdate(
                 name = binding.name.text.toString(),
@@ -260,8 +262,7 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
     }
 
     private fun upload(fileUri: Uri) {
-        dialog.setCancelable(false)
-        dialog.show()
+       dialog.show()
 
         val filesDir = requireActivity().filesDir
         val file = File(filesDir, "profile${System.currentTimeMillis()}.png")
@@ -384,22 +385,18 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
     override fun binObserver() {
 
         dashboardViewModel.responseUpdateProfileVMLD.observe(viewLifecycleOwner) {
-
+            binding.progressBar.hide()
             when (it) {
                 is NetworkResult.Error -> {
-                    dialog.dismiss()
-
 
                 }
 
                 is NetworkResult.Loading -> {
-                    dialog.dismiss()
-
-
+                    binding.progressBar.show()
                 }
 
                 is NetworkResult.Success -> {
-                    dialog.dismiss()
+                    dialog.gone()
 
                     Log.i("TAG", "message: ${it.message}")
                     Log.i("TAG", "data: ${it.data?.message}")
@@ -419,19 +416,19 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
 
             when (it) {
                 is NetworkResult.Error -> {
-                    dialog.dismiss()
+                    dialog.gone()
                     Log.i("TAG", "Error: ${it.data.toString()}")
 
                 }
 
                 is NetworkResult.Loading -> {
-                    dialog.dismiss()
+                    dialog.gone()
 
                     Log.i("TAG", "Loading: ${it.data}")
                 }
 
                 is NetworkResult.Success -> {
-                    dialog.dismiss()
+                    dialog.gone()
 
                     Log.i("TAG", "message: ${it.message}")
                     Log.i("TAG", "data: ${it.data?.message}")
@@ -698,8 +695,6 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
         filterType!!.text = "Select a Blood group"
 
         val recyclerView = bottomSheetDialog.findViewById<RecyclerView>(R.id.countryRecyclerView)
-
-
 
         buildBloodGroupRecyclerView(recyclerView!!)
 
