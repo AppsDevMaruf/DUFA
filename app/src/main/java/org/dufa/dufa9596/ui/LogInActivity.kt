@@ -29,6 +29,7 @@ import org.dufa.dufa9596.utils.*
 import org.dufa.dufa9596.viewmodel.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import org.dufa.dufa9596.R
 import java.util.*
 import javax.inject.Inject
 
@@ -111,11 +112,10 @@ class LogInActivity : AppCompatActivity() {
 
     }
     fun binObserver() {
-        authViewModel.loginResponseLiveDataVM.observe(this) {
+        authViewModel.loginVMLD.observe(this) {
             binding.progressBar.gone()
             when (it) {
                 is NetworkResult.Success -> {
-
                     //token
                     Log.e("SuccessToken", "binObserver: ${it.data}")
                     authViewModel.setLoginResponseToken(it.data!!)
@@ -128,6 +128,17 @@ class LogInActivity : AppCompatActivity() {
                 }
 
                 is NetworkResult.Error -> {
+                    showDialog(
+                        context = this,
+                        title = "",
+                        details = "${it.message}",
+                        resId = R.drawable.ic_close,
+                        yesContent = "Okay",
+                        noContent = "Cancel",
+                        showNoBtn = false,
+                        positiveFun = {
+                        }, {}
+                    )
                     binding.loginErrorText.show()
                     binding.loginErrorText.text = it.message
                 }

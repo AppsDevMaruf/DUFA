@@ -12,6 +12,7 @@ import org.dufa.dufa9596.databinding.FragmentQRBinding
 import org.dufa.dufa9596.utils.NetworkResult
 import org.dufa.dufa9596.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import org.dufa.dufa9596.utils.showDialog
 
 
 @AndroidEntryPoint
@@ -42,7 +43,17 @@ class QRFragment : BaseFragment<FragmentQRBinding>() {
 
                 is NetworkResult.Error -> {
 
-                    //Log.i("TAG1", "binObserver: ${it.data!!.message.toString()}")
+                    showDialog(
+                        context = requireContext(),
+                        title = "",
+                        details = "${it.message}",
+                        resId = R.drawable.ic_close,
+                        yesContent = "Okay",
+                        noContent = "Cancel",
+                        showNoBtn = false,
+                        positiveFun = {
+                        }, {}
+                    )
                 }
                 is NetworkResult.Loading -> {
 

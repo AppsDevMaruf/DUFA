@@ -1,18 +1,17 @@
-package org.dufa.dufa9596
+package org.dufa.dufa9596.ui
 
 import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.view.Window
 import android.widget.EditText
-import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import org.dufa.dufa9596.BaseFragment
+import org.dufa.dufa9596.R
 import org.dufa.dufa9596.data.models.fund_collection.RequestFundCollection
 import org.dufa.dufa9596.databinding.FragmentFundCollectionBinding
 import org.dufa.dufa9596.utils.NetworkResult

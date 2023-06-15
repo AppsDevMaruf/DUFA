@@ -15,6 +15,7 @@ import org.dufa.dufa9596.utils.gone
 import org.dufa.dufa9596.utils.show
 import org.dufa.dufa9596.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import org.dufa.dufa9596.utils.showDialog
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -79,8 +80,6 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
         binding.fundCollectionCard.setOnClickListener {
             findNavController().navigate(R.id.action_DashboardFragment_to_fundCollectionFragment)
         }
-
-
     }
 
     override fun binObserver() {
@@ -91,7 +90,17 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
 
                 is NetworkResult.Error -> {
                     sendToLoginPage()
-                    Log.i("TAG1", "binObserver: ${it.data!!}")
+                    showDialog(
+                        context = requireContext(),
+                        title = "",
+                        details = "${it.message}",
+                        resId = R.drawable.ic_close,
+                        yesContent = "Okay",
+                        noContent = "Cancel",
+                        showNoBtn = false,
+                        positiveFun = {
+                        }, {}
+                    )
                 }
 
                 is NetworkResult.Loading -> {

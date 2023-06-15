@@ -10,6 +10,7 @@ import org.dufa.dufa9596.databinding.FragmentVoucherListBinding
 import org.dufa.dufa9596.utils.NetworkResult
 import dagger.hilt.android.AndroidEntryPoint
 import org.dufa.dufa9596.utils.show
+import org.dufa.dufa9596.utils.showDialog
 
 @AndroidEntryPoint
 class VoucherListFragment : BaseFragment<FragmentVoucherListBinding>() {
@@ -31,13 +32,25 @@ class VoucherListFragment : BaseFragment<FragmentVoucherListBinding>() {
 
 
     override fun binObserver() {
-        viewModel.getVoucherListVM()
+        viewModel.voucherListVM()
         adapter = VoucherAdapter()
         binding.voucherRecyclerView.adapter = adapter
-        viewModel.getVoucherListVMLD.observe(viewLifecycleOwner) {
+        viewModel.voucherListVMLD.observe(viewLifecycleOwner) {
             binding.progress.show()
             when (it) {
-                is NetworkResult.Error -> {}
+                is NetworkResult.Error -> {
+                    showDialog(
+                        context = requireContext(),
+                        title = "",
+                        details = "${it.message}",
+                        resId = R.drawable.ic_close,
+                        yesContent = "Okay",
+                        noContent = "Cancel",
+                        showNoBtn = false,
+                        positiveFun = {
+                        }, {}
+                    )
+                }
                 is NetworkResult.Loading -> {
                     binding.progress.show()
                 }

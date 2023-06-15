@@ -115,7 +115,7 @@
         android:label="LogoutFragment" />
     <fragment
         android:id="@+id/SSLFragment"
-        android:name="org.dufa.dufa9596.SSLFragment"
+        android:name="org.dufa.dufa9596.ui.SSLFragment"
         android:label="fragment_s_s_l"
         tools:layout="@layout/fragment_s_s_l">
         <action
@@ -132,7 +132,7 @@
         tools:layout="@layout/fragment_payent_success"/>
     <fragment
         android:id="@+id/paymentFailledFragment"
-        android:name="org.dufa.dufa9596.PaymentFailedFragment"
+        android:name="org.dufa.dufa9596.ui.PaymentFailedFragment"
         android:label="fragment_payment_failled"
         tools:layout="@layout/fragment_payment_failled"/>
     <fragment
@@ -163,7 +163,7 @@
         tools:layout="@layout/fragment_maps" />
     <fragment
         android:id="@+id/fundCollectionFragment"
-        android:name="org.dufa.dufa9596.FundCollectionFragment"
+        android:name="org.dufa.dufa9596.ui.FundCollectionFragment"
         android:label="fragment_fund_collection"
         tools:layout="@layout/fragment_fund_collection" >
         <action

@@ -14,9 +14,7 @@ class MemberSearchPagingSource(
 
 ) : PagingSource<Int, Data>() {
 
-
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Data> {
-
 
         return try {
             val position = params.key ?: 1
@@ -27,7 +25,6 @@ class MemberSearchPagingSource(
             } else {
                 hasData.invoke(true)
             }
-
 
             LoadResult.Page(
                 data = response.searchData.data,
@@ -42,13 +39,11 @@ class MemberSearchPagingSource(
 
     }
 
-
     override fun getRefreshKey(state: PagingState<Int, Data>): Int? {
         return state.anchorPosition?.let {
             state.closestPageToPosition(it)?.prevKey?.plus(1)
                 ?: state.closestPageToPosition(it)?.nextKey?.minus(1)
         }
     }
-
 
 }

@@ -87,11 +87,7 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), MemberSele
 
 
         searchItemAdapter = SearchItemAdapter(this, type)
-        /*  binding.memberListRv.adapter = searchAdapter.withLoadStateHeaderAndFooter(
-              header = LoaderAdapter(),
-              footer = LoaderAdapter()
-          )*/
-        //binding.memberListRv.adapter = searchAdapter
+
 
         searchBYSelectedItem(SearchBy(null, null))
 
@@ -156,7 +152,7 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), MemberSele
             binding.filterTypeIcon.setImageResource(R.drawable.blood)
             binding.titleText.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
             type = it.tag.toString()
-            dashboardViewModel.getBloodGroupVM()
+            dashboardViewModel.bloodGroupVM()
             hasData = false
             searchItemAdapter = SearchItemAdapter(this, type)
             filterType = "Select a blood group"
@@ -189,7 +185,7 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), MemberSele
             binding.filterTypeIcon.setImageResource(R.drawable.department)
             binding.titleText.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
             type = it.tag.toString()
-            dashboardViewModel.getDepartmentsVM()
+            dashboardViewModel.departmentVM()
             hasData = false
             searchItemAdapter = SearchItemAdapter(this, type)
             filterType = "Select a department"
@@ -267,10 +263,24 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), MemberSele
     }
 
     override fun binObserver() {
-        dashboardViewModel.getDepartmentsVMLD.observe(viewLifecycleOwner) {
+        dashboardViewModel.departmentVMLD.observe(viewLifecycleOwner) {
             binding.progressBar.gone()
             when (it) {
-                is NetworkResult.Error -> {}
+                is NetworkResult.Error -> {
+                    showDialog(
+                        context = requireActivity(),
+                        title = "",
+                        details = "${it.message}",
+                        resId = R.drawable.ic_close,
+                        yesContent = "Okay",
+                        noContent = "Cancel",
+                        showNoBtn = false,
+                        positiveFun = {
+                        }, {}
+                    )
+
+                }
+
                 is NetworkResult.Loading -> {
                     binding.progressBar.show()
                 }
@@ -292,10 +302,22 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), MemberSele
                 }
             }
         }
-        dashboardViewModel.getBloodGroupVMLD.observe(viewLifecycleOwner) {
+        dashboardViewModel.bloodGroupVMLD.observe(viewLifecycleOwner) {
             binding.progressBar.gone()
             when (it) {
-                is NetworkResult.Error -> {}
+                is NetworkResult.Error -> {
+                    showDialog(
+                        context = requireActivity(),
+                        title = "",
+                        details = "${it.message}",
+                        resId = R.drawable.ic_close,
+                        yesContent = "Okay",
+                        noContent = "Cancel",
+                        showNoBtn = false,
+                        positiveFun = {
+                        }, {}
+                    )
+                }
                 is NetworkResult.Loading -> {
                     binding.progressBar.show()
                 }
@@ -320,7 +342,19 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), MemberSele
         dashboardViewModel.districtVMLD.observe(viewLifecycleOwner) {
             binding.progressBar.gone()
             when (it) {
-                is NetworkResult.Error -> {}
+                is NetworkResult.Error -> {
+                    showDialog(
+                        context = requireActivity(),
+                        title = "",
+                        details = "${it.message}",
+                        resId = R.drawable.ic_close,
+                        yesContent = "Okay",
+                        noContent = "Cancel",
+                        showNoBtn = false,
+                        positiveFun = {
+                        }, {}
+                    )
+                }
                 is NetworkResult.Loading -> {
                     binding.progressBar.show()
                 }
@@ -344,7 +378,19 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), MemberSele
         dashboardViewModel.occupationsVMLD.observe(viewLifecycleOwner) {
             binding.progressBar.gone()
             when (it) {
-                is NetworkResult.Error -> {}
+                is NetworkResult.Error -> {
+                    showDialog(
+                        context = requireActivity(),
+                        title = "",
+                        details = "${it.message}",
+                        resId = R.drawable.ic_close,
+                        yesContent = "Okay",
+                        noContent = "Cancel",
+                        showNoBtn = false,
+                        positiveFun = {
+                        }, {}
+                    )
+                }
                 is NetworkResult.Loading -> {
                     binding.progressBar.show()
                 }
@@ -369,7 +415,19 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), MemberSele
         dashboardViewModel.hallsVMLD.observe(viewLifecycleOwner) {
             binding.progressBar.gone()
             when (it) {
-                is NetworkResult.Error -> {}
+                is NetworkResult.Error -> {
+                    showDialog(
+                        context = requireActivity(),
+                        title = "",
+                        details = "${it.message}",
+                        resId = R.drawable.ic_close,
+                        yesContent = "Okay",
+                        noContent = "Cancel",
+                        showNoBtn = false,
+                        positiveFun = {
+                        }, {}
+                    )
+                }
                 is NetworkResult.Loading -> {
                     binding.progressBar.show()
                 }
@@ -444,8 +502,6 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), MemberSele
                 }
 
             }.collectLatest {
-
-
                 searchAdapter.submitData(it)
 
 

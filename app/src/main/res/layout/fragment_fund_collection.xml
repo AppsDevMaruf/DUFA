@@ -8,7 +8,8 @@
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".ui.FundCollectionFragment">
         <com.github.ybq.android.spinkit.SpinKitView
             android:id="@+id/progressBar"
             style="@style/SpinKitView.Circle"
@@ -28,8 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_marginTop="10dp"
-            tools:context=".FundCollectionFragment">
+            android:layout_marginTop="10dp">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/generalFund"

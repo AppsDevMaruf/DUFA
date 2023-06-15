@@ -67,6 +67,7 @@ import org.dufa.dufa9596.utils.loadImagesWithGlide
 import org.dufa.dufa9596.utils.nameAbbreviationGenerator
 import org.dufa.dufa9596.utils.requestPermissions
 import org.dufa.dufa9596.utils.show
+import org.dufa.dufa9596.utils.showDialog
 import org.dufa.dufa9596.viewmodel.DashboardViewModel
 import java.io.File
 import java.io.FileOutputStream
@@ -350,7 +351,7 @@ class MainActivity : AppCompatActivity() {
                             latitude = list[0].latitude,
                             longitude = list[0].longitude
                         )
-                        Log.i("TAG", "requestSetCLocation: $requestSetCLocation")
+                        Log.e("TAG", "requestSetCLocation: $requestSetCLocation")
                         dashboardViewModel.setCurrentLocationVM(requestSetCLocation)
                     }
                 }
@@ -384,6 +385,17 @@ class MainActivity : AppCompatActivity() {
             when (it) {
                 is NetworkResult.Error -> {
                     dialog.dismiss()
+                    showDialog(
+                        context = this,
+                        title = "",
+                        details = "${it.message}",
+                        resId = R.drawable.ic_close,
+                        yesContent = "Okay",
+                        noContent = "Cancel",
+                        showNoBtn = false,
+                        positiveFun = {
+                        }, {}
+                    )
                 }
 
                 is NetworkResult.Loading -> {
@@ -403,6 +415,17 @@ class MainActivity : AppCompatActivity() {
             when (it) {
 
                 is NetworkResult.Error -> {
+                    showDialog(
+                        context = this,
+                        title = "",
+                        details = "${it.message}",
+                        resId = R.drawable.ic_close,
+                        yesContent = "Okay",
+                        noContent = "Cancel",
+                        showNoBtn = false,
+                        positiveFun = {
+                        }, {}
+                    )
 
                 }
 
@@ -426,6 +449,17 @@ class MainActivity : AppCompatActivity() {
             binding.progress.isVisible = false
             when (it) {
                 is NetworkResult.Error -> {
+                    showDialog(
+                        context = this,
+                        title = "",
+                        details = "${it.message}",
+                        resId = R.drawable.ic_close,
+                        yesContent = "Okay",
+                        noContent = "Cancel",
+                        showNoBtn = false,
+                        positiveFun = {
+                        }, {}
+                    )
                 }
 
                 is NetworkResult.Loading -> {
@@ -453,6 +487,17 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 is NetworkResult.Error -> {
+                    showDialog(
+                        context = this,
+                        title = "",
+                        details = "${it.message}",
+                        resId = R.drawable.ic_close,
+                        yesContent = "Okay",
+                        noContent = "Cancel",
+                        showNoBtn = false,
+                        positiveFun = {
+                        }, {}
+                    )
                 }
 
                 is NetworkResult.Loading -> {

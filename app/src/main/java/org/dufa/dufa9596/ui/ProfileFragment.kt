@@ -42,7 +42,17 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
             when (it) {
 
                 is NetworkResult.Error -> {
-
+                    showDialog(
+                        context = requireContext(),
+                        title = "",
+                        details = "${it.message}",
+                        resId = R.drawable.ic_close,
+                        yesContent = "Okay",
+                        noContent = "Cancel",
+                        showNoBtn = false,
+                        positiveFun = {
+                        }, {}
+                    )
                 }
 
                 is NetworkResult.Loading -> {

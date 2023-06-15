@@ -16,6 +16,8 @@ import org.dufa.dufa9596.utils.NetworkResult
 import org.dufa.dufa9596.utils.toast
 import org.dufa.dufa9596.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import org.dufa.dufa9596.R
+import org.dufa.dufa9596.utils.showDialog
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -73,7 +75,17 @@ class LogoutFragment : DialogFragment() {
             when (it) {
 
                 is NetworkResult.Error -> {
-
+                    showDialog(
+                        context = requireContext(),
+                        title = "",
+                        details = "${it.message}",
+                        resId = R.drawable.ic_close,
+                        yesContent = "Okay",
+                        noContent = "Cancel",
+                        showNoBtn = false,
+                        positiveFun = {
+                        }, {}
+                    )
                 }
                 is NetworkResult.Loading -> {
                     // progressBar.isVisible = true

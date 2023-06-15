@@ -61,6 +61,7 @@ import org.dufa.dufa9596.utils.loadImagesWithGlide
 import org.dufa.dufa9596.utils.nameAbbreviationGenerator
 import org.dufa.dufa9596.utils.requestPermissions
 import org.dufa.dufa9596.utils.show
+import org.dufa.dufa9596.utils.showDialog
 import org.dufa.dufa9596.viewmodel.DashboardViewModel
 import java.io.File
 import java.io.FileOutputStream
@@ -105,7 +106,7 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
 
     override fun getFragmentView(): Int {
 
-        dialog=ProgressBar(activity, null, android.R.attr.progressBarStyleSmall)
+        dialog = ProgressBar(activity, null, android.R.attr.progressBarStyleSmall)
         return R.layout.fragment_user_update
     }
 
@@ -262,7 +263,7 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
     }
 
     private fun upload(fileUri: Uri) {
-       dialog.show()
+        dialog.show()
 
         val filesDir = requireActivity().filesDir
         val file = File(filesDir, "profile${System.currentTimeMillis()}.png")
@@ -337,8 +338,8 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
         dashboardViewModel.occupationsVM()
         dashboardViewModel.districtVM()
         dashboardViewModel.hallsVM()
-        dashboardViewModel.getBloodGroupVM()
-        dashboardViewModel.getDepartmentsVM()
+        dashboardViewModel.bloodGroupVM()
+        dashboardViewModel.departmentVM()
 
         if (arguments != null) {
             val userInfo: ResponseProfileInfo = requireArguments().getParcelable("userinfo")!!
@@ -413,27 +414,32 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
 
         }
         dashboardViewModel.uploadProfilePicVMLD.observe(viewLifecycleOwner) {
-
+            dialog.show()
             when (it) {
                 is NetworkResult.Error -> {
                     dialog.gone()
-                    Log.i("TAG", "Error: ${it.data.toString()}")
+                    showDialog(
+                        context = requireActivity(),
+                        title = "",
+                        details = "${it.message}",
+                        resId = R.drawable.ic_close,
+                        yesContent = "Okay",
+                        noContent = "Cancel",
+                        showNoBtn = false,
+                        positiveFun = {
+                        }, {}
+                    )
 
                 }
 
                 is NetworkResult.Loading -> {
-                    dialog.gone()
-
-                    Log.i("TAG", "Loading: ${it.data}")
+                    dialog.show()
                 }
 
                 is NetworkResult.Success -> {
                     dialog.gone()
-
                     Log.i("TAG", "message: ${it.message}")
                     Log.i("TAG", "data: ${it.data?.message}")
-
-                    //   it.data?.let { it1 -> toast(it1.message) }
 
                 }
             }
@@ -446,8 +452,17 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
 
             when (occupations) {
                 is NetworkResult.Error -> {
-
-
+                    showDialog(
+                        context = requireActivity(),
+                        title = "",
+                        details = "${occupations.message}",
+                        resId = R.drawable.ic_close,
+                        yesContent = "Okay",
+                        noContent = "Cancel",
+                        showNoBtn = false,
+                        positiveFun = {
+                        }, {}
+                    )
                 }
 
                 is NetworkResult.Loading -> {
@@ -463,14 +478,22 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
                 }
             }
         }
-
-        dashboardViewModel.getDepartmentsVMLD.observe(viewLifecycleOwner) { departments ->
+        dashboardViewModel.departmentVMLD.observe(viewLifecycleOwner) { departments ->
             binding.progressBar.hide()
 
             when (departments) {
                 is NetworkResult.Error -> {
-
-
+                    showDialog(
+                        context = requireActivity(),
+                        title = "",
+                        details = "${departments.message}",
+                        resId = R.drawable.ic_close,
+                        yesContent = "Okay",
+                        noContent = "Cancel",
+                        showNoBtn = false,
+                        positiveFun = {
+                        }, {}
+                    )
                 }
 
                 is NetworkResult.Loading -> {
@@ -494,8 +517,17 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
 
             when (districts) {
                 is NetworkResult.Error -> {
-
-
+                    showDialog(
+                        context = requireActivity(),
+                        title = "",
+                        details = "${districts.message}",
+                        resId = R.drawable.ic_close,
+                        yesContent = "Okay",
+                        noContent = "Cancel",
+                        showNoBtn = false,
+                        positiveFun = {
+                        }, {}
+                    )
                 }
 
                 is NetworkResult.Loading -> {
@@ -520,7 +552,17 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
             when (halls) {
                 is NetworkResult.Error -> {
 
-
+                    showDialog(
+                        context = requireActivity(),
+                        title = "",
+                        details = "${halls.message}",
+                        resId = R.drawable.ic_close,
+                        yesContent = "Okay",
+                        noContent = "Cancel",
+                        showNoBtn = false,
+                        positiveFun = {
+                        }, {}
+                    )
                 }
 
                 is NetworkResult.Loading -> {
@@ -538,12 +580,22 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
             }
 
         }
-        dashboardViewModel.getBloodGroupVMLD.observe(viewLifecycleOwner) { bloodGroups ->
+        dashboardViewModel.bloodGroupVMLD.observe(viewLifecycleOwner) { bloodGroups ->
             binding.progressBar.hide()
 
             when (bloodGroups) {
                 is NetworkResult.Error -> {
-
+                    showDialog(
+                        context = requireActivity(),
+                        title = "",
+                        details = "${bloodGroups.message}",
+                        resId = R.drawable.ic_close,
+                        yesContent = "Okay",
+                        noContent = "Cancel",
+                        showNoBtn = false,
+                        positiveFun = {
+                        }, {}
+                    )
 
                 }
 
@@ -563,14 +615,22 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
             }
 
         }
-
         dashboardViewModel.profileInfoVMLD.observe(viewLifecycleOwner) {
             binding.progressBar.hide()
             when (it) {
 
                 is NetworkResult.Error -> {
-                    Log.i("Error", "NetworkResult.Error: ${it.data!!}")
-                    //Log.i("TAG1", "binObserver: ${it.data!!.message.toString()}")
+                    showDialog(
+                        context = requireActivity(),
+                        title = "",
+                        details = "${it.message}",
+                        resId = R.drawable.ic_close,
+                        yesContent = "Okay",
+                        noContent = "Cancel",
+                        showNoBtn = false,
+                        positiveFun = {
+                        }, {}
+                    )
                 }
 
                 is NetworkResult.Loading -> {

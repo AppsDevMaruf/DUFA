@@ -15,13 +15,10 @@ class LoaderAdapter : LoadStateAdapter<LoaderAdapter.LoadViewHolder>() {
         fun bindState(loadState: LoadState) {
             binding.progress.isVisible = loadState is LoadState.Loading
         }
-
     }
-
     override fun onBindViewHolder(holder: LoadViewHolder, loadState: LoadState) {
         holder.bindState(loadState)
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState): LoadViewHolder {
         return LoadViewHolder(
             ItemLoadingProgressBinding.inflate(

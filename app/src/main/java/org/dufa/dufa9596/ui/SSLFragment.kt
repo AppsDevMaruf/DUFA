@@ -1,4 +1,4 @@
-package org.dufa.dufa9596
+package org.dufa.dufa9596.ui
 
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
@@ -11,13 +11,15 @@ import androidx.navigation.fragment.findNavController
 import com.google.gson.Gson
 
 import dagger.hilt.android.AndroidEntryPoint
+import org.dufa.dufa9596.BaseFragment
+import org.dufa.dufa9596.R
 import org.dufa.dufa9596.databinding.FragmentSSLBinding
 import org.dufa.dufa9596.utils.gone
 import org.dufa.dufa9596.utils.show
 import org.dufa.dufa9596.utils.toast
 
 @AndroidEntryPoint
-class SSLFragment :BaseFragment<FragmentSSLBinding>() {
+class SSLFragment : BaseFragment<FragmentSSLBinding>() {
     private var paymentUrl: String? = null
     override fun getFragmentView(): Int {
         return R.layout.fragment_s_s_l

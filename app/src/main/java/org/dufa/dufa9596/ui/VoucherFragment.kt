@@ -251,11 +251,21 @@ class VoucherFragment : BaseFragment<FragmentVoucherBinding>() {
 
         dashboardViewModel.responseUploadVoucherVMLD.observe(viewLifecycleOwner) {
 
-            Log.i("TAG", "raw: ${it.data?.data} ")
-
+            dialog.dismiss()
             when (it) {
                 is NetworkResult.Error -> {
-                    dialog.dismiss()
+
+                    showDialog(
+                        context = requireContext(),
+                        title = "",
+                        details = "${it.message}",
+                        resId = R.drawable.ic_close,
+                        yesContent = "Okay",
+                        noContent = "Cancel",
+                        showNoBtn = false,
+                        positiveFun = {
+                        }, {}
+                    )
                 }
 
                 is NetworkResult.Loading -> {
@@ -263,13 +273,9 @@ class VoucherFragment : BaseFragment<FragmentVoucherBinding>() {
                 }
 
                 is NetworkResult.Success -> {
-                    dialog.dismiss()
                     if (it.data?.success == true) {
-
                         findNavController().navigate(R.id.action_voucherFragment_to_voucherListFragment)
                         findNavController().popBackStack()
-
-
                     }
 
 

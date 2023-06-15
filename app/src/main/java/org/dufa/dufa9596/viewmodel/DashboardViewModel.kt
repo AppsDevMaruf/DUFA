@@ -20,6 +20,7 @@ import org.dufa.dufa9596.data.models.dashboard.dasboard_info.ResponseDashboardIn
 import org.dufa.dufa9596.data.models.fee_list.ResponseFeeList
 import org.dufa.dufa9596.data.models.fund_collection.RequestFundCollection
 import org.dufa.dufa9596.data.models.getProfileInfo.ResponseProfileInfo
+import org.dufa.dufa9596.data.models.get_departments.ResponseDepartments
 import org.dufa.dufa9596.data.models.get_districts.ResponseDistrict
 import org.dufa.dufa9596.data.models.get_halls.ResponseHalls
 import org.dufa.dufa9596.data.models.get_occupations.ResponseOccupations
@@ -30,7 +31,9 @@ import org.dufa.dufa9596.data.models.logout.ResponseLogout
 import org.dufa.dufa9596.data.models.payRenew.RequestPayRenew
 import org.dufa.dufa9596.data.models.search.Data
 import org.dufa.dufa9596.data.models.search.RequestSearch
+import org.dufa.dufa9596.data.models.search.blood.ResponseBloodGroup
 import org.dufa.dufa9596.data.models.upload_profile_pic.ResponseUploadProfilePic
+import org.dufa.dufa9596.data.models.vouchers.ResponseVoucherList
 import org.dufa.dufa9596.data.models.vouchers.ResponseVoucherUpload
 import org.dufa.dufa9596.repos.SecuredRepository
 import org.dufa.dufa9596.ui.profile_update.RequestProfileUpdate
@@ -58,39 +61,7 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
             .cachedIn(viewModelScope)
     }
 
-
-    // get all Member start
-    val getAllMemberVMLD = securedRepository.responseAllMember
-    fun getAllMemberVM() {
-        viewModelScope.launch {
-            securedRepository.getAllMemberRepo()
-        }
-    }
-
-
-    // getDepartmentsVM start
-    val getDepartmentsVMLD = securedRepository.responseDepartmentsRepo
-
-    fun getDepartmentsVM() {
-        viewModelScope.launch {
-            securedRepository.getDepartmentsRepo()
-        }
-    }
-    // getDepartmentsVM end
-
-    // getBloodGroupVM start
-    val getBloodGroupVMLD = securedRepository.responseBloodGroupRepo
-
-    fun getBloodGroupVM() {
-        viewModelScope.launch {
-            securedRepository.getBloodGroupsRepo()
-        }
-    }
-    // getBloodGroupVM end
-
-
     //  logout start
-
     private var _responseLogout =
         MutableLiveData<NetworkResult<ResponseLogout>>()
     val logoutVMLD: LiveData<NetworkResult<ResponseLogout>>
@@ -174,48 +145,48 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
 
     //   profile info  end
 
-    /*  //  searchByNameEmail start
 
-      private var _responeSearchByNameEmail =
-          MutableLiveData<NetworkResult<ResponseSearch>>()
-      val searchByNameEmailVMLD: LiveData<NetworkResult<ResponseSearch>>
-          get() = _responeSearchByNameEmail
+    //  Blood group start
 
-      fun searchByNameEmailVM(nameOrEmail:RequestSearch) {
+    private var _responseBloodGroup =
+        MutableLiveData<NetworkResult<ResponseBloodGroup>>()
+    val bloodGroupVMLD: LiveData<NetworkResult<ResponseBloodGroup>>
+        get() = _responseBloodGroup
 
-          _responeSearchByNameEmail.postValue(NetworkResult.Loading())
+    @SuppressLint("SuspiciousIndentation")
+    fun bloodGroupVM() {
 
-          viewModelScope.launch {
+        _responseBloodGroup.postValue(NetworkResult.Loading())
 
-              try {
-                  val response = securedRepository.searchByNameEmail(nameOrEmail)
+        viewModelScope.launch {
 
-                  if (response.isSuccessful && response.body() != null) {
+            try {
+                val response = securedRepository.getBloodGroupsRepo()
 
-
-                      _responeSearchByNameEmail.postValue(NetworkResult.Success(response.body()!!))
-
-                  } else if (response.errorBody() != null) {
-
-                      val errorObj = JSONObject(response.errorBody()!!.charStream().readText())
-                      _responeSearchByNameEmail.postValue(NetworkResult.Error(errorObj.getString("message")))
-
-                  }
-              } catch (noInternetException: NoInternetException) {
-                  _responeSearchByNameEmail.postValue(noInternetException.localizedMessage?.let {
-                      NetworkResult.Error(
-                          it
-                      )
-                  })
-              }
-
-          }
-
-      }
+                if (response.isSuccessful && response.body() != null) {
 
 
-      //   searchByNameEmail info  end
-  */
+                    _responseBloodGroup.postValue(NetworkResult.Success(response.body()!!))
+
+                } else if (response.errorBody() != null) {
+
+                    val errorObj = JSONObject(response.errorBody()!!.charStream().readText())
+                    _responseBloodGroup.postValue(NetworkResult.Error(errorObj.getString("message")))
+
+                }
+            } catch (noInternetException: NoInternetException) {
+                _responseBloodGroup.postValue(noInternetException.localizedMessage?.let {
+                    NetworkResult.Error(
+                        it
+                    )
+                })
+            }
+
+        }
+
+    }
+
+    //   blood group  end
     //  District info start
 
     private var _responseDistrict =
@@ -256,11 +227,49 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
 
     }
 
-
     //   District info  end
+    //  Department start
+
+    private var _responseDepartment =
+        MutableLiveData<NetworkResult<ResponseDepartments>>()
+    val departmentVMLD: LiveData<NetworkResult<ResponseDepartments>>
+        get() = _responseDepartment
+
+    @SuppressLint("SuspiciousIndentation")
+    fun departmentVM() {
+
+        _responseDepartment.postValue(NetworkResult.Loading())
+
+        viewModelScope.launch {
+
+            try {
+                val response = securedRepository.getDepartmentsRepo()
+
+                if (response.isSuccessful && response.body() != null) {
 
 
-    //  District info start
+                    _responseDepartment.postValue(NetworkResult.Success(response.body()!!))
+
+                } else if (response.errorBody() != null) {
+
+                    val errorObj = JSONObject(response.errorBody()!!.charStream().readText())
+                    _responseDepartment.postValue(NetworkResult.Error(errorObj.getString("message")))
+
+                }
+            } catch (noInternetException: NoInternetException) {
+                _responseDepartment.postValue(noInternetException.localizedMessage?.let {
+                    NetworkResult.Error(
+                        it
+                    )
+                })
+            }
+
+        }
+
+    }
+    //   Departments end
+
+    //  Occupation start
 
     private var _responseOccupations =
         MutableLiveData<NetworkResult<ResponseOccupations>>()
@@ -709,6 +718,7 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
 
     }
     //   user locations  end
+
     //  setCurrentLocation  start
 
     private var _setCurrentLocation =
@@ -746,4 +756,4 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
 
     }
     //   setCurrentLocation  end
-}
+   }

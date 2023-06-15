@@ -1,14 +1,12 @@
 package org.dufa.dufa9596.ui.trans_history
 
 
-import androidx.activity.addCallback
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import org.dufa.dufa9596.BaseFragment
 import org.dufa.dufa9596.R
 import org.dufa.dufa9596.databinding.FragmentTransactionHistoryBinding
 import org.dufa.dufa9596.utils.NetworkResult
-import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class TransactionHistoryFragment : BaseFragment<FragmentTransactionHistoryBinding>() {
@@ -25,10 +23,10 @@ class TransactionHistoryFragment : BaseFragment<FragmentTransactionHistoryBindin
 
 
     override fun binObserver() {
-        viewModel.getTransactionHistoryVM()
+        viewModel.transactionHistoryVM()
         adapter = TransHistoryAdapter()
         binding.transHistoryRcv.adapter = adapter
-        viewModel.getTransactionHistoryVMLD.observe(viewLifecycleOwner) {
+        viewModel.transactionHistoryVMLD.observe(viewLifecycleOwner) {
             when (it) {
                 is NetworkResult.Error -> {}
                 is NetworkResult.Loading -> {}
