@@ -25,7 +25,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:padding="2dp"
-                android:src="@drawable/dufa_logo" />
+                android:src="@drawable/ic_round_warning_24" />
 
 
             <TextView

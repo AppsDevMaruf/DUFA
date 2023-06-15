@@ -1,4 +1,4 @@
-package org.dufa.dufa9596.ui.profile_update
+package org.dufa.dufa9596.data.models.profile
 
 
 import com.google.gson.annotations.SerializedName

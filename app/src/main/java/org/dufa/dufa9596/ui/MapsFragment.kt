@@ -219,7 +219,7 @@ class MapsFragment : BaseFragment<FragmentMapsBinding>(), OnMapReadyCallback {
                         context = requireContext(),
                         title = "",
                         details = "${it.message}",
-                        resId = R.drawable.ic_close,
+                        resId = R.drawable.ic_round_warning_24,
                         yesContent = "Okay",
                         noContent = "Cancel",
                         showNoBtn = false,

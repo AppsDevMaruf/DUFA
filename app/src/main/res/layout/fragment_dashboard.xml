@@ -29,7 +29,7 @@
 
         <LinearLayout
             android:id="@+id/mainLayout"
-            android:visibility="gone"
+            android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -98,7 +98,7 @@
                                     android:layout_marginTop="10dp"
                                     android:paddingStart="20dp"
                                     android:scaleType="fitStart"
-                                    android:src="@drawable/users"
+                                    android:src="@drawable/user_bg_remove"
                                     tools:ignore="RtlSymmetry" />
 
                                 <TextView
@@ -230,14 +230,13 @@
                                     android:layout_marginTop="10dp"
                                     android:layout_marginEnd="10dp"
                                     android:scaleType="centerInside"
-                                    android:src="@drawable/atm_card" />
+                                    android:src="@drawable/ic_pay" />
 
                                 <TextView
                                     android:id="@+id/totalDues"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="16dp"
-
                                     android:letterSpacing="-0.02"
                                     android:lineSpacingExtra="1sp"
                                     android:paddingStart="2dp"
@@ -290,7 +289,7 @@
                                     android:layout_marginTop="10dp"
                                     android:layout_marginEnd="10dp"
                                     android:scaleType="centerInside"
-                                    android:src="@drawable/income" />
+                                    android:src="@drawable/ic_amount" />
 
                                 <TextView
                                     android:layout_width="match_parent"
@@ -356,8 +355,8 @@
                                     android:layout_marginStart="-80dp"
                                     android:layout_marginTop="10dp"
                                     android:layout_marginRight="10dp"
-                                    android:scaleType="centerInside"
-                                    android:src="@drawable/voucher" />
+
+                                    android:src="@drawable/ic_voucher" />
 
                                 <TextView
                                     android:id="@+id/totalVouchers"
@@ -414,7 +413,7 @@
                                     android:layout_marginTop="10dp"
                                     android:layout_marginEnd="10dp"
                                     android:scaleType="centerInside"
-                                    android:src="@drawable/qr" />
+                                    android:src="@drawable/ic_qr" />
 
                                 <TextView
                                     android:layout_width="match_parent"
@@ -440,19 +439,9 @@
                                     android:text="QR"
                                     android:textColor="@color/text_gray"
                                     android:textSize="14sp" />
-
                             </LinearLayout>
-
-
                         </androidx.cardview.widget.CardView>
-
-
-
-
-
                     </LinearLayout>
-
-
                 </LinearLayout>
             </ScrollView>
         </LinearLayout>

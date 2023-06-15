@@ -24,7 +24,7 @@ import org.dufa.dufa9596.data.models.transaction_history.TransHistory
 import org.dufa.dufa9596.data.models.upload_profile_pic.ResponseUploadProfilePic
 import org.dufa.dufa9596.data.models.vouchers.ResponseVoucherList
 import org.dufa.dufa9596.data.models.vouchers.ResponseVoucherUpload
-import org.dufa.dufa9596.ui.profile_update.RequestProfileUpdate
+import org.dufa.dufa9596.data.models.profile.RequestProfileUpdate
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*

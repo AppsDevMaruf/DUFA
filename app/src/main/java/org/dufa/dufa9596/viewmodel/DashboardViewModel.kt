@@ -33,10 +33,9 @@ import org.dufa.dufa9596.data.models.search.Data
 import org.dufa.dufa9596.data.models.search.RequestSearch
 import org.dufa.dufa9596.data.models.search.blood.ResponseBloodGroup
 import org.dufa.dufa9596.data.models.upload_profile_pic.ResponseUploadProfilePic
-import org.dufa.dufa9596.data.models.vouchers.ResponseVoucherList
 import org.dufa.dufa9596.data.models.vouchers.ResponseVoucherUpload
 import org.dufa.dufa9596.repos.SecuredRepository
-import org.dufa.dufa9596.ui.profile_update.RequestProfileUpdate
+import org.dufa.dufa9596.data.models.profile.RequestProfileUpdate
 import org.dufa.dufa9596.utils.NetworkResult
 import org.dufa.dufa9596.utils.NoInternetException
 import org.json.JSONObject

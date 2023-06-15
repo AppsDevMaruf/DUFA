@@ -118,8 +118,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val pInfo: PackageInfo = this.packageManager.getPackageInfo(this.packageName, 0)
-        val version: String = pInfo.versionName //Version Name
+        /* val pInfo: PackageInfo = this.packageManager.getPackageInfo(this.packageName, 0)
+         val version: String = pInfo.versionName //Version Name*/
 
         binding = ActivityMainBinding.inflate(layoutInflater)
 
@@ -187,7 +187,7 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-        navView.menu.findItem(R.id.nav_log_version).title = "version $version"
+        //navView.menu.findItem(R.id.nav_log_version).title = "version $version"
         navView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.duesPaymentFragment -> {
@@ -200,8 +200,6 @@ class MainActivity : AppCompatActivity() {
                         navController.navigateUp() // to clear previous navigation history
                         navController.navigate(R.id.transactionHistoryFragment)
                     }
-
-
 
                     if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
                         binding.drawerLayout.closeDrawer(GravityCompat.START)

@@ -17,6 +17,7 @@ import org.dufa.dufa9596.databinding.FragmentFundCollectionBinding
 import org.dufa.dufa9596.utils.NetworkResult
 import org.dufa.dufa9596.utils.hide
 import org.dufa.dufa9596.utils.show
+import org.dufa.dufa9596.utils.showDialog
 import org.dufa.dufa9596.utils.toast
 import org.dufa.dufa9596.viewmodel.DashboardViewModel
 
@@ -110,7 +111,17 @@ class FundCollectionFragment : BaseFragment<FragmentFundCollectionBinding>() {
             when (it) {
 
                 is NetworkResult.Error -> {
-                    Log.i("Error", "NetworkResult.Error: ${it.data.toString()}")
+                    showDialog(
+                        context = requireContext(),
+                        title = "",
+                        details = "${it.message}",
+                        resId = R.drawable.ic_round_warning_24,
+                        yesContent = "Okay",
+                        noContent = "Cancel",
+                        showNoBtn = false,
+                        positiveFun = {
+                        }, {}
+                    )
                 }
 
                 is NetworkResult.Loading -> {

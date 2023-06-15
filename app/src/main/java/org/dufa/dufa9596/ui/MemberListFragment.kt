@@ -84,13 +84,8 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), MemberSele
             }
         }
 
-
-
         searchItemAdapter = SearchItemAdapter(this, type)
-
-
         searchBYSelectedItem(SearchBy(null, null))
-
         binding.searchET.onTextChanged { it ->
             if (it.length >= 3) {
                 timer = Timer()
@@ -268,17 +263,16 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), MemberSele
             when (it) {
                 is NetworkResult.Error -> {
                     showDialog(
-                        context = requireActivity(),
+                        context = requireContext(),
                         title = "",
                         details = "${it.message}",
-                        resId = R.drawable.ic_close,
+                        resId = R.drawable.ic_round_warning_24,
                         yesContent = "Okay",
                         noContent = "Cancel",
                         showNoBtn = false,
                         positiveFun = {
                         }, {}
                     )
-
                 }
 
                 is NetworkResult.Loading -> {
@@ -307,10 +301,10 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), MemberSele
             when (it) {
                 is NetworkResult.Error -> {
                     showDialog(
-                        context = requireActivity(),
+                        context = requireContext(),
                         title = "",
                         details = "${it.message}",
-                        resId = R.drawable.ic_close,
+                        resId = R.drawable.ic_round_warning_24,
                         yesContent = "Okay",
                         noContent = "Cancel",
                         showNoBtn = false,
@@ -344,10 +338,10 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), MemberSele
             when (it) {
                 is NetworkResult.Error -> {
                     showDialog(
-                        context = requireActivity(),
+                        context = requireContext(),
                         title = "",
                         details = "${it.message}",
-                        resId = R.drawable.ic_close,
+                        resId = R.drawable.ic_round_warning_24,
                         yesContent = "Okay",
                         noContent = "Cancel",
                         showNoBtn = false,
@@ -380,10 +374,10 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), MemberSele
             when (it) {
                 is NetworkResult.Error -> {
                     showDialog(
-                        context = requireActivity(),
+                        context = requireContext(),
                         title = "",
                         details = "${it.message}",
-                        resId = R.drawable.ic_close,
+                        resId = R.drawable.ic_round_warning_24,
                         yesContent = "Okay",
                         noContent = "Cancel",
                         showNoBtn = false,
@@ -417,10 +411,10 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), MemberSele
             when (it) {
                 is NetworkResult.Error -> {
                     showDialog(
-                        context = requireActivity(),
+                        context = requireContext(),
                         title = "",
                         details = "${it.message}",
-                        resId = R.drawable.ic_close,
+                        resId = R.drawable.ic_round_warning_24,
                         yesContent = "Okay",
                         noContent = "Cancel",
                         showNoBtn = false,

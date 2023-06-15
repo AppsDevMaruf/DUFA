@@ -2,7 +2,6 @@ package org.dufa.dufa9596.ui.profile_update
 
 import android.annotation.SuppressLint
 import android.app.Dialog
-import android.app.ProgressDialog
 import android.net.Uri
 import android.util.Log
 import android.view.Window
@@ -38,6 +37,7 @@ import org.dufa.dufa9596.data.models.get_departments.Department
 import org.dufa.dufa9596.data.models.get_districts.District
 import org.dufa.dufa9596.data.models.get_halls.Hall
 import org.dufa.dufa9596.data.models.get_occupations.Occupation
+import org.dufa.dufa9596.data.models.profile.RequestProfileUpdate
 import org.dufa.dufa9596.data.models.search.blood.Bloodgroup
 import org.dufa.dufa9596.databinding.FragmentUserUpdateBinding
 import org.dufa.dufa9596.interfaces.BloodGroupSelectListener
@@ -65,8 +65,6 @@ import org.dufa.dufa9596.utils.showDialog
 import org.dufa.dufa9596.viewmodel.DashboardViewModel
 import java.io.File
 import java.io.FileOutputStream
-
-
 @AndroidEntryPoint
 class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), DepartmentSelectListener,
     DistrictSelectListener, BloodGroupSelectListener, HallSelectListener, OccupationSelectListener {
@@ -84,7 +82,6 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
     private lateinit var occupationAdapter: OccupationAdapter
     private lateinit var hallAdapter: HallAdapter
     private var title = "Male"
-
     lateinit var dialog: ProgressBar
 
 
@@ -142,26 +139,20 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
                 binding.birthdate.text = it
             }
         }
-
         binding.userProfilePic.setOnClickListener {
             requestPermissions(permissionsRequest, PERMISSIONS)
             startCameraWithoutUri(includeCamera = true, includeGallery = true)
-
         }
         binding.profilePicAB.setOnClickListener {
             requestPermissions(permissionsRequest, PERMISSIONS)
             startCameraWithoutUri(includeCamera = true, includeGallery = true)
-
         }
-
         binding.uploadProfilePicBtn.setOnClickListener {
             requestPermissions(permissionsRequest, PERMISSIONS)
             startCameraWithoutUri(includeCamera = true, includeGallery = true)
         }
-
         binding.updateBtn.setOnClickListener {
             if (!validatedRequest(binding)) return@setOnClickListener
-
             val request = RequestProfileUpdate(
                 name = binding.name.text.toString(),
                 address = binding.address.text.toString(),
@@ -422,7 +413,7 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
                         context = requireActivity(),
                         title = "",
                         details = "${it.message}",
-                        resId = R.drawable.ic_close,
+                        resId = R.drawable.ic_round_warning_24,
                         yesContent = "Okay",
                         noContent = "Cancel",
                         showNoBtn = false,
@@ -456,7 +447,7 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
                         context = requireActivity(),
                         title = "",
                         details = "${occupations.message}",
-                        resId = R.drawable.ic_close,
+                        resId = R.drawable.ic_round_warning_24,
                         yesContent = "Okay",
                         noContent = "Cancel",
                         showNoBtn = false,
@@ -487,7 +478,7 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
                         context = requireActivity(),
                         title = "",
                         details = "${departments.message}",
-                        resId = R.drawable.ic_close,
+                        resId = R.drawable.ic_round_warning_24,
                         yesContent = "Okay",
                         noContent = "Cancel",
                         showNoBtn = false,
@@ -521,7 +512,7 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
                         context = requireActivity(),
                         title = "",
                         details = "${districts.message}",
-                        resId = R.drawable.ic_close,
+                        resId = R.drawable.ic_round_warning_24,
                         yesContent = "Okay",
                         noContent = "Cancel",
                         showNoBtn = false,
@@ -556,7 +547,7 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
                         context = requireActivity(),
                         title = "",
                         details = "${halls.message}",
-                        resId = R.drawable.ic_close,
+                        resId = R.drawable.ic_round_warning_24,
                         yesContent = "Okay",
                         noContent = "Cancel",
                         showNoBtn = false,
@@ -589,7 +580,7 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
                         context = requireActivity(),
                         title = "",
                         details = "${bloodGroups.message}",
-                        resId = R.drawable.ic_close,
+                        resId = R.drawable.ic_round_warning_24,
                         yesContent = "Okay",
                         noContent = "Cancel",
                         showNoBtn = false,
@@ -624,7 +615,7 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
                         context = requireActivity(),
                         title = "",
                         details = "${it.message}",
-                        resId = R.drawable.ic_close,
+                        resId = R.drawable.ic_round_warning_24,
                         yesContent = "Okay",
                         noContent = "Cancel",
                         showNoBtn = false,

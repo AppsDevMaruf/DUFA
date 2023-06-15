@@ -14,6 +14,7 @@ import org.dufa.dufa9596.utils.gone
 import org.dufa.dufa9596.utils.show
 import org.dufa.dufa9596.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import org.dufa.dufa9596.utils.showDialog
 
 @AndroidEntryPoint
 class DuesPaymentFragment : org.dufa.dufa9596.BaseFragment<FragmentDuesPaymentBinding>() {
@@ -75,31 +76,27 @@ class DuesPaymentFragment : org.dufa.dufa9596.BaseFragment<FragmentDuesPaymentBi
 
     @SuppressLint("SetTextI18n")
     override fun binObserver() {
-        /*  dashboardViewModel.paymentDues.observe(viewLifecycleOwner) {
-
-              if (it == 0) {
-                  findNavController().navigate(R.id.action_duesPaymentFragment_to_transactionHistoryFragment)
-                  binding.paymentsLayout.gone()
-
-              } else {
-
-                  binding.paymentsLayout.show()
-                  binding.duesAmount.text = it.toString()
-              }
-
-          }*/
-
 
         dashboardViewModel.responsePayRenewVMLD.observe(this) {
-
+            binding.progressBar.gone()
             when (it) {
 
                 is NetworkResult.Error -> {
-                    Log.i("Error", "NetworkResult.Error: ${it.data.toString()}")
+                    showDialog(
+                        context = requireContext(),
+                        title = "",
+                        details = "${it.message}",
+                        resId = R.drawable.ic_round_warning_24,
+                        yesContent = "Okay",
+                        noContent = "Cancel",
+                        showNoBtn = false,
+                        positiveFun = {
+                        }, {}
+                    )
                 }
 
                 is NetworkResult.Loading -> {
-                    // progressBar.isVisible = true
+                   binding.progressBar.show()
                 }
 
                 is NetworkResult.Success -> {

@@ -7,17 +7,31 @@
 
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         tools:context=".ui.dues_payment.DuesPaymentFragment">
 
-
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/progressBar"
+            style="@style/SpinKitView.Circle"
+            android:layout_width="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            app:SpinKit_Color="@color/blue"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
         <LinearLayout
-
-
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             android:id="@+id/paymentsLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -188,14 +202,17 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_30sdp"
             android:layout_margin="@dimen/_50sdp"
-            android:minHeight="40dp"
             android:background="@drawable/btn_enable"
             android:includeFontPadding="false"
+            android:minHeight="40dp"
             android:text="Show History"
             android:textAllCaps="false"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/paymentsLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/paymentsLayout" />
 
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
