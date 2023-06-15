@@ -11,6 +11,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -39,6 +40,7 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 import javax.inject.Inject
 
 @HiltViewModel
@@ -46,11 +48,12 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
     ViewModel() {
 
 
-    fun getMemberSearchVMLD(
+   suspend fun getMemberSearchVMLD(
         requestSearch: RequestSearch,
         hasData: (hasData: Boolean) -> Unit
 
-    ): LiveData<PagingData<Data>> {
+    ): Flow<PagingData<Data>> {
+
         return securedRepository.getMemberSearchRepo(requestSearch, hasData)
             .cachedIn(viewModelScope)
     }

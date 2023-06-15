@@ -220,7 +220,7 @@ class SecuredRepository @Inject constructor(private val securedApi: SecuredApi) 
     //getBloodGroups start end
 
 
-    fun getMemberSearchRepo(
+   suspend fun getMemberSearchRepo(
 
         requestSearch: RequestSearch,
         hasData: (hasData: Boolean) -> Unit
@@ -233,7 +233,7 @@ class SecuredRepository @Inject constructor(private val securedApi: SecuredApi) 
                 hasData
             )
         }
-    ).liveData
+    ).flow
 
     //suspend fun searchByNameEmail(nameOrEmail:RequestSearch) = securedApi.searchByNameEmail(nameOrEmail)
     suspend fun logout() = securedApi.logout()

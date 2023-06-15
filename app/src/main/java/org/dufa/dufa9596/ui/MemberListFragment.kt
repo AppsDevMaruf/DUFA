@@ -2,17 +2,20 @@ package org.dufa.dufa9596.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.WindowManager
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import org.dufa.dufa9596.BaseFragment
 import org.dufa.dufa9596.R
 import org.dufa.dufa9596.adapter.SearchMemberListAdapter
@@ -22,16 +25,10 @@ import org.dufa.dufa9596.data.models.search.RequestSearch
 import org.dufa.dufa9596.databinding.FragmentMemberListBinding
 import org.dufa.dufa9596.interfaces.MemberSelectListener
 import org.dufa.dufa9596.interfaces.SearchByListener
+import org.dufa.dufa9596.paging.LoaderAdapter
 import org.dufa.dufa9596.utils.*
 import org.dufa.dufa9596.viewmodel.DashboardViewModel
-import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
-import org.dufa.dufa9596.paging.LoaderAdapter
 
 @AndroidEntryPoint
 class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), MemberSelectListener,
@@ -64,11 +61,31 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), MemberSele
         bottomSheetDialogSearchItem.dismiss()
     }
 
-    @OptIn(DelicateCoroutinesApi::class)
     override fun configUi() {
 
         bottomSheetDialogSearchItem = BottomSheetDialog(requireContext())
         searchAdapter = SearchMemberListAdapter(this)
+
+        binding.memberListRv.adapter = searchAdapter.withLoadStateHeaderAndFooter(
+            header = LoaderAdapter(),
+            footer = LoaderAdapter()
+
+        )
+
+        CoroutineScope(Dispatchers.Main).launch {
+
+            searchAdapter.loadStateFlow.collectLatest { loadStates ->
+
+                if (loadStates.refresh is LoadState.Loading) {
+                    binding.progressBar.show()
+                } else {
+                    binding.progressBar.gone()
+                }
+            }
+        }
+
+
+
         searchItemAdapter = SearchItemAdapter(this, type)
         /*  binding.memberListRv.adapter = searchAdapter.withLoadStateHeaderAndFooter(
               header = LoaderAdapter(),
@@ -86,7 +103,7 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), MemberSele
                         override fun run() {
                             requestSearch = RequestSearch(null, null, null, null, null, it, null, 0)
                             //dashboardViewModel.getMemberSearchVMLD(requestSearch)
-                            GlobalScope.launch(Dispatchers.Main) {
+                            CoroutineScope(Dispatchers.Main).launch {
                                 dashboardViewModel.getMemberSearchVMLD(requestSearch) { dataFound ->
                                     if (!dataFound) {
                                         binding.memberListRv.gone()
@@ -96,9 +113,8 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), MemberSele
                                         binding.noData.gone()
                                     }
 
-                                }.observe(
-                                    viewLifecycleOwner
-                                ) {
+                                }.collectLatest {
+
                                     searchAdapter.submitData(lifecycle, it)
                                 }
                             }
@@ -230,17 +246,20 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), MemberSele
             datePickerFun {
                 binding.dobTV.text = it
                 requestSearch = RequestSearch(it, null, null, null, null, null, hall = null, 0)
-                dashboardViewModel.getMemberSearchVMLD(requestSearch) { dataFound ->
-                    if (!dataFound) {
-                        binding.memberListRv.gone()
-                        binding.noData.show()
-                    } else {
-                        binding.memberListRv.show()
-                        binding.noData.gone()
-                    }
+                CoroutineScope(Dispatchers.Main).launch {
 
-                }.observe(viewLifecycleOwner) {
-                    searchAdapter.submitData(lifecycle, it)
+                    dashboardViewModel.getMemberSearchVMLD(requestSearch) { dataFound ->
+                        if (!dataFound) {
+                            binding.memberListRv.gone()
+                            binding.noData.show()
+                        } else {
+                            binding.memberListRv.show()
+                            binding.noData.gone()
+                        }
+
+                    }.collectLatest {
+                        searchAdapter.submitData(lifecycle, it)
+                    }
                 }
                 hideSoftKeyboard()
             }
@@ -414,25 +433,28 @@ class MemberListFragment : BaseFragment<FragmentMemberListBinding>(), MemberSele
                 }
             }
 
-        dashboardViewModel.getMemberSearchVMLD(requestSearch) { dataFound ->
-            if (!dataFound) {
-                binding.memberListRv.gone()
-                binding.noData.show()
-            } else {
-                binding.memberListRv.show()
-                binding.noData.gone()
+        CoroutineScope(Dispatchers.Main).launch {
+            dashboardViewModel.getMemberSearchVMLD(requestSearch) { dataFound ->
+                if (!dataFound) {
+                    binding.memberListRv.gone()
+                    binding.noData.show()
+                } else {
+                    binding.memberListRv.show()
+                    binding.noData.gone()
+                }
+
+            }.collectLatest {
+
+
+                searchAdapter.submitData(it)
+
+
             }
 
-        }.observe(viewLifecycleOwner) {
-
-            binding.memberListRv.adapter = searchAdapter.withLoadStateHeaderAndFooter(
-                header = LoaderAdapter(),
-                footer = LoaderAdapter()
-            )
-
-            searchAdapter.submitData(lifecycle, it)
 
         }
+
+
     }
 
 
