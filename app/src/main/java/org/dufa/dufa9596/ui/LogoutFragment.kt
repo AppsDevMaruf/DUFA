@@ -51,7 +51,7 @@ class LogoutFragment : DialogFragment() {
         }
 
         binding.yesLogout.setOnClickListener {
-            //dashboardViewModel.logoutVM()
+            dashboardViewModel.logoutVM()
             tokenManager.saveToken(Constants.TOKEN, Constants.NO_DATA)
             requireActivity().run {
                 startActivity(
@@ -75,17 +75,7 @@ class LogoutFragment : DialogFragment() {
             when (it) {
 
                 is NetworkResult.Error -> {
-                    showDialog(
-                        context = requireContext(),
-                        title = "",
-                        details = "${it.message}",
-                        resId = R.drawable.ic_round_warning_24,
-                        yesContent = "Okay",
-                        noContent = "Cancel",
-                        showNoBtn = false,
-                        positiveFun = {
-                        }, {}
-                    )
+                    toast("LogoutFragment ${it.message}")
                 }
                 is NetworkResult.Loading -> {
                     // progressBar.isVisible = true

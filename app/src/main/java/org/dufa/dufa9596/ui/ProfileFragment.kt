@@ -3,6 +3,7 @@ package org.dufa.dufa9596.ui
 import android.os.Bundle
 import android.util.Log
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import org.dufa.dufa9596.BaseFragment
@@ -15,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
-    private val dashboardViewModel by viewModels<DashboardViewModel>()
+    private val dashboardViewModel by activityViewModels <DashboardViewModel>()
     var bundle = Bundle()
     override fun getFragmentView(): Int {
         return R.layout.fragment_profile
@@ -23,7 +24,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
     override fun configUi() {
         dashboardViewModel.profileInfoVM()
-
 
     }
 
@@ -74,7 +74,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     }
 
     private fun setProfileInfo(userInfo: ResponseProfileInfo?) {
-
         if (userInfo != null) {
             binding.name.text = userInfo.name
             binding.phoneNumber.text = userInfo.phone

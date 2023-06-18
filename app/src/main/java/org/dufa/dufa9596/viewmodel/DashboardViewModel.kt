@@ -81,14 +81,16 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
 
                     _responseLogout.postValue(NetworkResult.Success(response.body()!!))
 
-                } else if (response.errorBody() != null) {
-
-                    val errorObj = JSONObject(response.errorBody()!!.charStream().readText())
-                    _responseLogout.postValue(NetworkResult.Error(errorObj.getString("message")))
-
                 }
             } catch (noInternetException: NoInternetException) {
                 _responseLogout.postValue(noInternetException.localizedMessage?.let {
+                    NetworkResult.Error(
+                        it
+                    )
+                })
+            }
+            catch (e:Exception){
+                _responseLogout.postValue(e.localizedMessage?.let {
                     NetworkResult.Error(
                         it
                     )

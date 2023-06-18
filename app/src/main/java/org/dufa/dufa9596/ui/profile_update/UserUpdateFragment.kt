@@ -13,6 +13,7 @@ import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -68,7 +69,7 @@ import java.io.FileOutputStream
 @AndroidEntryPoint
 class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), DepartmentSelectListener,
     DistrictSelectListener, BloodGroupSelectListener, HallSelectListener, OccupationSelectListener {
-    private val dashboardViewModel by viewModels<DashboardViewModel>()
+    private val dashboardViewModel by activityViewModels <DashboardViewModel>()
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private lateinit var departmentList: List<Department>
     private lateinit var districtList: List<District>
@@ -429,8 +430,9 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
 
                 is NetworkResult.Success -> {
                     dialog.gone()
-                    Log.i("TAG", "message: ${it.message}")
-                    Log.i("TAG", "data: ${it.data?.message}")
+                    dashboardViewModel.profileInfoVM()
+                    Log.i("userUpdateFragemnt", "message: ${it.message}")
+                    Log.i("userUpdateFragemnt", "data: ${it.data?.message}")
 
                 }
             }

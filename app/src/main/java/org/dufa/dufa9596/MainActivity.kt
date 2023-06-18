@@ -32,6 +32,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.view.GravityCompat
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -87,7 +88,7 @@ class MainActivity : AppCompatActivity() {
     private var voucher: Int? = null
     private var bundle = Bundle()
 
-    private val dashboardViewModel: DashboardViewModel by viewModels()
+    private val dashboardViewModel by viewModels <DashboardViewModel>()
     lateinit var binding: ActivityMainBinding
     private lateinit var userProfilePicHeader: ShapeableImageView
     private lateinit var uploadProfilePicBtn: ImageView
