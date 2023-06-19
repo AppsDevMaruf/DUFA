@@ -66,10 +66,11 @@ import org.dufa.dufa9596.utils.showDialog
 import org.dufa.dufa9596.viewmodel.DashboardViewModel
 import java.io.File
 import java.io.FileOutputStream
+
 @AndroidEntryPoint
 class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), DepartmentSelectListener,
     DistrictSelectListener, BloodGroupSelectListener, HallSelectListener, OccupationSelectListener {
-    private val dashboardViewModel by activityViewModels <DashboardViewModel>()
+    private val dashboardViewModel by activityViewModels<DashboardViewModel>()
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private lateinit var departmentList: List<Department>
     private lateinit var districtList: List<District>
@@ -396,14 +397,10 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
 
                     //   it.data?.let { it1 -> toast(it1.message) }
 
-
-                    findNavController().popBackStack()
-
+                   findNavController().popBackStack()
 
                 }
             }
-
-
         }
         dashboardViewModel.uploadProfilePicVMLD.observe(viewLifecycleOwner) {
             dialog.show()

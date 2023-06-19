@@ -86,7 +86,6 @@
                     android:gravity="center"
                     android:includeFontPadding="false"
                     android:padding="1dp"
-                    android:text="AB"
                     android:textAllCaps="false"
                     android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
                     android:visibility="invisible"
@@ -98,7 +97,8 @@
                     app:shapeAppearanceOverlay="@style/ShapeAppearance.Image.PILL"
                     app:strokeColor="@color/white"
                     app:strokeWidth="2dp"
-                    tools:ignore="MissingConstraints" />
+                    tools:ignore="MissingConstraints"
+                    tools:text="AB" />
 
                 <View
                     android:id="@+id/view"
@@ -116,7 +116,6 @@
                     android:id="@+id/mainLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="70dp"
                     android:background="@color/back_grey"
                     android:orientation="vertical"
                     android:padding="16dp"
@@ -135,7 +134,8 @@
                             android:fontFamily="@font/dm_sans_medium"
                             android:lines="1"
                             android:padding="2dp"
-                            android:text="Full name"
+                            android:minHeight="45dp"
+                            android:text="@string/full_name"
                             android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
                             android:textColor="@color/blue" />
 
@@ -149,9 +149,10 @@
                             android:ellipsize="end"
                             android:fontFamily="@font/dm_sans_medium"
                             android:lines="1"
+                            android:minHeight="45dp"
                             android:padding="2dp"
+                            android:hint="Maruf Alam"
                             android:paddingStart="10dp"
-                            android:text="Saiful Khandaker"
                             android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
                             android:textColor="@color/text_primary" />
 
@@ -169,7 +170,7 @@
                             android:fontFamily="@font/dm_sans_medium"
                             android:lines="1"
                             android:padding="2dp"
-                            android:text="Occupation"
+                            android:text="@string/occupation"
                             android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
                             android:textColor="@color/blue" />
 
@@ -205,12 +206,12 @@
                                 android:layout_marginStart="16dp"
                                 android:ellipsize="end"
                                 android:ems="12"
+                                android:fontFamily="@font/dm_sans_medium"
                                 android:maxLines="1"
                                 android:singleLine="true"
-                                android:fontFamily="@font/dm_sans_medium"
 
                                 android:tag="false"
-                                android:text="Select Occupation type"
+                                android:text="@string/select_occupation_type"
                                 android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                                 android:textColor="#8F9BB3"
                                 app:layout_constraintBottom_toBottomOf="parent"
@@ -246,7 +247,7 @@
                             android:fontFamily="@font/dm_sans_medium"
                             android:lines="1"
                             android:padding="2dp"
-                            android:text="Phone"
+                            android:text="@string/phone"
                             android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
                             android:textColor="@color/blue" />
 
@@ -254,19 +255,20 @@
                             android:id="@+id/phone"
                             android:layout_width="match_parent"
                             android:layout_height="45dp"
-                            android:inputType="number"
                             android:layout_gravity="start"
                             android:layout_weight="1"
                             android:background="@drawable/white_back_react"
                             android:ellipsize="end"
                             android:fontFamily="@font/dm_sans_medium"
-                            android:lines="1"
                             android:hint="Phone"
+                            android:inputType="number"
+                            android:lines="1"
+                            android:minHeight="45dp"
                             android:padding="2dp"
                             android:paddingStart="10dp"
-                            android:text="Saiful Khandaker"
                             android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
-                            android:textColor="@color/text_primary" />
+                            android:textColor="@color/text_primary"
+                            tools:ignore="TextFields" />
 
                     </LinearLayout>
 
@@ -282,7 +284,7 @@
                             android:fontFamily="@font/dm_sans_medium"
                             android:lines="1"
                             android:padding="2dp"
-                            android:text="Department"
+                            android:text="@string/department"
                             android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
                             android:textColor="@color/blue" />
 
@@ -318,16 +320,16 @@
                                 android:layout_marginStart="16dp"
                                 android:ellipsize="end"
                                 android:ems="12"
-                                android:singleLine="true"
                                 android:fontFamily="@font/dm_sans_medium"
                                 android:maxLines="1"
+                                android:singleLine="true"
                                 android:tag="false"
-                                android:text="Select department"
+                                android:text="@string/select_department"
                                 android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                                 android:textColor="@color/text_primary"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toEndOf="@+id/departmentIcon"
                                 app:layout_constraintEnd_toStartOf="@+id/departmentArrow"
+                                app:layout_constraintStart_toEndOf="@+id/departmentIcon"
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <ImageView
@@ -357,7 +359,7 @@
                             android:fontFamily="@font/dm_sans_medium"
                             android:lines="1"
                             android:padding="2dp"
-                            android:text="Hall"
+                            android:text="@string/hall"
                             android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
                             android:textColor="@color/blue" />
 
@@ -388,17 +390,17 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="8dp"
                                 android:layout_marginStart="16dp"
-                                android:fontFamily="@font/dm_sans_medium"
-                                android:tag="false"
-                                android:text="Select hall"
                                 android:ellipsize="end"
                                 android:ems="12"
+                                android:fontFamily="@font/dm_sans_medium"
                                 android:maxLines="1"
                                 android:singleLine="true"
-                                app:layout_constraintEnd_toStartOf="@+id/hallArrow"
+                                android:tag="false"
+                                android:text="@string/select_hall"
                                 android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                                 android:textColor="@color/text_primary"
                                 app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toStartOf="@+id/hallArrow"
                                 app:layout_constraintStart_toEndOf="@+id/hallIcon"
                                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -430,7 +432,7 @@
                             android:fontFamily="@font/dm_sans_medium"
                             android:lines="1"
                             android:padding="2dp"
-                            android:text="Blood Group"
+                            android:text="@string/blood_group"
                             android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
                             android:textColor="@color/blue" />
 
@@ -462,16 +464,16 @@
                                 android:layout_marginStart="16dp"
                                 android:ellipsize="end"
                                 android:ems="12"
+                                android:fontFamily="@font/dm_sans_medium"
                                 android:maxLines="1"
                                 android:singleLine="true"
-                                app:layout_constraintEnd_toStartOf="@+id/blood_groupArrow"
 
-                                android:fontFamily="@font/dm_sans_medium"
+                                android:text="@string/select_blood_group"
 
-                                android:text="Select blood Group"
                                 android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                                 android:textColor="@color/text_primary"
                                 app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toStartOf="@+id/blood_groupArrow"
                                 app:layout_constraintStart_toEndOf="@+id/bloodGroupIcon"
                                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -501,7 +503,7 @@
                             android:fontFamily="@font/dm_sans_medium"
                             android:lines="1"
                             android:padding="2dp"
-                            android:text="District"
+                            android:text="@string/district"
                             android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
                             android:textColor="@color/blue" />
 
@@ -531,17 +533,17 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="8dp"
                                 android:layout_marginStart="16dp"
-                                android:fontFamily="@font/dm_sans_medium"
-                                android:tag="false"
-                                android:text="Select District"
                                 android:ellipsize="end"
                                 android:ems="12"
+                                android:fontFamily="@font/dm_sans_medium"
                                 android:maxLines="1"
                                 android:singleLine="true"
-                                app:layout_constraintEnd_toStartOf="@+id/districtArrow"
+                                android:tag="false"
+                                android:text="@string/select_district"
                                 android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                                 android:textColor="@color/text_primary"
                                 app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toStartOf="@+id/districtArrow"
                                 app:layout_constraintStart_toEndOf="@+id/districtIcon"
                                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -572,7 +574,7 @@
                             android:fontFamily="@font/dm_sans_medium"
                             android:lines="1"
                             android:padding="2dp"
-                            android:text="Address"
+                            android:text="@string/address"
                             android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
                             android:textColor="@color/blue" />
 
@@ -585,8 +587,8 @@
                             android:background="@drawable/white_back_react"
                             android:ellipsize="end"
                             android:fontFamily="@font/dm_sans_medium"
-                            android:lines="1"
                             android:hint="Address"
+                            android:lines="1"
                             android:maxLines="2"
                             android:minHeight="70dp"
                             android:padding="2dp"
@@ -609,22 +611,23 @@
                             android:fontFamily="@font/dm_sans_medium"
                             android:lines="1"
                             android:padding="2dp"
-                            android:text="NID"
+                            android:text="@string/nid"
                             android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
                             android:textColor="@color/blue" />
 
                         <EditText
                             android:id="@+id/nid"
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="45dp"
                             android:layout_gravity="start"
                             android:layout_weight="1"
                             android:background="@drawable/white_back_react"
                             android:ellipsize="end"
                             android:fontFamily="@font/dm_sans_medium"
-                            android:inputType="number"
-                            android:lines="1"
                             android:hint="Nid"
+                            android:inputType="number"
+                            android:minHeight="45dp"
+                            android:lines="1"
                             android:padding="2dp"
                             android:paddingStart="10dp"
                             android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
@@ -644,7 +647,7 @@
                             android:fontFamily="@font/dm_sans_medium"
                             android:lines="1"
                             android:padding="2dp"
-                            android:text="Gender"
+                            android:text="@string/gender"
                             android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
                             android:textColor="@color/blue" />
 
@@ -678,7 +681,7 @@
                                 android:fontFamily="@font/dm_sans_medium"
                                 android:maxLines="1"
                                 android:tag="false"
-                                android:text="Select Gender"
+                                android:text="@string/select_gender"
                                 android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                                 android:textColor="@color/text_primary"
                                 app:layout_constraintBottom_toBottomOf="parent"
@@ -711,7 +714,7 @@
                             android:fontFamily="@font/dm_sans_medium"
                             android:lines="1"
                             android:padding="2dp"
-                            android:text="Birthday"
+                            android:text="@string/birthday"
                             android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
                             android:textColor="@color/blue" />
 
@@ -722,7 +725,6 @@
                             android:layout_gravity="start"
                             android:layout_weight="1"
                             android:background="@drawable/white_back_react"
-                            android:drawableEnd="@drawable/baseline_date_range_24"
                             android:drawablePadding="10dp"
                             android:ellipsize="end"
                             android:fontFamily="@font/dm_sans_medium"
@@ -733,20 +735,23 @@
                             android:paddingStart="10dp"
                             android:paddingEnd="10dp"
                             android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
-                            android:textColor="@color/text_primary" />
+                            android:textColor="@color/text_primary"
+                            app:drawableEndCompat="@drawable/baseline_date_range_24" />
 
                     </LinearLayout>
-
-                    <androidx.appcompat.widget.AppCompatButton
+                    <Button
                         android:id="@+id/updateBtn"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="@dimen/_50sdp"
-                        android:background="@drawable/btn_enable"
-                        android:fontFamily="@font/dm_sans_bold"
-                        android:text="Update info"
+                        android:layout_height="55dp"
+                        android:layout_marginHorizontal="48dp"
+                        android:layout_marginLeft="-4dp"
+                        android:layout_marginTop="50dp"
+                        android:layout_marginBottom="50dp"
+                        android:background="@drawable/btn_rounded_primary"
+                        android:text="@string/update_info"
                         android:textAllCaps="false"
-                        android:textColor="@color/white" />
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold" />
 
 
                 </LinearLayout>

@@ -7,7 +7,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/mapsFragment"
-            android:icon="@drawable/location"
+            android:icon="@drawable/locations"
             android:title="Dufians Nearby"
             app:itemIconTint="@null" />
 

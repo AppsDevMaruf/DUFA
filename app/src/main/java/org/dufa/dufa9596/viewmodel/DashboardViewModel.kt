@@ -49,13 +49,11 @@ import javax.inject.Inject
 class DashboardViewModel @Inject constructor(private val securedRepository: SecuredRepository) :
     ViewModel() {
 
-
    suspend fun getMemberSearchVMLD(
         requestSearch: RequestSearch,
         hasData: (hasData: Boolean) -> Unit
 
     ): Flow<PagingData<Data>> {
-
         return securedRepository.getMemberSearchRepo(requestSearch, hasData)
             .cachedIn(viewModelScope)
     }

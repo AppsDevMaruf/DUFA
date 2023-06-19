@@ -19,20 +19,6 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
-
-        <item name="colorAccent">@color/colorPrimaryDark</item>
-
-    </style>
-    <style name="autoscroll">
-        <item name="android:singleLine">true</item>
-        <item name="android:ellipsize">marquee</item>
-        <item name="android:marqueeRepeatLimit">marquee_forever</item>
-        <item name="android:focusable">true</item>
-        <item name="android:focusableInTouchMode">true</item>
-        <item name="android:scrollHorizontally">true</item>
-    </style>
-
     <style name="DatePickerTheme" parent="Theme.MaterialComponents.DayNight.Dialog">
 
         <item name="colorPrimaryDark">@color/bluedeep</item>
@@ -52,13 +38,9 @@
         <item name="android:textColor">@color/grey_40</item>
         <item name="android:colorButtonNormal">@color/blue</item>
     </style>
-    <style name="roundedImageViewRounded">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">50%</item>
-    </style>
 
 
-<!--    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">-->
+    <!--    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">-->
 <!--        <item name="android:layout_gravity">center</item>-->
 <!--        <item name="colorAccent">@color/blue</item>-->
 <!--        <item name="colorControlNormal">@color/white</item>-->
@@ -89,12 +71,6 @@
     </style>
 
 
-    <style name="NoActionBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowActionBar">false</item>
-        <item name="android:windowFullscreen">true</item>
-        <item name="android:windowContentOverlay">@null</item>
-    </style>
     <style name="EditText.Grey" parent="@style/AppTheme">
         <item name="colorControlActivated">@color/grey_60</item>
         <item name="colorControlHighlight">@color/grey_60</item>
@@ -124,10 +100,4 @@
         <item name="cornerSize">50%</item>
     </style>
 
-    <style name="ShapeAppearance.Image.Top.PILL" parent="">
-        <item name="cornerSizeTopLeft">6dp</item>
-        <item name="cornerFamilyTopLeft">rounded</item>
-        <item name="cornerSizeTopRight">6dp</item>
-        <item name="cornerFamilyTopRight">rounded</item>
-    </style>
 </resources>
