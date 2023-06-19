@@ -46,6 +46,8 @@
     <string name="birthday">Birthday</string>
     <string name="update_info"> Update Info </string>
     <string name="qr">QR</string>
+    <string name="dufians_nearby">Dufians Nearby</string>
+    <string name="infinity">∞</string>
 
 
 </resources>
