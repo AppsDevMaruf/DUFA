@@ -146,7 +146,7 @@ class MainActivity : AppCompatActivity() {
 
         val drawerLayout: DrawerLayout = findViewById(R.id.drawerLayout)
         val navView: NavigationView = findViewById(R.id.navigationView)
-        navView.itemIconTintList = null;
+        navView.itemIconTintList = null
 
 
         val navController = findNavController(R.id.nav_host_fragment)

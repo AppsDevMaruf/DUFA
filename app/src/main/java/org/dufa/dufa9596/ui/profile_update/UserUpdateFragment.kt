@@ -71,6 +71,7 @@ import java.io.FileOutputStream
 class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), DepartmentSelectListener,
     DistrictSelectListener, BloodGroupSelectListener, HallSelectListener, OccupationSelectListener {
     private val dashboardViewModel by activityViewModels<DashboardViewModel>()
+    private val updateViewModel by viewModels<UserUpdateViewModel>()
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private lateinit var departmentList: List<Department>
     private lateinit var districtList: List<District>
@@ -188,7 +189,7 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
     private fun updateUserInfo(request: RequestProfileUpdate) {
         try {
             CoroutineScope(Dispatchers.IO).launch {
-                dashboardViewModel.updateProfileVM(userid, requestProfileUpdate = request)
+                updateViewModel.updateProfileVM(userid, requestProfileUpdate = request)
 
             }
 
@@ -368,17 +369,15 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
                 binding.profilePicAB.hide()
 
                 val profileImg = Constants.IMG_PREFIX + userInfo.imagePath
-
                 binding.userProfilePic.loadImagesWithGlide(profileImg)
 
             }
         }
-
     }
 
     override fun binObserver() {
 
-        dashboardViewModel.responseUpdateProfileVMLD.observe(viewLifecycleOwner) {
+        updateViewModel.responseUpdateProfileVMLD.observe(viewLifecycleOwner) {
             binding.progressBar.hide()
             when (it) {
                 is NetworkResult.Error -> {
@@ -394,7 +393,6 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
 
                     Log.i("TAG", "message: ${it.message}")
                     Log.i("TAG", "data: ${it.data?.message}")
-
                     //   it.data?.let { it1 -> toast(it1.message) }
 
                    findNavController().popBackStack()
@@ -436,7 +434,6 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
 
 
         }
-
         dashboardViewModel.occupationsVMLD.observe(viewLifecycleOwner) { occupations ->
             binding.progressBar.hide()
 
@@ -665,7 +662,6 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
 
     private fun buildDepartmentsRecyclerView(recyclerView: RecyclerView) {
 
-
         // initializing our adapter class.
         departmentAdapter = DepartmentAdapter(this, departmentList, requireContext())
 
@@ -680,7 +676,6 @@ class UserUpdateFragment : BaseFragment<FragmentUserUpdateBinding>(), Department
         // setting adapter to
         // our recycler view.
         recyclerView.adapter = departmentAdapter
-
 
     }
 

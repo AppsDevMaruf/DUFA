@@ -122,6 +122,7 @@ class SSLFragment : BaseFragment<FragmentSSLBinding>() {
 
     }
 
+/*
     override fun onResume() {
         super.onResume()
         (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
@@ -131,6 +132,7 @@ class SSLFragment : BaseFragment<FragmentSSLBinding>() {
         super.onStop()
         (activity as AppCompatActivity?)!!.supportActionBar!!.show()
     }
+*/
 
 
 }

@@ -64,15 +64,12 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                     setProfileInfo(it.data)
                     bundle.putParcelable("userinfo", it.data)  // Key, value
 
-
                 }
-
 
             }
         }
 
     }
-
     private fun setProfileInfo(userInfo: ResponseProfileInfo?) {
         if (userInfo != null) {
             binding.name.text = userInfo.name

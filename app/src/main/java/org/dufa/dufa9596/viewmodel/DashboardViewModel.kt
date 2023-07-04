@@ -496,50 +496,6 @@ class DashboardViewModel @Inject constructor(private val securedRepository: Secu
     //   upload profile pic  end
 
 
-    //  upload profile pic start
-
-    private var _responseUpdateProfile =
-        MutableLiveData<NetworkResult<ResponseUploadProfilePic>>()
-    val responseUpdateProfileVMLD: LiveData<NetworkResult<ResponseUploadProfilePic>>
-        get() = _responseUpdateProfile
-
-    suspend fun updateProfileVM(userId: Int, requestProfileUpdate: RequestProfileUpdate) {
-
-        _responseUpdateProfile.postValue(NetworkResult.Loading())
-
-
-        viewModelScope.launch {
-
-            try {
-                val response = securedRepository.updateProfile(userId, requestProfileUpdate)
-
-                Log.i("TAG", "uploadProfilePicVM: $response")
-
-                if (response.isSuccessful && response.body() != null) {
-
-
-                    _responseUpdateProfile.postValue(NetworkResult.Success(response.body()!!))
-
-                } else if (response.errorBody() != null) {
-
-                    val errorObj = JSONObject(response.errorBody()!!.charStream().readText())
-                    _responseUpdateProfile.postValue(NetworkResult.Error(errorObj.getString("message")))
-
-                }
-            } catch (noInternetException: Exception) {
-                _responseUpdateProfile.postValue(noInternetException.localizedMessage?.let {
-                    NetworkResult.Error(
-                        it
-                    )
-                })
-            }
-
-        }
-
-    }
-
-    //   upload profile pic  end
-
 
     //  payRenew  start
 

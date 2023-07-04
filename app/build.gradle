@@ -15,8 +15,8 @@ android {
         applicationId "org.dufa.dufa9596"
         minSdkVersion 23
         targetSdkVersion 33
-        versionCode 16
-        versionName "1.0.16"
+        versionCode 17
+        versionName "1.0.17"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
@@ -32,7 +32,6 @@ android {
         buildFeatures {
             dataBinding true
             viewBinding true
-
         }
     }
     compileOptions {
@@ -130,15 +129,12 @@ dependencies {
 
     //image cropper
     implementation 'com.vanniktech:android-image-cropper:4.5.0'
-
     implementation 'id.zelory:compressor:3.0.1'
-
     implementation 'com.github.androidmads:QRGenerator:1.0.1'
     implementation 'com.google.android.gms:play-services-location:21.0.1'
     implementation 'com.google.maps.android:maps-utils-ktx:3.4.0'
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
-    implementation 'com.squareup.picasso:picasso:2.8'
-
-    implementation "io.github.farimarwat:permissionmate:1.1"
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation "io.github.farimarwat:permissionmate:1.2"
 
 }

@@ -36,7 +36,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
-                app:srcCompat="@drawable/maruf"
+                tools:srcCompat="@drawable/maruf"
                 app:strokeWidth="2dp"
                 app:strokeColor="@color/blue"/>
 
