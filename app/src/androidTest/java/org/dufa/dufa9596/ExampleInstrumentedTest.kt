@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.marufalam.dufa", appContext.packageName)
+        assertEquals("org.dufa.dufa9596", appContext.packageName)
     }
 }
