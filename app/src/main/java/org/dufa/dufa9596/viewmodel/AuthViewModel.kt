@@ -31,7 +31,6 @@ class AuthViewModel @Inject constructor(
 
     fun setLoginResponseToken(responseLogin: ResponseLogin) {
         _loginResponseToken.postValue(responseLogin)
-
     }
 
     val registerResponseLiveDataVM: LiveData<NetworkResult<ResponseRegister>>

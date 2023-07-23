@@ -6,6 +6,7 @@ import android.os.Build
 import android.util.Log
 import android.view.View
 import android.webkit.*
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import com.google.gson.Gson
@@ -26,11 +27,19 @@ class SSLFragment : BaseFragment<FragmentSSLBinding>() {
     }
 
     override fun configUi() {
+
         if (arguments != null) {
             paymentUrl = requireArguments().getString("paymentUrl")!!
             loadWeb(paymentUrl!!)
         }
+        // Set up the back button press handling
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            // Handle back button press
+            findNavController().popBackStack()
+        }
+
     }
+
 
     @SuppressLint("SetJavaScriptEnabled")
     private fun loadWeb(url: String) {
@@ -122,17 +131,15 @@ class SSLFragment : BaseFragment<FragmentSSLBinding>() {
 
     }
 
-/*
-    override fun onResume() {
-        super.onResume()
-        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
-    }
+        override fun onResume() {
+            super.onResume()
+            (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
+        }
 
-    override fun onStop() {
-        super.onStop()
-        (activity as AppCompatActivity?)!!.supportActionBar!!.show()
-    }
-*/
+        override fun onStop() {
+            super.onStop()
+            (activity as AppCompatActivity?)!!.supportActionBar!!.show()
+        }
 
 
 }

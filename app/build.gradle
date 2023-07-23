@@ -41,6 +41,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+  /*  lintOptions {
+        checkReleaseBuilds false
+    }*/
     namespace 'org.dufa.dufa9596'
 
 }

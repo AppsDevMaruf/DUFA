@@ -57,8 +57,13 @@ class FundCollectionFragment : BaseFragment<FragmentFundCollectionBinding>() {
 
             val editText = dialog.findViewById<EditText>(R.id.editText)
             if (editText.text.toString().isNotEmpty()) {
-                sendDialogDataToActivity(fundType, editText.text.toString())
-                dialog.dismiss()
+                if (editText.text.toString().trim().toInt() >= 20) {
+                    sendDialogDataToActivity(fundType, editText.text.toString())
+                    dialog.dismiss()
+                } else {
+                    toast("Value must be greater than or equal to 20")
+                }
+
             } else {
                 toast("Please Enter the Valid Amount")
             }
