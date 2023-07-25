@@ -228,8 +228,6 @@ fun Activity.showDialog(
         deleteDialog.dismiss()
     }
 
-
-
     deleteDialog.show()
 
 

@@ -2,7 +2,7 @@ package org.dufa.dufa9596.utils
 
 object Constants {
     const val TAG = "DuFaAppTAG"
-    const val BASE_URL = "http://dufa9596.org/api/"
+    const val BASE_URL = "https://dufa9596.org/api/"
     const val TEST_BASE_URL = "https://mocki.io/v1/"
 
 
